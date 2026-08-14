@@ -1,0 +1,338 @@
+.services-page{
+    padding:30px;
+    animation:fadeIn .4s ease;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.services-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.services-header h1{
+    font-size:34px;
+    color:#14213D;
+    margin-bottom:8px;
+}
+
+.services-header p{
+    color:#7B8498;
+    font-size:15px;
+}
+
+.services-status{
+    text-align:center;
+    color:#7B8498;
+    padding:40px 20px;
+}
+
+/* ===========================
+   STATS
+=========================== */
+
+.service-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:35px;
+}
+
+.service-stats .stat-box{
+    background:#fff;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    text-align:center;
+    transition:.3s;
+}
+
+.service-stats .stat-box:hover{
+    transform:translateY(-5px);
+}
+
+.service-stats .stat-box h2{
+    color:#0077CC;
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.service-stats .stat-box p{
+    color:#7B8498;
+    font-size:15px;
+}
+
+/* ===========================
+   GRID / CARD
+=========================== */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.service-card{
+    background:#fff;
+    border-radius:22px;
+    padding:28px;
+    box-shadow:0 15px 35px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+}
+
+.service-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.service-icon{
+    width:60px;
+    height:60px;
+    border-radius:18px;
+    background:#E8F3FC;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#0077CC;
+    font-size:24px;
+}
+
+.service-status{
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.status-pending{ background:#FFF4E5; color:#B45309; }
+.status-active{ background:#EAF8EF; color:#27AE60; }
+.status-on-hold{ background:#FEF3C7; color:#92400E; }
+.status-completed{ background:#DBEAFE; color:#1D4ED8; }
+.status-cancelled{ background:#fee2e2; color:#dc2626; }
+
+.service-card h3{
+    color:#14213D;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.service-desc{
+    color:#7B8498;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.progress-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+    color:#555;
+    font-size:15px;
+}
+
+.progress-bar{
+    height:10px;
+    background:#EEF2F7;
+    border-radius:30px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#0077CC,#4DA8E8);
+    border-radius:30px;
+}
+
+.service-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.service-info div{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#7B8498;
+    font-size:13px;
+}
+
+.service-info svg{
+    color:#0077CC;
+}
+
+.service-action-required{
+    background:#FFF4E5;
+    color:#92400E;
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.details-btn{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#14213D;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.details-btn:hover{
+    background:#0077CC;
+    color:#14213D;
+}
+
+/* ===========================
+   DETAIL MODAL
+=========================== */
+
+.service-modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(6px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.service-modal{
+    width:100%;
+    max-width:560px;
+    background:#fff;
+    border-radius:20px;
+    padding:40px;
+    position:relative;
+    max-height:85vh;
+    overflow-y:auto;
+}
+
+.service-modal .close-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:22px;
+    color:#14213D;
+}
+
+.service-modal h2{
+    color:#14213D;
+    margin:10px 0 14px;
+}
+
+.service-modal-description{
+    color:#555;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.service-modal-section{
+    margin-bottom:22px;
+}
+
+.service-modal-section h4{
+    color:#14213D;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.service-modal-section p{
+    color:#555;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.service-modal-dates{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    color:#7B8498;
+    font-size:13px;
+}
+
+.service-modal-action{
+    background:#FFF4E5;
+    border-radius:14px;
+    padding:16px 18px;
+}
+
+.service-modal-action h4{
+    color:#92400E;
+}
+
+.service-modal-action p{
+    color:#92400E;
+}
+
+.service-modal-status{
+    text-align:center;
+    color:#7B8498;
+    padding:10px 0;
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+@keyframes fadeIn{
+    from{ opacity:0; transform:translateY(15px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:1200px){
+    .service-stats{ grid-template-columns:repeat(2,1fr); }
+    .services-grid{ grid-template-columns:1fr; }
+}
+
+@media(max-width:768px){
+    .services-page{ padding:20px; }
+
+    .services-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .service-stats{ grid-template-columns:1fr; }
+
+    .service-info{
+        flex-direction:column;
+        gap:12px;
+    }
+}
+
+@media(max-width:480px){
+    .services-header h1{ font-size:28px; }
+    .service-card h3{ font-size:20px; }
+    .service-stats .stat-box h2{ font-size:28px; }
+}

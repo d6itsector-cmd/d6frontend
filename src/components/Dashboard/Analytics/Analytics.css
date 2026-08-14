@@ -1,0 +1,625 @@
+.analytics{
+
+padding:35px;
+
+background:#F5F7FB;
+
+min-height:100vh;
+
+animation:fadeIn .4s ease;
+
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.analytics-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:35px;
+
+}
+
+.analytics-header h1{
+
+font-size:36px;
+
+color:#14213D;
+
+margin-bottom:8px;
+
+}
+
+.analytics-header p{
+
+color:#7B8498;
+
+font-size:15px;
+
+}
+
+.analytics-header button{
+
+padding:14px 22px;
+
+border:none;
+
+border-radius:12px;
+
+background:#14213D;
+
+color:#fff;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.analytics-header button:hover{
+
+background:#0077CC;
+
+color:#14213D;
+
+}
+
+.analytics-header select{
+
+padding:14px 22px;
+
+border:none;
+
+border-radius:12px;
+
+background:#14213D;
+
+color:#fff;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.analytics-header select:hover{
+
+background:#0077CC;
+
+color:#14213D;
+
+}
+
+.analytics-status-msg{
+
+text-align:center;
+
+color:#7B8498;
+
+padding:30px 0;
+
+}
+
+.analytics-bar-labels{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:18px;
+
+padding:12px 10px 0;
+
+}
+
+.analytics-bar-labels span{
+
+flex:1;
+
+text-align:center;
+
+font-size:12px;
+
+color:#98A2B3;
+
+}
+
+/* ===========================
+   KPI CARDS
+=========================== */
+
+.analytics-cards{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+margin-bottom:35px;
+
+}
+
+.analytics-card{
+
+background:#fff;
+
+padding:25px;
+
+border-radius:20px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+box-shadow:0 12px 30px rgba(0,0,0,.06);
+
+transition:.3s;
+
+}
+
+.analytics-card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.analytics-icon{
+
+width:65px;
+
+height:65px;
+
+border-radius:18px;
+
+background:#E8F3FC;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:28px;
+
+color:#0077CC;
+
+}
+
+.analytics-content{
+
+flex:1;
+
+margin-left:18px;
+
+}
+
+.analytics-content span{
+
+font-size:14px;
+
+color:#7B8498;
+
+}
+
+.analytics-content h2{
+
+margin-top:8px;
+
+font-size:28px;
+
+color:#14213D;
+
+}
+
+.analytics-growth{
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+color:#27AE60;
+
+font-weight:600;
+
+font-size:15px;
+
+}
+
+/* ===========================
+   TRAFFIC CARD
+=========================== */
+
+.traffic-card{
+
+background:#fff;
+
+padding:30px;
+
+border-radius:22px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.06);
+
+margin-bottom:35px;
+
+}
+
+.traffic-title{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:30px;
+
+}
+
+.traffic-title h2{
+
+font-size:28px;
+
+color:#14213D;
+
+}
+
+.traffic-title span{
+
+color:#7B8498;
+
+font-size:14px;
+
+}
+
+/* ===========================
+   BAR CHART
+=========================== */
+
+.traffic-chart{
+
+height:320px;
+
+display:flex;
+
+align-items:flex-end;
+
+justify-content:space-between;
+
+gap:18px;
+
+padding:0 10px;
+
+}
+
+.bar{
+
+flex:1;
+
+border-radius:12px 12px 0 0;
+
+background:linear-gradient(180deg,#4DA8E8,#0077CC);
+
+transition:.3s;
+
+cursor:pointer;
+
+}
+
+.bar:hover{
+
+opacity:.8;
+
+transform:translateY(-5px);
+
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:1200px){
+
+.analytics-cards{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.analytics{
+
+padding:20px;
+
+}
+
+
+.analytics-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
+
+}
+
+.analytics-cards{
+
+grid-template-columns:1fr;
+
+}
+
+.traffic-chart{
+
+height:220px;
+
+gap:10px;
+
+}
+
+.analytics-content h2{
+
+font-size:22px;
+
+}
+
+.analytics-header h1{
+
+font-size:30px;
+
+}
+
+}
+/* ===========================
+   PERFORMANCE SECTION
+=========================== */
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.performance-card {
+  background: #fff;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transition: 0.3s;
+}
+
+.performance-card:hover {
+  transform: translateY(-6px);
+}
+
+.performance-card h3 {
+  font-size: 22px;
+  color: #14213D;
+  margin-bottom: 22px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #EEF2F7;
+}
+
+.metric:last-child {
+  border-bottom: none;
+}
+
+.metric span {
+  color: #7B8498;
+  font-size: 15px;
+}
+
+.metric strong {
+  color: #14213D;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ===========================
+   TRAFFIC SOURCES
+=========================== */
+
+.traffic-sources {
+  margin-top: 35px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.traffic-sources h2 {
+  font-size: 28px;
+  color: #14213D;
+  margin-bottom: 25px;
+}
+
+.source {
+  display: grid;
+  grid-template-columns: 170px 1fr 70px;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.source:last-child {
+  margin-bottom: 0;
+}
+
+.source span {
+  color: #555;
+  font-size: 15px;
+}
+
+.source strong {
+  text-align: right;
+  color: #14213D;
+}
+
+.source-bar {
+  height: 12px;
+  background: #EEF2F7;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.source-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, #0077CC, #4DA8E8);
+  border-radius: 30px;
+}
+
+/* ===========================
+   CAMPAIGN STATUS
+=========================== */
+
+.campaign-card {
+  margin-top: 35px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.campaign-card h2 {
+  font-size: 28px;
+  color: #14213D;
+  margin-bottom: 25px;
+}
+
+.campaign-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.campaign-card th {
+  background: #F8FAFC;
+  color: #14213D;
+  text-align: left;
+  padding: 16px;
+  font-size: 15px;
+}
+
+.campaign-card td {
+  padding: 16px;
+  border-bottom: 1px solid #EEF2F7;
+  color: #555;
+}
+
+.campaign-card tr:last-child td {
+  border-bottom: none;
+}
+
+/* STATUS COLORS */
+
+.active-status {
+  color: #22C55E;
+  font-weight: 600;
+}
+
+.running-status {
+  color: #F59E0B;
+  font-weight: 600;
+}
+
+.planning-status {
+  color: #0077CC;
+  font-weight: 600;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 1100px) {
+
+  .performance-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .traffic-sources,
+  .campaign-card,
+  .performance-card {
+    padding: 22px;
+  }
+
+  .source {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .source strong {
+    text-align: left;
+  }
+
+  .campaign-card {
+    overflow-x: auto;
+  }
+
+  .campaign-card table {
+    min-width: 600px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .traffic-sources h2,
+  .campaign-card h2,
+  .performance-card h3 {
+    font-size: 22px;
+  }
+
+}

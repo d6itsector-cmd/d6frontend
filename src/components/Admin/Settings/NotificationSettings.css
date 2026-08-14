@@ -1,0 +1,64 @@
+.settings-card{
+background:white;
+padding:25px;
+border-radius:15px;
+margin-bottom:30px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.toggle-group{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.toggle-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+font-size:15px;
+color:var(--primary);
+}
+
+/* Same iOS-style switch as the client dashboard's Settings page, instead of
+   a bare unstyled browser checkbox. */
+.switch{
+position:relative;
+display:inline-block;
+width:52px;
+height:28px;
+flex-shrink:0;
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+position:absolute;
+inset:0;
+background:#ddd;
+border-radius:var(--radius-pill);
+transition:var(--transition);
+cursor:pointer;
+}
+
+.slider:before{
+content:"";
+position:absolute;
+width:20px;
+height:20px;
+left:4px;
+top:4px;
+background:#fff;
+border-radius:50%;
+transition:var(--transition);
+}
+
+.switch input:checked + .slider{
+background:var(--accent);
+}
+
+.switch input:checked + .slider:before{
+transform:translateX(24px);
+}

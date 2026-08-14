@@ -1,0 +1,158 @@
+.ticket-modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(6px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.ticket-modal{
+    width:100%;
+    max-width:560px;
+    background:#fff;
+    border-radius:20px;
+    padding:40px;
+    position:relative;
+    max-height:85vh;
+    overflow-y:auto;
+}
+
+.close-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:22px;
+    color:#14213D;
+}
+
+.ticket-modal h2{
+    color:#14213D;
+    margin:10px 0 20px;
+}
+
+.ticket-modal form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.ticket-modal input,
+.ticket-modal select,
+.ticket-modal textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+.ticket-modal textarea{
+    resize:none;
+}
+
+.ticket-modal button[type="submit"]{
+    padding:14px;
+    background:#0077CC;
+    color:#14213D;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.ticket-modal button[type="submit"]:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.ticket-modal-error{
+    background:rgba(220,53,69,.1);
+    color:#dc3545;
+    padding:12px 15px;
+    border-radius:10px;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.ticket-modal-status{
+    text-align:center;
+    color:#7B8498;
+    padding:20px 0;
+}
+
+.ticket-description{
+    color:#555;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.ticket-replies{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    max-height:280px;
+    overflow-y:auto;
+    padding:15px;
+    background:#F8FAFC;
+    border-radius:14px;
+    margin-bottom:16px;
+}
+
+.ticket-reply{
+    padding:12px 16px;
+    border-radius:14px;
+    max-width:80%;
+    line-height:1.5;
+    font-size:14px;
+}
+
+.ticket-reply.sent{
+    background:#0077CC;
+    color:#14213D;
+    align-self:flex-end;
+}
+
+.ticket-reply.received{
+    background:#EAF4FF;
+    color:#14213D;
+    align-self:flex-start;
+}
+
+.reply-time{
+    display:block;
+    font-size:10px;
+    opacity:.65;
+    margin-top:4px;
+}
+
+.ticket-reply-form{
+    display:flex;
+    gap:10px;
+}
+
+.ticket-reply-form input{
+    flex:1;
+}
+
+.ticket-reply-form button{
+    padding:0 20px;
+    background:#14213D;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.ticket-reply-form button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}

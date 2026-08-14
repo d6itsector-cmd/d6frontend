@@ -1,0 +1,109 @@
+.login-modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(6px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+    padding:20px;
+
+    animation:loginFadeIn .3s ease;
+
+    overflow-y:auto;
+
+}
+
+.login-modal{
+
+    position:relative;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    animation:loginPopup .35s ease;
+
+}
+
+.login-modal-logo{
+
+    display:block;
+
+    width:52px;
+
+    height:52px;
+
+    object-fit:contain;
+
+    border-radius:14px;
+
+    margin-bottom:14px;
+
+}
+
+.login-modal .close-modal{
+
+    position:absolute;
+
+    top:18px;
+
+    right:18px;
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    color:var(--primary);
+
+}
+
+@keyframes loginFadeIn{
+
+from{
+
+    opacity:0;
+
+}
+
+to{
+
+    opacity:1;
+
+}
+
+}
+
+@keyframes loginPopup{
+
+from{
+
+    opacity:0;
+
+    transform:translateY(40px) scale(.95);
+
+}
+
+to{
+
+    opacity:1;
+
+    transform:translateY(0) scale(1);
+
+}
+
+}

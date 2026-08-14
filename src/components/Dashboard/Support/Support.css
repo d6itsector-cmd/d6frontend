@@ -1,0 +1,379 @@
+/* ==========================================
+   SUPPORT PAGE
+========================================== */
+
+.support{
+    padding:35px;
+    background:#F5F7FB;
+    min-height:100vh;
+    animation:fadeIn .4s ease;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.support-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+    gap:20px;
+}
+
+.support-header h1{
+    font-size:36px;
+    color:#14213D;
+    margin-bottom:8px;
+}
+
+.support-header p{
+    color:#7B8498;
+    font-size:16px;
+}
+
+.create-ticket{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 24px;
+    background:#14213D;
+    color:#fff;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.create-ticket:hover{
+    background:#0077CC;
+    color:#14213D;
+    transform:translateY(-3px);
+}
+
+/* ==========================================
+   CONTACT CARDS
+========================================== */
+
+.support-cards{
+    display:flex;
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.support-card{
+    background:#fff;
+    border-radius:22px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    transition:.35s;
+    width:100%;
+    max-width:320px;
+}
+
+.support-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 45px rgba(0,0,0,.12);
+}
+
+.support-icon{
+    width:75px;
+    height:75px;
+    margin:auto;
+    margin-bottom:20px;
+    border-radius:18px;
+    background:#E8F3FC;
+    color:#0077CC;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+}
+
+.support-card h3{
+    color:#14213D;
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.support-card p{
+    color:#777;
+    line-height:1.6;
+}
+
+/* ==========================================
+   TICKET TABLE
+========================================== */
+
+.ticket-table{
+    background:#fff;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    margin-bottom:40px;
+}
+
+.ticket-title{
+    margin-bottom:25px;
+}
+
+.ticket-status-msg{
+    text-align:center;
+    color:#7B8498;
+    padding:30px 0;
+}
+
+.ticket-title h2{
+    color:#14213D;
+    font-size:28px;
+}
+
+.ticket-table table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.ticket-table th{
+    background:#F8FAFC;
+    color:#14213D;
+    padding:18px;
+    text-align:left;
+}
+
+.ticket-table td{
+    padding:18px;
+    border-bottom:1px solid #EEF2F7;
+}
+
+.ticket-table tr:last-child td{
+    border-bottom:none;
+}
+
+/* Status */
+
+.status{
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.status.open{
+    background:#FFF3CD;
+    color:#E67E22;
+}
+
+.status.in-progress{
+    background:#EAF4FF;
+    color:#0077CC;
+}
+
+.status.resolved{
+    background:#EAFBF3;
+    color:#22C55E;
+}
+
+.waiting-client{
+    background:#F3E8FF;
+    color:#9333EA;
+}
+
+.status.closed{
+    background:#F1F5F9;
+    color:#64748B;
+}
+
+.view-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 18px;
+    border:none;
+    background:#14213D;
+    color:#fff;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#0077CC;
+    color:#14213D;
+}
+
+/* ==========================================
+   SUPPORT STATS
+========================================== */
+
+.support-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.stat-card h2{
+    color:#0077CC;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.stat-card p{
+    color:#666;
+}
+
+/* ==========================================
+   FAQ
+========================================== */
+
+.faq-section{
+    background:#fff;
+    border-radius:22px;
+    padding:35px;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    margin-bottom:40px;
+}
+
+.faq-section h2{
+    color:#14213D;
+    margin-bottom:30px;
+}
+
+.faq-item{
+    padding:20px 0;
+    border-bottom:1px solid #EEF2F7;
+}
+
+.faq-item:last-child{
+    border-bottom:none;
+}
+
+.faq-item h4{
+    color:#14213D;
+    margin-bottom:10px;
+}
+
+.faq-item p{
+    color:#777;
+    line-height:1.7;
+}
+
+/* ==========================================
+   BOOK MEETING
+========================================== */
+
+.meeting-card{
+    background:linear-gradient(135deg,#14213D,#20345F);
+    color:#fff;
+    padding:40px;
+    border-radius:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:25px;
+}
+
+.meeting-card h2{
+    margin-bottom:12px;
+    font-size:30px;
+}
+
+.meeting-card p{
+    max-width:650px;
+    color:#E5E7EB;
+    line-height:1.7;
+}
+
+.meeting-btn{
+    padding:16px 32px;
+    background:#0077CC;
+    color:#14213D;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.meeting-btn:hover{
+    transform:translateY(-4px);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1200px){
+
+.support-stats{
+    grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.support{
+    padding:20px;
+}
+
+.support-header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.support-cards{
+    max-width:100%;
+}
+
+.support-card{
+    max-width:100%;
+}
+
+.ticket-table{
+    overflow-x:auto;
+}
+
+.ticket-table table{
+    min-width:700px;
+}
+
+.meeting-card{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.meeting-btn{
+    width:100%;
+}
+
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes fadeIn{
+
+from{
+    opacity:0;
+    transform:translateY(15px);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+
+}

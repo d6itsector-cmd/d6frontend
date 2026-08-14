@@ -1,0 +1,196 @@
+.whychoose {
+  padding: 100px 8%;
+  background: var(--white);
+}
+
+.whychoose-container {
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  gap: 60px;
+  align-items: center;
+}
+
+/* LEFT */
+
+.why-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: rgba(0, 119, 204, 0.15);
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.why-left h2 {
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--primary);
+  margin-bottom: 25px;
+}
+
+.why-left h2 span {
+  color: var(--accent);
+}
+
+.why-left p {
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.9;
+  color: #555;
+  margin-bottom: 35px;
+}
+
+.choose-btn {
+  background: var(--accent);
+  color: var(--primary);
+  border: none;
+  padding: 16px 34px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.choose-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* RIGHT */
+
+.why-right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.choose-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: var(--white);
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid #ececec;
+  box-shadow: 0 12px 30px rgba(20, 33, 61, 0.08);
+  transition: var(--transition);
+}
+
+.choose-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 18px 40px rgba(20, 33, 61, 0.12);
+}
+
+.choose-icon {
+  min-width: 65px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: rgba(0, 119, 204, 0.15);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.choose-card h3 {
+  color: var(--primary);
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.choose-card p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* --------------------- */
+/* Tablet */
+/* --------------------- */
+
+@media (max-width: 992px) {
+
+  .whychoose {
+    padding: 80px 30px;
+  }
+
+  .whychoose-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .why-left {
+    text-align: center;
+    align-items: center;
+  }
+
+  .why-left h2 {
+    font-size: 42px;
+  }
+
+  .why-left p {
+    max-width: 100%;
+  }
+
+  .why-right {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+/* --------------------- */
+/* Mobile */
+/* --------------------- */
+
+@media (max-width: 768px) {
+
+  .why-right {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .whychoose {
+    padding: 70px 20px;
+  }
+
+  .why-left h2 {
+    font-size: 34px;
+  }
+
+  .choose-card {
+    padding: 22px;
+  }
+
+  .choose-icon {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    font-size: 22px;
+  }
+
+  .choose-card h3 {
+    font-size: 18px;
+  }
+
+  .choose-card p {
+    font-size: 14px;
+  }
+
+}

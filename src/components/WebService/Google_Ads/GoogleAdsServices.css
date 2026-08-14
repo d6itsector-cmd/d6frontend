@@ -1,0 +1,107 @@
+.googleads-services{
+    padding:100px 8%;
+    background:#F8FAFC;
+}
+
+.googleads-services-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.googleads-services-header{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-tag{
+    display:inline-block;
+    padding:8px 20px;
+    background:#E8F3FC;
+    color:#0077CC;
+    border-radius:30px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.googleads-services-header h2{
+    font-size:46px;
+    color:#1E2A5E;
+    margin-bottom:20px;
+}
+
+.googleads-services-header h2 span{
+    color:#0077CC;
+}
+
+.googleads-services-header p{
+    max-width:720px;
+    margin:auto;
+    color:#6B7280;
+    line-height:1.8;
+}
+
+.googleads-services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.googleads-service-card{
+    background:#fff;
+    border:1px solid #E5E7EB;
+    border-radius:18px;
+    padding:35px;
+    transition:.3s;
+}
+
+.googleads-service-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+
+.service-icon{
+    width:70px;
+    height:70px;
+    background:#E8F3FC;
+    color:#0077CC;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    margin-bottom:25px;
+}
+
+.googleads-service-card h3{
+    color:#1E2A5E;
+    margin-bottom:15px;
+}
+
+.googleads-service-card p{
+    color:#6B7280;
+    line-height:1.8;
+}
+
+@media(max-width:992px){
+
+.googleads-services-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.googleads-services{
+    padding:80px 20px;
+}
+
+.googleads-services-header h2{
+    font-size:34px;
+}
+
+.googleads-services-grid{
+    grid-template-columns:1fr;
+}
+
+}

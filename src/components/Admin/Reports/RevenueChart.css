@@ -1,0 +1,21 @@
+.chart-card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.chart-card h2{
+margin-bottom:20px;
+color:var(--primary);
+}
+
+.chart-placeholder{
+height:320px;
+display:flex;
+justify-content:center;
+align-items:center;
+border:2px dashed #ddd;
+border-radius:10px;
+color:#888;
+}

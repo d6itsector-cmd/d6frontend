@@ -1,0 +1,113 @@
+/* ==========================
+   SERVICES PAGE
+========================== */
+
+.services-page {
+  padding: 30px;
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.services-header h1 {
+  font-size: 32px;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.services-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* ==========================
+   ADD BUTTON
+========================== */
+
+.add-service-btn {
+  background: var(--accent);
+  color: var(--primary);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-service-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 119, 204, 0.3);
+}
+
+/* ==========================
+   TABLE CARD
+========================== */
+
+.services-card {
+  background: var(--white);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 992px) {
+  .services-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .add-service-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-page {
+    padding: 20px;
+  }
+
+  .services-header h1 {
+    font-size: 28px;
+  }
+
+  .services-header p {
+    font-size: 14px;
+  }
+
+  .services-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-page {
+    padding: 15px;
+  }
+
+  .services-header h1 {
+    font-size: 24px;
+  }
+
+  .add-service-btn {
+    font-size: 14px;
+    padding: 12px 18px;
+  }
+}

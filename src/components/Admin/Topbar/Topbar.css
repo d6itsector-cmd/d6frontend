@@ -1,0 +1,55 @@
+.admin-topbar{
+    height:80px;
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.topbar-left h2{
+    color:#14213D;
+    font-size:28px;
+}
+
+.admin-menu-toggle{
+    display:none;
+    border:none;
+    background:none;
+    color:#14213D;
+    font-size:22px;
+    cursor:pointer;
+}
+
+@media(max-width:992px){
+
+.admin-menu-toggle{
+display:flex;
+}
+
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+@media(max-width:768px){
+
+.admin-topbar{
+padding:0 15px;
+}
+
+.topbar-left h2{
+font-size:22px;
+}
+
+}

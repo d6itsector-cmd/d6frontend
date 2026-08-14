@@ -1,0 +1,289 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.startup-hero{
+    position:relative;
+    padding:120px 20px 80px;
+    background:var(--white);
+    overflow:hidden;
+}
+
+.startup-container{
+    max-width:1200px;
+    margin:auto;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+/* Badge */
+
+.hero-badge{
+    display:inline-block;
+    padding:10px 22px;
+    border-radius:50px;
+    background:rgba(0, 119, 204,.12);
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:.8px;
+    margin-bottom:25px;
+}
+
+/* Heading */
+
+.hero-title{
+    font-size:62px;
+    line-height:1.2;
+    color:var(--primary);
+    font-weight:800;
+    margin-bottom:25px;
+}
+
+.hero-title span{
+    color:var(--accent);
+}
+
+/* Description */
+
+.hero-description{
+    max-width:760px;
+    margin:auto;
+    color:var(--text-light);
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* Buttons */
+
+.hero-buttons{
+    margin-top:45px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+    background:var(--accent);
+    color:var(--primary);
+    border:none;
+    padding:15px 32px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:var(--transition);
+}
+
+.primary-btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 30px rgba(0, 119, 204,.35);
+}
+
+.secondary-btn{
+    background:transparent;
+    color:var(--primary);
+    border:2px solid var(--primary);
+    padding:15px 32px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:var(--transition);
+}
+
+.secondary-btn:hover{
+    background:var(--primary);
+    color:var(--white);
+}
+
+/* Illustration */
+
+.hero-image{
+    margin-top:80px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-image img{
+    width:100%;
+    max-width:650px;
+    animation:float 5s ease-in-out infinite;
+}
+
+/* Floating Cards */
+
+.floating-card{
+    position:absolute;
+    background:var(--white);
+    padding:18px 24px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    box-shadow:0 10px 30px rgba(20,33,61,.08);
+    font-weight:600;
+    color:var(--primary);
+    animation:cardFloat 4s ease-in-out infinite;
+}
+
+.floating-card span{
+    font-size:15px;
+}
+
+.idea{
+    top:5%;
+    left:3%;
+}
+
+.growth{
+    top:8%;
+    right:3%;
+}
+
+.leads{
+    bottom:5%;
+    left:6%;
+}
+
+.branding{
+    bottom:8%;
+    right:6%;
+}
+
+/* Decorative Shapes */
+
+.shape{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.15;
+}
+
+.shape1{
+    width:300px;
+    height:300px;
+    background:var(--accent);
+    top:-120px;
+    left:-80px;
+}
+
+.shape2{
+    width:260px;
+    height:260px;
+    background:var(--primary);
+    bottom:-100px;
+    right:-80px;
+}
+
+.shape3{
+    width:180px;
+    height:180px;
+    background:var(--secondary-bg);
+    top:45%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+/* Animations */
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-18px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes cardFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.hero-title{
+    font-size:46px;
+}
+
+.hero-image img{
+    max-width:500px;
+}
+
+.floating-card{
+    display:none;
+}
+
+}
+
+@media(max-width:768px){
+
+.startup-hero{
+    padding:100px 20px 60px;
+}
+
+.hero-title{
+    font-size:36px;
+}
+
+.hero-description{
+    font-size:16px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+    align-items:center;
+}
+
+.primary-btn,
+.secondary-btn{
+    width:260px;
+}
+
+.hero-image{
+    margin-top:50px;
+}
+
+.hero-image img{
+    max-width:330px;
+}
+
+}
+
+@media(max-width:480px){
+
+.hero-title{
+    font-size:30px;
+}
+
+.hero-badge{
+    font-size:14px;
+}
+
+}

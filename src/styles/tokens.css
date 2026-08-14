@@ -1,0 +1,49 @@
+/* ==========================================================
+   DESIGN TOKENS -- single source of truth for color, radius,
+   shadow, and transition across the whole site (public pages,
+   client dashboard, admin panel).
+
+   This used to be defined as 7 separate, near-identical :root
+   blocks scattered across CSS files under frontend/src/components/Home/.
+   Since :root custom properties are global, whichever stylesheet
+   happened to load last silently won sitewide -- and one of those
+   blocks (Hero.css) actually diverged with different values for
+   --text and --secondary-bg. This file replaces all of them.
+
+   Loaded once, first, in main.jsx -- before any component CSS --
+   so every other stylesheet can rely on these existing.
+   ========================================================== */
+
+:root{
+  /* Colors */
+  --primary:#14213D;
+  --accent:#0077CC;
+  --white:#FFFFFF;
+  --secondary-bg:#E5E5E5;
+  --text:#000000;
+  --text-light:#666666;
+  --text-muted:#4B5563;
+
+  /* Radius scale */
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:20px;
+  --radius-pill:999px;
+
+  /* Shadow scale (two-tier: resting vs. elevated/hover) */
+  --shadow-sm:0 5px 20px rgba(20,33,61,.06);
+  --shadow-md:0 10px 25px rgba(20,33,61,.08);
+  --shadow-lg:0 20px 45px rgba(20,33,61,.15);
+
+  --transition:all .3s ease;
+}
+
+/* Shared loading/empty/error status line -- replaces the many ad hoc
+   <p>Loading...</p> / <p>No results</p> instances that each previously
+   defined their own one-off color/size. */
+.status-message{
+  text-align:center;
+  color:var(--text-light);
+  font-size:14px;
+  padding:20px 0;
+}

@@ -1,0 +1,116 @@
+.blog-categories{
+    padding:100px 8%;
+    background:var(--white);
+}
+
+.categories-header{
+    max-width:750px;
+    margin:auto;
+    text-align:center;
+}
+
+.categories-header span{
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.categories-header h2{
+    font-size:42px;
+    color:var(--primary);
+    margin:20px 0;
+}
+
+.categories-header p{
+    color:var(--text-light);
+    line-height:1.8;
+}
+
+/* flex, not grid: 7 real categories in a fixed 4-column grid strands a
+   ragged 3-item last row flush left (same fix applied to the Home services
+   grid) -- flex-wrap + justify-content:center lets it center itself. */
+.categories-grid{
+    margin-top:60px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+}
+
+.category-card{
+    background:var(--secondary-bg);
+    padding:35px 20px;
+    border-radius:18px;
+    text-align:center;
+    text-decoration:none;
+    transition:var(--transition);
+    cursor:pointer;
+    flex:1 1 220px;
+    max-width:260px;
+}
+
+.category-card:hover{
+    background:var(--primary);
+    transform:translateY(-8px);
+}
+
+.category-icon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    margin-bottom:20px;
+    border-radius:50%;
+    background:rgba(0, 119, 204,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:var(--transition);
+}
+
+.category-icon svg{
+    font-size:30px;
+    color:var(--accent);
+}
+
+.category-card h3{
+    color:var(--primary);
+    transition:var(--transition);
+}
+
+.category-card:hover h3{
+    color:var(--white);
+}
+
+.category-card:hover .category-icon{
+    background:var(--accent);
+}
+
+.category-card:hover .category-icon svg{
+    color:var(--primary);
+}
+
+@media(max-width:992px){
+
+.categories-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.blog-categories{
+    padding:80px 20px;
+}
+
+.categories-grid{
+    grid-template-columns:1fr;
+}
+
+.categories-header h2{
+    font-size:34px;
+}
+
+}

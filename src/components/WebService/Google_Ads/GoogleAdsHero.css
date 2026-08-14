@@ -1,0 +1,164 @@
+.googleads-hero{
+    padding:120px 8% 80px;
+    background:#F8FAFC;
+}
+
+.googleads-hero-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:60px;
+}
+
+.googleads-hero-content{
+    flex:1;
+}
+
+.hero-badge{
+    display:inline-block;
+    padding:8px 20px;
+    background:#E8F3FC;
+    color:#0077CC;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.googleads-hero-content h1{
+    font-size:56px;
+    line-height:1.2;
+    color:#1E2A5E;
+    margin-bottom:25px;
+}
+
+.googleads-hero-content h1 span{
+    color:#0077CC;
+}
+
+.googleads-hero-content p{
+    font-size:18px;
+    line-height:1.8;
+    color:#6B7280;
+    margin-bottom:35px;
+    max-width:560px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.primary-btn{
+    padding:15px 35px;
+    background:#0077CC;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:#E69518;
+}
+
+.secondary-btn{
+    padding:15px 35px;
+    background:transparent;
+    color:#1E2A5E;
+    border:2px solid #1E2A5E;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+    background:#1E2A5E;
+    color:#fff;
+}
+
+.googleads-hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.googleads-hero-image img{
+    width:100%;
+    max-width:520px;
+    border-radius:20px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+@media(max-width:992px){
+
+.googleads-hero-container{
+flex-direction:column-reverse;
+text-align:center;
+}
+
+.googleads-hero-content h1{
+font-size:42px;
+}
+
+.googleads-hero-content p{
+margin:auto auto 35px;
+}
+
+.hero-buttons{
+justify-content:center;
+}
+
+}
+
+@media(max-width:768px){
+
+.googleads-hero{
+padding:100px 20px 60px;
+}
+
+.googleads-hero-content h1{
+font-size:34px;
+}
+
+.googleads-hero-content p{
+font-size:16px;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+.primary-btn,
+.secondary-btn{
+width:100%;
+}
+
+.googleads-hero-image img{
+max-width:380px;
+}
+
+}

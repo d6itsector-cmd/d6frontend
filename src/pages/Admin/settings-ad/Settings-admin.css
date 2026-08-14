@@ -1,0 +1,19 @@
+.settings-page{
+    padding:30px;
+    background:#F5F7FB;
+    min-height:100vh;
+}
+
+.settings-header{
+    margin-bottom:30px;
+}
+
+.settings-header h1{
+    font-size:32px;
+    color:var(--primary);
+    margin-bottom:8px;
+}
+
+.settings-header p{
+    color:#666;
+}

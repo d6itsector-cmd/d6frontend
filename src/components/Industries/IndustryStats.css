@@ -1,0 +1,108 @@
+.industry-stats{
+    padding:100px 8%;
+    background:var(--white);
+}
+
+.stats-header{
+    max-width:760px;
+    margin:auto;
+    text-align:center;
+}
+
+.stats-header span{
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.stats-header h2{
+    margin:20px 0;
+    font-size:42px;
+    color:var(--primary);
+}
+
+.stats-header p{
+    color:var(--text-light);
+    line-height:1.8;
+}
+
+.industry-stats-grid{
+    margin-top:60px;
+    display:grid;
+    /* minmax(0,1fr), not bare 1fr -- the unbreakable 42px numerals ("250+")
+       can force a column wider than its 1fr share and push the grid past
+       the container edge (same bug already fixed in PortfolioStats.css). */
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:25px;
+}
+
+.industry-stats-card{
+    box-sizing:border-box;
+    background:var(--secondary-bg);
+    padding:40px 20px;
+    border-radius:20px;
+    text-align:center;
+    transition:var(--transition);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.industry-stats-card:hover{
+    transform:translateY(-10px);
+    background:var(--white);
+    box-shadow:0 20px 40px rgba(20,33,61,.08);
+}
+
+.industry-stats-icon{
+    width:75px;
+    height:75px;
+    margin:auto;
+    margin-bottom:20px;
+    border-radius:50%;
+    background:rgba(0, 119, 204,.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.industry-stats-icon svg{
+    font-size:32px;
+    color:var(--accent);
+}
+
+.industry-stats-card h3{
+    width:100%;
+    font-size:42px;
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+.industry-stats-card h4{
+    width:100%;
+    color:var(--text);
+    font-size:18px;
+    font-weight:600;
+    overflow-wrap:break-word;
+}
+
+@media(max-width:992px){
+
+.industry-stats-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+}
+
+@media(max-width:768px){
+
+.industry-stats-grid{
+    grid-template-columns:1fr;
+}
+
+.stats-header h2{
+    font-size:34px;
+}
+
+}

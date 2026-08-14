@@ -1,0 +1,599 @@
+/* ==========================================
+   TOPBAR
+========================================== */
+
+/* Dashboard's topbar is rendered inside .dashboard-content (which already
+   carries the page's own side padding), unlike the admin topbar which sits
+   edge-to-edge in its own layout -- so this gets its own card chrome
+   (background/shadow/radius) rather than admin's edge-to-edge bar, but the
+   goal is the same: give it real chrome instead of a bare, shadowless row
+   that reads as an unfinished panel next to the rest of the dashboard's
+   cards. */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 22px 28px;
+  margin: 0 0 25px;
+}
+
+/* ==========================================
+   LEFT
+========================================== */
+
+.dashboard-menu-toggle {
+  display: none;
+  border: none;
+  background: none;
+  color: #14213D;
+  font-size: 22px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.topbar-left h1 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #14213D;
+  margin-bottom: 6px;
+}
+
+.topbar-left p {
+  font-size: 15px;
+  color: #7D8BA5;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   RIGHT
+========================================== */
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 340px;
+  height: 52px;
+
+  padding: 0 18px;
+
+  background: #fff;
+
+  border: 1px solid #EEF2F7;
+
+  border-radius: 16px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,.05);
+
+  transition: .3s;
+}
+
+.search-box:hover {
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.search-box svg {
+  color: #98A2B3;
+  font-size: 16px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-size: 15px;
+
+  color: #14213D;
+}
+
+.search-box input::placeholder {
+  color: #98A2B3;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-dropdown {
+  position: absolute;
+  left: 0;
+  top: 60px;
+  width: 100%;
+  min-width: 320px;
+  max-width: calc(100vw - 40px);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.search-results-list {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.search-result-item:hover {
+  background: #F5F7FB;
+}
+
+.search-result-item.no-link {
+  cursor: default;
+  opacity: .6;
+}
+
+.search-result-item.no-link:hover {
+  background: transparent;
+}
+
+.search-result-type {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #EEF2F7;
+  color: #14213D;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.search-result-item strong {
+  display: block;
+  color: #14213D;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.search-result-item p {
+  font-size: 13px;
+  color: #7D8BA5;
+  margin: 0;
+}
+
+.search-empty {
+  padding: 20px;
+  text-align: center;
+  color: #7D8BA5;
+  font-size: 14px;
+}
+
+/* ==========================================
+   ICON BUTTONS
+========================================== */
+
+.icon-btn {
+
+  position: relative;
+
+  width: 50px;
+
+  height: 50px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: #fff;
+
+  color: #14213D;
+
+  cursor: pointer;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 18px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,.05);
+
+  transition: .3s;
+
+}
+
+.icon-btn:hover {
+
+  background: #0077CC;
+
+  color: #14213D;
+
+  transform: translateY(-4px);
+
+}
+
+.icon-btn span {
+
+  position: absolute;
+
+  top: -4px;
+
+  right: -4px;
+
+  width: 20px;
+
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: #FF4D4F;
+
+  color: white;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+}
+
+/* ==========================================
+   NOTIFICATIONS
+========================================== */
+
+.notif-wrapper {
+  position: relative;
+}
+
+.notif-dropdown {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.notif-dropdown-header {
+  padding: 16px 18px;
+  background: #14213D;
+  color: #fff;
+  font-weight: 600;
+}
+
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.notif-list-item {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.notif-list-item:hover {
+  background: #F5F7FB;
+}
+
+.notif-list-item.unread {
+  background: #E8F3FC;
+}
+
+.notif-list-item strong {
+  display: block;
+  color: #14213D;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.notif-list-item p {
+  font-size: 13px;
+  color: #7D8BA5;
+  margin: 0;
+}
+
+.notif-empty {
+  padding: 20px;
+  text-align: center;
+  color: #7D8BA5;
+  font-size: 14px;
+}
+
+/* ==========================================
+   PROFILE
+========================================== */
+
+.profile-wrapper {
+
+  position: relative;
+
+}
+
+.profile-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  background: white;
+
+  border: 1px solid #EEF2F7;
+
+  padding: 8px 16px;
+
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,.05);
+
+  transition: .3s;
+
+  font-family: inherit;
+
+}
+
+.profile-box:hover {
+
+  transform: translateY(-4px);
+
+}
+
+.profile-box img {
+
+  width: 48px;
+
+  height: 48px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+}
+
+.profile-avatar-icon {
+
+  width: 48px;
+
+  height: 48px;
+
+  font-size: 48px;
+
+  color: #98A2B3;
+
+  flex-shrink: 0;
+
+}
+
+.profile-box h4 {
+
+  color: #14213D;
+
+  font-size: 15px;
+
+}
+
+.profile-box svg {
+
+  color: #98A2B3;
+
+  transition: transform .25s ease;
+
+}
+
+.profile-box svg.rotate {
+
+  transform: rotate(180deg);
+
+}
+
+/* ==========================================
+   PROFILE DROPDOWN
+========================================== */
+
+.profile-dropdown {
+
+  position: absolute;
+
+  right: 0;
+
+  top: calc(100% + 10px);
+
+  width: 180px;
+
+  background: #fff;
+
+  border-radius: 14px;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
+
+  overflow: hidden;
+
+  z-index: 1000;
+
+}
+
+.profile-dropdown-item {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 14px 18px;
+
+  border: none;
+
+  background: none;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #E5484D;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+}
+
+.profile-dropdown-item:hover {
+
+  background: #FFF2F2;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:1200px) {
+
+  .search-box {
+
+    width: 260px;
+
+  }
+
+}
+
+@media (max-width:992px) {
+
+  .dashboard-menu-toggle {
+
+    display: flex;
+
+    align-items: center;
+
+  }
+
+  .topbar-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+  }
+
+  .topbar-left h1 {
+
+    font-size: 26px;
+
+  }
+
+  .topbar-left p {
+
+    font-size: 14px;
+
+  }
+
+  .topbar {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+  }
+
+  .topbar-right {
+
+    width: 100%;
+
+    flex-wrap: wrap;
+
+  }
+
+  .search-box {
+
+    width: 100%;
+
+  }
+
+}
+
+@media (max-width:600px) {
+
+  .profile-box h4 {
+
+    display: none;
+
+  }
+
+  .profile-box {
+
+    padding: 8px 10px;
+
+  }
+
+  .search-box {
+
+    height: 48px;
+
+  }
+
+  /* .topbar-left h1/p never had a mobile size at all -- stayed at the
+     34px desktop heading and full "Weekday, Month Day, Year" date string
+     all the way down to phone width. */
+  .topbar {
+
+    padding: 18px 20px;
+
+  }
+
+  .topbar-left h1 {
+
+    font-size: 22px;
+
+  }
+
+  .topbar-left p {
+
+    font-size: 13px;
+
+  }
+
+}

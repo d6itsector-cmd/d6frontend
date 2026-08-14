@@ -1,0 +1,160 @@
+.email-hero{
+    padding:120px 8% 80px;
+    background:#F8FAFC;
+}
+
+.email-hero-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:60px;
+}
+
+.email-hero-content{
+    flex:1;
+}
+
+.hero-badge{
+    display:inline-block;
+    padding:8px 20px;
+    background:#E8F3FC;
+    color:#0077CC;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.email-hero-content h1{
+    font-size:56px;
+    color:#1E2A5E;
+    line-height:1.2;
+    margin-bottom:25px;
+}
+
+.email-hero-content h1 span{
+    color:#0077CC;
+}
+
+.email-hero-content p{
+    color:#6B7280;
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:35px;
+    max-width:550px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.primary-btn{
+    padding:15px 35px;
+    background:#0077CC;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.primary-btn:hover{
+    background:#E69518;
+}
+
+.secondary-btn{
+    padding:15px 35px;
+    background:transparent;
+    color:#1E2A5E;
+    border:2px solid #1E2A5E;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.secondary-btn:hover{
+    background:#1E2A5E;
+    color:#fff;
+}
+
+.email-hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.email-hero-image img{
+    width:100%;
+    max-width:520px;
+    border-radius:20px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:992px){
+
+.email-hero-container{
+    flex-direction:column-reverse;
+    text-align:center;
+}
+
+.hero-buttons{
+    justify-content:center;
+}
+
+.email-hero-content h1{
+    font-size:42px;
+}
+
+.email-hero-content p{
+    margin:auto auto 35px;
+}
+
+}
+
+@media(max-width:768px){
+
+.email-hero{
+    padding:100px 20px 60px;
+}
+
+.email-hero-content h1{
+    font-size:34px;
+}
+
+.email-hero-content p{
+    font-size:16px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+}
+
+.primary-btn,
+.secondary-btn{
+    width:100%;
+}
+
+.email-hero-image img{
+    max-width:380px;
+}
+
+}

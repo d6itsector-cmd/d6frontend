@@ -1,0 +1,63 @@
+.settings-card{
+    background:var(--white);
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:30px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.settings-card h2{
+    color:var(--primary);
+    margin-bottom:20px;
+}
+
+.settings-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:8px;
+    font-weight:600;
+    color:var(--primary);
+}
+
+.form-group input{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:var(--accent);
+}
+
+.save-btn{
+    margin-top:25px;
+    padding:12px 25px;
+    background:var(--accent);
+    color:var(--primary);
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+@media(max-width:768px){
+
+.settings-grid{
+grid-template-columns:1fr;
+}
+
+.save-btn{
+width:100%;
+}
+
+}

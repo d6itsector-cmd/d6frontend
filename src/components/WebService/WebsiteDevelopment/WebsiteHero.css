@@ -1,0 +1,164 @@
+.website-hero{
+    padding:120px 8% 80px;
+    background:#F8FAFC;
+}
+
+.website-hero-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+}
+
+.website-hero-content{
+    flex:1;
+}
+
+.hero-badge{
+    display:inline-block;
+    padding:8px 20px;
+    background:#E8F3FC;
+    color:#0077CC;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.website-hero-content h1{
+    font-size:56px;
+    color:#1E2A5E;
+    line-height:1.2;
+    margin-bottom:25px;
+}
+
+.website-hero-content h1 span{
+    color:#0077CC;
+}
+
+.website-hero-content p{
+    font-size:18px;
+    color:#6B7280;
+    line-height:1.8;
+    margin-bottom:35px;
+    max-width:560px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.primary-btn{
+    padding:15px 35px;
+    background:#0077CC;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:#E69518;
+}
+
+.secondary-btn{
+    padding:15px 35px;
+    background:transparent;
+    color:#1E2A5E;
+    border:2px solid #1E2A5E;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+    background:#1E2A5E;
+    color:#fff;
+}
+
+.website-hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.website-hero-image img{
+    width:100%;
+    max-width:520px;
+    border-radius:20px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-12px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+@media(max-width:992px){
+
+.website-hero-container{
+flex-direction:column-reverse;
+text-align:center;
+}
+
+.website-hero-content h1{
+font-size:42px;
+}
+
+.website-hero-content p{
+margin:0 auto 35px;
+}
+
+.hero-buttons{
+justify-content:center;
+}
+
+}
+
+@media(max-width:768px){
+
+.website-hero{
+padding:100px 20px 60px;
+}
+
+.website-hero-content h1{
+font-size:34px;
+}
+
+.website-hero-content p{
+font-size:16px;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+.primary-btn,
+.secondary-btn{
+width:100%;
+}
+
+.website-hero-image img{
+max-width:380px;
+}
+
+}

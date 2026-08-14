@@ -1,0 +1,167 @@
+.missionVision{
+    padding:100px 8%;
+    background:var(--secondary-bg);
+}
+
+.missionVision__container{
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:80px;
+}
+
+/* LEFT */
+
+.missionVision__image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.missionVision__image img{
+    width:100%;
+    max-width:520px;
+    border-radius:25px;
+    box-shadow:0 20px 45px rgba(20,33,61,.15);
+    transition:var(--transition);
+}
+
+.missionVision__image img:hover{
+    transform:scale(1.03);
+}
+
+/* RIGHT */
+
+.missionVision__content{
+    flex:1;
+}
+
+.sectionBadge{
+    display:inline-block;
+    padding:10px 22px;
+    background:rgba(0, 119, 204,.15);
+    color:var(--accent);
+    border-radius:50px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.missionVision__content h2{
+    font-size:48px;
+    color:var(--primary);
+    margin-bottom:20px;
+    line-height:1.2;
+}
+
+.missionVision__content h2 span{
+    color:var(--accent);
+}
+
+.sectionDesc{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+/* Cards */
+
+.infoCard{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    background:var(--white);
+    padding:22px;
+    border-radius:18px;
+    margin-bottom:20px;
+    box-shadow:0 10px 30px rgba(20,33,61,.08);
+    transition:var(--transition);
+}
+
+.infoCard:hover{
+    transform:translateX(10px);
+}
+
+.iconBox{
+    min-width:60px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0, 119, 204,.12);
+    color:var(--accent);
+    font-size:24px;
+}
+
+.infoCard h3{
+    color:var(--primary);
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.infoCard p{
+    color:#666;
+    line-height:1.7;
+}
+
+/* Tablet */
+
+@media(max-width:992px){
+
+.missionVision{
+padding:80px 30px;
+}
+
+.missionVision__container{
+flex-direction:column;
+}
+
+.missionVision__content{
+text-align:center;
+}
+
+.infoCard{
+text-align:left;
+}
+
+}
+
+/* Mobile */
+
+@media(max-width:576px){
+
+.missionVision{
+padding:70px 20px;
+}
+
+.missionVision__content h2{
+font-size:34px;
+}
+
+.infoCard{
+padding:18px;
+}
+
+.iconBox{
+width:50px;
+height:50px;
+min-width:50px;
+font-size:20px;
+}
+
+.infoCard h3{
+font-size:18px;
+}
+
+.infoCard p{
+font-size:15px;
+}
+
+.missionVision__image img{
+max-width:100%;
+}
+
+}

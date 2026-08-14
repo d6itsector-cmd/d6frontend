@@ -1,0 +1,205 @@
+.csvc-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+    padding:20px;
+}
+
+.csvc-card{
+    width:800px;
+    max-width:100%;
+    max-height:88vh;
+    overflow-y:auto;
+    background:var(--white);
+    border-radius:16px;
+    padding:30px;
+    position:relative;
+    animation:popup .3s ease;
+}
+
+@keyframes popup{
+    from{ opacity:0; transform:scale(.9); }
+    to{ opacity:1; transform:scale(1); }
+}
+
+.csvc-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:20px;
+}
+
+.csvc-header h2{
+    color:var(--primary);
+    margin-bottom:4px;
+}
+
+.csvc-header p{
+    color:#888;
+    font-size:14px;
+}
+
+.csvc-section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.csvc-section-header h3{
+    color:var(--primary);
+    font-size:18px;
+}
+
+.csvc-assign-btn{
+    background:var(--accent);
+    color:var(--primary);
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.csvc-status{
+    color:#888;
+    padding:20px 0;
+    text-align:center;
+}
+
+/* ---------- form ---------- */
+
+.csvc-form{
+    background:#F8FAFC;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:24px;
+}
+
+.csvc-form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.csvc-form-grid textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+    font-family:inherit;
+    resize:vertical;
+}
+
+.csvc-form-grid select:disabled{
+    background:#f5f5f5;
+    color:#888;
+}
+
+/* ---------- assigned services list ---------- */
+
+.csvc-list{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.csvc-row{
+    background:#F8FAFC;
+    border-radius:14px;
+    padding:18px 20px;
+}
+
+.csvc-row-main{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.csvc-row-main strong{
+    color:var(--primary);
+    font-size:16px;
+}
+
+.csvc-badge{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.csvc-pending{ background:#FFF4E5; color:#B45309; }
+.csvc-active{ background:#dcfce7; color:#16a34a; }
+.csvc-on-hold{ background:#FEF3C7; color:#92400E; }
+.csvc-completed{ background:#DBEAFE; color:#1D4ED8; }
+.csvc-cancelled{ background:#fee2e2; color:#dc2626; }
+
+.csvc-progress-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.csvc-progress-bar{
+    flex:1;
+    height:8px;
+    background:#EEF2F7;
+    border-radius:30px;
+    overflow:hidden;
+}
+
+.csvc-progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#0077CC,#4DA8E8);
+    border-radius:30px;
+}
+
+.csvc-progress-row span{
+    font-size:13px;
+    font-weight:600;
+    color:var(--primary);
+    width:40px;
+    text-align:right;
+}
+
+.csvc-row-meta{
+    display:flex;
+    gap:20px;
+    color:#7B8498;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.csvc-action-required{
+    background:#FFF4E5;
+    color:#92400E;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.csvc-row-actions{
+    display:flex;
+    gap:10px;
+}
+
+@media(max-width:768px){
+    .csvc-form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .csvc-row-meta{
+        flex-direction:column;
+        gap:6px;
+    }
+}

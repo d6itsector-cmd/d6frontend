@@ -1,0 +1,643 @@
+/* ===========================================
+   HERO SECTION
+=========================================== */
+
+.dhero {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+
+  padding: 40px 50px;
+  margin: 25px 0 35px;
+
+  border-radius: 28px;
+
+  background: linear-gradient(135deg, #14213D 0%, #1E3159 100%);
+
+  color: #fff;
+
+  overflow: hidden;
+
+  box-shadow: 0 20px 50px rgba(20, 33, 61, 0.25);
+}
+
+/* Decorative Background */
+
+.dhero::before{
+  content:"";
+  position:absolute;
+
+  width:320px;
+  height:320px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.05);
+
+  right:-120px;
+  top:-140px;
+}
+
+.dhero::after{
+  content:"";
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  border-radius:50%;
+
+  background:rgba(0, 119, 204,.08);
+
+  left:-90px;
+  bottom:-90px;
+}
+
+/* ===========================================
+   LEFT CONTENT
+=========================================== */
+
+.hero-left{
+  flex:2;
+  position:relative;
+  z-index:2;
+}
+
+.hero-badge{
+
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  background:rgba(255,255,255,.12);
+
+  color:#0077CC;
+
+  padding:10px 20px;
+
+  border-radius:50px;
+
+  font-size:14px;
+  font-weight:600;
+
+  margin-bottom:24px;
+
+  backdrop-filter:blur(10px);
+}
+
+.hero-left h1{
+
+  font-size:48px;
+
+  line-height:1.2;
+
+  font-weight:700;
+
+  margin-bottom:20px;
+
+  max-width:650px;
+
+}
+
+.hero-left h1 span{
+
+  color:#0077CC;
+
+}
+
+.hero-left p{
+
+  font-size:17px;
+
+  line-height:1.8;
+
+  max-width:600px;
+
+  color:rgba(255,255,255,.88);
+
+}
+
+.hero-left strong{
+
+  color:#fff;
+
+}
+
+/* ===========================================
+   BUTTONS
+=========================================== */
+
+.hero-buttons{
+
+  display:flex;
+
+  gap:18px;
+
+  margin-top:35px;
+
+  flex-wrap:wrap;
+
+}
+
+.hero-primary{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  padding:15px 32px;
+
+  background:#0077CC;
+
+  color:#14213D;
+
+  border:none;
+
+  border-radius:14px;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.35s;
+}
+
+.hero-primary:hover{
+
+  transform:translateY(-4px);
+
+  background:#005FA3;
+
+  box-shadow:0 12px 25px rgba(0, 119, 204,.35);
+
+}
+
+.hero-secondary{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  padding:15px 30px;
+
+  border-radius:14px;
+
+  border:2px solid rgba(255,255,255,.15);
+
+  background:rgba(255,255,255,.05);
+
+  color:#fff;
+
+  cursor:pointer;
+
+  transition:.35s;
+
+  backdrop-filter:blur(10px);
+
+}
+
+.hero-secondary:hover{
+
+  background:rgba(255,255,255,.12);
+
+  transform:translateY(-4px);
+
+}
+/* ===========================================
+   RIGHT SECTION
+=========================================== */
+
+.hero-right{
+  flex:1;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap:25px;
+
+  position:relative;
+  z-index:2;
+}
+
+/* Progress Circle */
+
+.progress-circle{
+
+  width:200px;
+  height:200px;
+
+  border-radius:50%;
+
+  background:conic-gradient(
+      #0077CC 0deg,
+      #0077CC 288deg,
+      rgba(255,255,255,.12) 288deg
+  );
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  box-shadow:
+      0 20px 45px rgba(0, 119, 204,.30);
+
+  animation:rotateIn .8s ease;
+}
+
+.inner-circle{
+
+  width:155px;
+  height:155px;
+
+  border-radius:50%;
+
+  background:#14213D;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  box-shadow:
+      inset 0 0 25px rgba(255,255,255,.06);
+}
+
+.inner-circle h2{
+
+  font-size:42px;
+
+  color:#0077CC;
+
+  margin-bottom:6px;
+}
+
+.inner-circle p{
+
+  font-size:14px;
+
+  color:#C9D0DD;
+}
+
+/* ===========================================
+   HERO INFO CARDS
+=========================================== */
+
+.hero-info{
+
+  width:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:16px;
+
+}
+
+.hero-info > div{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  background:rgba(255,255,255,.08);
+
+  backdrop-filter:blur(10px);
+
+  transition:.35s;
+
+}
+
+.hero-info > div:hover{
+
+  transform:translateX(8px);
+
+  background:rgba(255,255,255,.13);
+
+}
+
+.hero-info svg{
+
+  font-size:24px;
+
+  color:#0077CC;
+
+  min-width:24px;
+
+}
+
+.hero-info h4{
+
+  font-size:15px;
+
+  margin-bottom:4px;
+
+  color:#fff;
+
+}
+
+.hero-info p{
+
+  font-size:14px;
+
+  color:#D7DFEA;
+
+}
+
+/* ===========================================
+   ANIMATIONS
+=========================================== */
+
+@keyframes rotateIn{
+
+  from{
+
+    transform:scale(.8) rotate(-30deg);
+
+    opacity:0;
+
+  }
+
+  to{
+
+    transform:scale(1) rotate(0);
+
+    opacity:1;
+
+  }
+
+}
+
+@keyframes float{
+
+  0%{
+
+    transform:translateY(0);
+
+  }
+
+  50%{
+
+    transform:translateY(-10px);
+
+  }
+
+  100%{
+
+    transform:translateY(0);
+
+  }
+
+}
+
+.progress-circle{
+
+  animation:
+      rotateIn .8s ease,
+      float 4s ease-in-out infinite;
+
+}
+
+/* ===========================================
+   TABLET
+=========================================== */
+
+@media (max-width:1100px){
+
+.dhero{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:45px;
+
+    padding:35px;
+
+}
+
+.hero-left{
+
+    width:100%;
+
+}
+
+.hero-left h1{
+
+    font-size:40px;
+
+    max-width:100%;
+
+}
+
+.hero-left p{
+
+    margin:auto;
+
+}
+
+.hero-buttons{
+
+    justify-content:center;
+
+}
+
+.hero-right{
+
+    width:100%;
+
+}
+
+.hero-info{
+
+    max-width:420px;
+
+}
+
+}
+
+/* ===========================================
+   MOBILE
+=========================================== */
+
+@media (max-width:768px){
+
+/* Outer margin never shrank on mobile before -- 25px/35px of vertical
+   whitespace above/below the card regardless of screen size, on top of
+   the card's own (already-scaled) internal padding. */
+.dhero{
+
+    margin:15px 0 20px;
+
+    padding:24px;
+
+    gap:24px;
+
+}
+
+.hero-buttons{
+
+    gap:12px;
+
+    margin-top:24px;
+
+}
+
+.hero-info{
+
+    gap:12px;
+
+}
+
+.hero-badge{
+
+    font-size:13px;
+
+}
+
+.hero-left h1{
+
+    font-size:30px;
+
+}
+
+.hero-left p{
+
+    font-size:15px;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+}
+
+.hero-primary,
+.hero-secondary{
+
+    width:100%;
+
+}
+
+.progress-circle{
+
+    width:170px;
+
+    height:170px;
+
+}
+
+.inner-circle{
+
+    width:130px;
+
+    height:130px;
+
+}
+
+.inner-circle h2{
+
+    font-size:34px;
+
+}
+
+.hero-info{
+
+    width:100%;
+
+}
+
+.hero-info > div{
+
+    padding:16px;
+
+}
+
+}
+
+/* ===========================================
+   SMALL MOBILE
+=========================================== */
+
+@media (max-width:480px){
+
+.dhero{
+
+    margin:12px 0 18px;
+
+    padding:20px;
+
+    gap:20px;
+
+}
+
+.hero-badge{
+
+    padding:8px 16px;
+
+    margin-bottom:16px;
+
+}
+
+.hero-left h1{
+
+    font-size:26px;
+
+}
+
+.progress-circle{
+
+    width:150px;
+
+    height:150px;
+
+}
+
+.inner-circle{
+
+    width:115px;
+
+    height:115px;
+
+}
+
+.inner-circle h2{
+
+    font-size:30px;
+
+}
+
+.hero-info h4{
+
+    font-size:14px;
+
+}
+
+.hero-info p{
+
+    font-size:13px;
+
+}
+
+}

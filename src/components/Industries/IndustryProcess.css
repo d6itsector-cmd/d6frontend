@@ -1,0 +1,124 @@
+.industry-process{
+    padding:100px 8%;
+    background:var(--secondary-bg);
+}
+
+.process-header{
+    max-width:760px;
+    margin:auto;
+    text-align:center;
+}
+
+.process-header span{
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.process-header h2{
+    margin:20px 0;
+    font-size:42px;
+    color:var(--primary);
+}
+
+.process-header p{
+    color:var(--text-light);
+    line-height:1.8;
+}
+
+.process-timeline{
+    margin-top:70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    position:relative;
+}
+
+.process-step{
+    flex:1;
+    text-align:center;
+    position:relative;
+    transition:var(--transition);
+}
+
+/* Same lift + icon color-swap language as the Home page's Process section
+   (.process-card:hover), which this component otherwise mirrors closely --
+   this was the only section-level component sitewide with zero hover
+   states. */
+.process-step:hover{
+    transform:translateY(-8px);
+}
+
+.process-icon{
+    width:80px;
+    height:80px;
+    margin:auto;
+    border-radius:50%;
+    background:var(--white);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 10px 30px rgba(20,33,61,.08);
+    transition:var(--transition);
+}
+
+.process-step:hover .process-icon{
+    background:var(--accent);
+    box-shadow:var(--shadow-lg);
+}
+
+.process-icon svg{
+    font-size:32px;
+    color:var(--accent);
+    transition:var(--transition);
+}
+
+.process-step:hover .process-icon svg{
+    color:var(--white);
+}
+
+.process-step h3{
+    margin:20px 0 10px;
+    color:var(--primary);
+}
+
+.process-step p{
+    color:var(--text-light);
+    line-height:1.7;
+    font-size:15px;
+}
+
+.process-line{
+    position:absolute;
+    top:40px;
+    left:60%;
+    width:80%;
+    height:3px;
+    background:var(--accent);
+    z-index:-1;
+}
+
+@media(max-width:992px){
+
+.process-timeline{
+    flex-direction:column;
+}
+
+.process-line{
+    display:none;
+}
+
+.process-step{
+    margin-bottom:40px;
+}
+
+}
+
+@media(max-width:768px){
+
+.process-header h2{
+    font-size:34px;
+}
+
+}

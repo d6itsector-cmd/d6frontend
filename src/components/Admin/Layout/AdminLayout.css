@@ -1,0 +1,92 @@
+/* ===========================
+   ADMIN LAYOUT
+=========================== */
+
+.admin-layout{
+    display:flex;
+    min-height:100vh;
+    background:#F5F7FB;
+    overflow:hidden;
+}
+
+.admin-sidebar-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:1900;
+}
+
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+.admin-main{
+    flex:1;
+    margin-left:280px;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    transition:margin-left .3s ease;
+}
+
+/* ===========================
+   PAGE CONTENT
+=========================== */
+
+.admin-content{
+    flex:1;
+    margin-top:80px;
+    padding:30px;
+    background:#F5F7FB;
+    overflow-y:auto;
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+.admin-content::-webkit-scrollbar{
+    width:8px;
+}
+
+.admin-content::-webkit-scrollbar-track{
+    background:#f1f1f1;
+}
+
+.admin-content::-webkit-scrollbar-thumb{
+    background:#0077CC;
+    border-radius:20px;
+}
+
+.admin-content::-webkit-scrollbar-thumb:hover{
+    background:#e29400;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width:992px){
+
+.admin-main{
+    margin-left:0;
+}
+
+.admin-content{
+    margin-top:70px;
+    padding:20px;
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:576px){
+
+.admin-content{
+    padding:15px;
+}
+
+}

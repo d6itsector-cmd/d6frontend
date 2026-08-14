@@ -1,0 +1,126 @@
+.portfolio-stats{
+    padding:100px 8%;
+    background:var(--white);
+}
+
+.stats-heading{
+    max-width:760px;
+    margin:auto;
+    text-align:center;
+}
+
+.stats-heading span{
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.stats-heading h2{
+    margin:18px 0;
+    color:var(--primary);
+    font-size:42px;
+}
+
+.stats-heading p{
+    color:var(--text-light);
+    line-height:1.8;
+}
+
+.stats-grid{
+    margin-top:70px;
+    display:grid;
+    /* minmax(0,1fr), not bare 1fr -- a grid track's implicit min-width is
+       "auto" (its content's min-content size), so an unbreakable number like
+       "250+" at 42px can force a column wider than its 1fr share and push
+       the whole grid past the container edge. minmax(0,1fr) caps that. */
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:30px;
+}
+
+.stats-card{
+    box-sizing:border-box;
+    background:var(--secondary-bg);
+    border-radius:18px;
+    padding:35px 25px;
+    text-align:center;
+    transition:var(--transition);
+    overflow:hidden;
+
+    /* Flex column + width:100% on the text children below is the
+       defensive fix -- a plain block card relies on every ancestor
+       behaving exactly as expected to keep text wrapping inside its own
+       box; this pins it explicitly instead. */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.stats-card:hover{
+    transform:translateY(-10px);
+    background:var(--white);
+    box-shadow:0 20px 40px rgba(20,33,61,.08);
+}
+
+.stats-icon{
+    width:80px;
+    height:80px;
+    margin:auto;
+    margin-bottom:20px;
+    border-radius:50%;
+    background:rgba(0, 119, 204,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.stats-icon svg{
+    font-size:34px;
+    color:var(--accent);
+}
+
+.stats-card h3{
+    width:100%;
+    font-size:42px;
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+.stats-card h4{
+    width:100%;
+    color:var(--primary);
+    margin-bottom:15px;
+    overflow-wrap:break-word;
+}
+
+.stats-card p{
+    width:100%;
+    color:var(--text-light);
+    line-height:1.7;
+    overflow-wrap:break-word;
+    word-break:normal;
+}
+
+@media(max-width:992px){
+
+.stats-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+}
+
+@media(max-width:768px){
+
+.portfolio-stats{
+    padding:80px 20px;
+}
+
+.stats-grid{
+    grid-template-columns:1fr;
+}
+
+.stats-heading h2{
+    font-size:34px;
+}
+
+}

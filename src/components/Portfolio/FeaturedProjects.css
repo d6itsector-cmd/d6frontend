@@ -1,0 +1,239 @@
+/*==============================
+      Featured Projects
+==============================*/
+
+.featured-projects{
+    padding:100px 8%;
+    background:var(--secondary-bg);
+}
+
+.section-header{
+    max-width:750px;
+    margin:auto;
+    text-align:center;
+}
+
+.projects-status{
+    text-align:center;
+    color:var(--text-light, #666);
+    padding:40px 0;
+    font-size:16px;
+}
+
+.section-header span{
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.section-header h2{
+    margin:18px 0;
+    font-size:42px;
+    color:var(--primary);
+}
+
+.section-header p{
+    color:var(--text-light);
+    line-height:1.8;
+}
+
+/*==============================
+        Grid
+==============================*/
+
+.projects-grid{
+    margin-top:70px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+}
+
+/*==============================
+        Card
+==============================*/
+
+.project-card{
+    background:var(--white);
+    border-radius:20px;
+    padding:35px;
+    transition:var(--transition);
+    box-shadow:0 10px 30px rgba(20,33,61,.06);
+    border:1px solid transparent;
+}
+
+.project-card:hover{
+    transform:translateY(-10px);
+    border-color:var(--accent);
+    box-shadow:0 20px 45px rgba(20,33,61,.12);
+}
+
+/*==============================
+        Icon
+==============================*/
+
+.project-icon{
+    width:90px;
+    height:90px;
+    margin:0 auto 25px;
+    border-radius:50%;
+    background:rgba(0, 119, 204,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:var(--transition);
+}
+
+.project-icon svg{
+    font-size:42px;
+    color:var(--accent);
+    transition:var(--transition);
+}
+
+.project-card:hover .project-icon{
+    background:var(--accent);
+    transform:scale(1.08);
+}
+
+.project-card:hover .project-icon svg{
+    color:var(--primary);
+}
+
+/*==============================
+      Content
+==============================*/
+
+.project-content{
+    text-align:center;
+}
+
+.industry-tag{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:30px;
+    background:rgba(0, 119, 204,.15);
+    color:var(--accent);
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.project-content h3{
+    color:var(--primary);
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+/*==============================
+      Service Tags
+==============================*/
+
+.service-tags{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.service-tags span{
+    background:var(--secondary-bg);
+    color:var(--text);
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:14px;
+}
+
+/*==============================
+      Result
+==============================*/
+
+.project-result{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-bottom:28px;
+}
+
+.project-result svg{
+    color:var(--accent);
+    font-size:22px;
+}
+
+.project-result p{
+    color:var(--primary);
+    font-weight:600;
+    font-size:22px;
+}
+
+/*==============================
+        Button
+==============================*/
+
+.project-content button{
+    border:none;
+    background:none;
+    color:var(--primary);
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    margin:auto;
+
+    transition:var(--transition);
+}
+
+.project-content button:hover{
+    color:var(--accent);
+}
+
+.project-content button svg{
+    transition:var(--transition);
+}
+
+.project-content button:hover svg{
+    transform:translateX(5px);
+}
+
+/*==============================
+      Responsive
+==============================*/
+
+@media(max-width:992px){
+
+.projects-grid{
+    grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.featured-projects{
+    padding:80px 20px;
+}
+
+.section-header h2{
+    font-size:34px;
+}
+
+.project-card{
+    padding:30px;
+}
+
+.project-content h3{
+    font-size:24px;
+}
+
+.project-result p{
+    font-size:20px;
+}
+
+}

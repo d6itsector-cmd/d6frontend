@@ -1,0 +1,217 @@
+.timeline-section{
+
+background:#fff;
+
+padding:35px;
+
+margin-top:30px;
+
+border-radius:22px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.06);
+
+}
+
+.timeline-header{
+
+margin-bottom:35px;
+
+}
+
+.timeline-header h2{
+
+font-size:32px;
+
+color:#14213D;
+
+margin-bottom:10px;
+
+}
+
+.timeline-header p{
+
+color:#7B8498;
+
+}
+
+.timeline{
+
+position:relative;
+
+padding-left:30px;
+
+}
+
+.timeline::before{
+
+content:"";
+
+position:absolute;
+
+left:12px;
+
+top:0;
+
+bottom:0;
+
+width:3px;
+
+background:#E7EDF5;
+
+}
+
+.timeline-item{
+
+display:flex;
+
+gap:20px;
+
+position:relative;
+
+padding-bottom:35px;
+
+}
+
+.timeline-icon{
+
+position:absolute;
+
+left:-2px;
+
+width:28px;
+
+height:28px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:white;
+
+font-size:20px;
+
+}
+
+.timeline-content{
+
+margin-left:35px;
+
+padding:18px 22px;
+
+background:#F8FAFC;
+
+border-radius:14px;
+
+width:100%;
+
+transition:.3s;
+
+}
+
+.timeline-content:hover{
+
+transform:translateX(6px);
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.timeline-content h4{
+
+color:#14213D;
+
+margin-bottom:8px;
+
+font-size:18px;
+
+}
+
+.timeline-content span{
+
+font-size:14px;
+
+color:#7B8498;
+
+}
+
+/* Completed */
+
+.completed .timeline-icon{
+
+color:#27AE60;
+
+}
+
+/* Current */
+
+.current .timeline-icon{
+
+color:#0077CC;
+
+animation:spin 2s linear infinite;
+
+}
+
+/* Upcoming */
+
+.upcoming .timeline-icon{
+
+color:#C5CCD8;
+
+}
+
+/* Milestone */
+
+.milestone .timeline-icon{
+
+color:#0077CC;
+
+}
+
+/* Issue */
+
+.issue .timeline-icon{
+
+color:#DC3545;
+
+}
+
+.timeline-status{
+
+    text-align:center;
+
+    color:#7B8498;
+
+    padding:20px 0;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.timeline-content{
+
+padding:16px;
+
+}
+
+.timeline-header h2{
+
+font-size:26px;
+
+}
+
+}

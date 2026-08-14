@@ -1,0 +1,77 @@
+.onboarding-welcome{
+    background:#fff;
+    border-radius:20px;
+    padding:50px 40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.onboarding-welcome h2{
+    color:#14213D;
+    font-size:26px;
+    margin-bottom:12px;
+}
+
+.onboarding-welcome > p{
+    color:#7B8498;
+    font-size:15px;
+    max-width:480px;
+    margin:0 auto 30px;
+}
+
+.onboarding-steps{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    list-style:none;
+    padding:0;
+    margin:0 auto 30px;
+    max-width:720px;
+}
+
+.onboarding-steps li{
+    background:#E8F3FC;
+    color:#0077CC;
+    font-size:13px;
+    font-weight:600;
+    padding:10px 16px;
+    border-radius:30px;
+}
+
+.onboarding-help{
+    color:#14213D !important;
+    font-weight:600;
+    margin-bottom:16px !important;
+}
+
+.onboarding-welcome button{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:none;
+    background:#0077CC;
+    color:#fff;
+    padding:14px 28px;
+    border-radius:12px;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.onboarding-welcome button:hover{
+    background:#14213D;
+}
+
+@media(max-width:600px){
+    .onboarding-welcome{
+        padding:35px 20px;
+    }
+
+    .onboarding-steps li{
+        font-size:12px;
+        padding:8px 12px;
+    }
+}
