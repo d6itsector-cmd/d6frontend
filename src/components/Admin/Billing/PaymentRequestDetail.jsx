@@ -1,6 +1,7 @@
 import { getPaymentRequest, getApiErrorMessage } from "../../../services/billingApi";
 import {
   formatGBP,
+  formatDate,
   formatDateTime,
   clientLabel,
   safeExternalUrl,
@@ -10,6 +11,7 @@ import {
 import { useBillingQuery } from "../../Billing/useBillingQuery";
 import BillingModal from "../../Billing/BillingModal";
 import StatusBadge from "../../Billing/StatusBadge";
+import InvoiceLinks from "../../Billing/InvoiceLinks";
 import { LoadingState, ErrorState } from "../../Billing/StateViews";
 
 // View of one one-off payment request, freshly loaded from the backend.
@@ -122,6 +124,38 @@ const PaymentRequestDetail = ({ requestId, emailSent, refreshKey = 0, busy = fal
               </div>
             )}
           </dl>
+
+          {request.payments?.length > 0 && (
+            <div>
+              <h3>Payments &amp; invoices</h3>
+              <div className="bl-table-wrap">
+                <table className="bl-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Invoice</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {request.payments.map((p) => (
+                      <tr key={p._id}>
+                        <td data-label="Date">{formatDate(p.paidAt || p.failedAt || p.createdAt)}</td>
+                        <td data-label="Amount">{formatGBP(p.amountPence)}</td>
+                        <td data-label="Status">
+                          <StatusBadge kind="payment" value={p.status} />
+                        </td>
+                        <td data-label="Invoice">
+                          <InvoiceLinks payment={p} showDetails />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
 
           {payUrl && (
             <div className="bl-copy">

@@ -11,6 +11,19 @@
  * @typedef {"subscription"|"payment_request"} PaymentSource
  * @typedef {"pending"|"processing"|"paid"|"failed"|"expired"|"cancelled"|"setup_failed"} PaymentRequestStatus
  * @typedef {"previous_unpaid"|"outstanding_balance"|"additional_service"|"one_time"|"manual"} PaymentRequestReason
+ * @typedef {"draft"|"open"|"paid"|"void"|"uncollectible"} InvoiceStatus
+ */
+
+/**
+ * Stripe's own invoice for a payment (Stripe is the source of truth; links
+ * are Stripe-hosted and null until Stripe provides them).
+ * @typedef {Object} Invoice
+ * @property {string} id Stripe invoice id (in_...)
+ * @property {string|null} number Stripe-assigned invoice number
+ * @property {InvoiceStatus|null} status
+ * @property {string|null} hostedInvoiceUrl
+ * @property {string|null} invoicePdfUrl
+ * @property {string|null} createdAt
  */
 
 /**
@@ -122,8 +135,9 @@
  * @property {string} [paidAt]
  * @property {string} [failedAt]
  * @property {string} [failureMessage] admin only
- * @property {string} [hostedInvoiceUrl]
- * @property {string} [invoicePdfUrl]
+ * @property {Invoice|null} invoice null when Stripe has no invoice for this payment
+ * @property {string} [hostedInvoiceUrl] deprecated -- use invoice.hostedInvoiceUrl
+ * @property {string} [invoicePdfUrl] deprecated -- use invoice.invoicePdfUrl
  * @property {string} createdAt
  */
 
@@ -144,6 +158,7 @@
  * @property {string} [emailedAt] admin only
  * @property {string} [cancelledAt] admin only
  * @property {number} [checkoutAttempts] admin only
+ * @property {Payment[]} [payments] admin detail only: payments (with invoices) recorded for this request
  * @property {string} createdAt
  */
 

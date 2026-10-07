@@ -104,6 +104,36 @@ export const paymentDescription = (p) =>
 // Only http(s) links from the backend are rendered as hrefs.
 export const safeExternalUrl = (url) => (typeof url === "string" && /^https?:\/\//i.test(url) ? url : null);
 
+// Invoice links must be Stripe-hosted (invoice.stripe.com / pay.stripe.com).
+// The backend already enforces this; checked again here before rendering.
+export const safeStripeUrl = (url) => {
+  if (typeof url !== "string") return null;
+  try {
+    const { protocol, hostname } = new URL(url);
+    return protocol === "https:" && (hostname === "stripe.com" || hostname.endsWith(".stripe.com")) ? url : null;
+  } catch {
+    return null;
+  }
+};
+
+// The payment's Stripe invoice ({ id, number, status, hostedInvoiceUrl,
+// invoicePdfUrl, createdAt }) or null. Falls back to the older flat link
+// fields so this still works against a backend that predates `invoice`.
+export const paymentInvoice = (payment) => {
+  if (payment?.invoice) return payment.invoice;
+  if (payment?.hostedInvoiceUrl || payment?.invoicePdfUrl) {
+    return {
+      id: null,
+      number: null,
+      status: null,
+      hostedInvoiceUrl: payment.hostedInvoiceUrl,
+      invoicePdfUrl: payment.invoicePdfUrl,
+      createdAt: null,
+    };
+  }
+  return null;
+};
+
 // ---------------- Labels ----------------
 
 export const SUBSCRIPTION_STATUS_LABELS = {
@@ -158,6 +188,15 @@ export const PAYMENT_REQUEST_REASON_LABELS = {
   additional_service: "Additional service",
   one_time: "One-time charge",
   manual: "Manual request",
+};
+
+// Stripe Invoice.status
+export const INVOICE_STATUS_LABELS = {
+  draft: "Draft",
+  open: "Unpaid",
+  paid: "Paid",
+  void: "Void",
+  uncollectible: "Uncollectible",
 };
 
 export const PAYMENT_SOURCE_LABELS = {

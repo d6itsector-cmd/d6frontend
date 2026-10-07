@@ -99,7 +99,7 @@ const PaymentsAdmin = () => {
                 <th>Source</th>
                 <th>Status</th>
                 <th>Billing period</th>
-                <th>Invoice / receipt</th>
+                <th>Invoice</th>
               </tr>
             </thead>
             <tbody>
@@ -122,8 +122,8 @@ const PaymentsAdmin = () => {
                     <StatusBadge kind="payment" value={p.status} />
                   </td>
                   <td data-label="Billing period">{p.source === "subscription" ? formatPeriod(p.periodStart, p.periodEnd) : "—"}</td>
-                  <td data-label="Invoice / receipt">
-                    <InvoiceLinks payment={p} />
+                  <td data-label="Invoice">
+                    <InvoiceLinks payment={p} showDetails />
                   </td>
                 </tr>
               ))}

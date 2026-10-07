@@ -470,6 +470,7 @@
 
 .bl-links{
   display:inline-flex;
+  flex-wrap:wrap;
   gap:12px;
 }
 
@@ -480,6 +481,26 @@
 }
 
 .bl-links a:hover{ text-decoration:underline; }
+
+/* Invoice cell: number + Stripe status above the View / PDF links. */
+.bl-invoice{
+  display:inline-flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.bl-invoice-meta{
+  display:inline-flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.bl-invoice-number{
+  font-weight:600;
+  color:var(--primary);
+  font-variant-numeric:tabular-nums;
+}
 
 .bl-pagination{
   display:flex;
@@ -894,6 +915,9 @@
 
   .bl-table td > *{ text-align:right; }
   .bl-table td .bl-actions{ justify-content:flex-end; }
+  .bl-table td .bl-invoice{ align-items:flex-end; }
+  .bl-table td .bl-invoice-meta,
+  .bl-table td .bl-links{ justify-content:flex-end; }
 
   .bl-copy{ flex-direction:column; }
 }

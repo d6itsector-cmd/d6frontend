@@ -5,6 +5,7 @@ import {
   PAYMENT_STATUS_LABELS,
   PAYMENT_REQUEST_STATUS_LABELS,
   PAYMENT_SOURCE_LABELS,
+  INVOICE_STATUS_LABELS,
 } from "../../utils/billingFormat";
 
 const LABELS = {
@@ -14,13 +15,14 @@ const LABELS = {
   payment: PAYMENT_STATUS_LABELS,
   request: PAYMENT_REQUEST_STATUS_LABELS,
   source: PAYMENT_SOURCE_LABELS,
+  invoice: INVOICE_STATUS_LABELS,
 };
 
 // One colour scale across every billing status family.
 const TONES = {
   success: ["active", "trialing", "succeeded", "paid"],
-  warning: ["pending_checkout", "incomplete", "past_due", "requires_action", "processing", "pending"],
-  danger: ["setup_failed", "unpaid", "failed", "incomplete_expired"],
+  warning: ["pending_checkout", "incomplete", "past_due", "requires_action", "processing", "pending", "open"],
+  danger: ["setup_failed", "unpaid", "failed", "incomplete_expired", "uncollectible"],
   info: ["paused", "subscription", "payment_request"],
 };
 
