@@ -14,6 +14,7 @@
 
 .table-header input{
     width:320px;
+    max-width:100%;
     padding:12px;
     border:1px solid #ddd;
     border-radius:8px;

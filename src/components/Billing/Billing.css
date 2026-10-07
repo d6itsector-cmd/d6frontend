@@ -259,6 +259,8 @@
   color:#7B8498;
   margin-top:4px;
   font-weight:400;
+  /* emails, IDs and links never widen their container */
+  overflow-wrap:anywhere;
 }
 
 /* ---------- My Plan ---------- */
@@ -580,9 +582,13 @@
   color:var(--white);
 }
 
+/* minmax(0,…) on every track: a plain `fr` column can't shrink below its
+   content's min-content width, and a <select>'s min-content is its longest
+   option ("Name (Company) — email"), which pushed the filters (and the page)
+   wider than the content area. */
 .bl-filters{
   display:grid;
-  grid-template-columns:2fr 1fr 1fr;
+  grid-template-columns:minmax(0, 2fr) repeat(2, minmax(0, 1fr));
   gap:14px;
   margin-bottom:20px;
 }
@@ -597,7 +603,7 @@
 
 .bl-form-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(2, minmax(0, 1fr));
   gap:16px;
 }
 
@@ -893,7 +899,12 @@
 /* ---------- Responsive ---------- */
 
 @media (max-width:1100px){
-  .bl-facts{ grid-template-columns:repeat(2,1fr); }
+  .bl-facts{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+
+  /* Client search+select gets its own row; the two status filters share
+     the next one. */
+  .bl-filters{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .bl-filters > .bl-field:first-child{ grid-column:1 / -1; }
 }
 
 @media (max-width:768px){
@@ -905,7 +916,7 @@
   .bl-facts,
   .bl-plan-sections,
   .bl-form-grid,
-  .bl-filters{ grid-template-columns:1fr; }
+  .bl-filters{ grid-template-columns:minmax(0, 1fr); }
 
   .bl-plan-price{ text-align:left; }
 
@@ -933,10 +944,15 @@
     margin-bottom:12px;
   }
 
+  /* Wrapping row: label on the left, values on the right. Values may wrap
+     onto further lines instead of overflowing the card (a long client
+     email used to push the card past the screen edge). */
   .bl-table td{
     display:flex;
-    justify-content:space-between;
-    gap:14px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    column-gap:14px;
+    row-gap:2px;
     border-bottom:none;
     padding:8px 14px;
     text-align:right;
@@ -947,10 +963,18 @@
     font-weight:600;
     color:#7B8498;
     text-align:left;
-    flex-shrink:0;
+    margin-right:auto;
   }
 
-  .bl-table td > *{ text-align:right; }
+  .bl-table td > *{
+    text-align:right;
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+
+  /* Secondary line (email, date, reason) goes under the main value. */
+  .bl-table td > .bl-fact-sub{ flex-basis:100%; }
   .bl-table td .bl-actions{ justify-content:flex-end; }
   .bl-table td .bl-invoice{ align-items:flex-end; }
   .bl-table td .bl-invoice-meta,

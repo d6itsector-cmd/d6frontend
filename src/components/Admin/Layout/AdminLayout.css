@@ -2,11 +2,26 @@
    ADMIN LAYOUT
 =========================== */
 
+/* No overflow:hidden here: it used to clip .admin-main when wide content
+   (tables, long select options) stretched it past the viewport, which hid
+   right-hand columns instead of letting them scroll. Width is now
+   constrained at the source (min-width:0 below) and tables scroll inside
+   their own wrappers. */
 .admin-layout{
     display:flex;
     min-height:100vh;
     background:#F5F7FB;
-    overflow:hidden;
+}
+
+/* The project has no global box-sizing reset, so `width:100%` / fixed-width
+   inputs with padding rendered wider than their container (e.g. a 320px
+   search box was really 346px). Scoped to the admin portal so public pages
+   are unaffected. */
+.admin-layout,
+.admin-layout *,
+.admin-layout *::before,
+.admin-layout *::after{
+    box-sizing:border-box;
 }
 
 .admin-sidebar-backdrop{
@@ -20,8 +35,13 @@
    MAIN CONTENT
 =========================== */
 
+/* min-width:0 lets this flex item shrink to the space beside the 280px
+   fixed sidebar. Without it a flex item is at least as wide as its widest
+   content, so one wide table made the whole admin area wider than the
+   screen. */
 .admin-main{
     flex:1;
+    min-width:0;
     margin-left:280px;
     display:flex;
     flex-direction:column;
@@ -33,12 +53,13 @@
    PAGE CONTENT
 =========================== */
 
+/* The topbar is in normal flow (not fixed), so no margin-top offset is
+   needed -- the old 80px/70px margin only added empty space under it. */
 .admin-content{
     flex:1;
-    margin-top:80px;
+    min-width:0;
     padding:30px;
     background:#F5F7FB;
-    overflow-y:auto;
 }
 
 /* ===========================
@@ -73,7 +94,6 @@
 }
 
 .admin-content{
-    margin-top:70px;
     padding:20px;
 }
 
