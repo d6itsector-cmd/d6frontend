@@ -17,6 +17,7 @@ import {
   FaSignOutAlt,
   FaFileAlt,
   FaComments,
+  FaFileInvoiceDollar,
 } from "react-icons/fa";
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -41,6 +42,11 @@ const Sidebar = ({ isOpen, onClose }) => {
       name: "Clients",
       icon: <FaUsers />,
       path: "/admin/clients",
+    },
+    {
+      name: "Billing",
+      icon: <FaFileInvoiceDollar />,
+      path: "/admin/billing",
     },
     {
       name: "Projects",

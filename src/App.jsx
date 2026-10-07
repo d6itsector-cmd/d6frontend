@@ -51,6 +51,10 @@ import BlogsAdmin from "./pages/Admin/Blogs-admin/Blogs-admin";
 import ReportsAdmin from "./pages/Admin/reports-ad/Reports-admin";
 import MessagesAdmin from "./pages/Admin/Messages-admin";
 import SettingsAdmin from "./pages/Admin/settings-ad/Settings-admin";
+import BillingAdmin from "./pages/Admin/billing-ad/BillingAdmin";
+import ClientPlansAdmin from "./pages/Admin/billing-ad/ClientPlansAdmin";
+import PaymentRequestsAdmin from "./pages/Admin/billing-ad/PaymentRequestsAdmin";
+import PaymentsAdmin from "./pages/Admin/billing-ad/PaymentsAdmin";
 
 
 function AppContent() {
@@ -151,10 +155,12 @@ function AppContent() {
 
         {/* ================= CLIENT DASHBOARD ================= */}
 
+        {/* /dashboard/<section> (incl. my-plan, billing, billing/success,
+            billing/cancelled) -- Dashboard picks the section from the URL. */}
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute clientOnly>
               <Dashboard />
             </ProtectedRoute>
           }
@@ -184,6 +190,14 @@ function AppContent() {
             path="clients"
             element={<Clients />}
           />
+
+          {/* Billing: custom plans/subscriptions, one-off requests, payments */}
+
+          <Route path="billing" element={<BillingAdmin />}>
+            <Route index element={<ClientPlansAdmin />} />
+            <Route path="payment-requests" element={<PaymentRequestsAdmin />} />
+            <Route path="payments" element={<PaymentsAdmin />} />
+          </Route>
 
           {/* Projects */}
 

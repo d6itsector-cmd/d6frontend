@@ -13,6 +13,8 @@ import {
     FaCog,
     FaSignOutAlt,
     FaGlobe,
+    FaFileInvoiceDollar,
+    FaCreditCard,
 } from "react-icons/fa";
 
 import { useAuth } from "../../context/AuthContext";
@@ -54,6 +56,18 @@ const Sidebar = ({ activePage, setActivePage, isOpen, onClose }) => {
             id: "services",
             title: "My Services",
             icon: <FaBriefcase />,
+        },
+
+        {
+            id: "my-plan",
+            title: "My Plan",
+            icon: <FaFileInvoiceDollar />,
+        },
+
+        {
+            id: "billing",
+            title: "Billing",
+            icon: <FaCreditCard />,
         },
 
         {

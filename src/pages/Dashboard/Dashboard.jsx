@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import "./Dashboard.css";
 
@@ -23,11 +24,42 @@ import Messages from "../../components/Dashboard/Messages/Messages";
 import Support from "../../components/Dashboard/Support/Support";
 import Settings from "../../components/Dashboard/Settings/Settings";
 
+// Billing
+import MyPlan from "../../components/Dashboard/Billing/MyPlan";
+import BillingPayments from "../../components/Dashboard/Billing/BillingPayments";
+import CheckoutResult from "../../components/Dashboard/Billing/CheckoutResult";
+
 import api from "../../services/api";
+
+// Each section lives at /dashboard/<id> so pages can be linked to directly
+// (Stripe redirects to /dashboard/billing/success|cancelled and the billing
+// portal returns to /dashboard/my-plan).
+const SECTIONS = [
+  "projects",
+  "services",
+  "analytics",
+  "reports",
+  "messages",
+  "support",
+  "settings",
+  "my-plan",
+  "billing",
+  "billing/success",
+  "billing/cancelled",
+];
 
 const Dashboard = () => {
 
-  const [activePage, setActivePage] = useState("dashboard");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const section = location.pathname.replace(/^\/dashboard\/?/, "").replace(/\/+$/, "");
+  const activePage = section || "dashboard";
+  const isKnownSection = !section || SECTIONS.includes(section);
+
+  const setActivePage = (id) => {
+    navigate(id === "dashboard" ? "/dashboard" : `/dashboard/${id}`);
+  };
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Loaded once here (not per-card) and shared by Hero/CurrentProject/RecentActivity.
@@ -97,6 +129,18 @@ const Dashboard = () => {
       case "settings":
         return <Settings />;
 
+      case "my-plan":
+        return <MyPlan setActivePage={setActivePage} />;
+
+      case "billing":
+        return <BillingPayments />;
+
+      case "billing/success":
+        return <CheckoutResult outcome="success" setActivePage={setActivePage} />;
+
+      case "billing/cancelled":
+        return <CheckoutResult outcome="cancelled" setActivePage={setActivePage} />;
+
       default:
         return (
           <>
@@ -136,12 +180,16 @@ const Dashboard = () => {
 
   };
 
+  if (!isKnownSection) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
   return (
 
     <div className="dashboard">
 
       <Sidebar
-        activePage={activePage}
+        activePage={activePage.split("/")[0]}
         setActivePage={setActivePage}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
