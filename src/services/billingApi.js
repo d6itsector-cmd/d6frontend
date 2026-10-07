@@ -92,6 +92,9 @@ export const cancelPaymentRequest = async (id) => unwrap(await api.post(`/admin/
 /** @returns {Promise<{ items: Payment[], pagination: Pagination|null }>} */
 export const listPayments = (params) => list("/admin/payments", params);
 
+/** @returns {Promise<Payment>} full record incl. Stripe ids and `invoice` */
+export const getPayment = async (id) => unwrap(await api.get(`/admin/payments/${id}`));
+
 // ---------------- Admin: lookups used by billing forms ----------------
 
 // activeOnly for anything that creates billing -- the backend refuses to bill

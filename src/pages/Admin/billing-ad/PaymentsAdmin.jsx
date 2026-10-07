@@ -16,6 +16,7 @@ import InvoiceLinks from "../../../components/Billing/InvoiceLinks";
 import Pagination from "../../../components/Billing/Pagination";
 import { LoadingState, EmptyState, ErrorState } from "../../../components/Billing/StateViews";
 import ClientSelect from "../../../components/Admin/Billing/ClientSelect";
+import PaymentDetail from "../../../components/Admin/Billing/PaymentDetail";
 
 const PAGE_SIZE = 25;
 
@@ -23,6 +24,7 @@ const PAGE_SIZE = 25;
 const PaymentsAdmin = () => {
   const [filters, setFilters] = useState({ client: "", source: "", status: "" });
   const [page, setPage] = useState(1);
+  const [openPaymentId, setOpenPaymentId] = useState(null);
 
   const { status, data, error, reload } = useBillingQuery(
     () =>
@@ -100,6 +102,7 @@ const PaymentsAdmin = () => {
                 <th>Status</th>
                 <th>Billing period</th>
                 <th>Invoice</th>
+                <th aria-label="Actions" />
               </tr>
             </thead>
             <tbody>
@@ -125,6 +128,11 @@ const PaymentsAdmin = () => {
                   <td data-label="Invoice">
                     <InvoiceLinks payment={p} showDetails />
                   </td>
+                  <td data-label="Actions">
+                    <button type="button" className="bl-btn bl-btn--ghost bl-btn--sm" onClick={() => setOpenPaymentId(p._id)}>
+                      View
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -133,6 +141,8 @@ const PaymentsAdmin = () => {
       )}
 
       <Pagination pagination={data?.pagination} onPageChange={setPage} disabled={status === "loading"} />
+
+      {openPaymentId && <PaymentDetail paymentId={openPaymentId} onClose={() => setOpenPaymentId(null)} />}
     </section>
   );
 };

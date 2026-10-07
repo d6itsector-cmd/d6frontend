@@ -425,6 +425,43 @@
 
 .bl-result-icon--success{ color:#1E8E4E; }
 
+.bl-live-status{
+  margin:22px auto 0;
+  max-width:460px;
+  text-align:left;
+}
+
+.bl-live-status ul{
+  list-style:none;
+  padding:0;
+  margin:0 0 8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.bl-live-status li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#F7F9FC;
+  color:var(--primary);
+  font-weight:500;
+}
+
+.bl-link-btn{
+  background:none;
+  border:none;
+  padding:0;
+  color:var(--accent);
+  font-weight:600;
+  cursor:pointer;
+  font-size:inherit;
+}
+
 .bl-result-actions{
   display:flex;
   justify-content:center;
