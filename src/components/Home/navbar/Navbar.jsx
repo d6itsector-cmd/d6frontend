@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useConsultation } from "../../../context/ConsultationContext";
 import { useLoginModal } from "../../../context/LoginModalContext";
@@ -37,7 +37,54 @@ const Navbar = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
 
+  const profileRef = useRef(null);
+  const profileButtonRef = useRef(null);
+
   const isServicesActive = location.pathname.startsWith("/services");
+
+  /* =========================
+     PROFILE MENU: CLOSE ON OUTSIDE CLICK / ESCAPE
+  ========================= */
+
+  useEffect(() => {
+    if (!profileOpen) return;
+
+    const handlePointerDown = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setProfileOpen(false);
+        profileButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [profileOpen]);
+
+  // Arrow keys move between the menu items (Dashboard / Logout).
+  const handleProfileMenuKeyDown = (e) => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+
+    const items = [...profileRef.current.querySelectorAll('[role="menuitem"]')];
+    const index = items.indexOf(document.activeElement);
+    const next =
+      e.key === "ArrowDown"
+        ? (index + 1) % items.length
+        : (index - 1 + items.length) % items.length;
+
+    items[next]?.focus();
+  };
 
   /* =========================
      MOBILE RESPONSIVE
@@ -370,30 +417,29 @@ const Navbar = () => {
           {currentUser && (
             <div
               className="profile-wrapper"
-              onMouseEnter={() => {
-                if (!isMobile) {
-                  setProfileOpen(true);
-                }
-              }}
-              onMouseLeave={() => {
-                if (!isMobile) {
-                  setProfileOpen(false);
-                }
-              }}
+              ref={profileRef}
+              onKeyDown={handleProfileMenuKeyDown}
             >
 
               <button
                 type="button"
-                className="profile-button"
+                ref={profileButtonRef}
+                className={`profile-button ${profileOpen ? "active" : ""}`}
                 onClick={() =>
                   setProfileOpen(!profileOpen)
                 }
-                aria-label="Open profile menu"
+                aria-label="Profile menu"
+                aria-haspopup="menu"
+                aria-expanded={profileOpen}
+                aria-controls="navbar-profile-menu"
               >
                 <FaUserCircle />
               </button>
 
               <div
+                id="navbar-profile-menu"
+                role="menu"
+                aria-label="Profile"
                 className={`profile-menu ${
                   profileOpen ? "show" : ""
                 }`}
@@ -401,6 +447,7 @@ const Navbar = () => {
 
                 <NavLink
                   to={dashboardPath}
+                  role="menuitem"
                   className="profile-menu-item"
                   onClick={closeAllMenus}
                 >
@@ -408,10 +455,11 @@ const Navbar = () => {
                   <span>Dashboard</span>
                 </NavLink>
 
-                <div className="profile-divider" />
+                <div className="profile-divider" role="separator" />
 
                 <button
                   type="button"
+                  role="menuitem"
                   className="profile-menu-item logout"
                   onClick={handleLogout}
                 >

@@ -869,23 +869,31 @@
    PROFILE DROPDOWN
 ========================================================= */
 
+/* Anchored to the profile button: right edges aligned, 6px below it, with a
+   small pointer under the icon. Absolutely positioned, so opening it never
+   shifts the header layout. Opens on click only (see Navbar.jsx). */
+
 .profile-menu {
   position: absolute;
 
-  top: calc(100% + 12px);
+  top: calc(100% + 6px);
 
   right: 0;
 
-  width: 200px;
+  min-width: 176px;
 
-  padding: 8px;
+  max-width: calc(100vw - 24px);
+
+  padding: 6px;
 
   background: var(--white);
+
+  border: 1px solid #e8edf3;
 
   border-radius: 12px;
 
   box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.16);
+    0 8px 24px rgba(20, 33, 61, 0.12);
 
   opacity: 0;
 
@@ -893,14 +901,39 @@
 
   pointer-events: none;
 
-  transform: translateY(8px);
+  transform: translateY(-4px);
+
+  transform-origin: top right;
 
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    visibility 0.2s ease;
+    opacity 0.16s ease,
+    transform 0.16s ease,
+    visibility 0.16s ease;
 
   z-index: 3000;
+}
+
+/* Pointer connecting the menu to the icon (centred under the button). */
+.profile-menu::before {
+  content: "";
+
+  position: absolute;
+
+  top: -6px;
+
+  right: 18px;
+
+  width: 10px;
+
+  height: 10px;
+
+  background: var(--white);
+
+  border-top: 1px solid #e8edf3;
+
+  border-left: 1px solid #e8edf3;
+
+  transform: rotate(45deg);
 }
 
 
@@ -908,7 +941,6 @@
    PROFILE MENU SHOW
 ========================================================= */
 
-.profile-wrapper:hover .profile-menu,
 .profile-menu.show {
   opacity: 1;
 
@@ -919,17 +951,33 @@
   transform: translateY(0);
 }
 
+.profile-button.active svg {
+  color: var(--blue);
+}
+
+.profile-button:focus-visible {
+  outline: 2px solid var(--blue);
+
+  outline-offset: 2px;
+
+  border-radius: 50%;
+}
+
 
 /* =========================================================
    PROFILE MENU ITEMS
 ========================================================= */
 
 .profile-menu-item {
+  position: relative;
+
   width: 100%;
 
-  min-height: 44px;
+  min-height: 40px;
 
-  padding: 10px 12px;
+  padding: 9px 12px;
+
+  white-space: nowrap;
 
   display: flex;
 
@@ -962,10 +1010,13 @@
     color var(--transition);
 }
 
-.profile-menu-item:hover {
+.profile-menu-item:hover,
+.profile-menu-item:focus-visible {
   background: #edf4fb;
 
   color: var(--blue);
+
+  outline: none;
 }
 
 
@@ -977,7 +1028,8 @@
   color: #d83b3b;
 }
 
-.profile-menu-item.logout:hover {
+.profile-menu-item.logout:hover,
+.profile-menu-item.logout:focus-visible {
   background: #fff2f2;
 
   color: #c62828;
@@ -1512,9 +1564,13 @@
   ------------------------------------------------------- */
 
   .profile-menu {
-    top: calc(100% + 8px);
+    top: calc(100% + 6px);
 
     right: 0;
+  }
+
+  .profile-menu::before {
+    right: 16px;
   }
 }
 

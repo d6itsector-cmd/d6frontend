@@ -22,6 +22,9 @@ export const useUserRole = () => {
   // in-between render and AdminRoute would redirect an admin to /dashboard
   // before the /auth/me fetch ever ran.
   const [resolvedUid, setResolvedUid] = useState(undefined);
+  // true when /auth/me failed (network, 401, 500...) -- role is then
+  // UNKNOWN, not "client", so guards must not route on it.
+  const [roleError, setRoleError] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -31,6 +34,7 @@ export const useUserRole = () => {
 
     if (!currentUser) {
       setRole(null);
+      setRoleError(false);
       setResolvedUid(null);
       return;
     }
@@ -42,6 +46,7 @@ export const useUserRole = () => {
       .then((res) => {
         if (cancelled) return;
         setRole(res.data?.data?.role || null);
+        setRoleError(false);
         setResolvedUid(uid);
       })
       .catch((err) => {
@@ -56,6 +61,7 @@ export const useUserRole = () => {
           auth.signOut().catch(() => {});
         }
         setRole(null);
+        setRoleError(err.response?.status !== 403);
         setResolvedUid(uid);
       });
 
@@ -67,5 +73,5 @@ export const useUserRole = () => {
   const roleLoading =
     authLoading || (!!currentUser && resolvedUid !== currentUser.uid);
 
-  return { role, roleLoading };
+  return { role, roleLoading, roleError };
 };
