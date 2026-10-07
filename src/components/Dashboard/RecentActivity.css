@@ -164,7 +164,7 @@ white-space:nowrap;
 
 }
 
-.success .activity-icon{
+.activity-card--success .activity-icon{
 
 background:#EAF8EF;
 
@@ -172,7 +172,7 @@ color:#27AE60;
 
 }
 
-.report .activity-icon{
+.activity-card--report .activity-icon{
 
 background:#E8F3FC;
 
@@ -180,7 +180,7 @@ color:#0077CC;
 
 }
 
-.message .activity-icon{
+.activity-card--message .activity-icon{
 
 background:#E8F3FC;
 
@@ -188,7 +188,7 @@ color:#0077CC;
 
 }
 
-.meeting .activity-icon{
+.activity-card--meeting .activity-icon{
 
 background:#E8F3FC;
 
@@ -196,7 +196,7 @@ color:#0077CC;
 
 }
 
-.upload .activity-icon{
+.activity-card--upload .activity-icon{
 
 background:#E8F3FC;
 
@@ -204,7 +204,7 @@ color:#0077CC;
 
 }
 
-.timeline .activity-icon{
+.activity-card--timeline .activity-icon{
 
 background:#EAF8EF;
 
@@ -212,7 +212,7 @@ color:#27AE60;
 
 }
 
-.document .activity-icon{
+.activity-card--document .activity-icon{
 
 background:#E8F3FC;
 
@@ -220,7 +220,7 @@ color:#0077CC;
 
 }
 
-.support .activity-icon{
+.activity-card--support .activity-icon{
 
 background:#E8F3FC;
 

@@ -93,7 +93,10 @@ const RecentActivity = ({ items: initialItems, status: initialStatus }) => {
           {items.map((item, index) => (
 
             <div
-              className={`activity-card ${item.type}`}
+              // Namespaced modifier: a bare `${item.type}` class collided with
+              // global page styles (e.g. `.support { min-height: 100vh }` from
+              // Support.css, `.message { max-width: 65% }` from Messages.css).
+              className={`activity-card activity-card--${item.type}`}
               key={index}
             >
 

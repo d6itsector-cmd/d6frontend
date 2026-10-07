@@ -27,6 +27,10 @@
     display:grid;
     grid-template-columns:2fr 1fr;
     gap:30px;
+    /* Each card (Project Timeline / Recent Activity) is as tall as its own
+       content -- the default `stretch` padded the shorter one with empty
+       space to match the taller one. */
+    align-items:start;
 }
 
 @media(max-width:992px){
