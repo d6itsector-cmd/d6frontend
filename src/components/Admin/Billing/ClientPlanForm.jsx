@@ -115,17 +115,25 @@ const buildBody = (form, { isEdit }) => {
 };
 
 /**
- * Create (no `plan`) or edit an admin-authored client plan.
- * @param {{ plan?: import("../../../types/billing").ClientPlan, onClose: () => void, onSaved: (plan: object) => void }} props
+ * Create (no `plan`) or edit an admin-authored client plan. When created from
+ * a client's plan request, `planRequest` ({ _id, client }) fixes the client
+ * and `initial` prefills form fields; the backend then marks that request
+ * plan_created.
+ * @param {{ plan?: import("../../../types/billing").ClientPlan, planRequest?: { _id: string, client: object }, initial?: object, onClose: () => void, onSaved: (plan: object) => void }} props
  */
-const ClientPlanForm = ({ plan, onClose, onSaved }) => {
+const ClientPlanForm = ({ plan, planRequest, initial, onClose, onSaved }) => {
   const isEdit = Boolean(plan);
-  const [form, setForm] = useState(() => toFormState(plan));
+  const clientLocked = isEdit || Boolean(planRequest);
+  const [form, setForm] = useState(() => ({
+    ...toFormState(plan),
+    ...(planRequest ? { client: idOf(planRequest.client) } : {}),
+    ...initial,
+  }));
   const [saving, setSaving] = useState(false);
   // { message, field } -- field-level messages render under that control,
   // anything else (row validation, API errors) in the footer status area.
   const [error, setError] = useState(null);
-  const [selectedClient, setSelectedClient] = useState(isEdit ? plan.client : null);
+  const [selectedClient, setSelectedClient] = useState(isEdit ? plan.client : planRequest?.client || null);
 
   // The Stripe Price behind an open subscription is fixed -- the backend
   // answers 409 to an amount change, so the field is locked up front.
@@ -151,6 +159,7 @@ const ClientPlanForm = ({ plan, onClose, onSaved }) => {
       return;
     }
     if (amountLocked) delete body.amountPence;
+    if (planRequest && !isEdit) body.planRequest = planRequest._id;
 
     setSaving(true);
     setError(null);
@@ -170,11 +179,13 @@ const ClientPlanForm = ({ plan, onClose, onSaved }) => {
 
   return (
     <BillingModal
-      title={isEdit ? `Edit plan: ${plan.name}` : "Create custom plan"}
+      title={isEdit ? `Edit plan: ${plan.name}` : planRequest ? "Create plan from request" : "Create custom plan"}
       subtitle={
         isEdit
           ? "Update the plan details shown to the client."
-          : "Set the client's monthly billing terms and payment details."
+          : planRequest
+            ? "Prefilled from the client's request. Set the monthly amount, then send the payment link from the plan."
+            : "Set the client's monthly billing terms and payment details."
       }
       onClose={onClose}
       busy={saving}
@@ -209,7 +220,7 @@ const ClientPlanForm = ({ plan, onClose, onSaved }) => {
             <label htmlFor={FIELD_IDS.client}>
               Client <RequiredMark />
             </label>
-            {isEdit ? (
+            {clientLocked ? (
               <div className="bl-client-chip bl-client-chip--static" id={FIELD_IDS.client}>
                 <span className="bl-client-chip-avatar" aria-hidden="true">
                   {(clientName || clientEmail || "?").charAt(0).toUpperCase()}

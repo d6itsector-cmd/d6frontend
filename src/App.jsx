@@ -54,6 +54,7 @@ import SettingsAdmin from "./pages/Admin/settings-ad/Settings-admin";
 import BillingAdmin from "./pages/Admin/billing-ad/BillingAdmin";
 import ClientPlansAdmin from "./pages/Admin/billing-ad/ClientPlansAdmin";
 import PaymentRequestsAdmin from "./pages/Admin/billing-ad/PaymentRequestsAdmin";
+import PlanRequestsAdmin from "./pages/Admin/billing-ad/PlanRequestsAdmin";
 import PaymentsAdmin from "./pages/Admin/billing-ad/PaymentsAdmin";
 
 
@@ -195,6 +196,7 @@ function AppContent() {
 
           <Route path="billing" element={<BillingAdmin />}>
             <Route index element={<ClientPlansAdmin />} />
+            <Route path="plan-requests" element={<PlanRequestsAdmin />} />
             <Route path="payment-requests" element={<PaymentRequestsAdmin />} />
             <Route path="payments" element={<PaymentsAdmin />} />
           </Route>

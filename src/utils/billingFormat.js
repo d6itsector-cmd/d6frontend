@@ -193,6 +193,14 @@ export const PAYMENT_REQUEST_STATUS_LABELS = {
   setup_failed: "Setup failed",
 };
 
+// A client's request for a plan (not a payment request).
+export const PLAN_REQUEST_STATUS_LABELS = {
+  pending: "Pending review",
+  plan_created: "Plan created",
+  rejected: "Not approved",
+  cancelled: "Withdrawn",
+};
+
 export const PAYMENT_REQUEST_REASON_LABELS = {
   previous_unpaid: "Previous unpaid amount",
   outstanding_balance: "Outstanding balance",

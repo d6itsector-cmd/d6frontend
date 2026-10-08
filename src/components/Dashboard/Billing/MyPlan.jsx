@@ -1,8 +1,9 @@
 import "../../Billing/Billing.css";
 
+import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
-import { getMyPlans, getApiErrorMessage } from "../../../services/billingApi";
+import { getMyPlans, getMyPlanRequests, cancelMyPlanRequest, getApiErrorMessage } from "../../../services/billingApi";
 import {
   formatGBP,
   formatDate,
@@ -15,13 +16,47 @@ import {
 import { useBillingQuery } from "../../Billing/useBillingQuery";
 import StatusBadge from "../../Billing/StatusBadge";
 import DaysRemaining from "../../Billing/DaysRemaining";
+import ConfirmationModal from "../../Billing/ConfirmationModal";
 import { LoadingState, EmptyState, ErrorState } from "../../Billing/StateViews";
 import ManagePaymentMethodButton from "./ManagePaymentMethodButton";
+import RequestPlanModal from "./RequestPlanModal";
+
+// Plans are the source of truth; plan requests only matter while the client
+// has no visible plan. A failing requests call must never hide the plans.
+const loadMyPlanPage = async () => {
+  const [plans, requests] = await Promise.all([getMyPlans(), getMyPlanRequests().catch(() => [])]);
+  return { plans, requests };
+};
 
 // Read-only view of the admin-authored plan + Stripe-synced billing state
-// (GET /api/my-plan). Nothing here is editable by the client.
+// (GET /api/my-plan). Nothing here is editable by the client. With no plan,
+// the client can ask for one (a plan request, reviewed by an admin).
 const MyPlan = ({ setActivePage }) => {
-  const { status, data: plans, error, reload } = useBillingQuery(getMyPlans);
+  const { status, data, error, reload } = useBillingQuery(loadMyPlanPage);
+  const plans = data?.plans || [];
+  const latestRequest = data?.requests?.[0];
+  const [requesting, setRequesting] = useState(false);
+  const [withdrawing, setWithdrawing] = useState(false);
+  const [withdrawBusy, setWithdrawBusy] = useState(false);
+  const [withdrawError, setWithdrawError] = useState("");
+
+  // pending / plan_created stay on screen; after a rejection or withdrawal
+  // the client may ask again.
+  const requestInProgress = ["pending", "plan_created"].includes(latestRequest?.status);
+
+  const handleWithdraw = async () => {
+    setWithdrawBusy(true);
+    setWithdrawError("");
+    try {
+      await cancelMyPlanRequest(latestRequest._id);
+      setWithdrawing(false);
+      reload();
+    } catch (err) {
+      setWithdrawError(getApiErrorMessage(err, "We couldn't withdraw your request. Please try again."));
+    } finally {
+      setWithdrawBusy(false);
+    }
+  };
 
   return (
     <div className="bl-page">
@@ -39,17 +74,112 @@ const MyPlan = ({ setActivePage }) => {
       )}
 
       {status === "success" && plans.length === 0 && (
-        <EmptyState
-          title="No plan yet"
-          message="Your account team hasn't set up a plan for you yet. Once it's ready, its services, price and billing dates will appear here."
-        />
+        <>
+          {latestRequest && latestRequest.status !== "cancelled" && (
+            <PlanRequestCard
+              request={latestRequest}
+              onWithdraw={() => {
+                setWithdrawError("");
+                setWithdrawing(true);
+              }}
+            />
+          )}
+          {!requestInProgress && (
+            <EmptyState
+              title="No plan yet"
+              message="Your D6 Global Media account doesn't have an active plan yet. Request a plan and our team will review your requirements."
+            >
+              <button type="button" className="bl-btn bl-btn--primary" onClick={() => setRequesting(true)}>
+                Request a Plan
+              </button>
+            </EmptyState>
+          )}
+        </>
       )}
 
       {status === "success" &&
         plans.map((plan) => <PlanCard key={plan._id} plan={plan} setActivePage={setActivePage} />)}
+
+      {requesting && (
+        <RequestPlanModal
+          onClose={() => setRequesting(false)}
+          onSubmitted={() => {
+            setRequesting(false);
+            reload();
+          }}
+        />
+      )}
+
+      {withdrawing && latestRequest && (
+        <ConfirmationModal
+          title="Withdraw this request?"
+          message={`Your request for ${latestRequest.serviceName} will be withdrawn. You can send a new request at any time.`}
+          confirmLabel="Withdraw request"
+          cancelLabel="Keep request"
+          danger
+          busy={withdrawBusy}
+          error={withdrawError}
+          onConfirm={handleWithdraw}
+          onClose={() => setWithdrawing(false)}
+        />
+      )}
     </div>
   );
 };
+
+const REQUEST_MESSAGES = {
+  pending: "Our team is reviewing your request. We'll be in touch with a plan and payment link.",
+  plan_created: "Your request has been approved and your plan is being set up. It will appear here with a payment link shortly.",
+  rejected: "We weren't able to go ahead with this request.",
+};
+
+const PlanRequestCard = ({ request, onWithdraw }) => (
+  <section className="bl-card bl-plan" aria-label="Plan request">
+    <div className="bl-plan-top">
+      <div>
+        <span className="bl-muted">Plan request</span>
+        <h2>{request.serviceName}</h2>
+      </div>
+    </div>
+
+    <dl className="bl-facts">
+      <Fact label="Status">
+        <StatusBadge kind="planRequest" value={request.status} />
+      </Fact>
+      <Fact label="Submitted">{formatDate(request.createdAt)}</Fact>
+      {request.preferredBudgetPence > 0 && <Fact label="Preferred budget">{formatGBP(request.preferredBudgetPence)}</Fact>}
+      {request.reviewedAt && <Fact label="Reviewed">{formatDate(request.reviewedAt)}</Fact>}
+    </dl>
+
+    <div className={`bl-alert ${request.status === "rejected" ? "bl-alert--danger" : "bl-alert--info"}`}>
+      <div>
+        {REQUEST_MESSAGES[request.status]}
+        {request.status === "rejected" && request.rejectionReason && (
+          <span className="bl-fact-sub bl-prewrap">Reason: {request.rejectionReason}</span>
+        )}
+      </div>
+    </div>
+
+    <div className="bl-plan-sections">
+      <PlanSection title="Your requirements">
+        <p className="bl-prewrap">{request.requirements}</p>
+      </PlanSection>
+      {request.additionalDetails && (
+        <PlanSection title="Additional details">
+          <p className="bl-prewrap">{request.additionalDetails}</p>
+        </PlanSection>
+      )}
+    </div>
+
+    {request.status === "pending" && (
+      <div className="bl-plan-actions">
+        <button type="button" className="bl-btn bl-btn--ghost" onClick={onWithdraw}>
+          Withdraw request
+        </button>
+      </div>
+    )}
+  </section>
+);
 
 const PlanCard = ({ plan, setActivePage }) => {
   const billing = plan.billing || {};

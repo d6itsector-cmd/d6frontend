@@ -9,6 +9,7 @@ import ToastStack from "../../../components/Billing/ToastStack";
 // requests and payment history. Child routes get `notify` via outlet context.
 const TABS = [
   { to: "/admin/billing", label: "Plans & Subscriptions", end: true },
+  { to: "/admin/billing/plan-requests", label: "Plan Requests" },
   { to: "/admin/billing/payment-requests", label: "One-off Payment Requests" },
   { to: "/admin/billing/payments", label: "Payment History" },
 ];

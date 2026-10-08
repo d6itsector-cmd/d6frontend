@@ -41,6 +41,22 @@ export const getMyPaymentRequests = (params) => list("/payment-requests", params
 /** @returns {Promise<{ url: string }>} */
 export const createBillingPortalSession = async () => unwrap(await api.post("/billing/portal-session"));
 
+// ---------------- Client: plan requests (asking for a plan) ----------------
+// Separate from payment requests. The requester is always the signed-in
+// client on the backend; no client id is ever sent.
+
+/** @returns {Promise<object[]>} own requests, newest first */
+export const getMyPlanRequests = async () => unwrap(await api.get("/plan-requests")) || [];
+
+/** @returns {Promise<object>} */
+export const createPlanRequest = async (body) => unwrap(await api.post("/plan-requests", body));
+
+/** @returns {Promise<object>} */
+export const cancelMyPlanRequest = async (id) => unwrap(await api.post(`/plan-requests/${id}/cancel`));
+
+// Public catalogue (published services only) for the request form.
+export const listServiceCatalogue = () => list("/services", { limit: 100 });
+
 // ---------------- Admin: client plans / subscriptions ----------------
 
 /** @returns {Promise<{ items: ClientPlan[], pagination: Pagination|null }>} */
@@ -86,6 +102,20 @@ export const resendPaymentRequest = async (id) => unwrap(await api.post(`/admin/
 
 /** @returns {Promise<{ paymentRequest: PaymentRequest }>} */
 export const cancelPaymentRequest = async (id) => unwrap(await api.post(`/admin/payment-requests/${id}/cancel`));
+
+// ---------------- Admin: plan requests ----------------
+// Approving one is done by creating a plan (createClientPlan with
+// `planRequest`); there is no separate approve call.
+
+/** @returns {Promise<{ items: object[], pagination: Pagination|null }>} */
+export const listPlanRequests = (params) => list("/admin/plan-requests", params);
+
+/** @returns {Promise<object>} */
+export const getPlanRequest = async (id) => unwrap(await api.get(`/admin/plan-requests/${id}`));
+
+/** @returns {Promise<object>} */
+export const rejectPlanRequest = async (id, reason) =>
+  unwrap(await api.post(`/admin/plan-requests/${id}/reject`, { reason }));
 
 // ---------------- Admin: payment history ----------------
 
