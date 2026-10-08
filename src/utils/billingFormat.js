@@ -98,6 +98,17 @@ export const clientLabel = (client) => {
   return company ? `${name} (${company})` : name;
 };
 
+// One-line text for a client <option>. clientLabel() falls back to the email
+// when there is no displayName, so "label — email" used to render the email
+// twice; the email is now shown exactly once.
+export const clientOptionText = (client) => {
+  if (!client || typeof client !== "object") return "—";
+  const name = client.displayName?.trim();
+  const company = client.profile?.companyName?.trim();
+  if (!name) return company ? `${client.email} (${company})` : client.email;
+  return `${name}${company ? ` (${company})` : ""} — ${client.email}`;
+};
+
 export const paymentDescription = (p) =>
   p.description || p.plan?.name || p.paymentRequest?.description || "Payment";
 

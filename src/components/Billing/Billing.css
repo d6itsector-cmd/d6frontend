@@ -621,6 +621,22 @@
   font-weight:600;
   color:var(--primary);
   font-size:14px;
+  line-height:1.3;
+}
+
+.bl-required{
+  color:#C2410C;
+  font-weight:600;
+  margin-left:2px;
+}
+
+.bl-optional{
+  margin-left:6px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.02em;
+  color:#8A93A6;
+  text-transform:none;
 }
 
 .bl-field input,
@@ -632,14 +648,37 @@
 .bl-client-select select,
 .bl-copy input{
   width:100%;
-  padding:11px 12px;
-  border:1px solid #d9dde5;
-  border-radius:var(--radius-sm);
+  min-height:44px;
+  padding:10px 12px;
+  border:1px solid #D9DEE7;
+  border-radius:10px;
   font-size:14px;
+  line-height:1.4;
   font-family:inherit;
+  color:#1F2937;
   outline:none;
   background:var(--white);
-  transition:var(--transition);
+  transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.bl-field textarea{
+  min-height:96px;
+  resize:vertical;
+}
+
+.bl-field input::placeholder,
+.bl-field textarea::placeholder,
+.bl-row input::placeholder,
+.bl-client-select input::placeholder{
+  color:#9AA3B2;
+}
+
+.bl-field input:hover:not(:disabled),
+.bl-field select:hover:not(:disabled),
+.bl-field textarea:hover:not(:disabled),
+.bl-client-select input:hover:not(:disabled),
+.bl-client-select select:hover:not(:disabled){
+  border-color:#C3CAD6;
 }
 
 .bl-field input:focus,
@@ -650,19 +689,175 @@
 .bl-client-select input:focus,
 .bl-client-select select:focus{
   border-color:var(--accent);
+  /* ring follows the theme accent (orange in the admin portal) */
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.bl-field [aria-invalid="true"],
+.bl-client-select [aria-invalid="true"],
+.bl-field [aria-invalid="true"]:focus,
+.bl-client-select [aria-invalid="true"]:focus{
+  border-color:#DC2626;
+}
+
+.bl-field [aria-invalid="true"]:focus,
+.bl-client-select [aria-invalid="true"]:focus{
+  box-shadow:0 0 0 3px rgba(220,38,38,.14);
 }
 
 .bl-field input:disabled,
 .bl-field select:disabled{
-  background:#f5f5f5;
-  color:#888;
+  background:#F5F7FA;
+  color:#6B7280;
+  cursor:not-allowed;
 }
 
-.bl-field textarea{ resize:vertical; }
-
 .bl-hint{
+  font-size:12.5px;
+  line-height:1.45;
+  color:#6B7280;
+}
+
+.bl-hint strong{ color:#374151; font-weight:600; }
+
+/* Compact inline validation message, placed under its field. */
+.bl-inline-error{
+  display:flex;
+  align-items:flex-start;
+  gap:6px;
+  margin:0;
+  font-size:13px;
+  line-height:1.4;
+  color:#B91C1C;
+}
+
+.bl-inline-error svg{
+  flex-shrink:0;
+  margin-top:2px;
   font-size:12px;
-  color:#7B8498;
+}
+
+/* £ prefix / "per month" suffix inside an input. */
+.bl-input-affix{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.bl-input-affix input{
+  padding-left:30px;
+  padding-right:72px;
+  font-variant-numeric:tabular-nums;
+}
+
+.bl-input-affix-symbol,
+.bl-input-affix-suffix{
+  position:absolute;
+  pointer-events:none;
+  font-size:14px;
+  color:#6B7280;
+}
+
+.bl-input-affix-symbol{
+  left:13px;
+  font-weight:600;
+  color:var(--primary);
+}
+
+.bl-input-affix-suffix{
+  right:13px;
+  font-size:12.5px;
+}
+
+.bl-input-affix.is-disabled .bl-input-affix-symbol{ color:#9AA3B2; }
+
+/* Selected client summary (name + email, or the email once). */
+.bl-client-chip{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  border:1px solid #E5EAF1;
+  border-radius:10px;
+  background:#F7F9FC;
+  min-width:0;
+}
+
+.bl-client-chip-avatar{
+  flex-shrink:0;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--primary);
+  color:var(--white);
+  font-size:13px;
+  font-weight:600;
+}
+
+.bl-client-chip-text{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  line-height:1.35;
+}
+
+.bl-client-chip-text strong{
+  color:var(--primary);
+  font-size:14px;
+  font-weight:600;
+  overflow-wrap:anywhere;
+}
+
+.bl-client-chip-text span{
+  color:#6B7280;
+  font-size:12.5px;
+  overflow-wrap:anywhere;
+}
+
+/* Sectioned form (Create / Edit plan): whitespace + small caps labels
+   instead of nested cards. */
+.bl-form--sections{ gap:0; }
+
+.bl-form-section{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  padding:20px 0;
+  border-top:1px solid #EEF1F5;
+}
+
+.bl-form-section:first-child{
+  padding-top:4px;
+  border-top:none;
+}
+
+.bl-form-section:last-child{ padding-bottom:4px; }
+
+.bl-form-section-title{
+  margin:0;
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#6B7280;
+}
+
+.bl-form-section-title .bl-optional{
+  letter-spacing:normal;
+  text-transform:none;
+}
+
+.bl-form-section .bl-fieldset{
+  border-color:#EEF1F5;
+  border-radius:12px;
+  padding:14px 16px;
+}
+
+.bl-form-section .bl-fieldset legend{
+  font-size:13px;
 }
 
 .bl-form-error{
@@ -771,25 +966,29 @@
 .bl-modal-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.5);
+  background:rgba(15,23,42,.55);
   display:flex;
   justify-content:center;
   align-items:center;
   z-index:2500;
-  padding:20px;
+  padding:16px;
 }
 
+/* Header and footer stay fixed; only the body scrolls. */
 .bl-modal{
   width:560px;
-  max-width:100%;
-  max-height:90vh;
+  max-width:calc(100vw - 32px);
+  max-height:calc(100vh - 32px);
   display:flex;
   flex-direction:column;
+  overflow:hidden;
   background:var(--white);
   border-radius:var(--radius-md);
+  box-shadow:0 24px 60px rgba(15,23,42,.22);
   animation:bl-pop .25s ease;
 }
 
+.bl-modal--form{ width:780px; }
 .bl-modal--wide{ width:900px; }
 
 @keyframes bl-pop{
@@ -800,37 +999,99 @@
 .bl-modal-header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
   gap:16px;
-  padding:22px 26px 14px;
-  border-bottom:1px solid #eef0f4;
+  padding:22px 24px 16px;
+  border-bottom:1px solid #EEF1F5;
+  flex-shrink:0;
 }
 
+.bl-modal-heading{ min-width:0; }
+
 .bl-modal-header h2{
+  margin:0;
   color:var(--primary);
   font-size:20px;
+  line-height:1.3;
+  overflow-wrap:anywhere;
+}
+
+.bl-modal-subtitle{
+  margin:4px 0 0;
+  font-size:13.5px;
+  line-height:1.45;
+  color:#6B7280;
 }
 
 .bl-modal-close{
-  background:none;
+  flex-shrink:0;
+  width:34px;
+  height:34px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:-4px -6px 0 0;
   border:none;
-  font-size:20px;
+  border-radius:8px;
+  background:none;
+  font-size:16px;
   cursor:pointer;
+  color:#6B7280;
+  transition:background .15s ease, color .15s ease;
+}
+
+.bl-modal-close:hover:not(:disabled){
+  background:#F1F4F8;
   color:var(--primary);
 }
 
-.bl-modal-body{
-  padding:20px 26px;
-  overflow-y:auto;
+.bl-modal-close:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
 }
+
+.bl-modal-body{
+  flex:1;
+  min-height:0;
+  padding:20px 24px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#CBD2DC transparent;
+}
+
+.bl-modal-body::-webkit-scrollbar{ width:8px; }
+.bl-modal-body::-webkit-scrollbar-thumb{
+  background:#CBD2DC;
+  border-radius:8px;
+}
+.bl-modal-body::-webkit-scrollbar-track{ background:transparent; }
 
 .bl-modal-footer{
   display:flex;
   justify-content:flex-end;
+  align-items:center;
   gap:10px;
   flex-wrap:wrap;
-  padding:14px 26px 20px;
-  border-top:1px solid #eef0f4;
+  flex-shrink:0;
+  padding:14px 24px;
+  border-top:1px solid #EEF1F5;
+  background:var(--white);
+}
+
+/* Optional left-hand status area (validation / API errors). */
+.bl-modal-footer-status{
+  flex:1 1 220px;
+  min-width:0;
+  margin-right:auto;
+}
+
+.bl-modal-footer-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  margin-left:auto;
 }
 
 .bl-detail{
@@ -928,7 +1189,11 @@
   .bl-modal-body,
   .bl-modal-footer{ padding-left:18px; padding-right:18px; }
 
-  .bl-modal-footer .bl-btn{ flex:1 1 100%; }
+  /* Buttons share the row while they fit, then wrap -- never overflow. */
+  .bl-modal-footer .bl-btn{ flex:1 1 auto; }
+  .bl-modal-footer-status{ flex-basis:100%; }
+  .bl-modal-footer-actions{ width:100%; margin-left:0; }
+  .bl-modal-header h2{ font-size:18px; }
 
   /* Tables become stacked cards labelled from data-label. */
   .bl-table thead{ display:none; }

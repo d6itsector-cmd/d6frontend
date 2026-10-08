@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaTrash, FaExclamationCircle } from "react-icons/fa";
 
 import {
   createClientPlan,
@@ -11,7 +11,7 @@ import {
   poundsToPence,
   penceToPoundsInput,
   toDateInputValue,
-  clientLabel,
+  formatDate,
   formatGBP,
   MIN_AMOUNT_PENCE,
   MAX_AMOUNT_PENCE,
@@ -52,15 +52,21 @@ const toFormState = (plan) => ({
 
 // Turns the form into the backend body. Only admin-authored plan content is
 // ever sent -- no billing/Stripe fields exist in this form at all (the
-// backend would strip them anyway). Returns { body } or { error }.
+// backend would strip them anyway). Returns { body } or { error, field }
+// -- `field` lets the form show the message next to the offending control.
+// Checked top-to-bottom in form order.
 const buildBody = (form, { isEdit }) => {
+  if (!isEdit && !form.client) return { error: "Select a client to continue.", field: "client" };
+  if (!form.name.trim()) return { error: "Enter a plan name.", field: "name" };
+
   const amountPence = poundsToPence(form.amount);
-  if (amountPence === null) return { error: "Enter the monthly amount in pounds, e.g. 499 or 499.99." };
+  if (amountPence === null) return { error: "Enter the monthly amount in pounds, e.g. 499 or 499.99.", field: "amount" };
   if (amountPence < MIN_AMOUNT_PENCE || amountPence > MAX_AMOUNT_PENCE) {
-    return { error: `The monthly amount must be between ${formatGBP(MIN_AMOUNT_PENCE)} and ${formatGBP(MAX_AMOUNT_PENCE)}.` };
+    return {
+      error: `Enter an amount between ${formatGBP(MIN_AMOUNT_PENCE)} and ${formatGBP(MAX_AMOUNT_PENCE)}.`,
+      field: "amount",
+    };
   }
-  if (!form.name.trim()) return { error: "Plan name is required." };
-  if (!isEdit && !form.client) return { error: "Select the client this plan is for." };
 
   const services = form.servicesIncluded.filter((s) => s.label.trim() || s.service || s.description.trim());
   if (services.some((s) => !s.label.trim())) return { error: "Each included service needs a label." };
@@ -116,7 +122,10 @@ const ClientPlanForm = ({ plan, onClose, onSaved }) => {
   const isEdit = Boolean(plan);
   const [form, setForm] = useState(() => toFormState(plan));
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState("");
+  // { message, field } -- field-level messages render under that control,
+  // anything else (row validation, API errors) in the footer status area.
+  const [error, setError] = useState(null);
+  const [selectedClient, setSelectedClient] = useState(isEdit ? plan.client : null);
 
   // The Stripe Price behind an open subscription is fixed -- the backend
   // answers 409 to an amount change, so the field is locked up front.
@@ -125,123 +134,250 @@ const ClientPlanForm = ({ plan, onClose, onSaved }) => {
   const { status: servicesStatus, data: servicesData } = useBillingQuery(listPublishedServices);
   const catalogue = servicesData?.items || [];
 
-  const set = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
+  const set = (key) => (e) => {
+    const { value } = e.target;
+    setForm((prev) => ({ ...prev, [key]: value }));
+    if (error?.field === key) setError(null);
+  };
   const setRows = (key, rows) => setForm((prev) => ({ ...prev, [key]: rows }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { body, error: validationError } = buildBody(form, { isEdit });
+    const { body, error: validationError, field } = buildBody(form, { isEdit });
     if (validationError) {
-      setError(validationError);
+      setError({ message: validationError, field });
+      const target = field && document.getElementById(FIELD_IDS[field]);
+      if (target) target.focus();
       return;
     }
     if (amountLocked) delete body.amountPence;
 
     setSaving(true);
-    setError("");
+    setError(null);
     try {
       const saved = isEdit ? await updateClientPlan(plan._id, body) : await createClientPlan(body);
       onSaved(saved);
     } catch (err) {
-      setError(getApiErrorMessage(err, "Unable to save this plan."));
+      setError({ message: getApiErrorMessage(err, "Unable to save this plan.") });
       setSaving(false);
     }
   };
 
+  const fieldError = (field) => (error?.field === field ? error.message : "");
+  const formError = error && !error.field ? error.message : "";
+  const clientEmail = selectedClient?.email;
+  const clientName = selectedClient?.displayName?.trim();
+
   return (
     <BillingModal
       title={isEdit ? `Edit plan: ${plan.name}` : "Create custom plan"}
+      subtitle={
+        isEdit
+          ? "Update the plan details shown to the client."
+          : "Set the client's monthly billing terms and payment details."
+      }
       onClose={onClose}
       busy={saving}
-      wide
+      size="form"
       footer={
         <>
-          <button type="button" className="bl-btn bl-btn--ghost" onClick={onClose} disabled={saving}>
-            Cancel
-          </button>
-          <button type="submit" form="client-plan-form" className="bl-btn bl-btn--primary" disabled={saving}>
-            {saving ? "Saving..." : isEdit ? "Save changes" : "Create plan"}
-          </button>
+          <div className="bl-modal-footer-status" role="status" aria-live="polite">
+            {formError && (
+              <p className="bl-inline-error">
+                <FaExclamationCircle aria-hidden="true" />
+                <span>{formError}</span>
+              </p>
+            )}
+          </div>
+          <div className="bl-modal-footer-actions">
+            <button type="button" className="bl-btn bl-btn--ghost" onClick={onClose} disabled={saving}>
+              Cancel
+            </button>
+            <button type="submit" form="client-plan-form" className="bl-btn bl-btn--primary" disabled={saving}>
+              {saving ? "Saving..." : isEdit ? "Save changes" : "Create plan"}
+            </button>
+          </div>
         </>
       }
     >
-      <form id="client-plan-form" className="bl-form" onSubmit={handleSubmit} noValidate>
-        {error && <p className="bl-form-error">{error}</p>}
+      <form id="client-plan-form" className="bl-form bl-form--sections" onSubmit={handleSubmit} noValidate>
+        {/* ---------------- CLIENT ---------------- */}
+        <section className="bl-form-section" aria-labelledby="plan-sec-client">
+          <h3 id="plan-sec-client" className="bl-form-section-title">Client</h3>
 
-        <div className="bl-form-grid">
-          <div className="bl-field bl-field--full">
-            <label htmlFor="plan-client">Client *</label>
+          <div className="bl-field">
+            <label htmlFor={FIELD_IDS.client}>
+              Client <RequiredMark />
+            </label>
             {isEdit ? (
-              <input id="plan-client" value={`${clientLabel(plan.client)} — ${plan.client?.email || ""}`} disabled />
+              <div className="bl-client-chip bl-client-chip--static" id={FIELD_IDS.client}>
+                <span className="bl-client-chip-avatar" aria-hidden="true">
+                  {(clientName || clientEmail || "?").charAt(0).toUpperCase()}
+                </span>
+                <span className="bl-client-chip-text">
+                  <strong>{clientName || clientEmail || "—"}</strong>
+                  {clientName && clientEmail && <span>{clientEmail}</span>}
+                  {selectedClient?.profile?.companyName && <span>{selectedClient.profile.companyName}</span>}
+                </span>
+              </div>
             ) : (
               <ClientSelect
-                id="plan-client"
+                id={FIELD_IDS.client}
                 value={form.client}
-                onChange={(id) => setForm((prev) => ({ ...prev, client: id }))}
+                onChange={(id, client) => {
+                  setForm((prev) => ({ ...prev, client: id }));
+                  setSelectedClient(client);
+                  if (error?.field === "client") setError(null);
+                }}
                 activeOnly
                 required
+                showSelected
+                invalid={Boolean(fieldError("client"))}
+                describedBy={fieldError("client") ? "plan-client-error" : undefined}
               />
             )}
+            <FieldError id="plan-client-error" message={fieldError("client")} />
           </div>
+        </section>
 
-          <div className="bl-field">
-            <label htmlFor="plan-name">Plan name *</label>
-            <input id="plan-name" value={form.name} onChange={set("name")} maxLength={150} required />
-          </div>
+        {/* ---------------- PLAN DETAILS ---------------- */}
+        <section className="bl-form-section" aria-labelledby="plan-sec-details">
+          <h3 id="plan-sec-details" className="bl-form-section-title">Plan details</h3>
 
-          <div className="bl-field">
-            <label htmlFor="plan-amount">Monthly amount (£) *</label>
-            <input
-              id="plan-amount"
-              inputMode="decimal"
-              placeholder="499.00"
-              value={form.amount}
-              onChange={set("amount")}
-              disabled={amountLocked}
-              required
-            />
-            {amountLocked && (
-              <span className="bl-hint">
-                Locked while a subscription is open. Cancel the subscription before changing the amount.
+          <div className="bl-form-grid">
+            <div className="bl-field">
+              <label htmlFor={FIELD_IDS.name}>
+                Plan name <RequiredMark />
+              </label>
+              <input
+                id={FIELD_IDS.name}
+                value={form.name}
+                onChange={set("name")}
+                maxLength={150}
+                placeholder="e.g. Growth retainer"
+                required
+                aria-required="true"
+                aria-invalid={Boolean(fieldError("name")) || undefined}
+                aria-describedby={fieldError("name") ? "plan-name-error" : undefined}
+              />
+              <FieldError id="plan-name-error" message={fieldError("name")} />
+            </div>
+
+            <div className="bl-field">
+              <label htmlFor={FIELD_IDS.amount}>
+                Monthly amount (£) <RequiredMark />
+              </label>
+              <div className={`bl-input-affix${amountLocked ? " is-disabled" : ""}`}>
+                <span className="bl-input-affix-symbol" aria-hidden="true">
+                  £
+                </span>
+                <input
+                  id={FIELD_IDS.amount}
+                  inputMode="decimal"
+                  placeholder="0.00"
+                  value={form.amount}
+                  onChange={set("amount")}
+                  disabled={amountLocked}
+                  required
+                  aria-required="true"
+                  aria-invalid={Boolean(fieldError("amount")) || undefined}
+                  aria-describedby={[fieldError("amount") && "plan-amount-error", "plan-amount-hint"]
+                    .filter(Boolean)
+                    .join(" ")}
+                />
+                <span className="bl-input-affix-suffix" aria-hidden="true">
+                  / month
+                </span>
+              </div>
+              <FieldError id="plan-amount-error" message={fieldError("amount")} />
+              <span id="plan-amount-hint" className="bl-hint">
+                {amountLocked
+                  ? "Locked while a subscription is open. Cancel it before changing the amount."
+                  : "GBP, charged monthly once the client completes payment."}
               </span>
-            )}
+            </div>
+
+            <div className="bl-field">
+              <label htmlFor="plan-start">Start date</label>
+              <input
+                id="plan-start"
+                type="date"
+                value={form.startDate}
+                onChange={set("startDate")}
+                aria-describedby="plan-start-hint"
+              />
+              <span id="plan-start-hint" className="bl-hint">
+                {form.startDate ? (
+                  <>
+                    Starts <strong>{formatDate(`${form.startDate}T00:00:00Z`)}</strong>. Billing begins when the client
+                    pays.
+                  </>
+                ) : (
+                  "Shown to the client. Billing begins when the client pays."
+                )}
+              </span>
+            </div>
+
+            <div className="bl-field">
+              <label htmlFor="plan-status">Plan status</label>
+              <select id="plan-status" value={form.status} onChange={set("status")} aria-describedby="plan-status-hint">
+                {Object.entries(PLAN_STATUS_LABELS).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+              <span id="plan-status-hint" className="bl-hint">
+                Draft plans stay hidden from the client until billing starts. Status doesn't pause Stripe billing.
+              </span>
+            </div>
           </div>
+        </section>
+
+        {/* ---------------- BILLING DETAILS ---------------- */}
+        <section className="bl-form-section" aria-labelledby="plan-sec-billing">
+          <h3 id="plan-sec-billing" className="bl-form-section-title">Billing details</h3>
 
           <div className="bl-field">
-            <label htmlFor="plan-start">Start date</label>
-            <input id="plan-start" type="date" value={form.startDate} onChange={set("startDate")} />
-            <span className="bl-hint">Shown to the client. Billing starts when they complete the payment link.</span>
-          </div>
-
-          <div className="bl-field">
-            <label htmlFor="plan-status">Plan status</label>
-            <select id="plan-status" value={form.status} onChange={set("status")}>
-              {Object.entries(PLAN_STATUS_LABELS).map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-            <span className="bl-hint">Drafts are hidden from the client until billing starts. This doesn't pause Stripe.</span>
-          </div>
-
-          <div className="bl-field bl-field--full">
-            <label htmlFor="plan-billing-email">Billing email (optional)</label>
+            <label htmlFor="plan-billing-email">
+              Billing email <span className="bl-optional">Optional</span>
+            </label>
             <input
               id="plan-billing-email"
               type="email"
-              placeholder="Defaults to the client's login email"
+              placeholder={clientEmail || "client@company.com"}
               value={form.billingEmail}
               onChange={set("billingEmail")}
               maxLength={254}
+              aria-describedby="plan-billing-email-hint"
             />
+            <span id="plan-billing-email-hint" className="bl-hint">
+              {clientEmail
+                ? `Leave blank to send invoices and payment links to ${clientEmail}.`
+                : "Leave blank to use the client's login email."}
+            </span>
           </div>
 
-          <div className="bl-field bl-field--full">
-            <label htmlFor="plan-description">Description</label>
-            <textarea id="plan-description" rows={3} value={form.description} onChange={set("description")} maxLength={5000} />
+          <div className="bl-field">
+            <label htmlFor="plan-description">
+              Description <span className="bl-optional">Optional</span>
+            </label>
+            <textarea
+              id="plan-description"
+              rows={4}
+              value={form.description}
+              onChange={set("description")}
+              maxLength={5000}
+              placeholder="Add any notes or billing details for this plan..."
+            />
           </div>
-        </div>
+        </section>
+
+        {/* ---------------- PLAN CONTENT ---------------- */}
+        <section className="bl-form-section" aria-labelledby="plan-sec-content">
+          <h3 id="plan-sec-content" className="bl-form-section-title">
+            Plan content <span className="bl-optional">Optional</span>
+          </h3>
 
         <fieldset className="bl-fieldset">
           <legend>Services included</legend>
@@ -367,20 +503,47 @@ const ClientPlanForm = ({ plan, onClose, onSaved }) => {
           />
         </fieldset>
 
-        <div className="bl-form-grid">
-          <div className="bl-field">
-            <label htmlFor="plan-client-notes">Client-visible notes</label>
-            <textarea id="plan-client-notes" rows={4} value={form.clientNotes} onChange={set("clientNotes")} maxLength={5000} />
+        </section>
+
+        {/* ---------------- NOTES ---------------- */}
+        <section className="bl-form-section" aria-labelledby="plan-sec-notes">
+          <h3 id="plan-sec-notes" className="bl-form-section-title">
+            Notes <span className="bl-optional">Optional</span>
+          </h3>
+
+          <div className="bl-form-grid">
+            <div className="bl-field">
+              <label htmlFor="plan-client-notes">Client-visible notes</label>
+              <textarea id="plan-client-notes" rows={3} value={form.clientNotes} onChange={set("clientNotes")} maxLength={5000} />
+            </div>
+            <div className="bl-field">
+              <label htmlFor="plan-admin-notes">Admin notes</label>
+              <textarea id="plan-admin-notes" rows={3} value={form.adminNotes} onChange={set("adminNotes")} maxLength={5000} />
+              <span className="bl-hint">Internal only. Never shown to the client.</span>
+            </div>
           </div>
-          <div className="bl-field">
-            <label htmlFor="plan-admin-notes">Admin notes (never shown to the client)</label>
-            <textarea id="plan-admin-notes" rows={4} value={form.adminNotes} onChange={set("adminNotes")} maxLength={5000} />
-          </div>
-        </div>
+        </section>
       </form>
     </BillingModal>
   );
 };
+
+// ids used to move focus to the first invalid field
+const FIELD_IDS = { client: "plan-client", name: "plan-name", amount: "plan-amount" };
+
+const RequiredMark = () => (
+  <span className="bl-required" aria-hidden="true">
+    *
+  </span>
+);
+
+const FieldError = ({ id, message }) =>
+  message ? (
+    <p id={id} className="bl-inline-error">
+      <FaExclamationCircle aria-hidden="true" />
+      <span>{message}</span>
+    </p>
+  ) : null;
 
 const updateRow = (rows, index, patch, commit) => {
   const next = [...rows];
