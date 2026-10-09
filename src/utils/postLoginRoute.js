@@ -1,6 +1,13 @@
 import { auth } from "../firebase/firebaseConfig";
 import api from "../services/api";
 
+// Where a client may be sent after logging in from an emailed link
+// (/login?next=/dashboard/my-plan). Only client-portal paths are accepted --
+// no other origin, query, "//" or "\" -- so `next` can never be used as an
+// open redirect. Anything else returns null (normal post-login routing).
+export const safeClientReturnPath = (value) =>
+  typeof value === "string" && /^\/dashboard(\/[a-z0-9-]+)*\/?$/i.test(value) ? value : null;
+
 // Role always comes from the verified backend record (GET /api/auth/me),
 // never guessed on the frontend. Shared by LoginModal and Register's Google
 // sign-in path so both routes a freshly-authenticated user the same way.

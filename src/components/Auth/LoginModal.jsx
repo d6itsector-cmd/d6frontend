@@ -8,7 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 import { resolvePostLoginDestination } from "../../utils/postLoginRoute";
 import logo from "../../assets/d6.png";
 
-const LoginModal = ({ isOpen, onClose }) => {
+const LoginModal = ({ isOpen, next, onClose }) => {
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
@@ -34,7 +34,9 @@ const LoginModal = ({ isOpen, onClose }) => {
     const destination = await resolvePostLoginDestination();
     resetForm();
     onClose();
-    navigate(destination);
+    // A client arriving from an emailed link (e.g. "Login to Pay") goes to
+    // that client-portal page; admins always go to their own area.
+    navigate(destination === "/dashboard" && next ? next : destination);
   };
 
   const handleSubmit = async (e) => {

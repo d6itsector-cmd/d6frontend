@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 import Navbar from "./components/Home/navbar/Navbar";
 import ScrollToTop from "./components/Scroll/ScrollToTop";
@@ -25,6 +25,7 @@ import WebsiteDevelopment from "./pages/Services/WebsiteDevelopment";
 import Register from "./pages/Auth/Register";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
+import LoginRedirect from "./components/Auth/LoginRedirect";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 
@@ -78,7 +79,7 @@ function AppContent() {
   // reopening the modal.
   useEffect(() => {
     if (location.state?.openLogin) {
-      openLogin();
+      openLogin(location.state.next);
       navigate(location.pathname, { replace: true, state: {} });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -144,12 +145,10 @@ function AppContent() {
 
         {/* ================= AUTH ================= */}
 
-        {/* No standalone login page -- redirect any old /login link/bookmark
-            to the public home page with the login modal open. */}
-        <Route
-          path="/login"
-          element={<Navigate to="/" state={{ openLogin: true }} replace />}
-        />
+        {/* No standalone login page -- /login opens the login modal on the
+            public home page. ?next=/dashboard/... (e.g. the "Login to Pay"
+            email) is where a client lands after logging in. */}
+        <Route path="/login" element={<LoginRedirect />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
