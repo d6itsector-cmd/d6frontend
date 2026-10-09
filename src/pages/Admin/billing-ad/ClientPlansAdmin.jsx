@@ -136,7 +136,11 @@ const ClientPlansAdmin = () => {
                     </td>
                     <td data-label="Monthly">{formatGBP(plan.amountPence)}</td>
                     <td data-label="Subscription">
-                      <StatusBadge kind="subscription" value={billing.status} />
+                      {billing.state ? (
+                        <StatusBadge kind="state" value={billing.state} />
+                      ) : (
+                        <StatusBadge kind="subscription" value={billing.status} />
+                      )}
                       {billing.cancelAtPeriodEnd && <span className="bl-fact-sub">Cancels at period end</span>}
                     </td>
                     <td data-label="Start date">{formatDate(plan.startDate)}</td>

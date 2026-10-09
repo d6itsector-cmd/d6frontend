@@ -16,6 +16,7 @@ import {
   PAYMENT_REQUEST_REASON_LABELS,
   PAYMENT_REQUEST_STATUS_LABELS,
   RESENDABLE_REQUEST_STATUSES,
+  emailFailureText,
 } from "../../../utils/billingFormat";
 import { useBillingQuery } from "../../../components/Billing/useBillingQuery";
 import StatusBadge from "../../../components/Billing/StatusBadge";
@@ -82,8 +83,13 @@ const PaymentRequestsAdmin = () => {
     setBusyId(cancelTarget._id);
     setCancelError("");
     try {
-      const { paymentRequest } = await cancelPaymentRequest(cancelTarget._id);
-      notify("success", `Payment request ${PAYMENT_REQUEST_STATUS_LABELS[paymentRequest?.status]?.toLowerCase() || "cancelled"}. The link no longer works.`);
+      const { paymentRequest, emailSent, email } = await cancelPaymentRequest(cancelTarget._id);
+      notify(
+        emailSent === false ? "warning" : "success",
+        `Payment request ${PAYMENT_REQUEST_STATUS_LABELS[paymentRequest?.status]?.toLowerCase() || "cancelled"}. The link no longer works.${
+          emailSent === false ? ` ${emailFailureText(email)}` : emailSent ? " The client was emailed." : ""
+        }`
+      );
       setCancelTarget(null);
       afterChange();
     } catch (err) {

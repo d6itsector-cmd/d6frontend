@@ -12,6 +12,7 @@ import api from "./api";
 /** @typedef {import("../types/billing").Payment} Payment */
 /** @typedef {import("../types/billing").PaymentRequest} PaymentRequest */
 /** @typedef {import("../types/billing").Pagination} Pagination */
+/** @typedef {import("../types/billing").EmailOutcome} EmailOutcome */
 
 const list = async (url, params) => {
   const res = await api.get(url, { params });
@@ -78,6 +79,16 @@ export const subscribeClientPlan = async (id) => unwrap(await api.post(`/admin/c
 export const resendClientPlanLink = async (id) => unwrap(await api.post(`/admin/client-plans/${id}/resend-link`));
 
 /**
+ * Withdraws an UNPAID payment link (expires the Stripe Checkout Session).
+ * The backend answers 409 and changes nothing once the client has paid --
+ * a paid subscription is stopped with cancelClientPlanSubscription instead.
+ * @returns {Promise<{ subscription: Subscription, emailSent: boolean, email: EmailOutcome }>}
+ */
+export const cancelClientPlanPaymentLink = async (id) =>
+  unwrap(await api.post(`/admin/client-plans/${id}/cancel-payment-link`));
+
+/**
+ * Stops a PAID (live) Stripe subscription.
  * 202 + pendingStripeConfirmation:true for a live Stripe subscription (state
  * changes only when the webhook arrives); 200 + false for an unpaid checkout
  * closed immediately.

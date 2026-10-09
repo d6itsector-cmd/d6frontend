@@ -162,6 +162,55 @@ export const SUBSCRIPTION_STATUS_LABELS = {
   canceled: "Cancelled",
 };
 
+// The backend's derived `state` (billing.state on plans, state on payment
+// requests) -- one vocabulary shared by every billing screen and email.
+export const BILLING_STATE_LABELS = {
+  not_started: "Not started",
+  pending_payment: "Pending payment",
+  link_expired: "Payment link expired",
+  setup_failed: "Setup failed",
+  processing: "Processing",
+  active: "Active",
+  paid: "Paid",
+  past_due: "Past due",
+  payment_failed: "Payment failed",
+  paused: "Paused",
+  cancelled_before_payment: "Cancelled before payment",
+  cancelled: "Cancelled",
+};
+
+// Older backends don't send `state`; fall back to the raw Stripe status so
+// the UI never shows a pending link as active.
+const LEGACY_SUBSCRIPTION_STATE = {
+  none: "not_started",
+  pending_checkout: "pending_payment",
+  checkout_expired: "link_expired",
+  setup_failed: "setup_failed",
+  incomplete: "payment_failed",
+  incomplete_expired: "payment_failed",
+  trialing: "active",
+  active: "active",
+  past_due: "past_due",
+  unpaid: "payment_failed",
+  paused: "paused",
+  canceled: "cancelled",
+};
+
+export const planState = (plan) => plan?.billing?.state || LEGACY_SUBSCRIPTION_STATE[plan?.billing?.status] || "not_started";
+
+// Admin-facing explanation of why a billing email didn't go out. The Stripe
+// action itself succeeded whenever this is shown.
+const EMAIL_FAILURE_REASONS = {
+  smtp_not_configured: "email is not configured on the server",
+  invalid_recipient: "the client's email address is invalid",
+  send_failed: "the mail server rejected or timed out",
+};
+
+export const emailFailureText = (email) => {
+  const why = EMAIL_FAILURE_REASONS[email?.reason];
+  return why ? `The email could NOT be sent (${why}).` : "The email could NOT be sent.";
+};
+
 export const PLAN_STATUS_LABELS = {
   draft: "Draft",
   active: "Active",

@@ -1,0 +1,18 @@
+/* Home dashboard billing card. Everything else comes from Billing.css. */
+
+.bl-overview{
+  margin-bottom:0; /* .dashboard-body already spaces its sections */
+}
+
+.bl-overview .bl-card-header{
+  margin-bottom:8px;
+}
+
+.bl-overview .bl-alert .bl-badge{
+  margin-left:6px;
+  vertical-align:middle;
+}
+
+.bl-overview-facts{
+  margin:16px 0 0;
+}

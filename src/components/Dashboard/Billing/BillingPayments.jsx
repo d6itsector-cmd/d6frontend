@@ -13,6 +13,7 @@ import {
   PAYMENT_REQUEST_REASON_LABELS,
 } from "../../../utils/billingFormat";
 import { useBillingQuery } from "../../Billing/useBillingQuery";
+import { useRefreshOnReturn } from "../../Billing/useRefreshOnReturn";
 import StatusBadge from "../../Billing/StatusBadge";
 import InvoiceLinks from "../../Billing/InvoiceLinks";
 import Pagination from "../../Billing/Pagination";
@@ -45,6 +46,9 @@ const PaymentRequestsSection = () => {
     `requests-${page}`
   );
   const items = data?.items || [];
+  // Background refreshes (returning from Stripe) keep the table on screen.
+  useRefreshOnReturn(reload);
+  const loaded = Boolean(data) && status !== "error";
 
   return (
     <section className="bl-card">
@@ -53,13 +57,13 @@ const PaymentRequestsSection = () => {
         <p>One-off payments requested by your account team. These are separate from your monthly plan.</p>
       </div>
 
-      {status === "loading" && <LoadingState message="Loading payment requests..." />}
+      {status === "loading" && !data && <LoadingState message="Loading payment requests..." />}
       {status === "error" && (
         <ErrorState message={getApiErrorMessage(error, "We couldn't load your payment requests.")} onRetry={reload} />
       )}
-      {status === "success" && items.length === 0 && <EmptyState message="You have no payment requests." />}
+      {loaded && items.length === 0 && <EmptyState message="You have no payment requests." />}
 
-      {status === "success" && items.length > 0 && (
+      {loaded && items.length > 0 && (
         <div className="bl-table-wrap">
           <table className="bl-table">
             <thead>
@@ -84,8 +88,11 @@ const PaymentRequestsSection = () => {
                     <td data-label="Type">One-off payment</td>
                     <td data-label="Amount">{formatGBP(r.amountPence)}</td>
                     <td data-label="Status">
-                      <StatusBadge kind="request" value={r.status} />
+                      {r.state ? <StatusBadge kind="state" value={r.state} /> : <StatusBadge kind="request" value={r.status} />}
                       {r.status === "paid" && r.paidAt && <span className="bl-fact-sub">{formatDate(r.paidAt)}</span>}
+                      {r.status === "cancelled" && r.cancelledAt && (
+                        <span className="bl-fact-sub">{formatDate(r.cancelledAt)} · no payment taken</span>
+                      )}
                     </td>
                     <td data-label="Requested">{formatDate(r.createdAt)}</td>
                     <td data-label="Action">

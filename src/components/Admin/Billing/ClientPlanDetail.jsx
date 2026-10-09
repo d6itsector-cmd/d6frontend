@@ -5,7 +5,9 @@ import {
   subscribeClientPlan,
   resendClientPlanLink,
   cancelClientPlanSubscription,
+  cancelClientPlanPaymentLink,
   getApiErrorMessage,
+  getApiErrorStatus,
 } from "../../../services/billingApi";
 import {
   formatGBP,
@@ -14,6 +16,8 @@ import {
   formatPeriod,
   clientLabel,
   safeExternalUrl,
+  emailFailureText,
+  planState,
   LINK_PENDING_STATUSES,
   LIVE_SUBSCRIPTION_STATUSES,
   SUBSCRIPTION_STATUS_LABELS,
@@ -35,7 +39,8 @@ import ClientPlanForm from "./ClientPlanForm";
 const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
   const { status, data, error, reload } = useBillingQuery(() => getClientPlan(planId), planId);
   const [editing, setEditing] = useState(false);
-  const [confirm, setConfirm] = useState(null); // "subscribe" | "cancel"
+  // "subscribe" | "cancelLink" (unpaid link) | "cancel" (paid subscription)
+  const [confirm, setConfirm] = useState(null);
   const [busy, setBusy] = useState(false);
   const [actionError, setActionError] = useState("");
   const [cancelAtPeriodEnd, setCancelAtPeriodEnd] = useState(true);
@@ -57,30 +62,44 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
       const message = getApiErrorMessage(err, "That action failed. Please try again.");
       if (confirm) setActionError(message);
       else notify("error", message);
+      // 409 = the record moved on (e.g. the client just paid): show its real state.
+      if (getApiErrorStatus(err) === 409) refresh();
     } finally {
       setBusy(false);
     }
   };
 
-  const emailOutcome = (emailSent) =>
+  // The Stripe link exists either way; only the email outcome differs.
+  const emailOutcome = (emailSent, email) =>
     emailSent
-      ? "Payment link emailed to the client."
-      : "The email could NOT be sent. Use Resend Payment Link, or copy the link and send it manually.";
+      ? "Payment link emailed to the client. It is also shown on the client's dashboard."
+      : `${emailFailureText(email)} The link is still valid and shown on the client's dashboard. Use Resend Payment Link, or copy the link and send it manually.`;
 
   const handleSubscribe = () =>
     run(
       () => subscribeClientPlan(planId),
-      ({ subscription, emailSent }) =>
+      ({ subscription, emailSent, email }) =>
         notify(
           emailSent ? "success" : "warning",
-          `Subscription created (${SUBSCRIPTION_STATUS_LABELS[subscription?.status] || subscription?.status}). ${emailOutcome(emailSent)}`
+          `Subscription created (${SUBSCRIPTION_STATUS_LABELS[subscription?.status] || subscription?.status}). ${emailOutcome(emailSent, email)}`
         )
     );
 
   const handleResend = () =>
     run(
       () => resendClientPlanLink(planId),
-      ({ emailSent }) => notify(emailSent ? "success" : "warning", emailSent ? "Payment link re-sent to the client." : emailOutcome(false))
+      ({ emailSent, email }) =>
+        notify(emailSent ? "success" : "warning", emailSent ? "Payment link re-sent to the client." : emailOutcome(false, email))
+    );
+
+  const handleCancelLink = () =>
+    run(
+      () => cancelClientPlanPaymentLink(planId),
+      ({ emailSent, email }) =>
+        notify(
+          emailSent ? "success" : "warning",
+          `Unpaid payment link cancelled; it can no longer be paid. ${emailSent ? "The client was emailed." : emailFailureText(email)}`
+        )
     );
 
   const handleCancel = () =>
@@ -96,7 +115,7 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
           );
         } else {
           const label = SUBSCRIPTION_STATUS_LABELS[result.subscription?.status] || result.subscription?.status;
-          notify("success", `Unpaid checkout closed. Subscription status: ${label}.`);
+          notify("success", `Unpaid payment link cancelled. Subscription status: ${label}.`);
         }
       }
     );
@@ -129,7 +148,11 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
   const billing = plan?.billing || {};
   const isOpen = Boolean(sub?.isOpen);
   const isLive = LIVE_SUBSCRIPTION_STATUSES.includes(billing.status);
-  const linkPending = isOpen && LINK_PENDING_STATUSES.includes(sub.status);
+  // Unpaid link (no Stripe subscription yet) vs a subscription Stripe has
+  // started: each has its own, clearly named cancel action.
+  const linkPending = isOpen && LINK_PENDING_STATUSES.includes(sub.status) && !sub.stripeSubscriptionId;
+  const startedSubscription = isOpen && !linkPending;
+  const state = data?.state || planState(plan);
   const checkoutUrl = safeExternalUrl(sub?.checkoutUrl);
   const cancelPendingConfirmation = isOpen && sub?.cancelRequestedAt && !billing.cancelAtPeriodEnd;
 
@@ -156,7 +179,20 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
                   {busy ? "Sending..." : "Resend Payment Link"}
                 </button>
               )}
-              {isOpen && (
+              {linkPending && (
+                <button
+                  type="button"
+                  className="bl-btn bl-btn--danger"
+                  onClick={() => {
+                    setActionError("");
+                    setConfirm("cancelLink");
+                  }}
+                  disabled={busy}
+                >
+                  Cancel payment link
+                </button>
+              )}
+              {startedSubscription && (
                 <button
                   type="button"
                   className="bl-btn bl-btn--danger"
@@ -238,10 +274,20 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
               )}
               <dl className="bl-kv">
                 <div>
-                  <dt>Subscription status</dt>
+                  <dt>Status</dt>
+                  <dd>
+                    <StatusBadge kind="state" value={state} />
+                  </dd>
+                </div>
+                <div>
+                  <dt>Stripe status</dt>
                   <dd>
                     <StatusBadge kind="subscription" value={billing.status} />
                   </dd>
+                </div>
+                <div>
+                  <dt>Subscription started</dt>
+                  <dd>{sub?.stripeSubscriptionId && sub.startDate ? formatDate(sub.startDate) : "Not started"}</dd>
                 </div>
                 <div>
                   <dt>Current period</dt>
@@ -264,7 +310,7 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
                 </div>
                 {billing.canceledAt && (
                   <div>
-                    <dt>Cancelled</dt>
+                    <dt>{state === "cancelled_before_payment" ? "Link cancelled" : "Cancelled"}</dt>
                     <dd>{formatDateTime(billing.canceledAt)}</dd>
                   </div>
                 )}
@@ -317,6 +363,20 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
         />
       )}
 
+      {confirm === "cancelLink" && plan && (
+        <ConfirmationModal
+          title="Cancel unpaid payment link?"
+          message={`The client hasn't paid. This expires the ${formatGBP(plan.amountPence)}/month Stripe payment link so it can no longer be paid, removes Pay Now from the client's dashboard and emails the client. If the client has already paid, nothing is changed.`}
+          confirmLabel="Cancel payment link"
+          cancelLabel="Keep link"
+          danger
+          busy={busy}
+          error={actionError}
+          onConfirm={handleCancelLink}
+          onClose={() => setConfirm(null)}
+        />
+      )}
+
       {confirm === "cancel" && plan && (
         <ConfirmationModal
           title="Cancel subscription"
@@ -328,37 +388,31 @@ const ClientPlanDetail = ({ planId, onClose, onChanged, notify }) => {
           onConfirm={handleCancel}
           onClose={() => setConfirm(null)}
         >
-          {LINK_PENDING_STATUSES.includes(sub?.status) ? (
-            <p className="bl-confirm-message">
-              The client hasn't paid yet. Cancelling closes the unpaid payment link immediately.
-            </p>
-          ) : (
-            <div className="bl-radio-group" role="radiogroup" aria-label="When to cancel">
-              <label className={!isLive ? "bl-disabled" : ""}>
-                <input
-                  type="radio"
-                  name="cancel-mode"
-                  checked={cancelAtPeriodEnd}
-                  disabled={!isLive}
-                  onChange={() => setCancelAtPeriodEnd(true)}
-                />
-                <span>
-                  <strong>Cancel at period end</strong>
-                  The client keeps the service until {formatDate(billing.currentPeriodEnd)} and isn't charged again.
-                </span>
-              </label>
-              <label>
-                <input type="radio" name="cancel-mode" checked={!cancelAtPeriodEnd} onChange={() => setCancelAtPeriodEnd(false)} />
-                <span>
-                  <strong>Cancel immediately</strong>
-                  Billing stops now. Stripe confirms the cancellation via webhook.
-                </span>
-              </label>
-              {["incomplete", "unpaid"].includes(sub?.status) && (
-                <p className="bl-hint">An {sub.status} subscription has no paid period, so Stripe cancels it immediately.</p>
-              )}
-            </div>
-          )}
+          <div className="bl-radio-group" role="radiogroup" aria-label="When to cancel">
+            <label className={!isLive ? "bl-disabled" : ""}>
+              <input
+                type="radio"
+                name="cancel-mode"
+                checked={cancelAtPeriodEnd}
+                disabled={!isLive}
+                onChange={() => setCancelAtPeriodEnd(true)}
+              />
+              <span>
+                <strong>Cancel at period end</strong>
+                The client keeps the service until {formatDate(billing.currentPeriodEnd)} and isn't charged again.
+              </span>
+            </label>
+            <label>
+              <input type="radio" name="cancel-mode" checked={!cancelAtPeriodEnd} onChange={() => setCancelAtPeriodEnd(false)} />
+              <span>
+                <strong>Cancel immediately</strong>
+                Billing stops now. Stripe confirms the cancellation via webhook.
+              </span>
+            </label>
+            {["incomplete", "unpaid"].includes(sub?.status) && (
+              <p className="bl-hint">An {sub.status} subscription has no paid period, so Stripe cancels it immediately.</p>
+            )}
+          </div>
         </ConfirmationModal>
       )}
     </>

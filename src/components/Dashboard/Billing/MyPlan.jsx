@@ -10,10 +10,12 @@ import {
   formatDateTime,
   formatPeriod,
   safeExternalUrl,
+  planState,
   LIVE_SUBSCRIPTION_STATUSES,
   PLAN_STATUS_LABELS,
 } from "../../../utils/billingFormat";
 import { useBillingQuery } from "../../Billing/useBillingQuery";
+import { useRefreshOnReturn } from "../../Billing/useRefreshOnReturn";
 import StatusBadge from "../../Billing/StatusBadge";
 import DaysRemaining from "../../Billing/DaysRemaining";
 import ConfirmationModal from "../../Billing/ConfirmationModal";
@@ -34,6 +36,11 @@ const loadMyPlanPage = async () => {
 const MyPlan = ({ setActivePage }) => {
   const { status, data, error, reload } = useBillingQuery(loadMyPlanPage);
   const plans = data?.plans || [];
+  // Re-read when the client returns from Stripe, and keep checking while a
+  // payment is pending -- only the backend's webhook can change its status.
+  useRefreshOnReturn(reload, { polling: plans.some((p) => planState(p) === "pending_payment") });
+  // Background refreshes keep the current content on screen.
+  const loaded = Boolean(data) && status !== "error";
   const latestRequest = data?.requests?.[0];
   const [requesting, setRequesting] = useState(false);
   const [withdrawing, setWithdrawing] = useState(false);
@@ -67,13 +74,13 @@ const MyPlan = ({ setActivePage }) => {
         </div>
       </div>
 
-      {status === "loading" && <LoadingState message="Loading your plan..." />}
+      {status === "loading" && !data && <LoadingState message="Loading your plan..." />}
 
       {status === "error" && (
         <ErrorState message={getApiErrorMessage(error, "We couldn't load your plan right now.")} onRetry={reload} />
       )}
 
-      {status === "success" && plans.length === 0 && (
+      {loaded && plans.length === 0 && (
         <>
           {latestRequest && latestRequest.status !== "cancelled" && (
             <PlanRequestCard
@@ -97,8 +104,7 @@ const MyPlan = ({ setActivePage }) => {
         </>
       )}
 
-      {status === "success" &&
-        plans.map((plan) => <PlanCard key={plan._id} plan={plan} setActivePage={setActivePage} />)}
+      {loaded && plans.map((plan) => <PlanCard key={plan._id} plan={plan} setActivePage={setActivePage} />)}
 
       {requesting && (
         <RequestPlanModal
@@ -183,8 +189,14 @@ const PlanRequestCard = ({ request, onWithdraw }) => (
 
 const PlanCard = ({ plan, setActivePage }) => {
   const billing = plan.billing || {};
+  const state = planState(plan);
   const isLive = LIVE_SUBSCRIPTION_STATUSES.includes(billing.status);
   const checkoutUrl = safeExternalUrl(billing.checkoutUrl);
+  const isPending = state === "pending_payment" || state === "link_expired";
+  // Ended = a started subscription that was cancelled; "Ends on" = set to
+  // cancel at period end. Both dates are Stripe's.
+  const endDate =
+    state === "cancelled" ? billing.endedAt || billing.canceledAt : billing.cancelAtPeriodEnd ? billing.currentPeriodEnd : null;
 
   const customFields = plan.customFields || [];
   const hasDetails =
@@ -212,21 +224,28 @@ const PlanCard = ({ plan, setActivePage }) => {
 
       {plan.description && <p className="bl-plan-desc">{plan.description}</p>}
 
-      <BillingAlert billing={billing} checkoutUrl={checkoutUrl} />
+      <BillingAlert billing={billing} state={state} checkoutUrl={checkoutUrl} />
 
       <dl className="bl-facts">
         <Fact label="Subscription status">
-          <StatusBadge kind="subscription" value={billing.status} />
+          <StatusBadge kind="state" value={state} />
         </Fact>
         <Fact label="Billing frequency">Monthly</Fact>
         <Fact label="Monthly price">{formatGBP(plan.amountPence)}</Fact>
-        <Fact label="Start date">{formatDate(plan.startDate, "Not set")}</Fact>
+        {isPending && <Fact label="Payment link created">{formatDate(billing.paymentLinkCreatedAt)}</Fact>}
+        <Fact label="Subscription started">
+          {billing.subscriptionStartDate ? formatDate(billing.subscriptionStartDate) : "Not started yet"}
+        </Fact>
+        {!billing.subscriptionStartDate && plan.startDate && (
+          <Fact label="Planned start date">{formatDate(plan.startDate)}</Fact>
+        )}
+        {endDate && <Fact label={state === "cancelled" ? "Ended" : "Ends on"}>{formatDate(endDate)}</Fact>}
         <Fact label="Current billing period">
           {isLive ? formatPeriod(billing.currentPeriodStart, billing.currentPeriodEnd) : "—"}
         </Fact>
         <Fact label="Current period ends">{isLive ? formatDate(billing.currentPeriodEnd) : "—"}</Fact>
         <Fact label="Next payment">
-          {billing.cancelAtPeriodEnd ? "No further payments" : formatDate(billing.nextPaymentDate)}
+          {billing.cancelAtPeriodEnd || state === "cancelled" ? "No further payments" : formatDate(billing.nextPaymentDate)}
         </Fact>
         <Fact label="Days remaining">{isLive ? <DaysRemaining until={billing.currentPeriodEnd} /> : "—"}</Fact>
         <Fact label="Last payment">
@@ -318,14 +337,14 @@ const PlanCard = ({ plan, setActivePage }) => {
 };
 
 // Messages for states that need the client's attention. Driven entirely by
-// the backend's billing.status / checkoutUrl.
-const BillingAlert = ({ billing, checkoutUrl }) => {
-  if (billing.status === "pending_checkout" && checkoutUrl) {
+// the backend's billing.state / checkoutUrl.
+const BillingAlert = ({ billing, state, checkoutUrl }) => {
+  if (state === "pending_payment" && checkoutUrl) {
     return (
       <div className="bl-alert bl-alert--warning">
         <div>
-          <strong>Your first payment is due.</strong> Complete it on Stripe's secure checkout to start your monthly
-          subscription.
+          <strong>Your payment link is ready.</strong> Complete your payment to activate your plan. Your plan is not
+          active until the payment succeeds.
           {billing.checkoutExpiresAt && (
             <span className="bl-fact-sub">This link expires {formatDateTime(billing.checkoutExpiresAt)}.</span>
           )}
@@ -337,10 +356,19 @@ const BillingAlert = ({ billing, checkoutUrl }) => {
     );
   }
 
-  if (billing.status === "pending_checkout" || billing.status === "checkout_expired") {
+  if (state === "pending_payment" || state === "link_expired") {
     return (
       <div className="bl-alert bl-alert--info">
         Your payment link has expired. Please contact your account team and they'll send you a new one.
+      </div>
+    );
+  }
+
+  if (state === "cancelled_before_payment") {
+    return (
+      <div className="bl-alert bl-alert--info">
+        This payment link was cancelled{billing.canceledAt ? ` on ${formatDate(billing.canceledAt)}` : ""} and can no
+        longer be used. No payment was taken.
       </div>
     );
   }

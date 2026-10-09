@@ -28,6 +28,7 @@ import Settings from "../../components/Dashboard/Settings/Settings";
 import MyPlan from "../../components/Dashboard/Billing/MyPlan";
 import BillingPayments from "../../components/Dashboard/Billing/BillingPayments";
 import CheckoutResult from "../../components/Dashboard/Billing/CheckoutResult";
+import BillingOverview from "../../components/Dashboard/Billing/BillingOverview";
 
 import api from "../../services/api";
 
@@ -149,6 +150,8 @@ const Dashboard = () => {
             <div className="dashboard-body">
 
               <KpiCards summary={summary} status={overviewStatus} />
+
+              <BillingOverview setActivePage={setActivePage} />
 
               {overviewStatus === "success" && (
                 <ActionRequired

@@ -12,6 +12,14 @@
  * @typedef {"pending"|"processing"|"paid"|"failed"|"expired"|"cancelled"|"setup_failed"} PaymentRequestStatus
  * @typedef {"previous_unpaid"|"outstanding_balance"|"additional_service"|"one_time"|"manual"} PaymentRequestReason
  * @typedef {"draft"|"open"|"paid"|"void"|"uncollectible"} InvoiceStatus
+ * @typedef {"not_started"|"pending_payment"|"link_expired"|"setup_failed"|"processing"|"active"|"paid"|"past_due"|"payment_failed"|"paused"|"cancelled_before_payment"|"cancelled"} BillingState
+ *   Backend-derived display state shared by every billing screen (backend utils/billingState.js).
+ */
+
+/**
+ * Result of an email the backend sent after an admin billing action. The
+ * Stripe action succeeded even when sent is false.
+ * @typedef {{ sent: true } | { sent: false, reason: string }} EmailOutcome
  */
 
 /**
@@ -59,8 +67,13 @@
 /**
  * Stripe-managed state. Written only by the backend webhook sync -- never
  * edited or derived on the frontend.
- * @typedef {Object} BillingState
+ * @typedef {Object} PlanBilling
  * @property {SubscriptionStatus} status
+ * @property {BillingState} state what to display
+ * @property {string} [subscriptionStartDate] Stripe's start date, only once the subscription has started (client view)
+ * @property {string} [paymentLinkCreatedAt] while the link is unpaid (client view)
+ * @property {string} [endedAt] client view
+ * @property {boolean} [cancelledBeforePayment] admin view
  * @property {string} [currentPeriodStart]
  * @property {string} [currentPeriodEnd]
  * @property {string|null} [nextPaymentDate]
@@ -93,7 +106,7 @@
  * @property {CustomField[]} customFields
  * @property {string} [clientNotes]
  * @property {string} [adminNotes] admin only
- * @property {BillingState} billing
+ * @property {PlanBilling} billing
  * @property {string} createdAt
  * @property {string} updatedAt
  */
@@ -152,6 +165,7 @@
  * @property {PaymentRequestReason} reason
  * @property {string} [billingEmail] admin only
  * @property {PaymentRequestStatus} status
+ * @property {BillingState} [state] what to display
  * @property {string} [paymentUrl] client: only while pending and unexpired
  * @property {string} [expiresAt]
  * @property {string} [paidAt]
