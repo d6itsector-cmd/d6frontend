@@ -218,6 +218,15 @@
 
 @keyframes bl-spin{ to{ transform:rotate(360deg); } }
 
+/* In-button variant (inherits the button's text colour). */
+.bl-spinner--sm{
+  width:14px;
+  height:14px;
+  border-width:2px;
+  border-color:color-mix(in srgb, currentColor 30%, transparent);
+  border-top-color:currentColor;
+}
+
 /* ---------- Alerts / inline notes ---------- */
 
 .bl-alert{
@@ -770,6 +779,77 @@
 }
 
 .bl-input-affix.is-disabled .bl-input-affix-symbol{ color:#9AA3B2; }
+
+/* Large amount input -- the focal field of the payment request form. */
+.bl-input-affix--lg input{
+  min-height:60px;
+  padding-left:40px;
+  padding-right:60px;
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--primary);
+}
+
+.bl-input-affix--lg input::placeholder{ font-weight:500; }
+
+.bl-input-affix--lg .bl-input-affix-symbol{
+  left:16px;
+  font-size:22px;
+}
+
+.bl-input-affix--lg .bl-input-affix-suffix{
+  right:16px;
+  font-weight:600;
+  letter-spacing:.04em;
+}
+
+/* Hint with a right-aligned counter (e.g. "120/500"). */
+.bl-hint--split{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.bl-hint--split > span:last-child{
+  flex-shrink:0;
+  font-variant-numeric:tabular-nums;
+}
+
+/* Read-only label/value summary at the end of a form. */
+.bl-summary{
+  margin:0;
+  padding:4px 16px;
+  border-radius:12px;
+  background:#F7F9FC;
+}
+
+.bl-summary-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:16px;
+  padding:10px 0;
+  font-size:14px;
+}
+
+.bl-summary-row + .bl-summary-row{ border-top:1px solid #E9EDF3; }
+
+.bl-summary-row dt{ color:#6B7280; flex-shrink:0; }
+
+.bl-summary-row dd{
+  margin:0;
+  min-width:0;
+  text-align:right;
+  font-weight:600;
+  color:var(--primary);
+  overflow-wrap:anywhere;
+}
+
+.bl-summary-row .bl-summary-amount{
+  font-size:18px;
+  font-variant-numeric:tabular-nums;
+}
 
 /* Selected client summary (name + email, or the email once). */
 .bl-client-chip{

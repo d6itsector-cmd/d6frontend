@@ -203,7 +203,7 @@ const Navbar = () => {
           />
 
           <span className="logo-text">
-            D6 <span>Global Media</span>
+            D6 <span>Global Services</span>
           </span>
         </NavLink>
 

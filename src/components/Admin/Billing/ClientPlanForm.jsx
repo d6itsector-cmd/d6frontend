@@ -20,6 +20,7 @@ import {
 } from "../../../utils/billingFormat";
 import { useBillingQuery } from "../../Billing/useBillingQuery";
 import BillingModal from "../../Billing/BillingModal";
+import { RequiredMark, FieldError } from "../../Billing/FieldBits";
 import ClientSelect from "./ClientSelect";
 
 const idOf = (ref) => (ref && typeof ref === "object" ? ref._id : ref) || "";
@@ -541,20 +542,6 @@ const ClientPlanForm = ({ plan, planRequest, initial, onClose, onSaved }) => {
 
 // ids used to move focus to the first invalid field
 const FIELD_IDS = { client: "plan-client", name: "plan-name", amount: "plan-amount" };
-
-const RequiredMark = () => (
-  <span className="bl-required" aria-hidden="true">
-    *
-  </span>
-);
-
-const FieldError = ({ id, message }) =>
-  message ? (
-    <p id={id} className="bl-inline-error">
-      <FaExclamationCircle aria-hidden="true" />
-      <span>{message}</span>
-    </p>
-  ) : null;
 
 const updateRow = (rows, index, patch, commit) => {
   const next = [...rows];

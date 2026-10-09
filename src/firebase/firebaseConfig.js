@@ -14,5 +14,8 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 export const auth = getAuth(firebaseApp);
 export const googleProvider = new GoogleAuthProvider();
+// Always show Google's account chooser. Without this, Google silently reuses
+// the browser's active Google account, so users can't pick another one.
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
 export default firebaseApp;
