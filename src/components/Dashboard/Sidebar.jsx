@@ -110,13 +110,13 @@ const Sidebar = ({ activePage, setActivePage, isOpen, onClose }) => {
 
                 <div className="logo-circle">
 
-                    <img src={logo} alt="D6 Global Media" />
+                    <img src={logo} alt="D6 Global Services" />
 
                 </div>
 
                 <div>
 
-                    <h2>D6 Global Media</h2>
+                    <h2>D6 Global Services</h2>
 
                     <p>Dashboard</p>
 

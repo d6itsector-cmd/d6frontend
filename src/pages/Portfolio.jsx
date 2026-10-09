@@ -19,7 +19,7 @@ const Portfolio = () => {
       <CTA
         badge="OUR PORTFOLIO"
         title="Ready to Start Your Success Story?"
-        description="Whether you're launching a new brand, redesigning your website, or scaling your digital marketing, D6 Global Media is here to help you achieve measurable business growth."
+        description="Whether you're launching a new brand, redesigning your website, or scaling your digital marketing, D6 Global Services is here to help you achieve measurable business growth."
         primaryButton="Get Free Consultation"
         secondaryButton="Contact Us"
       />

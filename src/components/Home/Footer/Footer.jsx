@@ -23,10 +23,10 @@ const Footer = () => {
                 <div className="footer-about">
 
                     <div className="footer-logo">
-                        <img src={logo} alt="D6 Global Media Logo" />
+                        <img src={logo} alt="D6 Global Services Logo" />
 
                         <h2>
-                            D6<span> Global Media</span>
+                            D6<span> Global Services</span>
                         </h2>
                     </div>
 
@@ -159,7 +159,7 @@ const Footer = () => {
             <div className="footer-cta">
 
                 <h3>
-                    Ready to grow your business with D6 Global Media?
+                    Ready to grow your business with D6 Global Services?
                 </h3>
 
                 <p>
@@ -173,7 +173,7 @@ const Footer = () => {
             <div className="footer-bottom">
 
                 <p>
-                    © 2026 D6 Global Media. All Rights Reserved.
+                    © 2026 D6 Global Services. All Rights Reserved.
                 </p>
 
                 <div className="footer-policy">

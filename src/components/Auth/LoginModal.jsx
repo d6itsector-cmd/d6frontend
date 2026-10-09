@@ -77,7 +77,7 @@ const LoginModal = ({ isOpen, next, onClose }) => {
           <FaTimes />
         </button>
 
-        <img src={logo} alt="D6 Global Media" className="login-modal-logo" />
+        <img src={logo} alt="D6 Global Services" className="login-modal-logo" />
 
         <span className="auth-badge">WELCOME BACK</span>
 

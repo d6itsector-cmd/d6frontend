@@ -8,7 +8,7 @@ const formatDate = (value) =>
 // "reply" channel is email, same as the Reply-To header already set on the
 // admin notification for this request.
 const buildReplyHref = (request) => {
-  const subject = `Re: ${request.subject || "Your inquiry to D6 Global Media"}`;
+  const subject = `Re: ${request.subject || "Your inquiry to D6 Global Services"}`;
   const quoted = request.message
     ? `\n\n---\nOn ${new Date(request.createdAt).toLocaleDateString("en-GB")}, ${request.name} wrote:\n${request.message}`
     : "";

@@ -78,7 +78,7 @@ const Messages = () => {
 
           <div className="chat-info">
 
-            <h4>D6 Global Media Team</h4>
+            <h4>D6 Global Services Team</h4>
 
             <p>{latest ? latest.message : "No messages yet"}</p>
 
@@ -100,7 +100,7 @@ const Messages = () => {
 
         <div className="chat-header">
 
-          <h2>D6 Global Media Team</h2>
+          <h2>D6 Global Services Team</h2>
 
           <span>Your project &amp; support contact</span>
 

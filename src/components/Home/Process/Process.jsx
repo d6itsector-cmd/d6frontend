@@ -47,7 +47,7 @@ const Process = () => {
           <span className="section-tag">Our Process</span>
 
           <h2>
-            How <span>D6 Global Media</span> Works
+            How <span>D6 Global Services</span> Works
           </h2>
 
           <p>

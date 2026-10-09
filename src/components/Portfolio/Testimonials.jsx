@@ -42,7 +42,7 @@ const Testimonials = () => {
 
         <p>
           We believe our clients' success is the true measure of our work.
-          Here's what they have to say about partnering with D6 Global Media.
+          Here's what they have to say about partnering with D6 Global Services.
         </p>
 
       </div>

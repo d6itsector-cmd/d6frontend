@@ -70,7 +70,7 @@ const MyPlan = ({ setActivePage }) => {
       <div className="bl-page-header">
         <div>
           <h1>My Plan</h1>
-          <p>Your plan is set up by your D6 Global Media account team.</p>
+          <p>Your plan is set up by your D6 Global Services account team.</p>
         </div>
       </div>
 
@@ -94,7 +94,7 @@ const MyPlan = ({ setActivePage }) => {
           {!requestInProgress && (
             <EmptyState
               title="No plan yet"
-              message="Your D6 Global Media account doesn't have an active plan yet. Request a plan and our team will review your requirements."
+              message="Your D6 Global Services account doesn't have an active plan yet. Request a plan and our team will review your requirements."
             >
               <button type="button" className="bl-btn bl-btn--primary" onClick={() => setRequesting(true)}>
                 Request a Plan

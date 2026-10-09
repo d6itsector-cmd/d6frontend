@@ -33,7 +33,7 @@ const Hero = () => {
           </h1>
 
           <p>
-            At <strong>D6 Global Media</strong>, we help startups,
+            At <strong>D6 Global Services</strong>, we help startups,
             small businesses, and growing brands establish
             a strong online presence. From SEO and Google Ads
             to Social Media Marketing and Website Development,

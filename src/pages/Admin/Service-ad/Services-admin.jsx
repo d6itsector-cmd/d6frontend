@@ -55,7 +55,7 @@ const Services = () => {
 
         <div>
           <h1>Services</h1>
-          <p>Manage all services offered by D6 Global Media.</p>
+          <p>Manage all services offered by D6 Global Services.</p>
         </div>
 
         <button

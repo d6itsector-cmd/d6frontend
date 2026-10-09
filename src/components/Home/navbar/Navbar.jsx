@@ -199,7 +199,7 @@ const Navbar = () => {
         >
           <img
             src={logo}
-            alt="D6 Global Media"
+            alt="D6 Global Services"
           />
 
           <span className="logo-text">
@@ -368,7 +368,7 @@ const Navbar = () => {
           <a
             href="tel:+44 330 088 8586"
             className="navbar-phone"
-            aria-label="Call D6 Global Media"
+            aria-label="Call D6 Global Services"
           >
             <FaPhoneAlt />
             <span>+44 330 088 8586</span>

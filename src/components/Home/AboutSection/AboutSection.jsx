@@ -18,7 +18,7 @@ const About = () => {
         <div className="about-content">
 
           <span className="section-tag">
-            About D6 Global Media
+            About D6 Global Services
           </span>
 
           <h2>
@@ -27,7 +27,7 @@ const About = () => {
           </h2>
 
           <p>
-            At <strong>D6 Global Media</strong>, we are passionate about helping
+            At <strong>D6 Global Services</strong>, we are passionate about helping
             startups, small businesses, and growing brands establish a strong
             online presence. We combine creativity, technology, and
             data-driven marketing strategies to deliver solutions that increase

@@ -108,8 +108,8 @@ const Sidebar = ({ isOpen, onClose }) => {
   return (
     <aside className={`sidebar ${isOpen ? "open" : ""}`}>
       <Link to="/" className="sidebar-logo" onClick={onClose}>
-        <img src={logo} alt="D6 Global Media" />
-        <h2>D6 Global Media</h2>
+        <img src={logo} alt="D6 Global Services" />
+        <h2>D6 Global Services</h2>
         <span>Admin Panel</span>
       </Link>
 

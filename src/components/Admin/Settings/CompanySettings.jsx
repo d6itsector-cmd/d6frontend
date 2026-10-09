@@ -12,7 +12,7 @@ const CompanySettings = () => {
           <label>Company Name</label>
           <input
             type="text"
-            placeholder="D6 Global Media"
+            placeholder="D6 Global Services"
           />
         </div>
 
