@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import "./AdminLayout.css";
+import "../../../styles/admin-theme.css";
 
 import Sidebar from "./Sidebar";
 import Topbar from "../Topbar/Topbar";

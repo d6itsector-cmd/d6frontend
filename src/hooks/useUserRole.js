@@ -26,18 +26,23 @@ export const useUserRole = () => {
   // UNKNOWN, not "client", so guards must not route on it.
   const [roleError, setRoleError] = useState(false);
 
+  // Signed out: settle on the resolved "no user" state. Done during render
+  // (React's "adjusting state when a prop changes" pattern) rather than in the
+  // effect below. Resetting resolvedUid also guarantees /auth/me is re-checked
+  // if the same user signs back in.
+  if (!authLoading && !currentUser && resolvedUid !== null) {
+    setRole(null);
+    setRoleError(false);
+    setResolvedUid(null);
+  }
+
   useEffect(() => {
     if (authLoading) return;
 
-    const uid = currentUser?.uid || null;
-    if (uid === resolvedUid) return;
+    if (!currentUser) return;
 
-    if (!currentUser) {
-      setRole(null);
-      setRoleError(false);
-      setResolvedUid(null);
-      return;
-    }
+    const uid = currentUser.uid;
+    if (uid === resolvedUid) return;
 
     let cancelled = false;
 

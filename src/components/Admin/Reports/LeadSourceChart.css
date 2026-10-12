@@ -1,13 +1,13 @@
 .chart-card{
-background:white;
+background:var(--surface);
 padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
+border-radius:var(--radius-lg);
+box-shadow:var(--shadow-sm);
 }
 
 .chart-card h2{
 margin-bottom:20px;
-color:var(--primary);
+color:var(--text-strong);
 }
 
 .chart-placeholder{
@@ -15,7 +15,7 @@ height:320px;
 display:flex;
 justify-content:center;
 align-items:center;
-border:2px dashed #ddd;
-border-radius:10px;
-color:#888;
+border:2px dashed var(--border-strong);
+border-radius:var(--radius-md);
+color:var(--text-muted);
 }

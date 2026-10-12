@@ -24,9 +24,16 @@ const Topbar = ({ onMenuClick, showGreeting = true }) => {
   const [profileOpen, setProfileOpen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchStatus, setSearchStatus] = useState("idle"); // idle | loading | success | error
+  // Last settled search, tagged with the query it answered. "idle" and
+  // "loading" are derived from the current query rather than set in the effect.
+  const [search, setSearch] = useState({ query: "", status: "idle", results: [] });
   const [searchOpen, setSearchOpen] = useState(false);
+
+  const trimmedQuery = searchQuery.trim();
+  const searchSettled = trimmedQuery.length >= 2 && search.query === trimmedQuery;
+  const searchStatus = // idle | loading | success | error
+    trimmedQuery.length < 2 ? "idle" : searchSettled ? search.status : "loading";
+  const searchResults = searchSettled ? search.results : [];
 
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -59,22 +66,15 @@ const Topbar = ({ onMenuClick, showGreeting = true }) => {
   useEffect(() => {
     const trimmed = searchQuery.trim();
 
-    if (trimmed.length < 2) {
-      setSearchResults([]);
-      setSearchStatus("idle");
-      return;
-    }
-
-    setSearchStatus("loading");
+    if (trimmed.length < 2) return;
 
     const timer = setTimeout(() => {
       api
         .get("/search", { params: { query: trimmed, limit: 8 } })
         .then((res) => {
-          setSearchResults(res.data?.results || []);
-          setSearchStatus("success");
+          setSearch({ query: trimmed, status: "success", results: res.data?.results || [] });
         })
-        .catch(() => setSearchStatus("error"));
+        .catch(() => setSearch({ query: trimmed, status: "error", results: [] }));
     }, 300);
 
     return () => clearTimeout(timer);

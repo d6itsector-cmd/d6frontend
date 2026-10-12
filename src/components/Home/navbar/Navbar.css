@@ -7,31 +7,8 @@
 ========================================================= */
 
 
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-  --primary: #17233f;
-  --primary-light: #243b63;
-
-  --blue: #347dcc;
-  --blue-hover: #286db8;
-
-  --accent: #fca311;
-
-  --white: #ffffff;
-  --black: #111111;
-
-  --text: #17233f;
-  --muted: #666666;
-
-  --border: #eeeeee;
-
-  --nav-height: 98px;
-
-  --transition: 0.25s ease;
-}
+/* Colours, --nav-height and --transition come from styles/tokens.css.
+   (A local :root block here used to override the global tokens sitewide.) */
 
 
 /* =========================================================
@@ -59,12 +36,14 @@
   width: 100%;
   height: var(--nav-height);
 
-  background: var(--primary);
+  background: var(--surface);
+
+  border-bottom: 1px solid var(--border);
 
   z-index: 1000;
 
   box-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.10);
+    var(--shadow-xs);
 }
 
 
@@ -86,7 +65,8 @@
 
   align-items: center;
 
-  gap: 0;
+  /* logo ........ links | actions -- spacing comes from gap, not margins */
+  gap: 40px;
 }
 
 
@@ -103,7 +83,7 @@
 
   flex-shrink: 0;
 
-  color: var(--white);
+  color: var(--text-strong);
 
   text-decoration: none;
 
@@ -122,7 +102,7 @@
 }
 
 .logo-text {
-  color: var(--white);
+  color: var(--text-strong);
 
   font-size: 29px;
 
@@ -136,7 +116,7 @@
 }
 
 .logo-text span {
-  color: var(--white);
+  color: var(--text-strong);
 }
 
 
@@ -149,13 +129,12 @@
 
   height: 100%;
 
-  margin-left: 235px;
-
   display: flex;
 
   align-items: center;
 
-  justify-content: center;
+  /* sit the links next to the CTA/Login group on the right */
+  justify-content: flex-end;
 
   gap: 30px;
 }
@@ -182,7 +161,7 @@
 
   background: transparent;
 
-  color: var(--white);
+  color: var(--text);
 
   font-family: inherit;
 
@@ -257,9 +236,7 @@
 
   gap: 7px;
 
-  margin-left: 2px;
-
-  color: var(--white);
+  color: var(--text);
 
   font-family: inherit;
 
@@ -358,15 +335,15 @@
 
   width: 575px;
 
-  background: var(--white);
+  background: var(--surface);
 
-  border-radius: 18px;
+  border-radius: var(--radius-xl);
 
   overflow: hidden;
 
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.14),
-    0 8px 20px rgba(18, 32, 60, 0.08);
+    0 8px 20px rgba(var(--primary-rgb),0.08);
 
   opacity: 0;
 
@@ -421,7 +398,11 @@
   width: 16px;
   height: 16px;
 
-  background: var(--primary);
+  background: var(--accent-softer);
+
+  border-top: 1px solid var(--border);
+
+  border-left: 1px solid var(--border);
 
   transform:
     translateX(-50%)
@@ -450,18 +431,20 @@
 
   justify-content: center;
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--primary),
-      var(--primary-light)
-    );
+  background: var(--accent-softer);
+
+  border-bottom: 1px solid var(--border);
+
+
+
+
+
 }
 
 .services-dropdown-header h4 {
   margin: 0 0 6px;
 
-  color: var(--white);
+  color: var(--text-strong);
 
   font-size: 20px;
 
@@ -473,7 +456,7 @@
 .services-dropdown-header p {
   margin: 0;
 
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--text-light);
 
   font-size: 13px;
 
@@ -501,7 +484,7 @@
 
   padding: 24px 25px 28px;
 
-  background: var(--white);
+  background: var(--surface);
 }
 
 
@@ -530,7 +513,7 @@
 
   align-items: center;
 
-  border-radius: 13px;
+  border-radius: var(--radius-lg);
 
   text-decoration: none;
 
@@ -545,7 +528,7 @@
 ========================================================= */
 
 .service-item:hover {
-  background: #fff8eb;
+  background: var(--accent-softer);
 
   transform: translateY(-2px);
 }
@@ -571,10 +554,10 @@
 
   flex-shrink: 0;
 
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
 
   background:
-    rgba(252, 163, 17, 0.15);
+    var(--accent-soft);
 
   color: var(--accent);
 
@@ -587,7 +570,7 @@
 
 .service-item:hover .service-icon {
   background:
-    rgba(252, 163, 17, 0.23);
+    rgba(var(--accent-rgb),0.16);
 
   transform: scale(1.03);
 }
@@ -612,7 +595,7 @@
 
   margin: 0 0 4px;
 
-  color: var(--primary);
+  color: var(--text-strong);
 
   font-size: 15px;
 
@@ -662,7 +645,7 @@
 
   border-top: 1px solid var(--border);
 
-  background: var(--white);
+  background: var(--surface);
 }
 
 
@@ -682,7 +665,7 @@
 }
 
 .view-services:hover {
-  color: var(--primary);
+  color: var(--text-strong);
 }
 
 
@@ -720,7 +703,7 @@
 
   border: none;
 
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 
   background: var(--blue);
 
@@ -750,7 +733,7 @@
   transform: translateY(-1px);
 
   box-shadow:
-    0 7px 18px rgba(52, 125, 204, 0.25);
+    var(--shadow-md);
 }
 
 
@@ -771,13 +754,13 @@
 
   justify-content: center;
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--border-strong);
 
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 
   background: transparent;
 
-  color: var(--white);
+  color: var(--text);
 
   font-family: inherit;
 
@@ -803,12 +786,12 @@
 
 .navbar-login:hover {
   background:
-    rgba(255, 255, 255, 0.08);
+    var(--accent-softer);
 
   border-color:
-    rgba(255, 255, 255, 0.60);
+    var(--accent);
 
-  color: var(--white);
+  color: var(--accent);
 }
 
 
@@ -845,7 +828,7 @@
 
   background: transparent;
 
-  color: var(--white);
+  color: var(--text);
 
   cursor: pointer;
 }
@@ -886,14 +869,14 @@
 
   padding: 6px;
 
-  background: var(--white);
+  background: var(--surface);
 
-  border: 1px solid #e8edf3;
+  border: 1px solid var(--border);
 
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 
   box-shadow:
-    0 8px 24px rgba(20, 33, 61, 0.12);
+    0 8px 24px rgba(var(--primary-rgb),0.12);
 
   opacity: 0;
 
@@ -927,11 +910,11 @@
 
   height: 10px;
 
-  background: var(--white);
+  background: var(--surface);
 
-  border-top: 1px solid #e8edf3;
+  border-top: 1px solid var(--border);
 
-  border-left: 1px solid #e8edf3;
+  border-left: 1px solid var(--border);
 
   transform: rotate(45deg);
 }
@@ -987,7 +970,7 @@
 
   border: none;
 
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 
   background: transparent;
 
@@ -1012,7 +995,7 @@
 
 .profile-menu-item:hover,
 .profile-menu-item:focus-visible {
-  background: #edf4fb;
+  background: var(--accent-soft);
 
   color: var(--blue);
 
@@ -1025,14 +1008,14 @@
 ========================================================= */
 
 .profile-menu-item.logout {
-  color: #d83b3b;
+  color: var(--danger);
 }
 
 .profile-menu-item.logout:hover,
 .profile-menu-item.logout:focus-visible {
-  background: #fff2f2;
+  background: var(--danger-soft);
 
-  color: #c62828;
+  color: var(--danger-strong);
 }
 
 
@@ -1047,7 +1030,7 @@
 
   margin: 5px 0;
 
-  background: #eeeeee;
+  background: var(--surface-sunken);
 }
 
 
@@ -1071,7 +1054,7 @@
 
   background: transparent;
 
-  color: var(--white);
+  color: var(--text-strong);
 
   font-size: 24px;
 
@@ -1096,14 +1079,12 @@
 
   .navbar-container {
     padding: 0 28px;
+
+    gap: 32px;
   }
 
   .navbar-menu {
     gap: 24px;
-
-    margin-left: 30px;
-
-    margin-right: 24px;
   }
 
   .navbar-link {
@@ -1134,10 +1115,14 @@
    LAPTOP
 ========================================================= */
 
-@media (max-width: 1350px) {
+/* The full desktop bar (logo + links + phone + CTA + login) needs ~1265px
+   even at these compact sizes, so they start at 1480px. */
+@media (max-width: 1480px) {
 
   .navbar-container {
     padding: 0 22px;
+
+    gap: 28px;
   }
 
   .navbar-logo img {
@@ -1151,10 +1136,6 @@
 
   .navbar-menu {
     gap: 15px;
-
-    margin-left: 18px;
-
-    margin-right: 14px;
   }
 
   .navbar-link {
@@ -1213,7 +1194,10 @@
    TABLET / MOBILE
 ========================================================= */
 
-@media (max-width: 992px) {
+/* Collapse to the hamburger menu below 1280px -- narrower than that the
+   desktop bar pushed the CTA/Login off-screen. Keep in sync with
+   MOBILE_NAV_MAX in Navbar.jsx. */
+@media (max-width: 1279px) {
 
   .navbar {
     height: var(--nav-height);
@@ -1225,6 +1209,8 @@
     height: var(--nav-height);
 
     padding: 0 22px;
+
+    gap: 12px;
   }
 
 
@@ -1265,11 +1251,29 @@
 
 
   /* -------------------------------------------------------
-     CONTACT NUMBER HIDDEN
+     CONTACT NUMBER -- a row in the expanded menu, styled like
+     the mobile nav links (shown when showPhoneNumber is on)
   ------------------------------------------------------- */
 
   .navbar-phone {
-    display: none;
+    width: 100%;
+
+    height: 52px;
+
+    margin-left: 0;
+
+    justify-content: flex-start;
+
+    gap: 10px;
+
+    font-size: 16px;
+
+    border-bottom:
+      1px solid var(--border);
+  }
+
+  .navbar-phone svg {
+    font-size: 15px;
   }
 
 
@@ -1341,7 +1345,9 @@
 
     gap: 5px;
 
-    background: var(--primary);
+    background: var(--surface);
+
+    border-top: 1px solid var(--border);
 
     overflow-y: auto;
 
@@ -1370,7 +1376,7 @@
     font-size: 16px;
 
     border-bottom:
-      1px solid rgba(255, 255, 255, 0.08);
+      1px solid var(--border);
   }
 
   .navbar-link::after {
@@ -1410,9 +1416,11 @@
 
     margin-top: 4px;
 
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
 
     box-shadow: none;
+
+    border: 1px solid var(--border);
 
     opacity: 1;
 
@@ -1431,6 +1439,14 @@
   .navbar-nav-item.dropdown-open .services-dropdown,
   .services-dropdown.show {
     max-height: 900px;
+  }
+
+  /* The desktop open-state rules centre the panel with translateX(-50%)
+     and out-rank the plain .services-dropdown reset above. */
+  .navbar-nav-item:hover .services-dropdown,
+  .navbar-nav-item.dropdown-open .services-dropdown,
+  .services-dropdown.show {
+    transform: none;
   }
 
 
@@ -1498,7 +1514,7 @@
     width: 60px;
     height: 60px;
 
-    border-radius: 13px;
+    border-radius: var(--radius-lg);
 
     font-size: 23px;
   }
@@ -1543,7 +1559,7 @@
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 
     background: var(--blue);
 

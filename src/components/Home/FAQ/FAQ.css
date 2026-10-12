@@ -30,7 +30,7 @@
     display:inline-block;
     width:fit-content;
     padding:10px 22px;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
     color:var(--accent);
     border-radius:40px;
     font-weight:600;
@@ -40,7 +40,7 @@
 .faq-left h2{
     font-size:58px;
     line-height:1.15;
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:25px;
 }
 
@@ -88,7 +88,7 @@
     color:var(--white);
     border:none;
     padding:16px 32px;
-    border-radius:12px;
+    border-radius:var(--radius-lg);
     cursor:pointer;
     font-size:16px;
     font-weight:600;
@@ -96,7 +96,7 @@
 }
 
 .faq-btn:hover{
-    background:var(--primary);
+    background:var(--accent-hover);
 }
 
 /* ==========================
@@ -110,22 +110,22 @@
 }
 
 .faq-card{
-    background:#fff;
-    border:1px solid #ECECEC;
-    border-radius:16px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
     overflow:hidden;
-    box-shadow:0 8px 20px rgba(20,33,61,.06);
+    box-shadow:0 8px 20px rgba(var(--primary-rgb),.06);
     transition:.3s;
 }
 
 .faq-card:hover{
-    transform:translateY(-5px);
+    transform:translateY(-2px);
     border-color:var(--accent);
 }
 
 .faq-card.active{
     border:2px solid var(--accent);
-    box-shadow:0 18px 45px rgba(0, 119, 204,.18);
+    box-shadow:var(--shadow-sm);
 }
 
 /* ==========================
@@ -145,7 +145,7 @@
     flex:1;
     font-size:24px;
     line-height:1.5;
-    color:var(--primary);
+    color:var(--text-strong);
     font-weight:600;
 }
 
@@ -156,7 +156,7 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
     color:var(--accent);
     border-radius:50%;
     font-size:15px;
@@ -164,7 +164,7 @@
 }
 .faq-card.active .icon{
     background:var(--accent);
-    color:white;
+    color:var(--white);
 }
 
 .rotate{
@@ -189,13 +189,13 @@
 
 .faq-answer p{
     padding:0 35px 30px;
-    color:#64748B;
+    color:var(--text-light);
     line-height:1.8;
     font-size:16px;
 }
 .faq-card:hover .icon{
-    background:var(--accent);
-    color:#fff;
+    background:var(--accent-hover);
+    color:var(--white);
     transform:rotate(180deg);
 }
 

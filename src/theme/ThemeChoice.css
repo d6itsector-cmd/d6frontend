@@ -1,0 +1,54 @@
+/* Light / Dark / System segmented control (theme/ThemeChoice.jsx). */
+
+.theme-choice-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.theme-choice-option{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:40px;
+  padding:0 16px;
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  background:var(--surface);
+  color:var(--text-body);
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:background-color var(--transition),border-color var(--transition),color var(--transition);
+}
+
+.theme-choice-option:hover{
+  background:var(--surface-alt);
+  color:var(--text-strong);
+}
+
+.theme-choice-option.is-selected{
+  background:var(--accent-soft);
+  border-color:var(--accent);
+  color:var(--accent-active);
+}
+
+/* Visually hidden but focusable radio; the label shows the focus ring. */
+.theme-choice-option input{
+  position:absolute;
+  opacity:0;
+  width:1px;
+  height:1px;
+  margin:0;
+}
+
+.theme-choice-option:focus-within{
+  box-shadow:var(--focus-ring);
+}
+
+.theme-choice-hint{
+  margin-top:10px;
+  color:var(--text-light);
+  font-size:13px;
+}

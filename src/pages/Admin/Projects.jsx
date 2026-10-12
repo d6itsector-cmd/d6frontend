@@ -9,6 +9,13 @@ const Projects = () => {
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
+  const [notice, setNotice] = useState("");
+
+  useEffect(() => {
+    if (!notice) return undefined;
+    const t = setTimeout(() => setNotice(""), 5000);
+    return () => clearTimeout(t);
+  }, [notice]);
 
   const loadProjects = () => {
     setStatus("loading");
@@ -37,11 +44,19 @@ const Projects = () => {
     }
   };
 
-  const handleSaved = (saved) => {
-    setProjects((prev) => {
-      const exists = prev.some((p) => p._id === saved._id);
-      return exists ? prev.map((p) => (p._id === saved._id ? saved : p)) : [saved, ...prev];
-    });
+  const handleSaved = (saved, kind) => {
+    setNotice(
+      kind === "created"
+        ? `Project "${saved.name}" was created and is now visible to the client.`
+        : `Project "${saved.name}" was updated.`
+    );
+    if (kind === "created") {
+      // Reload so the new row arrives populated (client name, linked
+      // services) exactly as the server stored it.
+      loadProjects();
+    } else {
+      setProjects((prev) => prev.map((p) => (p._id === saved._id ? saved : p)));
+    }
     setShowForm(false);
     setEditingProject(null);
   };
@@ -64,6 +79,12 @@ const Projects = () => {
         </button>
 
       </div>
+
+      {notice && (
+        <p className="bl-alert bl-alert--success" role="status">
+          {notice}
+        </p>
+      )}
 
       <ProjectTable
         projects={projects}

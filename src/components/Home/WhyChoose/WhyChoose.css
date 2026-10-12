@@ -1,6 +1,6 @@
 .whychoose {
   padding: 100px 8%;
-  background: var(--white);
+  background: var(--surface);
 }
 
 .whychoose-container {
@@ -24,7 +24,7 @@
   display: inline-block;
   padding: 10px 22px;
   border-radius: 50px;
-  background: rgba(0, 119, 204, 0.15);
+  background: rgba(var(--accent-rgb),0.15);
   color: var(--accent);
   font-size: 15px;
   font-weight: 600;
@@ -34,7 +34,7 @@
 .why-left h2 {
   font-size: 56px;
   line-height: 1.15;
-  color: var(--primary);
+  color: var(--text-strong);
   margin-bottom: 25px;
 }
 
@@ -46,16 +46,16 @@
   max-width: 520px;
   font-size: 17px;
   line-height: 1.9;
-  color: #555;
+  color: var(--text-body);
   margin-bottom: 35px;
 }
 
 .choose-btn {
   background: var(--accent);
-  color: var(--primary);
+  color: var(--white);
   border: none;
   padding: 16px 34px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -63,7 +63,7 @@
 }
 
 .choose-btn:hover {
-  background: var(--primary);
+  background: var(--accent-hover);
   color: var(--white);
 }
 
@@ -79,18 +79,18 @@
   display: flex;
   align-items: flex-start;
   gap: 18px;
-  background: var(--white);
+  background: var(--surface);
   padding: 28px;
-  border-radius: 20px;
-  border: 1px solid #ececec;
-  box-shadow: 0 12px 30px rgba(20, 33, 61, 0.08);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 30px rgba(var(--primary-rgb),0.08);
   transition: var(--transition);
 }
 
 .choose-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-2px);
   border-color: var(--accent);
-  box-shadow: 0 18px 40px rgba(20, 33, 61, 0.12);
+  box-shadow: 0 18px 40px rgba(var(--primary-rgb),0.12);
 }
 
 .choose-icon {
@@ -98,7 +98,7 @@
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  background: rgba(0, 119, 204, 0.15);
+  background: rgba(var(--accent-rgb),0.15);
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -107,13 +107,13 @@
 }
 
 .choose-card h3 {
-  color: var(--primary);
+  color: var(--text-strong);
   font-size: 22px;
   margin-bottom: 12px;
 }
 
 .choose-card p {
-  color: #666;
+  color: var(--text-light);
   font-size: 15px;
   line-height: 1.7;
 }

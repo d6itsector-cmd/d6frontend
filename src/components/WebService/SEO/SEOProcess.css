@@ -1,6 +1,6 @@
 .seo-process{
     padding:100px 8%;
-    background:#ffffff;
+    background:var(--surface);
 }
 
 .seo-process-container{
@@ -12,8 +12,8 @@
 .section-tag{
     display:inline-block;
     padding:8px 20px;
-    background:#E8F3FC;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
     border-radius:30px;
     font-weight:600;
     margin-bottom:20px;
@@ -21,18 +21,18 @@
 
 .seo-process h2{
     font-size:46px;
-    color:#1E2A5E;
+    color:var(--text-strong);
     margin-bottom:20px;
 }
 
 .seo-process h2 span{
-    color:#0077CC;
+    color:var(--accent);
 }
 
 .section-description{
     max-width:700px;
     margin:0 auto 60px;
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
     font-size:17px;
 }
@@ -45,16 +45,16 @@
 
 .process-card{
     position:relative;
-    background:#F8FAFC;
+    background:var(--surface-alt);
     padding:40px 25px;
-    border-radius:20px;
+    border-radius:var(--radius-xl);
     transition:.3s;
-    border:1px solid #ECECEC;
+    border:1px solid var(--border);
 }
 
 .process-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 40px rgba(0,0,0,.08);
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
 }
 
 .process-number{
@@ -63,14 +63,14 @@
     right:20px;
     font-size:18px;
     font-weight:700;
-    color:#D1D5DB;
+    color:var(--text-muted);
 }
 
 .process-icon{
     width:70px;
     height:70px;
     margin:0 auto 20px;
-    background:#E8F3FC;
+    background:var(--accent-soft);
     border-radius:50%;
     display:flex;
     justify-content:center;
@@ -79,17 +79,17 @@
 
 .process-icon svg{
     font-size:30px;
-    color:#0077CC;
+    color:var(--accent);
 }
 
 .process-card h3{
-    color:#1E2A5E;
+    color:var(--text-strong);
     font-size:22px;
     margin-bottom:15px;
 }
 
 .process-card p{
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
     font-size:15px;
 }

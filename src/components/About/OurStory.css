@@ -1,6 +1,6 @@
 .ourStory{
     padding:100px 8%;
-    background:var(--white);
+    background:var(--surface);
 }
 
 .ourStory__container{
@@ -18,7 +18,7 @@
 .ourStory__image img{
     width:100%;
     border-radius:25px;
-    box-shadow:0 20px 50px rgba(20,33,61,.12);
+    box-shadow:0 20px 50px rgba(var(--primary-rgb),.12);
 }
 
 .ourStory__content{
@@ -28,7 +28,7 @@
 .storyBadge{
     display:inline-block;
     padding:10px 20px;
-    background:rgba(0, 119, 204,.12);
+    background:rgba(var(--accent-rgb),.12);
     color:var(--accent);
     border-radius:50px;
     font-weight:600;
@@ -37,7 +37,7 @@
 
 .ourStory__content h2{
     font-size:48px;
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:25px;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .ourStory__content p{
-    color:#666;
+    color:var(--text-light);
     line-height:1.8;
     margin-bottom:18px;
 }
@@ -62,10 +62,10 @@
     display:flex;
     align-items:center;
     gap:18px;
-    background:#fff;
+    background:var(--surface);
     padding:20px;
-    border-radius:18px;
-    box-shadow:0 10px 30px rgba(20,33,61,.08);
+    border-radius:var(--radius-xl);
+    box-shadow:0 10px 30px rgba(var(--primary-rgb),.08);
     transition:var(--transition);
 }
 
@@ -79,7 +79,7 @@
 }
 
 .featureCard h4{
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:5px;
 }
 

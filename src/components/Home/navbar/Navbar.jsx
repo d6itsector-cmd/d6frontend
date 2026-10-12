@@ -4,6 +4,7 @@ import { useConsultation } from "../../../context/ConsultationContext";
 import { useLoginModal } from "../../../context/LoginModalContext";
 import { useAuth } from "../../../context/AuthContext";
 import { useUserRole } from "../../../hooks/useUserRole";
+import { navbarConfig } from "../../../config/navbarConfig";
 
 import {
   FaBars,
@@ -23,6 +24,10 @@ import {
 import logo from "../../../assets/d6.png";
 import "./Navbar.css";
 
+// Widest viewport that gets the hamburger menu. Must match the
+// `@media (max-width: 1279px)` block in Navbar.css.
+const MOBILE_NAV_MAX = 1279;
+
 const Navbar = () => {
   const { openConsultation } = useConsultation();
   const { openLogin } = useLoginModal();
@@ -35,7 +40,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_NAV_MAX);
 
   const profileRef = useRef(null);
   const profileButtonRef = useRef(null);
@@ -92,7 +97,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 992;
+      const mobile = window.innerWidth <= MOBILE_NAV_MAX;
 
       setIsMobile(mobile);
 
@@ -321,35 +326,41 @@ const Navbar = () => {
             About
           </NavLink>
 
-          <NavLink
-            to="/industries"
-            className={({ isActive }) =>
-              `navbar-link ${isActive ? "active" : ""}`
-            }
-            onClick={closeAllMenus}
-          >
-            Industries
-          </NavLink>
+          {navbarConfig.showIndustries && (
+            <NavLink
+              to="/industries"
+              className={({ isActive }) =>
+                `navbar-link ${isActive ? "active" : ""}`
+              }
+              onClick={closeAllMenus}
+            >
+              Industries
+            </NavLink>
+          )}
 
-          <NavLink
-            to="/portfolio"
-            className={({ isActive }) =>
-              `navbar-link ${isActive ? "active" : ""}`
-            }
-            onClick={closeAllMenus}
-          >
-            Portfolio
-          </NavLink>
+          {navbarConfig.showPortfolio && (
+            <NavLink
+              to="/portfolio"
+              className={({ isActive }) =>
+                `navbar-link ${isActive ? "active" : ""}`
+              }
+              onClick={closeAllMenus}
+            >
+              Portfolio
+            </NavLink>
+          )}
 
-          <NavLink
-            to="/blog"
-            className={({ isActive }) =>
-              `navbar-link ${isActive ? "active" : ""}`
-            }
-            onClick={closeAllMenus}
-          >
-            Blog
-          </NavLink>
+          {navbarConfig.showBlog && (
+            <NavLink
+              to="/blog"
+              className={({ isActive }) =>
+                `navbar-link ${isActive ? "active" : ""}`
+              }
+              onClick={closeAllMenus}
+            >
+              Blog
+            </NavLink>
+          )}
 
           {/* CONTACT */}
 
@@ -365,14 +376,16 @@ const Navbar = () => {
 
           {/* CONTACT NUMBER */}
 
-          <a
-            href="tel:+44 330 088 8586"
-            className="navbar-phone"
-            aria-label="Call D6 Global Services"
-          >
-            <FaPhoneAlt />
-            <span>+44 330 088 8586</span>
-          </a>
+          {navbarConfig.showPhoneNumber && (
+            <a
+              href="tel:+44 330 088 8586"
+              className="navbar-phone"
+              aria-label="Call D6 Global Services"
+            >
+              <FaPhoneAlt />
+              <span>+44 330 088 8586</span>
+            </a>
+          )}
 
           {/* MOBILE CTA */}
 

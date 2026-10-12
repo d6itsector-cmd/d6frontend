@@ -10,15 +10,24 @@ import {
 } from "firebase/auth";
 
 import { auth, googleProvider } from "../firebase/firebaseConfig";
+import api from "./api";
 
 export const registerWithEmail = async (email, password, displayName) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
   if (displayName) {
     await updateProfile(user, { displayName });
+    // Refresh the ID token so it carries the new display name: the backend
+    // uses it for the account record and the account-created email.
+    await user.getIdToken(true);
   }
 
   await sendEmailVerification(user);
+
+  // Create the account record now (and trigger the one-time account-created
+  // email) instead of waiting for the next API call. Not fatal: the backend
+  // also does this on the user's next authenticated request.
+  await api.get("/auth/me").catch(() => {});
 
   return user;
 };

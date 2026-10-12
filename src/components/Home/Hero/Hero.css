@@ -1,12 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
-
-*{
-    /* background-color: white; */
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Poppins",sans-serif;
-}
+/* Global reset + font now live in styles/tokens.css. */
 
 /* ===================================
             HERO SECTION
@@ -22,16 +14,22 @@
 
     background:linear-gradient(
         180deg,
-        #FFFFFF 0%,
-        #F8FAFC 100%
+        var(--surface) 0%,
+        var(--surface-alt) 100%
     );
-    /* background-color: white !important; */
+    /* background-color: var(--surface) !important; */
 
     display:flex;
 
     align-items:center;
 
     /* overflow:hidden; */
+
+    /* The fadeLeft/fadeRight entrance slides the columns 60px sideways and the
+       floating cards hang partly outside the image. Clip that horizontally at
+       this full-width section so it never widens the page; vertical overflow
+       stays visible and the cards stay within the side padding. */
+    overflow-x:clip;
 
 }
 
@@ -71,7 +69,7 @@
 
     gap:10px;
 
-    background:rgba(0, 119, 204,.12);
+    background:rgba(var(--accent-rgb),.12);
 
     color:var(--accent);
 
@@ -93,7 +91,7 @@
 
     line-height:1.15;
 
-    color:var(--primary);
+    color:var(--text-strong);
 
     margin-bottom:25px;
 
@@ -113,7 +111,7 @@
 
     line-height:1.9;
 
-    color:#64748B;
+    color:var(--text-light);
 
     max-width:620px;
 
@@ -147,7 +145,7 @@
 
     border:none;
 
-    border-radius:14px;
+    border-radius:var(--radius-lg);
 
     cursor:pointer;
 
@@ -169,43 +167,37 @@
 
 .primary-btn{
 
-    background:linear-gradient(
-        135deg,
-        #0077CC,
-        #005FA3
-    );
+    background:var(--accent);
+        color:var(--white);
 
-    color:#14213D;
-
-    box-shadow:0 18px 40px rgba(0, 119, 204,.25);
+    box-shadow:var(--shadow-sm);
 
 }
 
 .primary-btn:hover{
+    background:var(--accent-hover);
+    transform:translateY(-2px);
 
-    transform:translateY(-6px);
-
-    box-shadow:0 22px 50px rgba(0, 119, 204,.35);
+    box-shadow:var(--shadow-md);
 
 }
 
 .secondary-btn{
 
-    background:#fff;
+    background:var(--surface);
 
-    color:#14213D;
+    color:var(--text-strong);
 
-    border:2px solid #D8DEE8;
+    border:2px solid var(--border-strong);
 
 }
 
 .secondary-btn:hover{
 
-    background:#14213D;
+    background:var(--accent-hover);
 
-    color:white;
-
-    border-color:#14213D;
+    color:var(--white);
+    border-color:var(--accent-hover);
 
 }
 
@@ -241,9 +233,9 @@
 
     border-radius:50%;
 
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
 
-    color:#0077CC;
+    color:var(--accent);
 
     display:flex;
 
@@ -261,7 +253,7 @@
 
     margin:0;
 
-    color:#475569;
+    color:var(--text-body);
 
     font-size:15px;
 
@@ -299,7 +291,7 @@
 
     z-index:2;
 
-    filter:drop-shadow(0 30px 60px rgba(20,33,61,.15));
+    filter:drop-shadow(0 30px 60px rgba(var(--primary-rgb),.15));
 
     transition:.4s;
 
@@ -329,8 +321,8 @@
 
     background:linear-gradient(
         135deg,
-        rgba(0, 119, 204,.18),
-        rgba(20,33,61,.08)
+        rgba(var(--accent-rgb),.18),
+        rgba(var(--primary-rgb),.08)
     );
 
     z-index:0;
@@ -349,7 +341,7 @@
 
     border-radius:50%;
 
-    border:2px dashed rgba(0, 119, 204,.3);
+    border:2px dashed rgba(var(--accent-rgb),.3);
 
     animation:rotateCircle 18s linear infinite;
 
@@ -371,13 +363,13 @@
 
     min-width:240px;
 
-    background:#fff;
+    background:var(--surface);
 
     padding:18px 22px;
 
-    border-radius:18px;
+    border-radius:var(--radius-xl);
 
-    box-shadow:0 20px 50px rgba(20,33,61,.10);
+    box-shadow:0 20px 50px rgba(var(--primary-rgb),.10);
 
     z-index:5;
 
@@ -389,9 +381,9 @@
 
 .floating-card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-2px);
 
-    box-shadow:0 30px 70px rgba(20,33,61,.18);
+    box-shadow:0 30px 70px rgba(var(--primary-rgb),.18);
 
 }
 
@@ -401,11 +393,11 @@
 
     height:54px;
 
-    border-radius:14px;
+    border-radius:var(--radius-lg);
 
-    background:rgba(0, 119, 204,.12);
+    background:rgba(var(--accent-rgb),.12);
 
-    color:#0077CC;
+    color:var(--accent);
 
     padding:14px;
 
@@ -417,7 +409,7 @@
 
 .floating-card h4{
 
-    color:#14213D;
+    color:var(--text-strong);
 
     font-size:18px;
 
@@ -427,7 +419,7 @@
 
 .floating-card p{
 
-    color:#64748B;
+    color:var(--text-light);
 
     font-size:13px;
 
@@ -481,13 +473,13 @@
 
 .stat-box{
 
-    background:#fff;
+    background:var(--surface);
 
-    border-radius:16px;
+    border-radius:var(--radius-lg);
 
     padding:18px 26px;
 
-    box-shadow:0 15px 35px rgba(20,33,61,.08);
+    box-shadow:0 15px 35px rgba(var(--primary-rgb),.08);
 
     min-width:150px;
 
@@ -499,7 +491,7 @@
 
 .stat-box:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-2px);
 
 }
 
@@ -507,7 +499,7 @@
 
     font-size:30px;
 
-    color:#14213D;
+    color:var(--text-strong);
 
     margin-bottom:6px;
 
@@ -515,7 +507,7 @@
 
 .stat-box span{
 
-    color:#64748B;
+    color:var(--text-light);
 
     font-size:14px;
 

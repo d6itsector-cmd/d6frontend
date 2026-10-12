@@ -1,12 +1,12 @@
 .current-project{
 
-background:#fff;
+background:var(--surface);
 
 padding:35px;
 
-border-radius:22px;
+border-radius:var(--radius-xl);
 
-box-shadow:0 15px 40px rgba(0,0,0,.06);
+box-shadow:var(--shadow-lg);
 
 margin-top:30px;
 
@@ -34,9 +34,9 @@ padding:8px 18px;
 
 border-radius:30px;
 
-background:rgba(0, 119, 204,.12);
+background:rgba(var(--accent-rgb),.12);
 
-color:#0077CC;
+color:var(--accent);
 
 font-weight:600;
 
@@ -50,7 +50,7 @@ margin-bottom:15px;
 
 font-size:34px;
 
-color:#14213D;
+color:var(--text-strong);
 
 margin-bottom:12px;
 
@@ -58,7 +58,7 @@ margin-bottom:12px;
 
 .project-header p{
 
-color:#7B8498;
+color:var(--text-light);
 
 line-height:1.8;
 
@@ -68,9 +68,9 @@ max-width:650px;
 
 .project-status{
 
-background:#E8F8EE;
+background:var(--success-soft);
 
-color:#27AE60;
+color:var(--success);
 
 padding:12px 24px;
 
@@ -90,7 +90,7 @@ margin-bottom:15px;
 
 font-size:16px;
 
-color:#14213D;
+color:var(--text-strong);
 
 }
 
@@ -98,9 +98,9 @@ color:#14213D;
 
 height:12px;
 
-background:#EEF2F7;
+background:var(--surface-sunken);
 
-border-radius:20px;
+border-radius:var(--radius-xl);
 
 overflow:hidden;
 
@@ -112,9 +112,9 @@ width:80%;
 
 height:100%;
 
-background:linear-gradient(90deg,#0077CC,#4DA8E8);
+background:linear-gradient(90deg,var(--accent),var(--accent));
 
-border-radius:20px;
+border-radius:var(--radius-xl);
 
 }
 
@@ -140,9 +140,9 @@ gap:18px;
 
 padding:20px;
 
-border-radius:16px;
+border-radius:var(--radius-lg);
 
-background:#F8FAFC;
+background:var(--surface-alt);
 
 transition:.3s;
 
@@ -150,7 +150,7 @@ transition:.3s;
 
 .detail-card:hover{
 
-transform:translateY(-4px);
+transform:translateY(-2px);
 
 }
 
@@ -158,13 +158,13 @@ transform:translateY(-4px);
 
 font-size:26px;
 
-color:#0077CC;
+color:var(--accent);
 
 }
 
 .detail-card h4{
 
-color:#14213D;
+color:var(--text-strong);
 
 margin-bottom:6px;
 
@@ -172,7 +172,7 @@ margin-bottom:6px;
 
 .detail-card p{
 
-color:#7B8498;
+color:var(--text-light);
 
 }
 
@@ -198,11 +198,11 @@ padding:14px 24px;
 
 border:none;
 
-border-radius:12px;
+border-radius:var(--radius-lg);
 
-background:#14213D;
+background:var(--accent);
 
-color:#fff;
+color:var(--white);
 
 cursor:pointer;
 
@@ -214,9 +214,9 @@ font-weight:600;
 
 .view-btn:hover{
 
-background:#0077CC;
+background:var(--accent-hover);
 
-color:#14213D;
+color:var(--white);
 
 }
 

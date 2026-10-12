@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import "./MyServices.css";
 
-import { FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+import { FaBriefcase, FaCalendarAlt, FaPoundSign } from "react-icons/fa";
 
 import api from "../../../services/api";
+import { formatGBP } from "../../../utils/billingFormat";
 import ServiceDetailModal from "./ServiceDetailModal";
 
 const STATUS_LABELS = {
@@ -23,19 +24,35 @@ const formatDate = (value) =>
       })
     : "Not set";
 
+const BILLING_TYPE_LABELS = {
+  "one-off": "one-off",
+  monthly: "per month",
+  quarterly: "per quarter",
+  annual: "per year",
+};
+
+// "£799.00 per month" -- or null when no agreed price has been set.
+const priceText = (s) =>
+  typeof s.agreedPricePence === "number"
+    ? `${formatGBP(s.agreedPricePence)}${s.billingType ? ` ${BILLING_TYPE_LABELS[s.billingType] || s.billingType}` : ""}`
+    : null;
+
 const MyServices = () => {
   const [services, setServices] = useState([]);
+  const [counts, setCounts] = useState(null);
   const [status, setStatus] = useState("loading"); // loading | success | error
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
 
-    api
-      .get("/client-services", { params: { limit: 50 } })
-      .then((res) => {
+    // Totals come from the server's per-status aggregation (the dashboard
+    // KPI numbers), not from this page's first 50 assignments.
+    Promise.all([api.get("/client-services", { params: { limit: 50 } }), api.get("/dashboard/summary")])
+      .then(([list, summary]) => {
         if (cancelled) return;
-        setServices(res.data?.data || []);
+        setServices(list.data?.data || []);
+        setCounts(summary.data?.data?.services || null);
         setStatus("success");
       })
       .catch(() => {
@@ -47,9 +64,10 @@ const MyServices = () => {
     };
   }, []);
 
-  const total = services.length;
-  const active = services.filter((s) => s.status === "active").length;
-  const completed = services.filter((s) => s.status === "completed").length;
+  const count = (key) => (status === "success" ? counts?.[key] ?? 0 : "-");
+  const total = count("total");
+  const active = count("active");
+  const completed = count("completed");
   const actionNeeded = services.filter((s) => s.clientActionRequired).length;
 
   return (
@@ -133,8 +151,15 @@ const MyServices = () => {
 
                 <div>
                   <FaCalendarAlt />
-                  <span>Target: {formatDate(s.targetDate)}</span>
+                  <span>Ends: {formatDate(s.targetDate)}</span>
                 </div>
+
+                {priceText(s) && (
+                  <div>
+                    <FaPoundSign />
+                    <span>{priceText(s)}</span>
+                  </div>
+                )}
               </div>
 
               {s.clientActionRequired && (
@@ -149,7 +174,9 @@ const MyServices = () => {
         </div>
       )}
 
-      {selectedId && <ServiceDetailModal serviceId={selectedId} onClose={() => setSelectedId(null)} />}
+      {selectedId && (
+        <ServiceDetailModal key={selectedId} serviceId={selectedId} onClose={() => setSelectedId(null)} />
+      )}
     </div>
   );
 };

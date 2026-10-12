@@ -3,6 +3,20 @@ import { FaTimes } from "react-icons/fa";
 
 import "./MyServices.css";
 import api from "../../../services/api";
+import { formatGBP } from "../../../utils/billingFormat";
+
+const BILLING_TYPE_LABELS = {
+  "one-off": "one-off",
+  monthly: "per month",
+  quarterly: "per quarter",
+  annual: "per year",
+};
+
+// "£799.00 per month" -- or null when no agreed price has been set.
+const priceText = (s) =>
+  typeof s.agreedPricePence === "number"
+    ? `${formatGBP(s.agreedPricePence)}${s.billingType ? ` ${BILLING_TYPE_LABELS[s.billingType] || s.billingType}` : ""}`
+    : null;
 
 const STATUS_LABELS = {
   pending: "Pending",
@@ -24,8 +38,9 @@ const ServiceDetailModal = ({ serviceId, onClose }) => {
   useEffect(() => {
     if (!serviceId) return;
 
+    // Starts in "loading"; MyServices keys this modal by service id, so a
+    // different service always mounts a fresh instance.
     let cancelled = false;
-    setStatus("loading");
 
     api
       .get(`/client-services/${serviceId}`)
@@ -84,7 +99,8 @@ const ServiceDetailModal = ({ serviceId, onClose }) => {
 
               <div className="service-modal-dates">
                 <span>Started: {formatDate(assignment.startDate)}</span>
-                <span>Target: {formatDate(assignment.targetDate)}</span>
+                <span>Ends: {formatDate(assignment.targetDate)}</span>
+                {priceText(assignment) && <span>Agreed price: {priceText(assignment)}</span>}
                 {assignment.status === "completed" && (
                   <span>Completed: {formatDate(assignment.completedAt)}</span>
                 )}

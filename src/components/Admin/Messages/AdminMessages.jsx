@@ -28,6 +28,14 @@ const AdminMessages = () => {
   const [sending, setSending] = useState(false);
   const bodyRef = useRef(null);
 
+  // Switching threads flips to "loading" here rather than inside the fetch
+  // effect; re-selecting the current client is a no-op, as before.
+  const selectClient = (client) => {
+    if (client === selectedClient) return;
+    setThreadStatus("loading");
+    setSelectedClient(client);
+  };
+
   useEffect(() => {
     api
       .get("/admin/users", { params: { role: "client", status: "active", limit: 100 } })
@@ -35,24 +43,23 @@ const AdminMessages = () => {
         const list = res.data?.data || [];
         setClients(list);
         setClientsStatus("success");
-        if (list.length > 0) setSelectedClient(list[0]);
+        if (list.length > 0) {
+          setThreadStatus("loading");
+          setSelectedClient(list[0]);
+        }
       })
       .catch(() => setClientsStatus("error"));
   }, []);
 
-  const loadThread = (clientId) => {
-    setThreadStatus("loading");
+  useEffect(() => {
+    if (!selectedClient) return;
     api
-      .get("/admin/messages", { params: { client: clientId, limit: 50 } })
+      .get("/admin/messages", { params: { client: selectedClient._id, limit: 50 } })
       .then((res) => {
         setMessages(res.data?.data || []);
         setThreadStatus("success");
       })
       .catch(() => setThreadStatus("error"));
-  };
-
-  useEffect(() => {
-    if (selectedClient) loadThread(selectedClient._id);
   }, [selectedClient]);
 
   useEffect(() => {
@@ -101,7 +108,7 @@ const AdminMessages = () => {
           <div
             key={client._id}
             className={`chat-user ${selectedClient?._id === client._id ? "active" : ""}`}
-            onClick={() => setSelectedClient(client)}
+            onClick={() => selectClient(client)}
           >
             <div className="avatar">{initials(client)}</div>
 

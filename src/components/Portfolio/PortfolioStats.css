@@ -1,6 +1,6 @@
 .portfolio-stats{
     padding:100px 8%;
-    background:var(--white);
+    background:var(--surface);
 }
 
 .stats-heading{
@@ -17,7 +17,7 @@
 
 .stats-heading h2{
     margin:18px 0;
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:42px;
 }
 
@@ -40,7 +40,7 @@
 .stats-card{
     box-sizing:border-box;
     background:var(--secondary-bg);
-    border-radius:18px;
+    border-radius:var(--radius-xl);
     padding:35px 25px;
     text-align:center;
     transition:var(--transition);
@@ -56,9 +56,9 @@
 }
 
 .stats-card:hover{
-    transform:translateY(-10px);
-    background:var(--white);
-    box-shadow:0 20px 40px rgba(20,33,61,.08);
+    transform:translateY(-2px);
+    background:var(--surface);
+    box-shadow:0 20px 40px rgba(var(--primary-rgb),.08);
 }
 
 .stats-icon{
@@ -67,7 +67,7 @@
     margin:auto;
     margin-bottom:20px;
     border-radius:50%;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
 
     display:flex;
     justify-content:center;
@@ -82,13 +82,13 @@
 .stats-card h3{
     width:100%;
     font-size:42px;
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:10px;
 }
 
 .stats-card h4{
     width:100%;
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:15px;
     overflow-wrap:break-word;
 }

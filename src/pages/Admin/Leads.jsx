@@ -10,7 +10,8 @@ import api from "../../services/api";
 // the real Contact schema; that creation flow has been removed since every
 // real lead originates from the public contact form, never from an admin
 // manually typing one in.
-const Leads = () => {
+// `embedded`: rendered as a tab of /admin/leads, which supplies the header.
+const Leads = ({ embedded = false }) => {
   const [leads, setLeads] = useState([]);
   const [status, setStatus] = useState("loading");
   const [search, setSearch] = useState("");
@@ -52,13 +53,15 @@ const Leads = () => {
   };
 
   return (
-    <div className="leads-page">
-      <div className="page-header">
-        <div>
-          <h1>Leads</h1>
-          <p>Inbound inquiries from your website's contact form.</p>
+    <div className={embedded ? undefined : "leads-page"}>
+      {!embedded && (
+        <div className="page-header">
+          <div>
+            <h1>Leads</h1>
+            <p>Inbound inquiries from your website's contact form.</p>
+          </div>
         </div>
-      </div>
+      )}
 
       <LeadTable
         leads={leads}

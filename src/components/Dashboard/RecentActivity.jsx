@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./RecentActivity.css";
 
 import {
@@ -40,15 +40,13 @@ const formatTime = (value) => {
 // items/status are supplied initially by Dashboard.jsx from a single
 // GET /api/dashboard call; "View All" fetches the fuller feed on demand.
 const RecentActivity = ({ items: initialItems, status: initialStatus }) => {
-  const [items, setItems] = useState(initialItems || []);
-  const [status, setStatus] = useState(initialStatus || "loading");
   const [expanded, setExpanded] = useState(false);
+  const [expandedItems, setItems] = useState([]);
+  const [expandedStatus, setStatus] = useState("loading");
 
-  useEffect(() => {
-    if (expanded) return;
-    setItems(initialItems || []);
-    setStatus(initialStatus || "loading");
-  }, [initialItems, initialStatus, expanded]);
+  // Until "View All" is used, mirror the props supplied by Dashboard.jsx.
+  const items = expanded ? expandedItems : initialItems || [];
+  const status = expanded ? expandedStatus : initialStatus || "loading";
 
   const handleViewAll = () => {
     setExpanded(true);

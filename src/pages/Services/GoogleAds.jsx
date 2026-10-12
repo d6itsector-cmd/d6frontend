@@ -1,4 +1,6 @@
-import GoogleAdsFAQ from "../../components/WebService/Google_Ads/GoogleAdsFAQ";
+// <GoogleAdsFAQ/> is disabled below; keep its stylesheet loaded since its global
+// .faq-* / .section-tag rules also apply to other components.
+import "../../components/WebService/Google_Ads/GoogleAdsFAQ.css";
 import GoogleAdsHero from "../../components/WebService/Google_Ads/GoogleAdsHero";
 import GoogleAdsProcess from "../../components/WebService/Google_Ads/GoogleAdsProcess";
 import GoogleAdsServices from "../../components/WebService/Google_Ads/GoogleAdsServices";

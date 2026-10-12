@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ClientServicesModal.css";
 import api from "../../../services/api";
+import { poundsToPence, penceToPoundsInput, formatGBP, MAX_AMOUNT_PENCE } from "../../../utils/billingFormat";
 
 const STATUS_OPTIONS = ["pending", "active", "on-hold", "completed", "cancelled"];
 
@@ -10,6 +11,13 @@ const STATUS_LABELS = {
   "on-hold": "On Hold",
   completed: "Completed",
   cancelled: "Cancelled",
+};
+
+const BILLING_TYPE_LABELS = {
+  "one-off": "One-off",
+  monthly: "Monthly",
+  quarterly: "Quarterly",
+  annual: "Annual",
 };
 
 const formatDate = (value) =>
@@ -23,6 +31,8 @@ const emptyForm = {
   progress: 0,
   startDate: "",
   targetDate: "",
+  agreedPrice: "",
+  billingType: "",
   description: "",
   requirements: "",
   clientActionRequired: "",
@@ -43,6 +53,7 @@ const ClientServicesModal = ({ client, onClose }) => {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState("");
+  const [notice, setNotice] = useState("");
 
   const load = () => {
     setStatus("loading");
@@ -55,7 +66,24 @@ const ClientServicesModal = ({ client, onClose }) => {
       .catch(() => setStatus("error"));
   };
 
-  useEffect(load, [client._id]);
+  // Initial load (status starts as "loading"); load() above is for reloads
+  // after a save, where showing "loading" again is intended.
+  useEffect(() => {
+    let cancelled = false;
+    api
+      .get("/admin/client-services", { params: { client: client._id, limit: 50 } })
+      .then((res) => {
+        if (cancelled) return;
+        setAssignments(res.data?.data || []);
+        setStatus("success");
+      })
+      .catch(() => {
+        if (!cancelled) setStatus("error");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [client._id]);
 
   useEffect(() => {
     if (!showForm) return;
@@ -80,6 +108,8 @@ const ClientServicesModal = ({ client, onClose }) => {
       progress: assignment.progress ?? 0,
       startDate: toDateInput(assignment.startDate),
       targetDate: toDateInput(assignment.targetDate),
+      agreedPrice: penceToPoundsInput(assignment.agreedPricePence),
+      billingType: assignment.billingType || "",
       description: assignment.description || "",
       requirements: assignment.requirements || "",
       clientActionRequired: assignment.clientActionRequired || "",
@@ -107,8 +137,21 @@ const ClientServicesModal = ({ client, onClose }) => {
       setFormError("Please select a service.");
       return;
     }
+    if (form.startDate && form.targetDate && form.targetDate < form.startDate) {
+      setFormError("The end date can't be before the start date.");
+      return;
+    }
+    let agreedPricePence;
+    if (form.agreedPrice.trim()) {
+      agreedPricePence = poundsToPence(form.agreedPrice);
+      if (agreedPricePence === null || agreedPricePence > MAX_AMOUNT_PENCE) {
+        setFormError("Enter the agreed price in pounds, e.g. 799 or 799.99.");
+        return;
+      }
+    }
     setSaving(true);
     setFormError("");
+    setNotice("");
 
     try {
       if (editingId) {
@@ -117,6 +160,8 @@ const ClientServicesModal = ({ client, onClose }) => {
           progress: Number(form.progress) || 0,
           startDate: form.startDate || undefined,
           targetDate: form.targetDate || undefined,
+          agreedPricePence,
+          billingType: form.billingType || undefined,
           description: form.description || undefined,
           requirements: form.requirements || undefined,
           clientActionRequired: form.clientActionRequired || undefined,
@@ -130,12 +175,15 @@ const ClientServicesModal = ({ client, onClose }) => {
           progress: Number(form.progress) || 0,
           startDate: form.startDate || undefined,
           targetDate: form.targetDate || undefined,
+          agreedPricePence,
+          billingType: form.billingType || undefined,
           description: form.description || undefined,
           requirements: form.requirements || undefined,
           clientActionRequired: form.clientActionRequired || undefined,
           adminNotes: form.adminNotes || undefined,
         });
       }
+      setNotice(editingId ? "Service assignment updated." : "Service assigned. The client can now see it in My Services.");
       closeForm();
       load();
     } catch (err) {
@@ -184,6 +232,12 @@ const ClientServicesModal = ({ client, onClose }) => {
             </button>
           )}
         </div>
+
+        {notice && !showForm && (
+          <p className="csvc-notice" role="status">
+            {notice}
+          </p>
+        )}
 
         {showForm && (
           <form className="csvc-form" onSubmit={handleSubmit}>
@@ -238,8 +292,38 @@ const ClientServicesModal = ({ client, onClose }) => {
               </div>
 
               <div className="form-group">
-                <label>Target Date</label>
-                <input type="date" name="targetDate" value={form.targetDate} onChange={handleFieldChange} />
+                <label>End Date</label>
+                <input
+                  type="date"
+                  name="targetDate"
+                  value={form.targetDate}
+                  min={form.startDate || undefined}
+                  onChange={handleFieldChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Agreed Price (£)</label>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  name="agreedPrice"
+                  placeholder="e.g. 799.00"
+                  value={form.agreedPrice}
+                  onChange={handleFieldChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Billing Type</label>
+                <select name="billingType" value={form.billingType} onChange={handleFieldChange}>
+                  <option value="">Not specified</option>
+                  {Object.entries(BILLING_TYPE_LABELS).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="form-group full-width">
@@ -322,7 +406,13 @@ const ClientServicesModal = ({ client, onClose }) => {
 
                 <div className="csvc-row-meta">
                   <span>Start: {formatDate(a.startDate)}</span>
-                  <span>Target: {formatDate(a.targetDate)}</span>
+                  <span>End: {formatDate(a.targetDate)}</span>
+                  {typeof a.agreedPricePence === "number" && (
+                    <span>
+                      Price: {formatGBP(a.agreedPricePence)}
+                      {a.billingType ? ` · ${BILLING_TYPE_LABELS[a.billingType] || a.billingType}` : ""}
+                    </span>
+                  )}
                 </div>
 
                 {a.clientActionRequired && (

@@ -3,7 +3,7 @@
     min-height:100vh;
     display:flex;
     align-items:center;
-    background:linear-gradient(135deg,#ffffff,#f8f9fa);
+    background:linear-gradient(135deg,var(--surface),var(--surface-alt));
     padding:120px 8%;
     overflow:hidden;
 }
@@ -27,9 +27,9 @@
 .aboutHero__badge{
     display:inline-block;
     padding:10px 22px;
-    background:rgba(0, 119, 204,.12);
+    background:rgba(var(--accent-rgb),.12);
     color:var(--accent);
-    border:1px solid rgba(0, 119, 204,.3);
+    border:1px solid rgba(var(--accent-rgb),.3);
     border-radius:50px;
     font-weight:600;
     letter-spacing:.5px;
@@ -39,7 +39,7 @@
 .aboutHero__content h1{
     font-size:60px;
     line-height:1.15;
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:25px;
     font-weight:800;
 }
@@ -52,7 +52,7 @@
     max-width:560px;
     font-size:18px;
     line-height:1.8;
-    color:#555;
+    color:var(--text-body);
     margin-bottom:40px;
 }
 
@@ -68,7 +68,7 @@
     padding:16px 32px;
     border:none;
     border-radius:50px;
-    background:var(--primary);
+    background:var(--accent);
     color:var(--white);
     font-size:16px;
     font-weight:600;
@@ -80,16 +80,16 @@
 }
 
 .primaryBtn:hover{
-    background:var(--accent);
-    transform:translateY(-4px);
+    background:var(--accent-hover);
+    transform:translateY(-2px);
 }
 
 .secondaryBtn{
     padding:16px 32px;
-    border:2px solid var(--primary);
+    border:2px solid var(--text-strong);
     border-radius:50px;
     background:transparent;
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:16px;
     font-weight:600;
     cursor:pointer;
@@ -97,7 +97,7 @@
 }
 
 .secondaryBtn:hover{
-    background:var(--primary);
+    background:var(--accent-hover);
     color:var(--white);
 }
 
@@ -110,16 +110,16 @@
 }
 
 .statCard{
-    background:var(--white);
+    background:var(--surface);
     padding:25px;
-    border-radius:18px;
+    border-radius:var(--radius-xl);
     min-width:170px;
-    box-shadow:0 15px 40px rgba(20,33,61,.08);
+    box-shadow:0 15px 40px rgba(var(--primary-rgb),.08);
     transition:var(--transition);
 }
 
 .statCard:hover{
-    transform:translateY(-10px);
+    transform:translateY(-2px);
 }
 
 .statCard h2{
@@ -130,7 +130,7 @@
 
 .statCard p{
     margin:0;
-    color:#666;
+    color:var(--text-light);
     font-size:15px;
 }
 
@@ -168,12 +168,12 @@
 
 .floatingCard{
     position:absolute;
-    background:var(--white);
+    background:var(--surface);
     padding:16px 24px;
-    border-radius:16px;
-    box-shadow:0 15px 35px rgba(20,33,61,.12);
+    border-radius:var(--radius-lg);
+    box-shadow:0 15px 35px rgba(var(--primary-rgb),.12);
     font-weight:600;
-    color:var(--primary);
+    color:var(--text-strong);
     z-index:3;
 }
 

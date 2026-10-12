@@ -24,7 +24,7 @@
 .section-tag {
   display: inline-block;
   padding: 8px 18px;
-  background: rgba(0, 119, 204, 0.15);
+  background: rgba(var(--accent-rgb),0.15);
   color: var(--accent);
   border-radius: 30px;
   font-size: 14px;
@@ -34,7 +34,7 @@
 
 .section-header h2 {
   font-size: 42px;
-  color: var(--primary);
+  color: var(--text-strong);
   margin-bottom: 20px;
 }
 
@@ -68,17 +68,17 @@
 
 .process-card {
   position: relative;
-  background: var(--white);
-  border-radius: 18px;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
   padding: 35px 25px;
   text-align: center;
   transition: var(--transition);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
 
 .process-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-2px);
   /* color: var(--white) !important;  */
 
 }
@@ -127,7 +127,7 @@
   height: 80px;
   margin: 0 auto 25px;
   border-radius: 50%;
-  background: rgba(0, 119, 204, 0.15);
+  background: rgba(var(--accent-rgb),0.15);
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -141,7 +141,7 @@
   transition: 0.3s ease;
 }
 .process-card:hover .process-icon{
-  background: var(--accent);
+  background: var(--accent-hover);
 }
 
 .process-card:hover .process-icon svg{
@@ -156,7 +156,7 @@
 
 .process-card h3 {
   font-size: 22px;
-  color: var(--primary);
+  color: var(--text-strong);
   margin-bottom: 15px;
 }
 

@@ -19,28 +19,28 @@ const DashboardCards = ({ summary }) => {
         title="Clients"
         value={summary?.users?.clients ?? "-"}
         icon={<FaUsers />}
-        color="#14213D"
+        color="var(--primary)"
       />
 
       <StatsCard
         title="Projects"
         value={summary?.projects?.total ?? "-"}
         icon={<FaProjectDiagram />}
-        color="#0077CC"
+        color="var(--accent)"
       />
 
       <StatsCard
         title="Leads"
         value={summary?.leads?.total ?? "-"}
         icon={<FaUserFriends />}
-        color="#22c55e"
+        color="var(--success)"
       />
 
       <StatsCard
         title="Open Support Tickets"
         value={openTickets}
         icon={<FaHeadset />}
-        color="#0077CC"
+        color="var(--accent)"
       />
 
     </div>

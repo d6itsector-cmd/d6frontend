@@ -1,35 +1,8 @@
-import { createContext, useContext, useState } from "react";
-import ContactModal from "../components/ContactModal/ContactModal";
+import { createContext, useContext } from "react";
 
-const ContactContext = createContext();
-
-export const ContactProvider = ({ children }) => {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-
-  const openContact = () => {
-    setIsContactOpen(true);
-  };
-
-  const closeContact = () => {
-    setIsContactOpen(false);
-  };
-
-  return (
-    <ContactContext.Provider
-      value={{
-        openContact,
-        closeContact,
-      }}
-    >
-      {children}
-
-      <ContactModal
-        isOpen={isContactOpen}
-        onClose={closeContact}
-      />
-    </ContactContext.Provider>
-  );
-};
+// The provider component lives in ContactProvider.jsx so this module only exports
+// non-components, which keeps React Fast Refresh working for both files.
+export const ContactContext = createContext();
 
 export const useContact = () => {
   return useContext(ContactContext);

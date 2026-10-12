@@ -18,24 +18,25 @@ const formatDate = (value) =>
 const BlogDetail = () => {
   const { slug } = useParams();
 
-  const [blog, setBlog] = useState(null);
-  const [status, setStatus] = useState("loading"); // loading | success | notFound | error
+  // Result of the last fetch, tagged with the slug it was for; a slug that
+  // hasn't resolved yet reads as "loading" with no blog.
+  const [result, setResult] = useState({ slug: null, status: "loading", blog: null });
+  const isCurrent = result.slug === slug;
+  const blog = isCurrent ? result.blog : null;
+  const status = isCurrent ? result.status : "loading"; // loading | success | notFound | error
 
   useEffect(() => {
     let cancelled = false;
-    setStatus("loading");
-    setBlog(null);
 
     api
       .get(`/blogs/${slug}`)
       .then((res) => {
         if (cancelled) return;
-        setBlog(res.data?.data || null);
-        setStatus("success");
+        setResult({ slug, status: "success", blog: res.data?.data || null });
       })
       .catch((err) => {
         if (cancelled) return;
-        setStatus(err.response?.status === 404 ? "notFound" : "error");
+        setResult({ slug, status: err.response?.status === 404 ? "notFound" : "error", blog: null });
       });
 
     return () => {

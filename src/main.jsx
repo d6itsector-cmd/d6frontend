@@ -4,11 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/tokens.css";
 import "./index.css";
 import App from "./App";
+import ThemeProvider from "./theme/ThemeProvider";
 
-import { AuthProvider } from "./context/AuthContext";
-import { LoginModalProvider } from "./context/LoginModalContext";
-import { ConsultationProvider } from "./context/ConsultationContext";
-import { ContactProvider } from "./context/ContactContext";
+import { AuthProvider } from "./context/AuthProvider";
+import { LoginModalProvider } from "./context/LoginModalProvider";
+import { ConsultationProvider } from "./context/ConsultationProvider";
+import { ContactProvider } from "./context/ContactProvider";
 
 // BrowserRouter has to be the outermost piece here (not inside App, as it
 // used to be) -- LoginModalProvider renders <LoginModal> as a sibling of
@@ -17,16 +18,18 @@ import { ContactProvider } from "./context/ContactContext";
 // Router context, not just the ones that happen not to need it.
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <LoginModalProvider>
-          <ConsultationProvider>
-            <ContactProvider>
-              <App />
-            </ContactProvider>
-          </ConsultationProvider>
-        </LoginModalProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <LoginModalProvider>
+            <ConsultationProvider>
+              <ContactProvider>
+                <App />
+              </ContactProvider>
+            </ConsultationProvider>
+          </LoginModalProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </StrictMode>
 );

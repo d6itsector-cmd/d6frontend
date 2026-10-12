@@ -1,6 +1,6 @@
 .blog-categories{
     padding:100px 8%;
-    background:var(--white);
+    background:var(--surface);
 }
 
 .categories-header{
@@ -17,7 +17,7 @@
 
 .categories-header h2{
     font-size:42px;
-    color:var(--primary);
+    color:var(--text-strong);
     margin:20px 0;
 }
 
@@ -40,7 +40,7 @@
 .category-card{
     background:var(--secondary-bg);
     padding:35px 20px;
-    border-radius:18px;
+    border-radius:var(--radius-xl);
     text-align:center;
     text-decoration:none;
     transition:var(--transition);
@@ -50,8 +50,8 @@
 }
 
 .category-card:hover{
-    background:var(--primary);
-    transform:translateY(-8px);
+    background:var(--accent-hover);
+    transform:translateY(-2px);
 }
 
 .category-icon{
@@ -60,7 +60,7 @@
     margin:auto;
     margin-bottom:20px;
     border-radius:50%;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
 
     display:flex;
     justify-content:center;
@@ -75,7 +75,7 @@
 }
 
 .category-card h3{
-    color:var(--primary);
+    color:var(--text-strong);
     transition:var(--transition);
 }
 
@@ -84,11 +84,11 @@
 }
 
 .category-card:hover .category-icon{
-    background:var(--accent);
+    background:var(--accent-hover);
 }
 
 .category-card:hover .category-icon svg{
-    color:var(--primary);
+    color:var(--text-strong);
 }
 
 @media(max-width:992px){

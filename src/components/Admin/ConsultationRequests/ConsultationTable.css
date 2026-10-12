@@ -1,12 +1,12 @@
 .consultation-table-container{
 
-background:white;
+background:var(--surface);
 
 padding:25px;
 
-border-radius:15px;
+border-radius:var(--radius-lg);
 
-box-shadow:0 5px 20px rgba(0,0,0,.08);
+box-shadow:var(--shadow-sm);
 
 overflow-x:auto;
 
@@ -29,9 +29,9 @@ max-width:100%;
 
 padding:12px;
 
-border:1px solid #ddd;
+border:1px solid var(--border-strong);
 
-border-radius:8px;
+border-radius:var(--radius-md);
 
 outline:none;
 
@@ -47,13 +47,14 @@ border-collapse:collapse;
 
 .consultation-table th{
 
-background:var(--primary);
+background:var(--surface-alt);
 
-color:white;
+color:var(--text-light);
 
 padding:15px;
 
 text-align:left;
+  border-bottom:1px solid var(--border);
 
 }
 
@@ -61,7 +62,7 @@ text-align:left;
 
 padding:15px;
 
-border-bottom:1px solid #eee;
+border-bottom:1px solid var(--border);
 
 }
 
@@ -69,7 +70,7 @@ border-bottom:1px solid #eee;
 
 padding:6px 14px;
 
-border-radius:20px;
+border-radius:var(--radius-xl);
 
 font-size:13px;
 
@@ -79,41 +80,41 @@ font-weight:600;
 
 .status.new{
 
-background:#FEF3C7;
+background:var(--accent-soft);
 
-color:#B45309;
+color:var(--accent);
 
 }
 
 .status.contacted{
 
-background:#FDE68A;
+background:var(--pending-soft);
 
-color:#92400E;
+color:var(--pending);
 
 }
 
 .scheduled{
 
-background:#DBEAFE;
+background:var(--accent-soft);
 
-color:#1D4ED8;
+color:var(--accent);
 
 }
 
 .status.completed{
 
-background:#DCFCE7;
+background:var(--success-soft);
 
-color:#15803D;
+color:var(--success);
 
 }
 
 .status.cancelled{
 
-background:#FEE2E2;
+background:var(--danger-soft);
 
-color:#DC2626;
+color:var(--danger);
 
 }
 
@@ -121,9 +122,9 @@ color:#DC2626;
 
 padding:6px 10px;
 
-border-radius:8px;
+border-radius:var(--radius-md);
 
-border:1px solid #ddd;
+border:1px solid var(--border-strong);
 
 font-size:13px;
 
@@ -135,7 +136,7 @@ margin-right:8px;
 
 text-align:center;
 
-color:#888;
+color:var(--text-muted);
 
 padding:30px 0;
 
@@ -143,15 +144,15 @@ padding:30px 0;
 
 .view-btn{
 
-background:#0077CC;
+background:var(--accent);
 
-color:white;
+color:var(--white);
 
 border:none;
 
 padding:8px 14px;
 
-border-radius:6px;
+border-radius:var(--radius-sm);
 
 cursor:pointer;
 
@@ -161,16 +162,109 @@ margin-right:8px;
 
 .delete-btn{
 
-background:#EF4444;
+background:var(--danger);
 
-color:white;
+color:var(--white);
 
 border:none;
 
 padding:8px 14px;
 
-border-radius:6px;
+border-radius:var(--radius-sm);
 
 cursor:pointer;
 
+}
+
+/* ---------- Action column ----------
+   View | status | Delete in one row with fixed control widths, so every row
+   lines up and nothing shifts when the status text changes. Scoped class
+   names keep the shared global .view-btn / .delete-btn / .status-select
+   rules out. */
+
+.consultation-actions-cell{
+    width:1%;
+    white-space:nowrap;
+}
+
+.consultation-actions{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    align-items:center;
+    gap:8px;
+}
+
+.consultation-action{
+    box-sizing:border-box;
+    flex:0 0 auto;
+    height:36px;
+    margin:0;
+    padding:0 12px;
+    border:1px solid transparent;
+    border-radius:var(--radius-sm);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    line-height:1;
+    cursor:pointer;
+    transition:background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.consultation-action:focus-visible{
+    outline:none;
+    box-shadow:var(--focus-ring);
+}
+
+.consultation-action--view{
+    width:72px;
+    background:var(--accent);
+    color:var(--white);
+}
+
+.consultation-action--view:hover{
+    background:var(--accent-hover);
+}
+
+.consultation-action--status{
+    width:132px;
+    background:var(--surface);
+    color:var(--text);
+    border-color:var(--border-strong);
+    font-weight:500;
+}
+
+.consultation-action--status:hover,
+.consultation-action--status:focus-visible{
+    border-color:var(--accent);
+}
+
+.consultation-action--delete{
+    width:80px;
+    background:var(--danger);
+    color:var(--white);
+}
+
+.consultation-action--delete:hover{
+    background:var(--danger-strong);
+}
+
+.consultation-action--delete:focus-visible{
+    box-shadow:0 0 0 3px rgba(var(--danger-rgb),.22);
+}
+
+@media (max-width:768px){
+    .consultation-actions{
+        gap:6px;
+    }
+
+    .consultation-action{
+        height:34px;
+        padding:0 10px;
+        font-size:12px;
+    }
+
+    .consultation-action--view{ width:64px; }
+    .consultation-action--status{ width:120px; }
+    .consultation-action--delete{ width:72px; }
 }

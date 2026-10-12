@@ -1,6 +1,6 @@
 .reports{
     padding:35px;
-    background:#F5F7FB;
+    background:var(--surface-alt);
     min-height:100vh;
     animation:fadeIn .4s ease;
 }
@@ -19,18 +19,18 @@
 
 .reports-status{
     text-align:center;
-    color:#7B8498;
+    color:var(--text-light);
     padding:20px 0;
 }
 
 .reports-header h1{
     font-size:36px;
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:8px;
 }
 
 .reports-header p{
-    color:#7B8498;
+    color:var(--text-light);
 }
 
 .report-actions{
@@ -43,10 +43,10 @@
     display:flex;
     align-items:center;
     gap:10px;
-    background:#fff;
+    background:var(--surface);
     padding:14px 18px;
-    border-radius:14px;
-    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-md);
 }
 
 .report-search input{
@@ -63,17 +63,17 @@
     gap:10px;
     border:none;
     padding:14px 20px;
-    border-radius:14px;
-    background:#14213D;
-    color:#fff;
+    border-radius:var(--radius-lg);
+    background:var(--accent);
+    color:var(--white);
     cursor:pointer;
     transition:.3s;
     font-weight:600;
 }
 
 .report-actions button:hover{
-    background:#0077CC;
-    color:#14213D;
+    background:var(--accent-hover);
+    color:var(--white);
 }
 
 /* ===========================
@@ -87,43 +87,43 @@
 }
 
 .report-card{
-    background:#fff;
+    background:var(--surface);
     padding:28px;
-    border-radius:20px;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-md);
     transition:.3s;
 }
 
 .report-card:hover{
-    transform:translateY(-6px);
+    transform:translateY(-2px);
 }
 
 .report-icon{
     width:70px;
     height:70px;
-    border-radius:18px;
-    background:#E8F3FC;
+    border-radius:var(--radius-xl);
+    background:var(--accent-soft);
     display:flex;
     justify-content:center;
     align-items:center;
     font-size:32px;
-    color:#0077CC;
+    color:var(--accent);
     margin-bottom:20px;
 }
 
 .report-card h3{
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:10px;
     font-size:22px;
 }
 
 .report-card p{
-    color:#7B8498;
+    color:var(--text-light);
     margin-bottom:8px;
 }
 
 .report-card span{
-    color:#555;
+    color:var(--text-body);
     display:block;
     margin-bottom:25px;
 }
@@ -134,9 +134,9 @@
     align-items:center;
     width:100%;
     padding:14px;
-    border-radius:12px;
-    background:#F5F7FB;
-    color:#7B8498;
+    border-radius:var(--radius-lg);
+    background:var(--surface-alt);
+    color:var(--text-light);
     font-weight:600;
 }
 
@@ -152,14 +152,14 @@
 }
 
 .summary-card{
-    background:#fff;
+    background:var(--surface);
     padding:30px;
-    border-radius:20px;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-md);
 }
 
 .summary-card h3{
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:20px;
 }
 
@@ -167,7 +167,7 @@
     display:flex;
     justify-content:space-between;
     padding:14px 0;
-    border-bottom:1px solid #EEF2F7;
+    border-bottom:1px solid var(--border);
 }
 
 .summary-item:last-child{
@@ -180,8 +180,8 @@
 
 .summary-card li{
     padding:12px 0;
-    border-bottom:1px solid #EEF2F7;
-    color:#555;
+    border-bottom:1px solid var(--border);
+    color:var(--text-body);
 }
 
 .summary-card li:last-child{
@@ -194,14 +194,14 @@
 
 .recent-downloads{
     margin-top:35px;
-    background:#fff;
+    background:var(--surface);
     padding:30px;
-    border-radius:20px;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-md);
 }
 
 .recent-downloads h2{
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:20px;
 }
 
@@ -211,24 +211,24 @@
 }
 
 .recent-downloads th{
-    background:#F8FAFC;
-    color:#14213D;
+    background:var(--surface-alt);
+    color:var(--text-strong);
     text-align:left;
     padding:18px;
 }
 
 .recent-downloads td{
     padding:18px;
-    border-bottom:1px solid #EEF2F7;
+    border-bottom:1px solid var(--border);
 }
 
 .recent-downloads .completed{
-    color:#22C55E;
+    color:var(--success);
     font-weight:600;
 }
 
 .recent-downloads .pending{
-    color:#F59E0B;
+    color:var(--warning-text);
     font-weight:600;
 }
 

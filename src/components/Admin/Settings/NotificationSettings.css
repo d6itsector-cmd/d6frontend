@@ -1,9 +1,9 @@
 .settings-card{
-background:white;
+background:var(--surface);
 padding:25px;
-border-radius:15px;
+border-radius:var(--radius-lg);
 margin-bottom:30px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
+box-shadow:var(--shadow-sm);
 }
 
 .toggle-group{
@@ -17,7 +17,7 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 font-size:15px;
-color:var(--primary);
+color:var(--text-strong);
 }
 
 /* Same iOS-style switch as the client dashboard's Settings page, instead of
@@ -37,7 +37,7 @@ display:none;
 .slider{
 position:absolute;
 inset:0;
-background:#ddd;
+background:var(--border-strong);
 border-radius:var(--radius-pill);
 transition:var(--transition);
 cursor:pointer;
@@ -50,7 +50,7 @@ width:20px;
 height:20px;
 left:4px;
 top:4px;
-background:#fff;
+background:var(--surface);
 border-radius:50%;
 transition:var(--transition);
 }

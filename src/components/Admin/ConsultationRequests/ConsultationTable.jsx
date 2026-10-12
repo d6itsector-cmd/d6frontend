@@ -65,31 +65,40 @@ const ConsultationTable = ({ consultations, status, search, onSearchChange, onVi
                   </span>
                 </td>
 
-                <td>
+                <td className="consultation-actions-cell">
 
-                  <button
-                    className="view-btn"
-                    onClick={() => onView(item)}
-                  >
-                    View
-                  </button>
+                  {/* Own class names: .view-btn / .delete-btn are defined globally by
+                      several other screens and would otherwise leak in here. */}
+                  <div className="consultation-actions">
 
-                  <select
-                    className="status-select"
-                    value={item.status}
-                    onChange={(e) => onStatusChange(item, e.target.value)}
-                  >
-                    {STATUSES.map((s) => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
+                    <button
+                      type="button"
+                      className="consultation-action consultation-action--view"
+                      onClick={() => onView(item)}
+                    >
+                      View
+                    </button>
 
-                  <button
-                    className="delete-btn"
-                    onClick={() => onDelete(item)}
-                  >
-                    Delete
-                  </button>
+                    <select
+                      className="consultation-action consultation-action--status"
+                      aria-label={`Status for ${item.name}`}
+                      value={item.status}
+                      onChange={(e) => onStatusChange(item, e.target.value)}
+                    >
+                      {STATUSES.map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+
+                    <button
+                      type="button"
+                      className="consultation-action consultation-action--delete"
+                      onClick={() => onDelete(item)}
+                    >
+                      Delete
+                    </button>
+
+                  </div>
 
                 </td>
 

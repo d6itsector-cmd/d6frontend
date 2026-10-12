@@ -9,8 +9,8 @@ const formatDate = (value) =>
   value ? new Date(value).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "-";
 
 const STATUS_COLORS = {
-  active: "#22C55E", completed: "#22C55E", new: "#0077CC", open: "#0077CC",
-  cancelled: "#EF4444", closed: "#999", "on-hold": "#0077CC",
+  active: "var(--success)", completed: "var(--success)", new: "var(--accent)", open: "var(--accent)",
+  cancelled: "var(--danger)", closed: "var(--text-muted)", "on-hold": "var(--warning-text)",
 };
 
 // Normalizes the admin dashboard's separate recent-* lists into one feed,
@@ -92,15 +92,15 @@ const Dashboard = () => {
 
         <div className="admin-dashboard-overview">
           <div className="admin-dashboard-overview-row">
-            <span className="admin-dashboard-dot" style={{ background: "#22C55E" }} />
+            <span className="admin-dashboard-dot" style={{ background: "var(--success)" }} />
             Active Projects: {overview?.summary?.projects?.active ?? "-"}
           </div>
           <div className="admin-dashboard-overview-row">
-            <span className="admin-dashboard-dot" style={{ background: "#F59E0B" }} />
+            <span className="admin-dashboard-dot" style={{ background: "var(--warning)" }} />
             New Leads: {overview?.summary?.leads?.new ?? "-"}
           </div>
           <div className="admin-dashboard-overview-row">
-            <span className="admin-dashboard-dot" style={{ background: "#0077CC" }} />
+            <span className="admin-dashboard-dot" style={{ background: "var(--accent)" }} />
             Completed Projects: {overview?.summary?.projects?.completed ?? "-"}
           </div>
           <div className="admin-dashboard-overview-row">
@@ -141,7 +141,7 @@ const Dashboard = () => {
                   <tr key={i}>
                     <td>{item.client}</td>
                     <td>{item.detail}</td>
-                    <td style={{ color: STATUS_COLORS[item.status] || "#666" }}>{item.status}</td>
+                    <td style={{ color: STATUS_COLORS[item.status] || "var(--text-light)" }}>{item.status}</td>
                     <td>{formatDate(item.date)}</td>
                   </tr>
                 ))}

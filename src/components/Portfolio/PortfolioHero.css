@@ -1,7 +1,7 @@
 .portfolio-hero{
     position:relative;
     padding:120px 8% 80px;
-    background:var(--white);
+    background:var(--surface);
     overflow:hidden;
 }
 
@@ -15,7 +15,7 @@
 
 .portfolio-badge{
     display:inline-block;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
     color:var(--accent);
     padding:10px 22px;
     border-radius:50px;
@@ -25,7 +25,7 @@
 
 .portfolio-title{
     font-size:58px;
-    color:var(--primary);
+    color:var(--text-strong);
     margin:25px 0;
     line-height:1.2;
 }
@@ -52,33 +52,33 @@
 
 .primary-btn{
     background:var(--accent);
-    color:var(--primary);
+    color:var(--white);
     border:none;
     padding:15px 34px;
-    border-radius:10px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-weight:600;
     transition:var(--transition);
 }
 
 .primary-btn:hover{
-    background:var(--primary);
+    background:var(--accent-hover);
     color:var(--white);
 }
 
 .secondary-btn{
     background:transparent;
-    color:var(--primary);
-    border:2px solid var(--primary);
+    color:var(--text-strong);
+    border:2px solid var(--text-strong);
     padding:15px 34px;
-    border-radius:10px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-weight:600;
     transition:var(--transition);
 }
 
 .secondary-btn:hover{
-    background:var(--primary);
+    background:var(--accent-hover);
     color:var(--white);
 }
 
@@ -89,8 +89,8 @@
 .portfolio-image img{
     width:100%;
     max-width:850px;
-    border-radius:20px;
-    box-shadow:0 20px 50px rgba(20,33,61,.1);
+    border-radius:var(--radius-xl);
+    box-shadow:0 20px 50px rgba(var(--primary-rgb),.1);
 }
 
 .portfolio-shape{

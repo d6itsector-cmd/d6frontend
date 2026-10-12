@@ -3,10 +3,10 @@
 =========================== */
 
 .portfolio-table-card{
-    background: var(--white);
-    border-radius: 15px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
     padding: 25px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    box-shadow: var(--shadow-sm);
 }
 
 /* ===========================
@@ -24,8 +24,8 @@
     width:320px;
     max-width:100%;
     padding:12px 15px;
-    border:1px solid #ddd;
-    border-radius:8px;
+    border:1px solid var(--border-strong);
+    border-radius:var(--radius-md);
     outline:none;
     font-size:14px;
     transition:.3s;
@@ -37,7 +37,7 @@
 
 .table-status-msg{
     text-align:center;
-    color:#7B8498;
+    color:var(--text-light);
     padding:30px 0;
 }
 
@@ -51,11 +51,12 @@
 }
 
 .portfolio-table thead{
-    background:var(--primary);
+    background:var(--surface-alt);
+  border-bottom:1px solid var(--border);
 }
 
 .portfolio-table th{
-    color:white;
+    color:var(--white);
     padding:15px;
     text-align:left;
     font-size:15px;
@@ -64,13 +65,13 @@
 
 .portfolio-table td{
     padding:15px;
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid var(--border);
     font-size:14px;
     vertical-align:middle;
 }
 
 .portfolio-table tbody tr:hover{
-    background:#fafafa;
+    background:var(--surface-alt);
 }
 
 /* ===========================
@@ -81,7 +82,7 @@
     width:60px;
     height:60px;
     object-fit:cover;
-    border-radius:10px;
+    border-radius:var(--radius-md);
 }
 
 /* ===========================
@@ -91,19 +92,19 @@
 .status{
     display:inline-block;
     padding:6px 14px;
-    border-radius:20px;
+    border-radius:var(--radius-xl);
     font-size:13px;
     font-weight:600;
 }
 
 .status.published{
-    background:#DCFCE7;
-    color:#15803D;
+    background:var(--success-soft);
+    color:var(--success);
 }
 
 .status.draft{
-    background:#FEE2E2;
-    color:#DC2626;
+    background:var(--surface-sunken);
+    color:var(--text-light);
 }
 
 /* ===========================
@@ -116,31 +117,31 @@
 }
 
 .edit-btn{
-    background:#0077CC;
-    color:white;
+    background:var(--accent);
+    color:var(--white);
     border:none;
     padding:8px 15px;
-    border-radius:6px;
+    border-radius:var(--radius-sm);
     cursor:pointer;
     transition:.3s;
 }
 
 .edit-btn:hover{
-    background:#1D4ED8;
+    background:var(--accent-hover);
 }
 
 .delete-btn{
-    background:#EF4444;
-    color:white;
+    background:var(--danger);
+    color:var(--white);
     border:none;
     padding:8px 15px;
-    border-radius:6px;
+    border-radius:var(--radius-sm);
     cursor:pointer;
     transition:.3s;
 }
 
 .delete-btn:hover{
-    background:#DC2626;
+    background:var(--danger);
 }
 
 /* ===========================

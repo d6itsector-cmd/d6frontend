@@ -1,14 +1,14 @@
 .timeline-section{
 
-background:#fff;
+background:var(--surface);
 
 padding:35px;
 
 margin-top:30px;
 
-border-radius:22px;
+border-radius:var(--radius-xl);
 
-box-shadow:0 15px 40px rgba(0,0,0,.06);
+box-shadow:var(--shadow-lg);
 
 }
 
@@ -22,7 +22,7 @@ margin-bottom:35px;
 
 font-size:32px;
 
-color:#14213D;
+color:var(--text-strong);
 
 margin-bottom:10px;
 
@@ -30,7 +30,7 @@ margin-bottom:10px;
 
 .timeline-header p{
 
-color:#7B8498;
+color:var(--text-light);
 
 }
 
@@ -56,7 +56,7 @@ bottom:0;
 
 width:3px;
 
-background:#E7EDF5;
+background:var(--surface-sunken);
 
 }
 
@@ -90,7 +90,7 @@ justify-content:center;
 
 align-items:center;
 
-background:white;
+background:var(--surface);
 
 font-size:20px;
 
@@ -102,9 +102,9 @@ margin-left:35px;
 
 padding:18px 22px;
 
-background:#F8FAFC;
+background:var(--surface-alt);
 
-border-radius:14px;
+border-radius:var(--radius-lg);
 
 width:100%;
 
@@ -116,13 +116,13 @@ transition:.3s;
 
 transform:translateX(6px);
 
-box-shadow:0 8px 20px rgba(0,0,0,.05);
+box-shadow:var(--shadow-md);
 
 }
 
 .timeline-content h4{
 
-color:#14213D;
+color:var(--text-strong);
 
 margin-bottom:8px;
 
@@ -134,7 +134,7 @@ font-size:18px;
 
 font-size:14px;
 
-color:#7B8498;
+color:var(--text-light);
 
 }
 
@@ -142,7 +142,7 @@ color:#7B8498;
 
 .completed .timeline-icon{
 
-color:#27AE60;
+color:var(--success);
 
 }
 
@@ -150,7 +150,7 @@ color:#27AE60;
 
 .current .timeline-icon{
 
-color:#0077CC;
+color:var(--accent);
 
 animation:spin 2s linear infinite;
 
@@ -160,7 +160,7 @@ animation:spin 2s linear infinite;
 
 .upcoming .timeline-icon{
 
-color:#C5CCD8;
+color:var(--text-muted);
 
 }
 
@@ -168,7 +168,7 @@ color:#C5CCD8;
 
 .milestone .timeline-icon{
 
-color:#0077CC;
+color:var(--accent);
 
 }
 
@@ -176,7 +176,7 @@ color:#0077CC;
 
 .issue .timeline-icon{
 
-color:#DC3545;
+color:var(--danger);
 
 }
 
@@ -184,7 +184,7 @@ color:#DC3545;
 
     text-align:center;
 
-    color:#7B8498;
+    color:var(--text-light);
 
     padding:20px 0;
 

@@ -2,8 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Theme before first paint (no flash of the wrong theme). Same rules as
+         src/theme/themeStore.js: a saved "d6-theme" wins, else the system
+         preference. -->
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          var saved = localStorage.getItem("d6-theme");
+          if (saved === "light" || saved === "dark") theme = saved;
+        } catch (e) {}
+        if (!theme) {
+          theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <link rel="icon" type="image/png" href="/d6-favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
     <title>D6 Global Services</title>
   </head>
   <body>

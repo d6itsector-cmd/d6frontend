@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./ReportManagementTable.css";
 import api from "../../../services/api";
 
@@ -22,13 +22,15 @@ const ReportManagementTable = () => {
 
   const [showForm, setShowForm] = useState(false);
   const [clients, setClients] = useState([]);
-  const [projects, setProjects] = useState([]);
+  // Projects are stored alongside the client they were fetched for, so the
+  // list is derived as empty whenever no client (or a different one) is selected.
+  const [clientProjects, setClientProjects] = useState({ client: "", list: [] });
   const [form, setForm] = useState(emptyForm);
+  const projects = form.client && clientProjects.client === form.client ? clientProjects.list : [];
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState("");
 
-  const load = () => {
-    setStatus("loading");
+  const fetchReports = useCallback(() => {
     api
       .get("/admin/reports", { params: { limit: 10 } })
       .then((res) => {
@@ -36,9 +38,17 @@ const ReportManagementTable = () => {
         setStatus("success");
       })
       .catch(() => setStatus("error"));
+  }, []);
+
+  const load = () => {
+    setStatus("loading");
+    fetchReports();
   };
 
-  useEffect(load, []);
+  // Initial status is already "loading", so the first fetch needs no reset.
+  useEffect(() => {
+    fetchReports();
+  }, [fetchReports]);
 
   useEffect(() => {
     if (!showForm) return;
@@ -49,14 +59,12 @@ const ReportManagementTable = () => {
   }, [showForm]);
 
   useEffect(() => {
-    if (!form.client) {
-      setProjects([]);
-      return;
-    }
+    const client = form.client;
+    if (!client) return;
     api
-      .get("/admin/projects", { params: { client: form.client, limit: 100 } })
-      .then((res) => setProjects(res.data?.data || []))
-      .catch(() => setProjects([]));
+      .get("/admin/projects", { params: { client, limit: 100 } })
+      .then((res) => setClientProjects({ client, list: res.data?.data || [] }))
+      .catch(() => setClientProjects({ client, list: [] }));
   }, [form.client]);
 
   const handleFieldChange = (e) => {

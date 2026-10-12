@@ -15,7 +15,7 @@
 
 .projects-status{
     text-align:center;
-    color:var(--text-light, #666);
+    color:var(--text-light, var(--text-light));
     padding:40px 0;
     font-size:16px;
 }
@@ -29,7 +29,7 @@
 .section-header h2{
     margin:18px 0;
     font-size:42px;
-    color:var(--primary);
+    color:var(--text-strong);
 }
 
 .section-header p{
@@ -53,18 +53,18 @@
 ==============================*/
 
 .project-card{
-    background:var(--white);
-    border-radius:20px;
+    background:var(--surface);
+    border-radius:var(--radius-xl);
     padding:35px;
     transition:var(--transition);
-    box-shadow:0 10px 30px rgba(20,33,61,.06);
+    box-shadow:0 10px 30px rgba(var(--primary-rgb),.06);
     border:1px solid transparent;
 }
 
 .project-card:hover{
-    transform:translateY(-10px);
+    transform:translateY(-2px);
     border-color:var(--accent);
-    box-shadow:0 20px 45px rgba(20,33,61,.12);
+    box-shadow:0 20px 45px rgba(var(--primary-rgb),.12);
 }
 
 /*==============================
@@ -76,7 +76,7 @@
     height:90px;
     margin:0 auto 25px;
     border-radius:50%;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
 
     display:flex;
     justify-content:center;
@@ -92,12 +92,12 @@
 }
 
 .project-card:hover .project-icon{
-    background:var(--accent);
+    background:var(--accent-hover);
     transform:scale(1.08);
 }
 
 .project-card:hover .project-icon svg{
-    color:var(--primary);
+    color:var(--text-strong);
 }
 
 /*==============================
@@ -112,7 +112,7 @@
     display:inline-block;
     padding:8px 18px;
     border-radius:30px;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
     color:var(--accent);
     font-size:14px;
     font-weight:600;
@@ -120,7 +120,7 @@
 }
 
 .project-content h3{
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:28px;
     margin-bottom:20px;
 }
@@ -163,7 +163,7 @@
 }
 
 .project-result p{
-    color:var(--primary);
+    color:var(--text-strong);
     font-weight:600;
     font-size:22px;
 }
@@ -175,7 +175,7 @@
 .project-content button{
     border:none;
     background:none;
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:16px;
     font-weight:600;
     cursor:pointer;

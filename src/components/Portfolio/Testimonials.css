@@ -11,7 +11,7 @@
 
 .testimonials-status{
     text-align:center;
-    color:var(--text-light, #666);
+    color:var(--text-light, var(--text-light));
     padding:40px 0;
     font-size:16px;
 }
@@ -25,7 +25,7 @@
 .testimonial-header h2{
     margin:20px 0;
     font-size:42px;
-    color:var(--primary);
+    color:var(--text-strong);
 }
 
 .testimonial-header p{
@@ -41,16 +41,16 @@
 }
 
 .testimonial-card{
-    background:var(--white);
+    background:var(--surface);
     padding:35px;
-    border-radius:18px;
+    border-radius:var(--radius-xl);
     transition:var(--transition);
-    box-shadow:0 10px 25px rgba(20,33,61,.06);
+    box-shadow:0 10px 25px rgba(var(--primary-rgb),.06);
 }
 
 .testimonial-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 20px 40px rgba(20,33,61,.1);
+    transform:translateY(-2px);
+    box-shadow:0 20px 40px rgba(var(--primary-rgb),.1);
 }
 
 .quote-icon{
@@ -73,7 +73,7 @@
 }
 
 .testimonial-card h3{
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:5px;
 }
 

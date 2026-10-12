@@ -82,7 +82,7 @@ const Hero = ({ project, status, setActivePage }) => {
         <div
           className="progress-circle"
           style={{
-            background: `conic-gradient(#0077CC 0deg, #0077CC ${circleDeg}deg, rgba(255,255,255,.12) ${circleDeg}deg)`,
+            background: `conic-gradient(var(--accent-on-dark) 0deg, var(--accent-on-dark) ${circleDeg}deg, rgba(255,255,255,.12) ${circleDeg}deg)`,
           }}
         >
 

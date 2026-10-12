@@ -18,7 +18,7 @@
 .process-header h2{
     margin:20px 0;
     font-size:42px;
-    color:var(--primary);
+    color:var(--text-strong);
 }
 
 .process-header p{
@@ -47,7 +47,7 @@
    this was the only section-level component sitewide with zero hover
    states. */
 .process-step:hover{
-    transform:translateY(-8px);
+    transform:translateY(-2px);
 }
 
 .process-icon{
@@ -55,16 +55,16 @@
     height:80px;
     margin:auto;
     border-radius:50%;
-    background:var(--white);
+    background:var(--surface);
     display:flex;
     justify-content:center;
     align-items:center;
-    box-shadow:0 10px 30px rgba(20,33,61,.08);
+    box-shadow:0 10px 30px rgba(var(--primary-rgb),.08);
     transition:var(--transition);
 }
 
 .process-step:hover .process-icon{
-    background:var(--accent);
+    background:var(--accent-hover);
     box-shadow:var(--shadow-lg);
 }
 
@@ -80,7 +80,7 @@
 
 .process-step h3{
     margin:20px 0 10px;
-    color:var(--primary);
+    color:var(--text-strong);
 }
 
 .process-step p{

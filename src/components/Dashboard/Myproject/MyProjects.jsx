@@ -5,9 +5,11 @@ import {
   FaGlobe,
   FaCalendarAlt,
   FaFlag,
+  FaPoundSign,
 } from "react-icons/fa";
 
 import api from "../../../services/api";
+import { formatGBP } from "../../../utils/billingFormat";
 
 const STATUS_LABELS = {
   planning: "Planning",
@@ -28,16 +30,19 @@ const formatDate = (value) =>
 
 const MyProjects = () => {
   const [projects, setProjects] = useState([]);
+  const [counts, setCounts] = useState(null);
   const [status, setStatus] = useState("loading"); // loading | success | error
 
   useEffect(() => {
     let cancelled = false;
 
-    api
-      .get("/projects", { params: { limit: 50 } })
-      .then((res) => {
+    // Counts come from the server's per-status aggregation (the same numbers
+    // as the dashboard KPIs), not from this page's first 50 projects.
+    Promise.all([api.get("/projects", { params: { limit: 50 } }), api.get("/dashboard/summary")])
+      .then(([list, summary]) => {
         if (cancelled) return;
-        setProjects(res.data?.data || []);
+        setProjects(list.data?.data || []);
+        setCounts(summary.data?.data?.projects || null);
         setStatus("success");
       })
       .catch(() => {
@@ -49,10 +54,11 @@ const MyProjects = () => {
     };
   }, []);
 
-  const total = projects.length;
-  const inProgress = projects.filter((p) => p.status === "active").length;
-  const completed = projects.filter((p) => p.status === "completed").length;
-  const planning = projects.filter((p) => p.status === "planning").length;
+  const count = (key) => (status === "success" ? counts?.[key] ?? 0 : "-");
+  const total = count("total");
+  const inProgress = count("active");
+  const completed = count("completed");
+  const planning = count("planning");
 
   return (
     <div className="projects-page">
@@ -150,6 +156,16 @@ const MyProjects = () => {
 
               </div>
 
+              {project.linkedServices?.length > 0 && (
+                <div className="project-services" aria-label="Services in this project">
+                  {project.linkedServices.map((s) => (
+                    <span key={s._id} className="project-service-chip">
+                      {s.service?.title || "Service"}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <div className="project-info">
 
                 <div>
@@ -159,8 +175,20 @@ const MyProjects = () => {
 
                 <div>
                   <FaCalendarAlt />
-                  <span>{formatDate(project.dueDate)}</span>
+                  <span>Start {formatDate(project.startDate)}</span>
                 </div>
+
+                <div>
+                  <FaCalendarAlt />
+                  <span>Due {formatDate(project.dueDate)}</span>
+                </div>
+
+                {typeof project.budgetPence === "number" && (
+                  <div>
+                    <FaPoundSign />
+                    <span>Budget {formatGBP(project.budgetPence)}</span>
+                  </div>
+                )}
 
               </div>
 

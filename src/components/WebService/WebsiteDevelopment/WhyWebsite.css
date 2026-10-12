@@ -1,6 +1,6 @@
 .why-website{
     padding:100px 8%;
-    background:#fff;
+    background:var(--surface);
 }
 
 .why-website-container{
@@ -16,8 +16,8 @@
 .section-tag{
     display:inline-block;
     padding:8px 20px;
-    background:#E8F3FC;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
     border-radius:30px;
     font-size:14px;
     font-weight:600;
@@ -26,18 +26,18 @@
 
 .why-header h2{
     font-size:46px;
-    color:#1E2A5E;
+    color:var(--text-strong);
     margin-bottom:20px;
 }
 
 .why-header h2 span{
-    color:#0077CC;
+    color:var(--accent);
 }
 
 .why-header p{
     max-width:720px;
     margin:auto;
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
 }
 
@@ -48,23 +48,23 @@
 }
 
 .why-card{
-    background:#fff;
-    border:1px solid #E5E7EB;
-    border-radius:18px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-xl);
     padding:35px;
     transition:.3s;
 }
 
 .why-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 20px 40px rgba(0,0,0,.08);
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
 }
 
 .why-icon{
     width:70px;
     height:70px;
-    background:#E8F3FC;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
     border-radius:50%;
     display:flex;
     justify-content:center;
@@ -74,13 +74,13 @@
 }
 
 .why-card h3{
-    color:#1E2A5E;
+    color:var(--text-strong);
     margin-bottom:15px;
     font-size:22px;
 }
 
 .why-card p{
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
 }
 

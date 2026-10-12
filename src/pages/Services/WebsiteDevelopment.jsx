@@ -1,4 +1,6 @@
-import WebsiteFAQ from "../../components/WebService/WebsiteDevelopment/WebsiteFAQ";
+// <WebsiteFAQ/> is disabled below; keep its stylesheet loaded since its global
+// .faq-* / .section-tag rules also apply to other components.
+import "../../components/WebService/WebsiteDevelopment/WebsiteFAQ.css";
 import WebsiteHero from "../../components/WebService/WebsiteDevelopment/WebsiteHero";
 import WebsiteProcess from "../../components/WebService/WebsiteDevelopment/WebsiteProcess";
 import WebsiteServices from "../../components/WebService/WebsiteDevelopment/WebsiteServices";

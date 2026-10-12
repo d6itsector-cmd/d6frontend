@@ -1,6 +1,6 @@
 .website-hero{
     padding:120px 8% 80px;
-    background:#F8FAFC;
+    background:var(--surface-alt);
 }
 
 .website-hero-container{
@@ -19,8 +19,8 @@
 .hero-badge{
     display:inline-block;
     padding:8px 20px;
-    background:#E8F3FC;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
     border-radius:30px;
     font-size:14px;
     font-weight:600;
@@ -29,18 +29,18 @@
 
 .website-hero-content h1{
     font-size:56px;
-    color:#1E2A5E;
+    color:var(--text-strong);
     line-height:1.2;
     margin-bottom:25px;
 }
 
 .website-hero-content h1 span{
-    color:#0077CC;
+    color:var(--accent);
 }
 
 .website-hero-content p{
     font-size:18px;
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
     margin-bottom:35px;
     max-width:560px;
@@ -53,10 +53,10 @@
 
 .primary-btn{
     padding:15px 35px;
-    background:#0077CC;
-    color:#fff;
+    background:var(--accent);
+    color:var(--white);
     border:none;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-size:16px;
     font-weight:600;
@@ -64,15 +64,15 @@
 }
 
 .primary-btn:hover{
-    background:#E69518;
+    background:var(--accent-hover);
 }
 
 .secondary-btn{
     padding:15px 35px;
     background:transparent;
-    color:#1E2A5E;
-    border:2px solid #1E2A5E;
-    border-radius:8px;
+    color:var(--text-strong);
+    border:2px solid var(--text-strong);
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-size:16px;
     font-weight:600;
@@ -80,8 +80,8 @@
 }
 
 .secondary-btn:hover{
-    background:#1E2A5E;
-    color:#fff;
+    background:var(--accent-hover);
+    color:var(--white);
 }
 
 .website-hero-image{
@@ -93,7 +93,7 @@
 .website-hero-image img{
     width:100%;
     max-width:520px;
-    border-radius:20px;
+    border-radius:var(--radius-xl);
     animation:float 3s ease-in-out infinite;
 }
 

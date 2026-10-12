@@ -1,6 +1,6 @@
 .reports-page{
     padding:30px;
-    background:#F5F7FB;
+    background:var(--surface-alt);
     min-height:100vh;
 }
 
@@ -9,14 +9,14 @@
 }
 
 .reports-header h1{
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:32px;
     font-weight:700;
     margin-bottom:8px;
 }
 
 .reports-header p{
-    color:#666;
+    color:var(--text-light);
     font-size:15px;
     max-width:700px;
     line-height:1.6;

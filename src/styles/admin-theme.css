@@ -1,0 +1,508 @@
+/* ==========================================================
+   ADMIN THEME -- Zoho-style SaaS refinement for the admin panel.
+
+   Presentation only: every rule is scoped under .admin-layout
+   (or .sidebar, which only renders inside it), so public pages and
+   the client dashboard are untouched. Loaded from AdminLayout.jsx
+   after AdminLayout.css; the .admin-layout / .admin-content prefix
+   gives these rules enough specificity to sit on top of each
+   page's own stylesheet without editing those files.
+
+   Uses the existing tokens in tokens.css (navy, D6 blue, white,
+   light grey) -- no new colours.
+   ========================================================== */
+
+/* ---------- Layout ---------- */
+
+.admin-layout{
+  --admin-sidebar-w:260px;
+  background:var(--surface-alt);
+  font-family:var(--font-sans);
+  color:var(--text);
+}
+
+.admin-layout .admin-main{
+  margin-left:var(--admin-sidebar-w);
+}
+
+.admin-layout .admin-content{
+  padding:28px 32px 40px;
+  background:var(--surface-alt);
+}
+
+.admin-sidebar-backdrop{
+  background:var(--overlay);
+  backdrop-filter:blur(2px);
+}
+
+/* ---------- Sidebar (navy rail, Zoho-style) ---------- */
+
+.admin-layout .sidebar{
+  width:var(--admin-sidebar-w);
+  background:var(--primary);
+  border-right:none;
+  color:rgba(255,255,255,.82);
+}
+
+.admin-layout .sidebar-logo{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  grid-template-rows:auto auto;
+  column-gap:12px;
+  row-gap:2px;
+  align-items:center;
+  justify-items:start;
+  align-content:center;
+  /* Same height as .admin-topbar (Topbar.css) so the borders line up. */
+  height:64px;
+  flex-shrink:0;
+  padding:0 20px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.admin-layout .sidebar-logo img{
+  grid-row:1 / span 2;
+  width:36px;
+  height:36px;
+  border-radius:var(--radius-md);
+  border:none;
+  padding:5px;
+  background:var(--white);
+}
+
+.admin-layout .sidebar-logo h2{
+  color:var(--white);
+  font-size:15px;
+  font-weight:700;
+  line-height:1.25;
+  text-align:left;
+  letter-spacing:.01em;
+}
+
+.admin-layout .sidebar-logo span{
+  color:var(--accent-on-dark);
+  font-size:12px;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.admin-layout .sidebar-menu{
+  padding:14px 0;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.18) transparent;
+}
+
+.admin-layout .menu-link{
+  position:relative;
+  gap:12px;
+  padding:10px 14px;
+  margin:2px 12px;
+  border-radius:var(--radius-md);
+  color:rgba(255,255,255,.78);
+  font-size:14px;
+  font-weight:500;
+  line-height:1.3;
+}
+
+.admin-layout .menu-link:hover{
+  background:rgba(255,255,255,.07);
+  color:var(--white);
+}
+
+.admin-layout .menu-link.active{
+  background:var(--accent);
+  color:var(--white);
+  font-weight:600;
+  box-shadow:0 2px 8px rgba(var(--accent-rgb),.35);
+}
+
+.admin-layout .menu-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:15px;
+  min-width:20px;
+  opacity:.9;
+}
+
+.admin-layout .menu-link.active .menu-icon{
+  opacity:1;
+}
+
+.admin-layout .logout-btn{
+  margin:14px 16px 18px;
+  height:42px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.82);
+  font-size:14px;
+}
+
+.admin-layout .logout-btn:hover{
+  background:rgba(var(--danger-rgb),.16);
+  border-color:rgba(var(--danger-rgb),.5);
+  color:var(--white);
+}
+
+/* ---------- Typography ---------- */
+
+.admin-content h1{
+  color:var(--text-strong);
+  font-size:26px;
+  font-weight:700;
+  line-height:1.25;
+  letter-spacing:-.01em;
+}
+
+.admin-content h1 + p{
+  color:var(--text-light);
+  font-size:14px;
+}
+
+.admin-content h2,
+.admin-content h3{
+  color:var(--text-strong);
+  letter-spacing:-.005em;
+}
+
+.admin-content h3{
+  font-size:17px;
+  font-weight:600;
+}
+
+/* Page header rows (each page names its own class). */
+.admin-content .admin-dashboard-header,
+.admin-content .page-header,
+.admin-content .bl-page-header,
+.admin-content .services-header,
+.admin-content .portfolio-header,
+.admin-content .blogs-header,
+.admin-content .reports-header,
+.admin-content .settings-header,
+.admin-content .consultation-header,
+.admin-content .project-header,
+.admin-content .doc-mgmt-header,
+.admin-content .report-mgmt-header{
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+
+.admin-content .admin-dashboard-header h1{
+  margin-bottom:4px;
+}
+
+/* ---------- Cards / panels ---------- */
+
+.admin-content .admin-dashboard-panel,
+.admin-content .admin-stats-card,
+.admin-content .client-table-container,
+.admin-content .portfolio-table-card,
+.admin-content .bl-card,
+.admin-content .settings-card,
+.admin-content .chart-card,
+.admin-content .activity-card,
+.admin-content .report-card,
+.admin-content .consultation-card,
+.admin-content .csvc-card,
+.admin-content .services-card,
+.admin-content .project-form-card,
+.admin-content .client-form-card,
+.admin-content .contact-view-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-xs);
+}
+
+.admin-content .admin-dashboard-panel{
+  padding:22px 24px;
+}
+
+.admin-content .admin-dashboard-panel h3{
+  margin-bottom:16px;
+}
+
+.admin-content .admin-dashboard-panel-mt{
+  margin-top:24px;
+}
+
+.admin-content .admin-dashboard-overview{
+  gap:12px;
+}
+
+.admin-content .admin-dashboard-overview-row{
+  padding:10px 12px;
+  border-radius:var(--radius-md);
+  background:var(--surface-alt);
+  color:var(--text);
+  font-size:14px;
+}
+
+/* ---------- KPI / stats cards ---------- */
+
+.admin-content .dashboard-cards{
+  gap:20px;
+  margin-top:0;
+  margin-bottom:24px;
+}
+
+.admin-content .admin-stats-card{
+  padding:20px;
+  gap:16px;
+  transition:box-shadow var(--transition),border-color var(--transition),transform var(--transition);
+}
+
+.admin-content .admin-stats-card:hover{
+  border-color:var(--accent-border);
+  box-shadow:var(--shadow-md);
+  transform:translateY(-1px);
+}
+
+.admin-content .admin-stats-icon{
+  width:48px;
+  height:48px;
+  flex-shrink:0;
+  border-radius:var(--radius-md);
+  font-size:20px;
+}
+
+.admin-content .stats-content p{
+  font-size:13px;
+  font-weight:500;
+  color:var(--text-light);
+}
+
+.admin-content .stats-content h2{
+  margin-top:4px;
+  font-size:26px;
+  font-weight:700;
+  line-height:1.2;
+}
+
+/* ---------- Charts ---------- */
+
+.admin-content .chart-card{
+  padding:22px 24px;
+}
+
+/* ---------- Tables (desktop only -- several pages switch to stacked
+   card rows on small screens and must keep their own mobile rules) ---- */
+
+@media (min-width:769px){
+  .admin-content table thead th{
+    background:var(--surface-alt);
+    color:var(--text-light);
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+  }
+
+  .admin-content table tbody td{
+    padding:13px 14px;
+    font-size:14px;
+    border-bottom:1px solid var(--border);
+    vertical-align:middle;
+  }
+
+  .admin-content table tbody tr:last-child td{
+    border-bottom:none;
+  }
+
+  .admin-content table tbody tr{
+    transition:background var(--transition);
+  }
+
+  .admin-content table tbody tr:hover,
+  .admin-content table tbody tr:hover td{
+    background:var(--accent-softer);
+  }
+}
+
+/* ---------- Form controls ---------- */
+
+.admin-content input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="color"]):not([type="range"]),
+.admin-content select,
+.admin-content textarea{
+  border-color:var(--border-strong);
+  border-radius:var(--radius-md);
+  font-size:14px;
+  color:var(--text);
+  background-color:var(--surface);
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+
+.admin-content input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="color"]):not([type="range"]):focus,
+.admin-content select:focus,
+.admin-content textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:var(--focus-ring);
+}
+
+.admin-content label{
+  color:var(--text-body);
+}
+
+/* ---------- Buttons ---------- */
+
+.admin-content button,
+.admin-content .admin-dashboard-add-btn{
+  transition:background-color var(--transition),border-color var(--transition),color var(--transition),box-shadow var(--transition);
+}
+
+/* Primary actions -- same blue, Zoho-like compact sizing. */
+.admin-content .admin-dashboard-add-btn,
+.admin-content .add-btn,
+.admin-content .add-service-btn,
+.admin-content .add-portfolio-btn,
+.admin-content .add-blog-btn,
+.admin-content .save-btn,
+.admin-content .bl-btn--primary,
+.admin-content .doc-mgmt-upload-btn,
+.admin-content .report-mgmt-upload-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:var(--radius-md);
+  font-size:14px;
+  font-weight:600;
+  box-shadow:0 1px 2px rgba(var(--accent-rgb),.25);
+}
+
+.admin-content .admin-dashboard-add-btn:hover,
+.admin-content .add-btn:hover,
+.admin-content .add-service-btn:hover,
+.admin-content .add-portfolio-btn:hover,
+.admin-content .add-blog-btn:hover,
+.admin-content .save-btn:hover,
+.admin-content .doc-mgmt-upload-btn:hover,
+.admin-content .report-mgmt-upload-btn:hover{
+  background:var(--accent-hover);
+}
+
+.admin-content .edit-btn,
+.admin-content .delete-btn,
+.admin-content .view-btn,
+.admin-content .services-btn,
+.admin-content .reply-btn,
+.admin-content .bl-btn--sm{
+  border-radius:var(--radius-sm);
+  font-size:13px;
+  font-weight:600;
+}
+
+/* ---------- Badges / status pills ---------- */
+
+.admin-content .status,
+.admin-content .status-badge,
+.admin-content .badge,
+.admin-content .bl-badge,
+.admin-content .csvc-badge{
+  display:inline-flex;
+  align-items:center;
+  border-radius:var(--radius-pill);
+  font-size:12px;
+  font-weight:600;
+  line-height:1.4;
+}
+
+/* ---------- Tabs ---------- */
+
+.admin-content .bl-tabs{
+  gap:4px;
+  padding:4px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  width:fit-content;
+  max-width:100%;
+}
+
+.admin-content .bl-tab{
+  padding:8px 16px;
+  border-radius:var(--radius-sm);
+  box-shadow:none;
+  color:var(--text-body);
+  font-size:13px;
+}
+
+.admin-content .bl-tab:hover{
+  background:var(--surface-alt);
+  color:var(--text-strong);
+}
+
+.admin-content .bl-tab.active{
+  background:var(--accent);
+  color:var(--white);
+}
+
+/* ---------- Scrollbar ---------- */
+
+.admin-layout ::-webkit-scrollbar-thumb{
+  background:var(--border-strong);
+  border-radius:var(--radius-pill);
+}
+
+.admin-layout ::-webkit-scrollbar-thumb:hover{
+  background:var(--text-muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width:992px){
+  .admin-layout .admin-main{
+    margin-left:0;
+  }
+
+  .admin-layout .admin-content{
+    padding:20px;
+  }
+}
+
+@media (max-width:768px){
+  .admin-content h1{
+    font-size:22px;
+  }
+
+  .admin-content .admin-dashboard-panel,
+  .admin-content .chart-card{
+    padding:18px;
+  }
+
+  .admin-content .dashboard-cards{
+    gap:14px;
+  }
+}
+
+@media (max-width:576px){
+  .admin-layout .admin-content{
+    padding:14px;
+  }
+
+  .admin-content .bl-tabs{
+    width:100%;
+  }
+}
+
+/* Admin Projects page wrapper. Its padding/fade-in used to come from the
+   client MyProjects.css (both pages use .projects-page); that file is now
+   scoped to the client dashboard, so the same values live here to keep
+   the admin page looking exactly as before. */
+.admin-content .projects-page{
+  padding:30px;
+  animation:fadeIn .4s ease;
+}
+
+@media (max-width:768px){
+  .admin-content .projects-page{
+    padding:20px;
+  }
+}

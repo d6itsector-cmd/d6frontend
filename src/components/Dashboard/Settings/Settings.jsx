@@ -6,10 +6,12 @@ import {
   FaBell,
   FaLock,
   FaShieldAlt,
+  FaAdjust,
 } from "react-icons/fa";
 
 import api from "../../../services/api";
 import { useAuth } from "../../../context/AuthContext";
+import ThemeChoice from "../../../theme/ThemeChoice";
 
 const Settings = () => {
   const { currentUser, resetPassword } = useAuth();
@@ -95,6 +97,14 @@ const Settings = () => {
           >
             <FaShieldAlt />
             Security
+          </div>
+
+          <div
+            className={`menu-item ${activeSection === "appearance" ? "active" : ""}`}
+            onClick={() => setActiveSection("appearance")}
+          >
+            <FaAdjust />
+            Appearance
           </div>
 
         </div>
@@ -246,6 +256,20 @@ const Settings = () => {
                 </button>
 
               </div>
+
+            </>
+          )}
+
+          {activeSection === "appearance" && (
+            <>
+
+              <h2>Appearance</h2>
+
+              <p className="settings-note">
+                Choose a light or dark theme for the whole site on this device.
+              </p>
+
+              <ThemeChoice name="client-theme" />
 
             </>
           )}

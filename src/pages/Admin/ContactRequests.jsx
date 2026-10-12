@@ -3,7 +3,8 @@ import ContactRequestTable from "../../components/Admin/ContactRequests/ContactR
 import ContactRequestView from "../../components/Admin/ContactRequests/ContactRequestView";
 import api from "../../services/api";
 
-const ContactRequests = () => {
+// `embedded`: rendered as a tab of /admin/leads, which supplies the header.
+const ContactRequests = ({ embedded = false }) => {
   const [requests, setRequests] = useState([]);
   const [status, setStatus] = useState("loading");
   const [search, setSearch] = useState("");
@@ -37,13 +38,15 @@ const ContactRequests = () => {
   };
 
   return (
-    <div className="clients-page">
-      <div className="page-header">
-        <div>
-          <h1>Contact Requests</h1>
-          <p>Manage all contact enquiries received from your website.</p>
+    <div className={embedded ? undefined : "clients-page"}>
+      {!embedded && (
+        <div className="page-header">
+          <div>
+            <h1>Contact Requests</h1>
+            <p>Manage all contact enquiries received from your website.</p>
+          </div>
         </div>
-      </div>
+      )}
 
       <ContactRequestTable
         requests={requests}

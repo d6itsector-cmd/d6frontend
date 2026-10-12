@@ -4,6 +4,7 @@
 
 .profile {
   position: relative;
+  min-width: 0;
 }
 
 /* Profile Card */
@@ -13,29 +14,56 @@
   align-items: center;
   gap: 10px;
 
-  min-width: 190px;
-  height: 58px;
+  min-width: 0;
+  height: 42px;
 
-  padding: 8px 14px;
+  padding: 4px 12px 4px 6px;
 
-  background: #fff;
-  border: 1px solid #E5E7EB;
-  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 
   cursor: pointer;
-  transition: all .3s ease;
+  transition: background-color var(--transition), border-color var(--transition);
 }
 
 .profile-box:hover {
-  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  background: var(--surface-alt);
+  border-color: var(--border-strong);
 }
 
 /* Avatar */
 
 .profile-avatar {
-  font-size: 40px;
-  color: #94A3B8;
+  font-size: 30px;
+  color: var(--text-muted);
   flex-shrink: 0;
+}
+
+/* Name / role block (unclassed <div> in ProfileMenu.jsx) */
+
+.profile-box > div {
+  min-width: 0;
+}
+
+/* No truncation: on desktop the name sits on one line; on phones it may
+   wrap (see below) so the full name is always shown. */
+.profile-box h3,
+.profile-box p {
+  white-space: nowrap;
+}
+
+/* Chevron (last child of the box) */
+
+.profile-box > svg:last-child {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.profile-box:hover > svg:last-child {
+  color: var(--accent);
 }
 
 /* Profile Info */
@@ -49,16 +77,16 @@
 
 .profile-box h3 {
   margin: 0;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
-  color: #111827;
+  color: var(--text);
   line-height: 1.2;
 }
 
 .profile-box p {
-  margin: 2px 0 0;
-  font-size: 12px;
-  color: #6B7280;
+  margin: 1px 0 0;
+  font-size: 11px;
+  color: var(--text-light);
   line-height: 1.2;
 }
 
@@ -66,12 +94,12 @@
 
 .profile-arrow {
   font-size: 14px;
-  color: #94A3B8;
+  color: var(--text-muted);
   transition: .3s;
 }
 
 .profile-box:hover .profile-arrow {
-  color: #0077CC;
+  color: var(--accent);
 }
 
 /* ==========================================
@@ -85,11 +113,11 @@
 
   width: 260px;
 
-  background: #fff;
-  border: 1px solid #E5E7EB;
-  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
 
-  box-shadow: 0 20px 45px rgba(0,0,0,.12);
+  box-shadow: var(--shadow-lg);
 
   overflow: hidden;
 
@@ -124,27 +152,28 @@
 
   width: 100%;
 
-  padding: 15px 18px;
+  padding: 11px 16px;
 
-  color: #1F2937;
+  color: var(--text);
   text-decoration: none;
+  cursor: pointer;
 
-  transition: .25s;
+  transition: background-color var(--transition), color var(--transition);
 }
 
 .profile-item:hover {
-  background: #F8FAFC;
-  color: #0077CC;
+  background: var(--surface-alt);
+  color: var(--accent);
 }
 
 .profile-item svg {
-  width: 18px;
-  min-width: 18px;
-  font-size: 18px;
+  width: 16px;
+  min-width: 16px;
+  font-size: 16px;
 }
 
 .profile-item span {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -152,50 +181,98 @@
 
 .profile-divider {
   height: 1px;
-  background: #E5E7EB;
+  background: var(--surface-sunken);
   margin: 4px 0;
 }
 
 /* Logout */
 
 .logout {
-  color: #EF4444;
+  color: var(--danger);
 }
 
 .logout svg {
-  color: #EF4444;
+  color: var(--danger);
 }
 
 .logout:hover {
-  background: #FEF2F2;
-  color: #DC2626;
+  background: var(--danger-soft);
+  color: var(--danger);
 }
 
 /* Responsive */
 
 @media (max-width:768px){
 
-  .profile-box{
-      min-width:160px;
-      height:52px;
-      padding:8px 12px;
-  }
-
-  .profile-avatar{
-      font-size:34px;
-  }
-
-  .profile-box h3{
-      font-size:15px;
-  }
-
-  .profile-box p{
-      font-size:11px;
-  }
-
   .profile-dropdown{
       width:230px;
       max-width:calc(100vw - 30px);
+  }
+
+}
+
+/* Phones: avatar, full name, role and chevron stay visible, each on a
+   single line -- never truncated. Padding, gaps and font sizes shrink so
+   typical names fit beside the full "Admin Dashboard" title; a longer
+   name moves the bell + profile group to its own row (Topbar.css). */
+@media (max-width:576px){
+
+  .profile-box{
+      height:36px;
+      padding:2px 5px 2px 3px;
+      gap:4px;
+  }
+
+  .profile-avatar{
+      font-size:22px;
+  }
+
+  .profile-box > div{
+      flex-shrink:0;
+  }
+
+  .profile-box h3,
+  .profile-box p{
+      white-space:nowrap;
+  }
+
+  .profile-box h3{
+      font-size:12px;
+      line-height:1.25;
+  }
+
+  .profile-box p{
+      font-size:10px;
+      line-height:1.2;
+  }
+
+  .profile-box > svg:last-child{
+      font-size:9px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .profile-box{
+      padding:2px 4px 2px 2px;
+      gap:3px;
+  }
+
+  .profile-avatar{
+      font-size:20px;
+  }
+
+  .profile-box h3{
+      font-size:11px;
+  }
+
+  .profile-box p{
+      font-size:9px;
+  }
+
+  .profile-box > svg:last-child{
+      font-size:8px;
   }
 
 }

@@ -4,7 +4,7 @@
 
 .support{
     padding:35px;
-    background:#F5F7FB;
+    background:var(--surface-alt);
     min-height:100vh;
     animation:fadeIn .4s ease;
 }
@@ -23,12 +23,12 @@
 
 .support-header h1{
     font-size:36px;
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:8px;
 }
 
 .support-header p{
-    color:#7B8498;
+    color:var(--text-light);
     font-size:16px;
 }
 
@@ -37,18 +37,18 @@
     align-items:center;
     gap:10px;
     padding:15px 24px;
-    background:#14213D;
-    color:#fff;
+    background:var(--accent);
+    color:var(--white);
     border:none;
-    border-radius:14px;
+    border-radius:var(--radius-lg);
     cursor:pointer;
     font-weight:600;
     transition:.3s;
 }
 
 .create-ticket:hover{
-    background:#0077CC;
-    color:#14213D;
+    background:var(--accent-hover);
+    color:var(--white);
     transform:translateY(-3px);
 }
 
@@ -63,19 +63,19 @@
 }
 
 .support-card{
-    background:#fff;
-    border-radius:22px;
+    background:var(--surface);
+    border-radius:var(--radius-xl);
     padding:35px 25px;
     text-align:center;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    box-shadow:var(--shadow-md);
     transition:.35s;
     width:100%;
     max-width:320px;
 }
 
 .support-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 45px rgba(0,0,0,.12);
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
 }
 
 .support-icon{
@@ -83,9 +83,9 @@
     height:75px;
     margin:auto;
     margin-bottom:20px;
-    border-radius:18px;
-    background:#E8F3FC;
-    color:#0077CC;
+    border-radius:var(--radius-xl);
+    background:var(--accent-soft);
+    color:var(--accent);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -93,13 +93,13 @@
 }
 
 .support-card h3{
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:10px;
     font-size:22px;
 }
 
 .support-card p{
-    color:#777;
+    color:var(--text-light);
     line-height:1.6;
 }
 
@@ -108,10 +108,10 @@
 ========================================== */
 
 .ticket-table{
-    background:#fff;
-    border-radius:22px;
+    background:var(--surface);
+    border-radius:var(--radius-xl);
     padding:30px;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    box-shadow:var(--shadow-md);
     margin-bottom:40px;
 }
 
@@ -121,12 +121,12 @@
 
 .ticket-status-msg{
     text-align:center;
-    color:#7B8498;
+    color:var(--text-light);
     padding:30px 0;
 }
 
 .ticket-title h2{
-    color:#14213D;
+    color:var(--text-strong);
     font-size:28px;
 }
 
@@ -136,15 +136,15 @@
 }
 
 .ticket-table th{
-    background:#F8FAFC;
-    color:#14213D;
+    background:var(--surface-alt);
+    color:var(--text-strong);
     padding:18px;
     text-align:left;
 }
 
 .ticket-table td{
     padding:18px;
-    border-bottom:1px solid #EEF2F7;
+    border-bottom:1px solid var(--border);
 }
 
 .ticket-table tr:last-child td{
@@ -161,28 +161,28 @@
 }
 
 .status.open{
-    background:#FFF3CD;
-    color:#E67E22;
+    background:var(--accent-soft);
+    color:var(--accent);
 }
 
 .status.in-progress{
-    background:#EAF4FF;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
 }
 
 .status.resolved{
-    background:#EAFBF3;
-    color:#22C55E;
+    background:var(--success-soft);
+    color:var(--success);
 }
 
 .waiting-client{
-    background:#F3E8FF;
-    color:#9333EA;
+    background:var(--pending-soft);
+    color:var(--pending);
 }
 
 .status.closed{
-    background:#F1F5F9;
-    color:#64748B;
+    background:var(--surface-sunken);
+    color:var(--text-light);
 }
 
 .view-btn{
@@ -191,16 +191,16 @@
     gap:8px;
     padding:10px 18px;
     border:none;
-    background:#14213D;
-    color:#fff;
-    border-radius:10px;
+    background:var(--accent);
+    color:var(--white);
+    border-radius:var(--radius-md);
     cursor:pointer;
     transition:.3s;
 }
 
 .view-btn:hover{
-    background:#0077CC;
-    color:#14213D;
+    background:var(--accent-hover);
+    color:var(--white);
 }
 
 /* ==========================================
@@ -215,21 +215,21 @@
 }
 
 .stat-card{
-    background:#fff;
-    border-radius:20px;
+    background:var(--surface);
+    border-radius:var(--radius-xl);
     padding:30px;
     text-align:center;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    box-shadow:var(--shadow-md);
 }
 
 .stat-card h2{
-    color:#0077CC;
+    color:var(--accent);
     font-size:42px;
     margin-bottom:10px;
 }
 
 .stat-card p{
-    color:#666;
+    color:var(--text-light);
 }
 
 /* ==========================================
@@ -237,21 +237,21 @@
 ========================================== */
 
 .faq-section{
-    background:#fff;
-    border-radius:22px;
+    background:var(--surface);
+    border-radius:var(--radius-xl);
     padding:35px;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
+    box-shadow:var(--shadow-md);
     margin-bottom:40px;
 }
 
 .faq-section h2{
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:30px;
 }
 
 .faq-item{
     padding:20px 0;
-    border-bottom:1px solid #EEF2F7;
+    border-bottom:1px solid var(--border);
 }
 
 .faq-item:last-child{
@@ -259,12 +259,12 @@
 }
 
 .faq-item h4{
-    color:#14213D;
+    color:var(--text-strong);
     margin-bottom:10px;
 }
 
 .faq-item p{
-    color:#777;
+    color:var(--text-light);
     line-height:1.7;
 }
 
@@ -273,10 +273,10 @@
 ========================================== */
 
 .meeting-card{
-    background:linear-gradient(135deg,#14213D,#20345F);
-    color:#fff;
+    background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    color:var(--white);
     padding:40px;
-    border-radius:24px;
+    border-radius:var(--radius-xl);
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -290,16 +290,16 @@
 
 .meeting-card p{
     max-width:650px;
-    color:#E5E7EB;
+    color:var(--border);
     line-height:1.7;
 }
 
 .meeting-btn{
     padding:16px 32px;
-    background:#0077CC;
-    color:#14213D;
+    background:var(--accent);
+    color:var(--white);
     border:none;
-    border-radius:14px;
+    border-radius:var(--radius-lg);
     cursor:pointer;
     font-size:16px;
     font-weight:600;
@@ -307,7 +307,7 @@
 }
 
 .meeting-btn:hover{
-    transform:translateY(-4px);
+    transform:translateY(-2px);
 }
 
 /* ==========================================

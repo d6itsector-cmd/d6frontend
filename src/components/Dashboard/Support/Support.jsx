@@ -22,8 +22,8 @@ const Support = () => {
   const [showCreate, setShowCreate] = useState(false);
   const [activeTicketId, setActiveTicketId] = useState(null);
 
-  const loadTickets = () => {
-    setStatus("loading");
+  // Initial status is already "loading", so the fetch needs no reset first.
+  useEffect(() => {
     api
       .get("/support", { params: { limit: 20 } })
       .then((res) => {
@@ -31,10 +31,6 @@ const Support = () => {
         setStatus("success");
       })
       .catch(() => setStatus("error"));
-  };
-
-  useEffect(() => {
-    loadTickets();
   }, []);
 
   const openCount = tickets.filter((t) => t.status === "open" || t.status === "in-progress").length;

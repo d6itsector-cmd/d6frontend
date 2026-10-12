@@ -7,8 +7,6 @@ import {
   FaUsers,
   FaProjectDiagram,
   FaUserFriends,
-  FaEnvelope,
-  FaCalendarCheck,
   FaCog,
   FaServicestack,
   FaImages,
@@ -54,19 +52,9 @@ const Sidebar = ({ isOpen, onClose }) => {
       path: "/admin/projects",
     },
     {
-      name: "Leads",
+      name: "Leads & Contact Requests",
       icon: <FaUserFriends />,
       path: "/admin/leads",
-    },
-    {
-      name: "Contact Requests",
-      icon: <FaEnvelope />,
-      path: "/admin/contact-requests",
-    },
-    {
-      name: "Consultations",
-      icon: <FaCalendarCheck />,
-      path: "/admin/consultations",
     },
     {
       name: "Services",

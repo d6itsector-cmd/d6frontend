@@ -14,8 +14,8 @@
     max-width:100%;
     max-height:88vh;
     overflow-y:auto;
-    background:var(--white);
-    border-radius:16px;
+    background:var(--surface);
+    border-radius:var(--radius-lg);
     padding:30px;
     position:relative;
     animation:popup .3s ease;
@@ -34,12 +34,12 @@
 }
 
 .csvc-header h2{
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:4px;
 }
 
 .csvc-header p{
-    color:#888;
+    color:var(--text-muted);
     font-size:14px;
 }
 
@@ -51,22 +51,22 @@
 }
 
 .csvc-section-header h3{
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:18px;
 }
 
 .csvc-assign-btn{
     background:var(--accent);
-    color:var(--primary);
+    color:var(--white);
     border:none;
     padding:10px 18px;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     font-weight:600;
     cursor:pointer;
 }
 
 .csvc-status{
-    color:#888;
+    color:var(--text-muted);
     padding:20px 0;
     text-align:center;
 }
@@ -74,8 +74,8 @@
 /* ---------- form ---------- */
 
 .csvc-form{
-    background:#F8FAFC;
-    border-radius:12px;
+    background:var(--surface-alt);
+    border-radius:var(--radius-lg);
     padding:20px;
     margin-bottom:24px;
 }
@@ -89,8 +89,8 @@
 .csvc-form-grid textarea{
     width:100%;
     padding:12px;
-    border:1px solid #ddd;
-    border-radius:10px;
+    border:1px solid var(--border-strong);
+    border-radius:var(--radius-md);
     outline:none;
     font-size:14px;
     font-family:inherit;
@@ -98,8 +98,8 @@
 }
 
 .csvc-form-grid select:disabled{
-    background:#f5f5f5;
-    color:#888;
+    background:var(--surface-alt);
+    color:var(--text-muted);
 }
 
 /* ---------- assigned services list ---------- */
@@ -111,8 +111,8 @@
 }
 
 .csvc-row{
-    background:#F8FAFC;
-    border-radius:14px;
+    background:var(--surface-alt);
+    border-radius:var(--radius-lg);
     padding:18px 20px;
 }
 
@@ -124,23 +124,23 @@
 }
 
 .csvc-row-main strong{
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:16px;
 }
 
 .csvc-badge{
     padding:6px 14px;
-    border-radius:20px;
+    border-radius:var(--radius-xl);
     font-size:12px;
     font-weight:600;
     white-space:nowrap;
 }
 
-.csvc-pending{ background:#FFF4E5; color:#B45309; }
-.csvc-active{ background:#dcfce7; color:#16a34a; }
-.csvc-on-hold{ background:#FEF3C7; color:#92400E; }
-.csvc-completed{ background:#DBEAFE; color:#1D4ED8; }
-.csvc-cancelled{ background:#fee2e2; color:#dc2626; }
+.csvc-pending{ background:var(--warning-soft); color:var(--warning-text); }
+.csvc-active{ background:var(--success-soft); color:var(--success); }
+.csvc-on-hold{ background:var(--warning-soft); color:var(--warning-text); }
+.csvc-completed{ background:var(--success-soft); color:var(--success); }
+.csvc-cancelled{ background:var(--danger-soft); color:var(--danger); }
 
 .csvc-progress-row{
     display:flex;
@@ -152,21 +152,21 @@
 .csvc-progress-bar{
     flex:1;
     height:8px;
-    background:#EEF2F7;
+    background:var(--surface-sunken);
     border-radius:30px;
     overflow:hidden;
 }
 
 .csvc-progress-fill{
     height:100%;
-    background:linear-gradient(90deg,#0077CC,#4DA8E8);
+    background:linear-gradient(90deg,var(--accent),var(--accent));
     border-radius:30px;
 }
 
 .csvc-progress-row span{
     font-size:13px;
     font-weight:600;
-    color:var(--primary);
+    color:var(--text-strong);
     width:40px;
     text-align:right;
 }
@@ -174,16 +174,16 @@
 .csvc-row-meta{
     display:flex;
     gap:20px;
-    color:#7B8498;
+    color:var(--text-light);
     font-size:13px;
     margin-bottom:10px;
 }
 
 .csvc-action-required{
-    background:#FFF4E5;
-    color:#92400E;
+    background:var(--warning-soft);
+    color:var(--warning-text);
     padding:10px 14px;
-    border-radius:10px;
+    border-radius:var(--radius-md);
     font-size:13px;
     margin-bottom:12px;
 }
@@ -202,4 +202,15 @@
         flex-direction:column;
         gap:6px;
     }
+}
+
+/* Success message after assigning/updating a service (assignment workflow). */
+.csvc-notice{
+margin:0 0 14px;
+padding:10px 14px;
+border-radius:var(--radius-md);
+background:var(--success-soft);
+color:var(--success);
+font-size:14px;
+font-weight:500;
 }

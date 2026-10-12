@@ -15,7 +15,14 @@ const formatDate = (value) =>
       })
     : "";
 
+// Keyed by ticketId so every open (or ticket switch) mounts a fresh detail
+// view that starts in "loading", without resetting state inside an effect.
 const TicketDetailModal = ({ ticketId, onClose }) => {
+  if (!ticketId) return null;
+  return <TicketDetail key={ticketId} ticketId={ticketId} onClose={onClose} />;
+};
+
+const TicketDetail = ({ ticketId, onClose }) => {
   const [ticket, setTicket] = useState(null);
   const [replies, setReplies] = useState([]);
   const [status, setStatus] = useState("loading"); // loading | success | error
@@ -23,10 +30,7 @@ const TicketDetailModal = ({ ticketId, onClose }) => {
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    if (!ticketId) return;
-
     let cancelled = false;
-    setStatus("loading");
 
     api
       .get(`/support/${ticketId}`)
@@ -44,8 +48,6 @@ const TicketDetailModal = ({ ticketId, onClose }) => {
       cancelled = true;
     };
   }, [ticketId]);
-
-  if (!ticketId) return null;
 
   const handleReply = async (e) => {
     e.preventDefault();

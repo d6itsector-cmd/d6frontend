@@ -1,6 +1,6 @@
 .portfolio-page{
     padding:30px;
-    background:#F5F7FB;
+    background:var(--surface-alt);
     min-height:100vh;
 }
 
@@ -13,21 +13,21 @@
 
 .portfolio-header h1{
     font-size:32px;
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:6px;
 }
 
 .portfolio-header p{
-    color:#666;
+    color:var(--text-light);
     font-size:15px;
 }
 
 .add-portfolio-btn{
     background:var(--accent);
-    color:var(--primary);
+    color:var(--white);
     border:none;
     padding:12px 24px;
-    border-radius:10px;
+    border-radius:var(--radius-md);
     font-weight:600;
     cursor:pointer;
     transition:.3s;
@@ -35,7 +35,7 @@
 
 .add-portfolio-btn:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(0, 119, 204,.25);
+    box-shadow:var(--shadow-md);
 }
 
 @media(max-width:768px){

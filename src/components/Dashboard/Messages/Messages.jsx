@@ -25,8 +25,8 @@ const Messages = () => {
   const [sending, setSending] = useState(false);
   const bodyRef = useRef(null);
 
-  const loadMessages = () => {
-    setStatus("loading");
+  // Initial status is already "loading", so the fetch needs no reset first.
+  useEffect(() => {
     api
       .get("/messages", { params: { limit: 50 } })
       .then((res) => {
@@ -34,10 +34,6 @@ const Messages = () => {
         setStatus("success");
       })
       .catch(() => setStatus("error"));
-  };
-
-  useEffect(() => {
-    loadMessages();
   }, []);
 
   useEffect(() => {

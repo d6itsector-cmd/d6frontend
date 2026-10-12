@@ -22,10 +22,10 @@
     max-width:100%;
     max-height:90vh;
     overflow-y:auto;
-    background:var(--white);
-    border-radius:15px;
+    background:var(--surface);
+    border-radius:var(--radius-lg);
     padding:30px;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    box-shadow:var(--shadow-lg);
     animation:popup .3s ease;
 }
 
@@ -55,15 +55,15 @@ to{
 }
 
 .form-header h2{
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:28px;
 }
 
 .form-error-msg{
-    background:rgba(220,53,69,.1);
-    color:#dc3545;
+    background:rgba(var(--danger-rgb),.1);
+    color:var(--danger);
     padding:12px 15px;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     font-size:14px;
     margin-bottom:20px;
 }
@@ -73,14 +73,14 @@ to{
     height:40px;
     border:none;
     border-radius:50%;
-    background:#eee;
+    background:var(--surface-sunken);
     cursor:pointer;
     font-size:18px;
     transition:.3s;
 }
 
 .close-btn:hover{
-    background:#ddd;
+    background:var(--border-strong);
 }
 
 /* ==========================
@@ -104,7 +104,7 @@ to{
 
 .form-group label{
     margin-bottom:8px;
-    color:var(--primary);
+    color:var(--text-strong);
     font-weight:600;
 }
 
@@ -114,8 +114,8 @@ to{
 
     width:100%;
     padding:12px 15px;
-    border:1px solid #ddd;
-    border-radius:8px;
+    border:1px solid var(--border-strong);
+    border-radius:var(--radius-md);
     outline:none;
     font-size:15px;
     transition:.3s;
@@ -163,24 +163,24 @@ to{
 
 .cancel-btn{
     padding:12px 25px;
-    background:#ddd;
+    background:var(--border-strong);
     border:none;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-weight:600;
     transition:.3s;
 }
 
 .cancel-btn:hover{
-    background:#cfcfcf;
+    background:var(--border-strong);
 }
 
 .save-btn{
     padding:12px 25px;
     background:var(--accent);
-    color:var(--primary);
+    color:var(--white);
     border:none;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-weight:600;
     transition:.3s;
@@ -188,7 +188,7 @@ to{
 
 .save-btn:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(0, 119, 204,.3);
+    box-shadow:var(--shadow-md);
 }
 
 /* ==========================
@@ -201,7 +201,7 @@ to{
 
 .blog-form::-webkit-scrollbar-thumb{
     background:var(--accent);
-    border-radius:20px;
+    border-radius:var(--radius-xl);
 }
 
 /* ==========================

@@ -24,7 +24,7 @@
     width:100%;
     max-width:520px;
     border-radius:25px;
-    box-shadow:0 20px 45px rgba(20,33,61,.15);
+    box-shadow:0 20px 45px rgba(var(--primary-rgb),.15);
     transition:var(--transition);
 }
 
@@ -41,7 +41,7 @@
 .sectionBadge{
     display:inline-block;
     padding:10px 22px;
-    background:rgba(0, 119, 204,.15);
+    background:rgba(var(--accent-rgb),.15);
     color:var(--accent);
     border-radius:50px;
     font-weight:600;
@@ -50,7 +50,7 @@
 
 .missionVision__content h2{
     font-size:48px;
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:20px;
     line-height:1.2;
 }
@@ -60,7 +60,7 @@
 }
 
 .sectionDesc{
-    color:#666;
+    color:var(--text-light);
     line-height:1.8;
     margin-bottom:35px;
 }
@@ -71,11 +71,11 @@
     display:flex;
     gap:20px;
     align-items:flex-start;
-    background:var(--white);
+    background:var(--surface);
     padding:22px;
-    border-radius:18px;
+    border-radius:var(--radius-xl);
     margin-bottom:20px;
-    box-shadow:0 10px 30px rgba(20,33,61,.08);
+    box-shadow:0 10px 30px rgba(var(--primary-rgb),.08);
     transition:var(--transition);
 }
 
@@ -91,19 +91,19 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(0, 119, 204,.12);
+    background:rgba(var(--accent-rgb),.12);
     color:var(--accent);
     font-size:24px;
 }
 
 .infoCard h3{
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:10px;
     font-size:22px;
 }
 
 .infoCard p{
-    color:#666;
+    color:var(--text-light);
     line-height:1.7;
 }
 

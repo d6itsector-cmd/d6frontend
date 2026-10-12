@@ -1,0 +1,1959 @@
+/* ==========================================================
+   CLIENT DASHBOARD THEME -- Zoho-style SaaS refinement.
+
+   Presentation only. Every rule is scoped under .dashboard (the root
+   rendered only by pages/Dashboard/Dashboard.jsx), so the public site
+   and the admin panel are untouched. Loaded from Dashboard.jsx after
+   Dashboard.css; the .dashboard prefix gives these rules enough
+   specificity to sit on top of each component's own stylesheet.
+
+   Why the sidebar/topbar rules restate so much: the client and admin
+   components share global class names (.sidebar, .sidebar-logo,
+   .logout-btn, .menu-icon, .topbar-left, .topbar-right, .profile-box,
+   .profile-dropdown) and the admin stylesheets load later in the
+   bundle, so they were leaking into the client dashboard. Pinning the
+   client values here under .dashboard keeps the two portals independent.
+
+   Uses only the existing tokens from tokens.css.
+   ========================================================== */
+
+/* ---------- Layout ---------- */
+
+.dashboard{
+  --client-sidebar-w:260px;
+  background:var(--surface-alt);
+  font-family:var(--font-sans);
+  color:var(--text);
+}
+
+.dashboard .dashboard-content{
+  min-width:0;
+  margin-left:var(--client-sidebar-w);
+  padding:0 32px 40px;
+}
+
+.dashboard .dashboard-sidebar-backdrop{
+  background:var(--overlay);
+  backdrop-filter:blur(2px);
+}
+
+.dashboard .dashboard-body{
+  gap:24px;
+}
+
+.dashboard .dashboard-row{
+  gap:24px;
+}
+
+/* ---------- Sidebar (navy rail, matches the admin panel) ---------- */
+
+.dashboard .sidebar{
+  left:0;
+  width:var(--client-sidebar-w);
+  padding:0;
+  background:var(--primary);
+  border-right:none;
+  color:rgba(255,255,255,.82);
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.18) transparent;
+}
+
+.dashboard .sidebar-logo{
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:center;
+  gap:12px;
+  height:64px;
+  flex-shrink:0;
+  margin:0;
+  padding:0 20px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.dashboard .logo-circle{
+  width:36px;
+  height:36px;
+  flex-shrink:0;
+  border:none;
+  border-radius:var(--radius-md);
+  background:var(--white);
+}
+
+.dashboard .sidebar-logo img{
+  width:100%;
+  height:100%;
+  padding:4px;
+  border:none;
+  border-radius:0;
+  background:transparent;
+  object-fit:contain;
+}
+
+.dashboard .sidebar-logo h2{
+  color:var(--white);
+  font-size:15px;
+  font-weight:700;
+  line-height:1.25;
+  text-align:left;
+  letter-spacing:.01em;
+}
+
+.dashboard .sidebar-logo p{
+  margin-top:2px;
+  color:var(--accent-on-dark);
+  font-size:12px;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.dashboard .menu-title{
+  display:block;
+  margin:0;
+  padding:20px 24px 8px;
+  color:rgba(255,255,255,.45);
+  font-size:11px;
+  letter-spacing:.08em;
+}
+
+.dashboard .sidebar nav{
+  gap:2px;
+  padding:0 12px;
+}
+
+.dashboard .sidebar-link{
+  gap:12px;
+  margin:0;
+  padding:10px 14px;
+  border-radius:var(--radius-md);
+  color:rgba(255,255,255,.78);
+  font-size:14px;
+  font-weight:500;
+  line-height:1.3;
+}
+
+.dashboard .sidebar-link:hover{
+  background:rgba(255,255,255,.07);
+  color:var(--white);
+}
+
+.dashboard .sidebar-link.active{
+  background:var(--accent);
+  color:var(--white);
+  font-weight:600;
+  box-shadow:0 2px 8px rgba(var(--accent-rgb),.35);
+}
+
+.dashboard .menu-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:20px;
+  font-size:15px;
+  opacity:.9;
+}
+
+.dashboard .sidebar-link.active .menu-icon{
+  opacity:1;
+}
+
+.dashboard .view-website-link{
+  margin:auto 12px 0;
+  padding:10px 14px;
+  border-radius:var(--radius-md);
+  color:rgba(255,255,255,.7);
+  font-size:14px;
+  transition:background-color var(--transition),color var(--transition);
+}
+
+.dashboard .view-website-link:hover{
+  background:rgba(255,255,255,.07);
+  color:var(--white);
+}
+
+.dashboard .logout-btn{
+  width:auto;
+  height:42px;
+  margin:8px 16px 18px;
+  padding:0 14px;
+  justify-content:center;
+  gap:10px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--radius-md);
+  background:transparent;
+  color:rgba(255,255,255,.82);
+  font-size:14px;
+  font-weight:600;
+  transition:background-color var(--transition),border-color var(--transition),color var(--transition);
+}
+
+.dashboard .logout-btn:hover{
+  background:rgba(var(--danger-rgb),.16);
+  border-color:rgba(var(--danger-rgb),.5);
+  color:var(--white);
+}
+
+/* ---------- Topbar (flush white bar, 64px like the sidebar header) ---------- */
+
+.dashboard .topbar{
+  min-height:64px;
+  margin:0 -32px 24px;
+  padding:10px 32px;
+  gap:16px;
+  background:var(--surface);
+  border-radius:0;
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--shadow-xs);
+}
+
+.dashboard .topbar-left{
+  gap:12px;
+  min-width:0;
+}
+
+.dashboard .topbar-left h1{
+  margin-bottom:2px;
+  color:var(--text-strong);
+  font-size:20px;
+  font-weight:600;
+  line-height:1.3;
+  letter-spacing:-.005em;
+}
+
+.dashboard .topbar-left p{
+  color:var(--text-light);
+  font-size:13px;
+  line-height:1.4;
+}
+
+.dashboard .dashboard-menu-toggle{
+  width:38px;
+  height:38px;
+  justify-content:center;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  background:var(--surface);
+  font-size:16px;
+  transition:background-color var(--transition),border-color var(--transition);
+}
+
+.dashboard .dashboard-menu-toggle:hover{
+  background:var(--surface-alt);
+  border-color:var(--border-strong);
+}
+
+.dashboard .topbar-right{
+  gap:10px;
+  margin-left:0;
+  justify-content:flex-end;
+}
+
+.dashboard .search-box{
+  width:300px;
+  height:40px;
+  gap:10px;
+  padding:0 14px;
+  background:var(--surface-alt);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  box-shadow:none;
+  transition:border-color var(--transition),box-shadow var(--transition),background-color var(--transition);
+}
+
+.dashboard .search-box:hover{
+  box-shadow:none;
+  border-color:var(--border-strong);
+}
+
+.dashboard .search-box:focus-within{
+  background:var(--surface);
+  border-color:var(--accent);
+  box-shadow:var(--focus-ring);
+}
+
+.dashboard .search-box svg{
+  font-size:14px;
+}
+
+.dashboard .search-box input{
+  font-size:14px;
+  color:var(--text);
+}
+
+.dashboard .search-box input:focus{
+  outline:none;
+}
+
+.dashboard .search-dropdown,
+.dashboard .notif-dropdown{
+  top:calc(100% + 8px);
+  border:1px solid var(--border);
+}
+
+.dashboard .icon-btn{
+  width:40px;
+  height:40px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  background:var(--surface);
+  color:var(--text-body);
+  font-size:16px;
+  box-shadow:none;
+  transition:background-color var(--transition),border-color var(--transition),color var(--transition);
+}
+
+.dashboard .icon-btn:hover{
+  background:var(--surface-alt);
+  border-color:var(--border-strong);
+  color:var(--text-strong);
+  transform:none;
+}
+
+.dashboard .icon-btn span{
+  top:-6px;
+  right:-6px;
+  width:auto;
+  min-width:18px;
+  height:18px;
+  padding:0 4px;
+  border:2px solid var(--surface);
+  border-radius:var(--radius-pill);
+  line-height:1;
+}
+
+.dashboard .profile-box{
+  height:42px;
+  min-width:0;
+  gap:10px;
+  padding:3px 12px 3px 4px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  background:var(--surface);
+  box-shadow:none;
+  transition:background-color var(--transition),border-color var(--transition);
+}
+
+.dashboard .profile-box:hover{
+  background:var(--surface-alt);
+  border-color:var(--border-strong);
+  transform:none;
+}
+
+.dashboard .profile-box img,
+.dashboard .profile-avatar-icon{
+  width:32px;
+  height:32px;
+  font-size:32px;
+}
+
+.dashboard .profile-box h4{
+  color:var(--text);
+  font-size:14px;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.dashboard .profile-box > svg:last-child{
+  font-size:11px;
+}
+
+.dashboard .profile-dropdown{
+  width:200px;
+  top:calc(100% + 8px);
+  border:1px solid var(--border);
+}
+
+/* ---------- Typography ---------- */
+
+.dashboard .dashboard-content h1{
+  letter-spacing:-.01em;
+}
+
+/* Page header rows -- each section names its own class. */
+.dashboard .analytics-header,
+.dashboard .reports-header,
+.dashboard .support-header,
+.dashboard .settings-header,
+.dashboard .projects-header,
+.dashboard .services-header,
+.dashboard .bl-page-header{
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+
+.dashboard .analytics-header h1,
+.dashboard .reports-header h1,
+.dashboard .support-header h1,
+.dashboard .settings-header h1,
+.dashboard .projects-header h1,
+.dashboard .services-header h1,
+.dashboard .bl-page-header h1{
+  margin-bottom:4px;
+  color:var(--text-strong);
+  font-size:26px;
+  font-weight:700;
+  line-height:1.25;
+}
+
+.dashboard .analytics-header p,
+.dashboard .reports-header p,
+.dashboard .support-header p,
+.dashboard .settings-header p,
+.dashboard .projects-header p,
+.dashboard .services-header p,
+.dashboard .bl-page-header p{
+  color:var(--text-light);
+  font-size:14px;
+}
+
+/* Section headings inside cards. */
+.dashboard .action-required h2,
+.dashboard .documents-header h2,
+.dashboard .campaign-card h2,
+.dashboard .traffic-title h2,
+.dashboard .chat-header h2,
+.dashboard .bl-card-header h2{
+  color:var(--text-strong);
+  font-size:18px;
+  font-weight:600;
+  line-height:1.3;
+}
+
+.dashboard .performance-card h3,
+.dashboard .project-card h3{
+  font-size:18px;
+  font-weight:600;
+}
+
+/* ---------- Cards / panels ---------- */
+
+.dashboard .action-required,
+.dashboard .current-project,
+.dashboard .documents,
+.dashboard .onboarding-welcome,
+.dashboard .timeline-section,
+.dashboard .activity-section,
+.dashboard .analytics-card,
+.dashboard .traffic-card,
+.dashboard .performance-card,
+.dashboard .campaign-card,
+.dashboard .chat-list,
+.dashboard .chat-window,
+.dashboard .project-card,
+.dashboard .service-card,
+.dashboard .report-card,
+.dashboard .summary-card,
+.dashboard .recent-downloads,
+.dashboard .settings-menu,
+.dashboard .settings-content,
+.dashboard .support-card,
+.dashboard .stat-card,
+.dashboard .ticket-table,
+.dashboard .faq-section,
+.dashboard .bl-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-xs);
+}
+
+/* Big panels had 35px padding and heavy shadows -- tighten. */
+.dashboard .current-project,
+.dashboard .documents,
+.dashboard .campaign-card,
+.dashboard .traffic-card,
+.dashboard .bl-card{
+  padding:24px;
+}
+
+.dashboard .action-required{
+  padding:20px 24px;
+}
+
+/* Interactive cards keep a lift, but a quieter one. */
+.dashboard .analytics-card,
+.dashboard .performance-card,
+.dashboard .project-card,
+.dashboard .service-card,
+.dashboard .report-card,
+.dashboard .support-card{
+  transition:border-color var(--transition),box-shadow var(--transition),transform var(--transition);
+}
+
+.dashboard .analytics-card:hover,
+.dashboard .performance-card:hover,
+.dashboard .project-card:hover,
+.dashboard .service-card:hover,
+.dashboard .report-card:hover,
+.dashboard .support-card:hover{
+  border-color:var(--accent-border);
+  box-shadow:var(--shadow-md);
+  transform:translateY(-1px);
+}
+
+.dashboard .document-card{
+  border-radius:var(--radius-md);
+}
+
+/* ---------- Hero (welcome banner) ---------- */
+
+.dashboard .dhero{
+  gap:40px;
+  margin:0 0 24px;
+  padding:32px 36px;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+}
+
+.dashboard .hero-badge{
+  margin-bottom:16px;
+  padding:6px 14px;
+  font-size:12px;
+}
+
+.dashboard .hero-left h1{
+  margin-bottom:12px;
+  font-size:32px;
+  line-height:1.25;
+  letter-spacing:-.015em;
+}
+
+.dashboard .hero-left p{
+  font-size:15px;
+  line-height:1.7;
+}
+
+.dashboard .hero-buttons{
+  gap:12px;
+  margin-top:24px;
+}
+
+.dashboard .hero-primary,
+.dashboard .hero-secondary{
+  padding:11px 22px;
+  border-radius:var(--radius-md);
+  font-size:14px;
+  font-weight:600;
+}
+
+.dashboard .hero-primary:hover,
+.dashboard .hero-secondary:hover{
+  transform:none;
+}
+
+/* ---------- KPI cards ---------- */
+
+.dashboard .kpi-stats{
+  gap:16px;
+  margin-bottom:0;
+}
+
+.dashboard .kpi-box{
+  padding:20px 22px;
+  text-align:left;
+  border:1px solid var(--border);
+  border-top:3px solid var(--accent);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-xs);
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+
+.dashboard .kpi-box:hover{
+  border-color:var(--accent-border);
+  border-top-color:var(--accent);
+  box-shadow:var(--shadow-md);
+  transform:none;
+}
+
+.dashboard .kpi-box h2{
+  margin-bottom:4px;
+  color:var(--text-strong);
+  font-size:28px;
+  font-weight:700;
+  line-height:1.2;
+}
+
+.dashboard .kpi-box p{
+  color:var(--text-light);
+  font-size:13px;
+  font-weight:500;
+}
+
+/* ---------- Tables (desktop only -- billing tables switch to stacked
+   card rows on phones and keep their own mobile rules) ---------- */
+
+@media (min-width:769px){
+  .dashboard .dashboard-content table thead th{
+    background:var(--surface-alt);
+    color:var(--text-light);
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+  }
+
+  .dashboard .dashboard-content table tbody td{
+    padding:13px 14px;
+    font-size:14px;
+    border-bottom:1px solid var(--border);
+    vertical-align:middle;
+  }
+
+  .dashboard .dashboard-content table tbody tr:last-child td{
+    border-bottom:none;
+  }
+
+  .dashboard .dashboard-content table tbody tr:hover td{
+    background:var(--accent-softer);
+  }
+}
+
+/* ---------- Form controls ---------- */
+
+.dashboard .dashboard-content input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="color"]):not([type="range"]),
+.dashboard .dashboard-content select,
+.dashboard .dashboard-content textarea{
+  border-color:var(--border-strong);
+  border-radius:var(--radius-md);
+  font-size:14px;
+  color:var(--text);
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+
+/* The topbar search input sits inside its own bordered box. */
+.dashboard .dashboard-content .search-box input{
+  border:none;
+  border-radius:0;
+  box-shadow:none;
+}
+
+.dashboard .dashboard-content input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="color"]):not([type="range"]):focus,
+.dashboard .dashboard-content select:focus,
+.dashboard .dashboard-content textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:var(--focus-ring);
+}
+
+.dashboard .dashboard-content .search-box input:focus{
+  box-shadow:none;
+}
+
+/* ---------- Buttons (shape/size only -- colours stay per component) ---------- */
+
+.dashboard .bl-btn,
+.dashboard .save-btn,
+.dashboard .outline-btn,
+.dashboard .delete-btn,
+.dashboard .create-ticket,
+.dashboard .meeting-btn,
+.dashboard .details-btn,
+.dashboard .reports-btn,
+.dashboard .view-btn,
+.dashboard .analytics-header button,
+.dashboard .documents-header button{
+  border-radius:var(--radius-md);
+  font-size:14px;
+  font-weight:600;
+  transition:background-color var(--transition),border-color var(--transition),color var(--transition),box-shadow var(--transition);
+}
+
+.dashboard .analytics-header button,
+.dashboard .analytics-header select,
+.dashboard .documents-header button{
+  padding:10px 18px;
+}
+
+/* ---------- Status badges ---------- */
+
+.dashboard .bl-badge,
+.dashboard .status,
+.dashboard .project-status,
+.dashboard .service-status,
+.dashboard .project-tag,
+.dashboard .unread-badge{
+  border-radius:var(--radius-pill);
+  font-size:12px;
+  font-weight:600;
+  line-height:1.4;
+}
+
+/* ---------- Scrollbar ---------- */
+
+.dashboard ::-webkit-scrollbar-thumb{
+  background:var(--border-strong);
+  border-radius:var(--radius-pill);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width:1100px){
+  .dashboard .dhero{
+    gap:28px;
+    padding:28px;
+  }
+
+  .dashboard .hero-left h1{
+    font-size:28px;
+  }
+}
+
+@media (max-width:992px){
+  .dashboard .dashboard-content{
+    margin-left:0;
+    padding:0 20px 32px;
+  }
+
+  .dashboard .topbar{
+    margin:0 -20px 20px;
+    padding:12px 20px;
+    gap:12px;
+  }
+
+  .dashboard .topbar-right{
+    width:100%;
+  }
+
+  /* Search takes the spare width but can shrink to 140px, so the bell
+     and profile stay on its row down to 320px. */
+  .dashboard .search-wrapper{
+    flex:1 1 140px;
+    min-width:0;
+  }
+
+  .dashboard .search-box{
+    width:100%;
+  }
+}
+
+@media (max-width:768px){
+  .dashboard .dhero{
+    padding:22px;
+    gap:22px;
+  }
+
+  .dashboard .hero-left h1{
+    font-size:24px;
+  }
+
+  .dashboard .current-project,
+  .dashboard .documents,
+  .dashboard .campaign-card,
+  .dashboard .traffic-card,
+  .dashboard .bl-card{
+    padding:18px;
+  }
+
+  .dashboard .analytics-header h1,
+  .dashboard .reports-header h1,
+  .dashboard .support-header h1,
+  .dashboard .settings-header h1,
+  .dashboard .projects-header h1,
+  .dashboard .services-header h1,
+  .dashboard .bl-page-header h1{
+    font-size:22px;
+  }
+
+  .dashboard .kpi-box h2{
+    font-size:24px;
+  }
+}
+
+@media (max-width:600px){
+  .dashboard .topbar-left h1{
+    font-size:17px;
+  }
+
+  /* Controls row: search, bell, profile (avatar + name + chevron).
+     The full name always shows on one line -- never truncated. Space is
+     reclaimed from gaps, padding and the search box first (search
+     shrinks to an 88px floor). If the full name still can't fit, the
+     profile button moves to its own right-aligned second row instead. */
+  /* flex-start + the profile's margin-left:auto (below) still right-aligns
+     it, but an auto margin collapses to 0 when space runs out, so content
+     can never be pushed off the left edge (flex-end would do that). */
+  .dashboard .topbar-right{
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    gap:8px 6px;
+  }
+
+  .dashboard .search-wrapper{
+    flex:1 1 88px;
+    min-width:88px;
+  }
+
+  .dashboard .search-box{
+    height:38px;
+    gap:8px;
+    padding:0 10px;
+  }
+
+  .dashboard .search-box input{
+    min-width:0;
+    font-size:13px;
+  }
+
+  .dashboard .notif-wrapper{
+    flex-shrink:0;
+  }
+
+  .dashboard .icon-btn{
+    width:38px;
+    height:38px;
+  }
+
+  .dashboard .profile-wrapper{
+    flex:0 0 auto;
+    margin-left:auto;
+  }
+
+  .dashboard .profile-box{
+    height:38px;
+    padding:2px 8px 2px 3px;
+    gap:6px;
+  }
+
+  .dashboard .profile-box img,
+  .dashboard .profile-avatar-icon{
+    flex-shrink:0;
+    width:28px;
+    height:28px;
+    font-size:28px;
+  }
+
+  .dashboard .profile-box h4{
+    display:block;
+    white-space:nowrap;
+    font-size:13px;
+  }
+
+  .dashboard .profile-box > svg:last-child{
+    flex-shrink:0;
+    font-size:10px;
+  }
+}
+
+@media (max-width:360px){
+  .dashboard .topbar-right{
+    gap:4px;
+  }
+
+  .dashboard .search-box{
+    padding:0 8px;
+    gap:6px;
+  }
+
+  .dashboard .profile-box{
+    gap:4px;
+    padding:2px 6px 2px 2px;
+  }
+}
+
+@media (max-width:576px){
+  .dashboard .dashboard-content{
+    padding:0 14px 24px;
+  }
+
+  .dashboard .topbar{
+    margin:0 -14px 16px;
+    padding:12px 14px;
+  }
+
+  .dashboard .dashboard-body,
+  .dashboard .dashboard-row{
+    gap:16px;
+  }
+}
+
+/* ---------- KPI cards on phones (kept last so it wins over the
+   tablet KPI size in the 768px block above) ---------- */
+
+/* Phones: compact 2-column grid (KpiCards.css drops to 1 column at
+   480px, which made four tall cards). Labels may wrap onto a second
+   line rather than clip; grid rows stretch so paired cards match. */
+@media (max-width:576px){
+  .dashboard .kpi-stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .dashboard .kpi-box{
+    padding:12px 14px;
+    border-top-width:2px;
+    border-radius:var(--radius-md);
+  }
+
+  .dashboard .kpi-box h2{
+    margin-bottom:2px;
+    font-size:22px;
+  }
+
+  .dashboard .kpi-box p{
+    font-size:12px;
+    line-height:1.35;
+    overflow-wrap:break-word;
+  }
+}
+
+@media (max-width:360px){
+  .dashboard .kpi-stats{
+    gap:8px;
+  }
+
+  .dashboard .kpi-box{
+    padding:10px 12px;
+  }
+
+  .dashboard .kpi-box h2{
+    font-size:20px;
+  }
+
+  .dashboard .kpi-box p{
+    font-size:11.5px;
+  }
+}
+
+/* Only below any real phone width does a single column make sense. */
+@media (max-width:279px){
+  .dashboard .kpi-stats{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ---------- Billing on phones ----------
+   Billing.css (shared with the admin billing pages) already turns
+   .bl-table rows into stacked label/value cards below 768px. Here the
+   client copy is made compact: the nested page/card/row/cell padding
+   used to leave ~200px for content at 320px. Desktop and tablet keep
+   the existing layout. */
+@media (max-width:576px){
+  /* .dashboard-content already supplies the side gutter. */
+  .dashboard .bl-page{
+    padding:0;
+  }
+
+  .dashboard .bl-page-header{
+    gap:12px;
+    margin-bottom:16px;
+  }
+
+  .dashboard .bl-card{
+    padding:14px;
+    margin-bottom:16px;
+  }
+
+  .dashboard .bl-card-header{
+    margin-bottom:12px;
+  }
+
+  .dashboard .bl-card-header h2{
+    font-size:16px;
+  }
+
+  .dashboard .bl-card-header p{
+    font-size:13px;
+    line-height:1.45;
+  }
+
+  .dashboard .bl-alert{
+    padding:10px 12px;
+    margin:12px 0;
+    font-size:13px;
+  }
+
+  /* Stacked rows: tighter card, cell and label spacing. */
+  .dashboard .bl-table tr{
+    padding:4px 0;
+    margin-bottom:8px;
+    border-radius:var(--radius-md);
+  }
+
+  .dashboard .bl-table tr:last-child{
+    margin-bottom:0;
+  }
+
+  .dashboard .bl-table td{
+    padding:6px 12px;
+    column-gap:10px;
+    font-size:13px;
+    line-height:1.4;
+  }
+
+  .dashboard .bl-table td::before{
+    font-size:12px;
+    font-weight:600;
+  }
+
+  /* No hover tint on touch rows. */
+  .dashboard .bl-table tr:hover td{
+    background:transparent;
+  }
+
+  .dashboard .bl-table .bl-fact-sub{
+    margin-top:2px;
+    font-size:11.5px;
+  }
+
+  .dashboard .bl-table .bl-badge{
+    padding:3px 9px;
+    font-size:11.5px;
+  }
+
+  .dashboard .bl-invoice{
+    gap:4px;
+  }
+
+  .dashboard .bl-links{
+    gap:12px;
+  }
+
+  /* Pay Now: full-width tap target at the bottom of its card. The
+     "Action" label adds nothing beside a button, so it's dropped. */
+  .dashboard .bl-table td[data-label="Action"]::before{
+    display:none;
+  }
+
+  /* A request with no action (e.g. cancelled) renders an empty cell --
+     don't leave a blank strip at the bottom of its card. */
+  .dashboard .bl-table td[data-label="Action"]:empty{
+    display:none;
+  }
+
+  /* The amount is the key figure on each card. */
+  .dashboard .bl-table td[data-label="Amount"]{
+    color:var(--text-strong);
+    font-weight:600;
+  }
+
+  .dashboard .bl-table td[data-label="Action"] > .bl-pay{
+    flex-basis:100%;
+    align-items:stretch;
+    text-align:left;
+  }
+
+  .dashboard .bl-table td[data-label="Action"] .bl-btn{
+    width:100%;
+    min-height:40px;
+  }
+
+  .dashboard .bl-table td[data-label="Action"] .bl-fact-sub{
+    text-align:center;
+  }
+
+  .dashboard .bl-pagination{
+    margin-top:12px;
+    font-size:12px;
+  }
+}
+
+/* ---------- My Plan on phones ----------
+   Builds on the Billing phone block above (shared .bl-page / .bl-card /
+   .bl-alert spacing). Billing.css stacks each plan fact as its own grey
+   tile below 768px (~70px each, 10+ facts); on phones they become one
+   compact label/value list instead. Tablet and desktop are unchanged. */
+@media (max-width:576px){
+  .dashboard .bl-page-header p{
+    font-size:13px;
+  }
+
+  /* Plan name + price */
+  .dashboard .bl-plan-top{
+    gap:6px 16px;
+  }
+
+  .dashboard .bl-plan-top h2{
+    margin-bottom:2px;
+    font-size:18px;
+    line-height:1.3;
+  }
+
+  .dashboard .bl-plan-price strong{
+    font-size:22px;
+    line-height:1.2;
+  }
+
+  .dashboard .bl-plan-price span{
+    font-size:12px;
+  }
+
+  .dashboard .bl-plan-desc{
+    margin-top:8px;
+    font-size:13.5px;
+    line-height:1.55;
+  }
+
+  /* Pay Now inside the payment alert: full-width tap target. */
+  .dashboard .bl-alert > .bl-btn{
+    width:100%;
+    min-height:40px;
+  }
+
+  /* Facts: one list, label left / value right. */
+  .dashboard .bl-facts{
+    grid-template-columns:minmax(0,1fr);
+    gap:0;
+    margin:12px 0;
+    padding:2px 12px;
+    background:var(--surface-alt);
+    border-radius:var(--radius-md);
+  }
+
+  /* Label keeps one line; if the value can't fit beside it, the value
+     drops to its own right-aligned line rather than squeezing/clipping. */
+  .dashboard .bl-fact{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:2px 12px;
+    padding:8px 0;
+    background:transparent;
+    border-radius:0;
+    border-bottom:1px solid var(--border);
+  }
+
+  .dashboard .bl-fact:last-child{
+    border-bottom:none;
+  }
+
+  .dashboard .bl-fact dt{
+    margin:0;
+    font-size:11px;
+    line-height:1.35;
+    letter-spacing:.03em;
+    white-space:nowrap;
+  }
+
+  /* Values only break mid-line if wider than the whole row. */
+  .dashboard .bl-fact dd{
+    max-width:100%;
+    margin-left:auto;
+    font-size:13px;
+    line-height:1.4;
+    text-align:right;
+    overflow-wrap:anywhere;
+  }
+
+  .dashboard .bl-fact .bl-badge{
+    padding:3px 9px;
+    font-size:11.5px;
+  }
+
+  .dashboard .bl-fact .bl-fact-sub{
+    margin-top:2px;
+    font-size:11.5px;
+  }
+
+  /* Services / features / deliverables / limits / notes */
+  .dashboard .bl-plan-sections{
+    gap:16px;
+    padding-top:14px;
+  }
+
+  .dashboard .bl-plan-section h3{
+    margin-bottom:8px;
+    font-size:15px;
+  }
+
+  .dashboard .bl-list{
+    gap:6px;
+  }
+
+  .dashboard .bl-list li{
+    gap:8px;
+    font-size:13.5px;
+    line-height:1.45;
+  }
+
+  .dashboard .bl-list svg{
+    margin-top:2px;
+    font-size:13px;
+  }
+
+  .dashboard .bl-list p{
+    margin-top:1px;
+    font-size:13px;
+  }
+
+  .dashboard .bl-kv{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px 12px;
+  }
+
+  .dashboard .bl-kv dt{
+    margin-bottom:2px;
+    font-size:11.5px;
+  }
+
+  .dashboard .bl-kv dd{
+    font-size:13px;
+  }
+
+  .dashboard .bl-plan-section .bl-prewrap{
+    font-size:13.5px;
+    line-height:1.5;
+  }
+
+  /* Actions: share a row while they fit, otherwise each takes the full
+     width -- always a comfortable 40px tap target. */
+  .dashboard .bl-plan-actions{
+    gap:8px;
+    margin-top:14px;
+    align-items:stretch;
+  }
+
+  .dashboard .bl-plan-actions > .bl-btn,
+  .dashboard .bl-plan-actions > .bl-portal{
+    flex:1 1 auto;
+  }
+
+  .dashboard .bl-plan-actions .bl-portal{
+    align-items:stretch;
+  }
+
+  .dashboard .bl-plan-actions .bl-btn{
+    min-height:40px;
+    white-space:nowrap;
+  }
+
+  .dashboard .bl-plan-actions .bl-inline-note{
+    max-width:none;
+  }
+
+  /* Loading / empty / error states */
+  .dashboard .bl-state{
+    gap:10px;
+    padding:24px 12px;
+  }
+
+  .dashboard .bl-state h3{
+    font-size:17px;
+  }
+
+  .dashboard .bl-state p{
+    font-size:13.5px;
+  }
+}
+
+/* ---------- Analytics: Reports Over Time on phones ----------
+   The bar labels ("Oct 2026") had an 18px gap vs the bars' 10px, so they
+   drifted off their bars and, with 6+ months, pushed past the card edge.
+   On phones the labels share the bars' spacing; with 5+ months they run
+   vertically so every month stays visible without horizontal scroll. */
+@media (max-width:576px){
+  .dashboard .traffic-chart{
+    height:180px;
+    gap:6px;
+    padding:0 4px;
+  }
+
+  .dashboard .analytics-bar-labels{
+    gap:6px;
+    padding:8px 4px 0;
+  }
+
+  .dashboard .analytics-bar-labels span{
+    min-width:0;
+    font-size:11px;
+    line-height:1.2;
+  }
+
+  .dashboard .analytics-bar-labels span:first-child:nth-last-child(n+5),
+  .dashboard .analytics-bar-labels span:first-child:nth-last-child(n+5) ~ span{
+    display:flex;
+    justify-content:center;
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    white-space:nowrap;
+    font-size:10px;
+  }
+}
+
+/* ---------- Support on phones ----------
+   Support.css keeps desktop spacing (35-40px padding/margins, 28-36px
+   headings) down to phones and forces the ticket table to 700px inside a
+   sideways scroller below 768px. On phones: tighter spacing, tickets as
+   stacked cards, and compact modals. Tablet/desktop are unchanged. The
+   ticket modals render inside .dashboard, so the same scope covers them. */
+@media (max-width:576px){
+  /* .dashboard-content already supplies the side gutter. */
+  .dashboard .support{
+    padding:0;
+    min-height:0;
+  }
+
+  .dashboard .support-header{
+    gap:12px;
+    margin-bottom:16px;
+  }
+
+  .dashboard .support-header h1{
+    margin-bottom:4px;
+  }
+
+  .dashboard .support-header p{
+    font-size:13px;
+  }
+
+  .dashboard .create-ticket{
+    width:100%;
+    min-height:44px;
+    justify-content:center;
+    padding:10px 16px;
+    border-radius:var(--radius-md);
+    font-size:14px;
+  }
+
+  .dashboard .create-ticket:hover{
+    transform:none;
+  }
+
+  /* Contact card: icon beside the text instead of a tall centred tile. */
+  .dashboard .support-cards{
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  .dashboard .support-card{
+    display:grid;
+    grid-template-columns:40px minmax(0,1fr);
+    column-gap:12px;
+    align-items:center;
+    max-width:none;
+    padding:12px 14px;
+    text-align:left;
+  }
+
+  .dashboard .support-icon{
+    grid-row:span 2;
+    width:40px;
+    height:40px;
+    margin:0;
+    border-radius:var(--radius-md);
+    font-size:17px;
+  }
+
+  .dashboard .support-card h3{
+    margin-bottom:0;
+    font-size:15px;
+  }
+
+  .dashboard .support-card p{
+    font-size:13px;
+    line-height:1.4;
+    overflow-wrap:anywhere;
+  }
+
+  /* Ticket list */
+  .dashboard .ticket-table{
+    padding:14px;
+    margin-bottom:16px;
+    overflow:visible;
+  }
+
+  .dashboard .ticket-title{
+    margin-bottom:10px;
+  }
+
+  .dashboard .ticket-title h2{
+    font-size:17px;
+  }
+
+  .dashboard .ticket-status-msg{
+    padding:16px 0;
+    font-size:13.5px;
+  }
+
+  .dashboard .ticket-table table{
+    min-width:0;
+  }
+
+  .dashboard .ticket-table thead{
+    display:none;
+  }
+
+  .dashboard .ticket-table table,
+  .dashboard .ticket-table tbody{
+    display:block;
+    width:100%;
+  }
+
+  /* Each ticket: subject + View on top, status + date underneath. */
+  .dashboard .ticket-table tr{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:
+      "subject action"
+      "status  date";
+    align-items:center;
+    gap:8px 12px;
+    padding:10px 12px;
+    margin-bottom:8px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+  }
+
+  .dashboard .ticket-table tr:last-child{
+    margin-bottom:0;
+  }
+
+  .dashboard .ticket-table td{
+    display:block;
+    padding:0;
+    border:none;
+    font-size:13px;
+  }
+
+  .dashboard .ticket-table td:nth-child(1){
+    grid-area:subject;
+    color:var(--text-strong);
+    font-size:14px;
+    font-weight:600;
+    line-height:1.35;
+    overflow-wrap:anywhere;
+  }
+
+  .dashboard .ticket-table td:nth-child(2){
+    grid-area:status;
+  }
+
+  .dashboard .ticket-table td:nth-child(3){
+    grid-area:date;
+    color:var(--text-light);
+    font-size:12px;
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  .dashboard .ticket-table td:nth-child(4){
+    grid-area:action;
+  }
+
+  .dashboard .ticket-table .status{
+    display:inline-block;
+    padding:3px 10px;
+    font-size:11.5px;
+    text-transform:capitalize;
+  }
+
+  .dashboard .ticket-table .view-btn{
+    min-height:40px;
+    padding:0 14px;
+    gap:6px;
+    font-size:13px;
+  }
+
+  /* Stats: two compact tiles side by side. */
+  .dashboard .support-stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  .dashboard .stat-card{
+    padding:12px 14px;
+  }
+
+  .dashboard .stat-card h2{
+    margin-bottom:2px;
+    font-size:24px;
+  }
+
+  .dashboard .stat-card p{
+    font-size:12.5px;
+  }
+
+  /* FAQ */
+  .dashboard .faq-section{
+    padding:14px;
+    margin-bottom:16px;
+  }
+
+  .dashboard .faq-section h2{
+    margin-bottom:4px;
+    font-size:17px;
+  }
+
+  /* Divider-row reset for the FAQ lives in the all-sizes block at the
+     end of this file; phones only tighten the spacing. */
+  .dashboard .faq-item{
+    padding:10px 0;
+  }
+
+  .dashboard .faq-item h4{
+    margin-bottom:4px;
+    font-size:14px;
+    line-height:1.4;
+  }
+
+  .dashboard .faq-item p{
+    font-size:13px;
+    line-height:1.55;
+  }
+
+  /* Create-ticket and ticket-detail modals */
+  .dashboard .ticket-modal-overlay{
+    padding:12px;
+  }
+
+  .dashboard .ticket-modal{
+    max-height:90vh;
+    padding:18px 16px 16px;
+    border-radius:var(--radius-lg);
+  }
+
+  .dashboard .ticket-modal .close-btn{
+    top:8px;
+    right:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    font-size:18px;
+  }
+
+  /* Keep the title clear of the close button. */
+  .dashboard .ticket-modal h2{
+    margin:4px 36px 12px 0;
+    font-size:18px;
+    line-height:1.3;
+    overflow-wrap:anywhere;
+  }
+
+  .dashboard .ticket-modal form{
+    gap:10px;
+  }
+
+  /* 16px stops iOS Safari zooming the page when a field is focused.
+     The input selector repeats the :not() chain of the general input rule
+     earlier in this file so this later rule wins on equal specificity. */
+  .dashboard .ticket-modal input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="color"]):not([type="range"]),
+  .dashboard .ticket-modal select,
+  .dashboard .ticket-modal textarea{
+    min-height:44px;
+    padding:10px 12px;
+    font-size:16px;
+  }
+
+  .dashboard .ticket-modal textarea{
+    height:120px;
+  }
+
+  .dashboard .ticket-modal button[type="submit"]{
+    min-height:44px;
+    padding:10px 16px;
+  }
+
+  .dashboard .ticket-modal-error{
+    padding:10px 12px;
+    font-size:13px;
+  }
+
+  .dashboard .ticket-modal-status{
+    padding:12px 0;
+    font-size:13.5px;
+  }
+
+  .dashboard .ticket-detail .status{
+    display:inline-block;
+    padding:3px 10px;
+    font-size:11.5px;
+    text-transform:capitalize;
+  }
+
+  .dashboard .ticket-description{
+    margin-bottom:12px;
+    font-size:14px;
+    line-height:1.55;
+    overflow-wrap:anywhere;
+  }
+
+  .dashboard .ticket-replies{
+    gap:8px;
+    max-height:40vh;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:var(--radius-md);
+  }
+
+  .dashboard .ticket-reply{
+    max-width:88%;
+    padding:8px 12px;
+    font-size:13.5px;
+    overflow-wrap:anywhere;
+  }
+
+  .dashboard .ticket-reply-form{
+    gap:8px;
+  }
+
+  .dashboard .ticket-reply-form input{
+    min-width:0;
+  }
+
+  .dashboard .ticket-reply-form button{
+    flex-shrink:0;
+    min-height:44px;
+    padding:0 16px;
+  }
+}
+
+/* ---------- Support FAQ: public FAQ style leak (all sizes) ----------
+   The public service pages' FAQ stylesheets (EmailFAQ, GoogleAdsFAQ,
+   SEOFAQ, SocialFAQ, WebsiteFAQ) each declare a global, unscoped
+   .faq-item -- white background, border, rounded corners,
+   overflow:hidden, a transition and (SEOFAQ) a hover shadow -- and every
+   stylesheet is bundled into one file, so they also hit the client
+   Support FAQ, which shares the class name. Restore Support.css's
+   intended plain rows with a divider, only inside the client dashboard;
+   the public FAQs are untouched. Row spacing stays per breakpoint
+   (Support.css 20px; the phone block above 10px). */
+.dashboard .faq-section .faq-item{
+  width:auto;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--border);
+  border-radius:0;
+  box-shadow:none;
+  overflow:visible;
+  transition:none;
+}
+
+.dashboard .faq-section .faq-item:hover{
+  box-shadow:none;
+}
+
+.dashboard .faq-section .faq-item:last-child{
+  border-bottom:none;
+  padding-bottom:0;
+}
+
+/* ---------- Support ticket reply form: input + Send on one row ----------
+   TicketModals.css's `.ticket-modal form { flex-direction:column }`
+   (0,1,1, meant for the create-ticket form) out-ranks
+   `.ticket-reply-form { display:flex }` (0,1,0), so Send stacked under the
+   input at every size. Restore the intended row for the reply form only.
+   Gap/padding stay as before (TicketModals.css; the phone block above). */
+.dashboard .ticket-reply-form{
+  flex-direction:row;
+  align-items:stretch;
+}
+
+.dashboard .ticket-reply-form input{
+  flex:1 1 auto;
+  width:auto;
+  min-width:0;
+}
+
+.dashboard .ticket-reply-form button{
+  flex:0 0 auto;
+  min-height:44px;
+  white-space:nowrap;
+}
+
+/* ---------- Analytics: Project & Service analytics ----------
+   Tables reuse .bl-table (stacked label/value cards below 768px, compact
+   on phones via the Billing block above). */
+.dashboard .an-section-note{
+  margin:-6px 0 14px;
+  color:var(--text-light);
+  font-size:13px;
+}
+
+.dashboard .an-table-note{
+  margin-top:10px;
+  color:var(--text-light);
+  font-size:12.5px;
+}
+
+.dashboard .an-portfolio-table td strong{
+  color:var(--text-strong);
+  font-weight:600;
+}
+
+/* Services table full width, status breakdown beneath it: side by side
+   left the six-column table and the status bars too narrow. */
+.dashboard .an-grid--services{
+  grid-template-columns:minmax(0,1fr);
+  align-items:start;
+}
+
+.dashboard .an-grid--services .campaign-card{
+  margin:0;
+}
+
+.dashboard .an-progress{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+
+.dashboard .an-progress-track{
+  display:inline-block;
+  width:72px;
+  height:6px;
+  border-radius:var(--radius-pill);
+  background:var(--surface-sunken);
+  overflow:hidden;
+}
+
+.dashboard .an-progress-fill{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:var(--accent);
+}
+
+/* Wide screens: dates stay on one line. Between the stacked-card layout
+   (<=768px) and 1200px the six columns share less room, so cells tighten
+   and dates may wrap rather than force a sideways scroll. */
+@media (min-width:1200px){
+  .dashboard .an-portfolio-table td[data-label="Start"],
+  .dashboard .an-portfolio-table td[data-label="Due"],
+  .dashboard .an-portfolio-table td[data-label="End"]{
+    white-space:nowrap;
+  }
+}
+
+@media (min-width:769px) and (max-width:1199px){
+  .dashboard .dashboard-content .an-portfolio-table thead th,
+  .dashboard .dashboard-content .an-portfolio-table tbody td{
+    padding:10px 8px;
+  }
+
+  .dashboard .dashboard-content .an-portfolio-table thead th{
+    white-space:normal;
+  }
+
+  .dashboard .an-progress-track{
+    width:44px;
+  }
+}
+
+/* Analytics.css gives every .campaign-card table min-width:600px and 16px
+   cells below 768px (for the subscription table). The project/service
+   tables stack into cards instead, so undo that for them only. */
+@media (max-width:768px){
+  .dashboard .campaign-card .an-portfolio-table{
+    min-width:0;
+  }
+
+  .dashboard .campaign-card .an-portfolio-table td{
+    padding:8px 14px;
+    border-bottom:none;
+  }
+}
+
+@media (max-width:576px){
+  .dashboard .campaign-card .an-portfolio-table td{
+    padding:6px 12px;
+  }
+}
+
+/* ---------- My Projects on phones ----------
+   MyProjects.css keeps 20-30px page/card padding, 60px icons, 20-34px
+   headings and one stat tile per row down to phones. Scoped to
+   .projects-page because .stat-box/.progress-bar/.project-status are also
+   used by My Services and the dashboard's Current Project card. */
+@media (max-width:576px){
+  /* .dashboard-content already supplies the side gutter. */
+  .dashboard .projects-page{
+    padding:0;
+  }
+
+  .dashboard .projects-page .projects-header{
+    gap:6px;
+    margin-bottom:14px;
+  }
+
+  .dashboard .projects-page .projects-header h1{
+    margin-bottom:2px;
+  }
+
+  .dashboard .projects-page .projects-header p{
+    font-size:13px;
+  }
+
+  .dashboard .projects-page .projects-status{
+    padding:20px 0;
+    font-size:13.5px;
+  }
+
+  /* Count tiles: two per row instead of four stacked. */
+  .dashboard .projects-page .project-stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  .dashboard .projects-page .stat-box{
+    padding:12px 14px;
+    border-radius:var(--radius-md);
+  }
+
+  .dashboard .projects-page .stat-box h2{
+    margin-bottom:2px;
+    font-size:24px;
+  }
+
+  .dashboard .projects-page .stat-box p{
+    font-size:12.5px;
+  }
+
+  /* margin-top:0 -- the public Portfolio page's FeaturedProjects.css
+     declares a global .projects-grid { margin-top:70px } that leaks in. */
+  .dashboard .projects-page .projects-grid{
+    gap:12px;
+    margin-top:0;
+  }
+
+  /* Project card */
+  .dashboard .projects-page .project-card{
+    padding:14px;
+    border-radius:var(--radius-md);
+  }
+
+  .dashboard .projects-page .project-top{
+    gap:10px;
+    margin-bottom:10px;
+  }
+
+  /* margin:0 -- FeaturedProjects.css's global .project-icon centres it
+     with auto margins (and a 25px bottom margin), leaving a tall gap. */
+  .dashboard .projects-page .project-icon{
+    width:36px;
+    height:36px;
+    margin:0;
+    flex-shrink:0;
+    border-radius:var(--radius-md);
+    font-size:16px;
+  }
+
+  .dashboard .projects-page .project-status{
+    padding:3px 10px;
+    font-size:11.5px;
+    white-space:nowrap;
+  }
+
+  /* Long names wrap instead of overflowing. */
+  .dashboard .projects-page .project-card h3{
+    margin-bottom:10px;
+    font-size:16px;
+    line-height:1.35;
+    overflow-wrap:anywhere;
+  }
+
+  .dashboard .projects-page .progress-header{
+    margin-bottom:6px;
+    font-size:13px;
+  }
+
+  .dashboard .projects-page .progress-bar{
+    height:8px;
+    margin-bottom:12px;
+  }
+
+  .dashboard .projects-page .project-services{
+    margin:0 0 10px;
+  }
+
+  .dashboard .projects-page .project-service-chip{
+    max-width:100%;
+    font-size:11.5px;
+    line-height:1.35;
+    overflow-wrap:anywhere;
+  }
+
+  /* Priority / start / due / budget in a 2-column grid. */
+  .dashboard .projects-page .project-info{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px 12px;
+    margin-bottom:0;
+    padding-top:10px;
+    border-top:1px solid var(--border);
+  }
+
+  .dashboard .projects-page .project-info div{
+    min-width:0;
+    gap:6px;
+    font-size:12.5px;
+    line-height:1.35;
+  }
+
+  .dashboard .projects-page .project-info svg{
+    flex-shrink:0;
+    font-size:12px;
+  }
+
+  .dashboard .projects-page .project-info span{
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+}
+
+/* ---------- My Projects: public Portfolio style leak (all sizes) ----------
+   components/Portfolio/FeaturedProjects.css declares global, unscoped
+   .projects-grid / .project-card / .project-icon rules (70px top margin,
+   90px centred round icon with a 42px glyph, 30-35px card padding, hover
+   recolour + scale). Every stylesheet is bundled together, so they also hit
+   My Projects, which shares the class names. Restore MyProjects.css's own
+   design here, only inside .projects-page -- the Portfolio page, My
+   Services and the Current Project card are untouched. */
+.dashboard .projects-page .projects-grid{
+  margin-top:0;
+}
+
+.dashboard .projects-page .project-icon{
+  margin:0;
+  background:var(--accent-soft);
+}
+
+/* The glyph follows the box's own font-size (24px; 16px on phones). */
+.dashboard .projects-page .project-icon svg{
+  font-size:inherit;
+  color:var(--accent);
+}
+
+.dashboard .projects-page .project-card:hover .project-icon{
+  background:var(--accent-soft);
+  transform:none;
+}
+
+.dashboard .projects-page .project-card:hover .project-icon svg{
+  color:var(--accent);
+}
+
+/* Sizes from MyProjects.css. Above phone width only, so the compact phone
+   block (earlier in this file, same specificity) keeps its values. */
+@media (min-width:577px){
+  .dashboard .projects-page .projects-grid{
+    gap:25px;
+  }
+
+  .dashboard .projects-page .project-card{
+    padding:28px;
+  }
+
+  .dashboard .projects-page .project-icon{
+    width:60px;
+    height:60px;
+    border-radius:var(--radius-xl);
+    font-size:24px;
+  }
+}
+
+/* Dashboard Current Project card: its status pill used to get 8px 18px
+   padding from the then-global MyProjects.css (CurrentProject.css alone
+   says 12px 24px). MyProjects.css is now scoped to My Projects, so keep
+   the pill exactly as it has been rendering. */
+.dashboard .current-project .project-status{
+  padding:8px 18px;
+}

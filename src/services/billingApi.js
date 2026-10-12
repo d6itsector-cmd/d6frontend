@@ -39,6 +39,11 @@ export const getMyPayments = (params) => list("/payments", params);
 /** @returns {Promise<{ items: PaymentRequest[], pagination: Pagination|null }>} */
 export const getMyPaymentRequests = (params) => list("/payment-requests", params);
 
+// Server-side billing summary for the Analytics page: paid totals, monthly
+// series (zero-filled), active subscriptions, outstanding requests. Pence/GBP.
+/** @param {"30d"|"90d"|"6m"|"12m"} range */
+export const getMyBillingAnalytics = async (range) => unwrap(await api.get("/analytics/billing", { params: { range } }));
+
 /** @returns {Promise<{ url: string }>} */
 export const createBillingPortalSession = async () => unwrap(await api.post("/billing/portal-session"));
 

@@ -18,7 +18,7 @@ margin-bottom:25px;
 
 .page-header h1{
 
-color:var(--primary);
+color:var(--text-strong);
 
 margin-bottom:5px;
 
@@ -34,13 +34,13 @@ color:var(--text-light);
 
 background:var(--accent);
 
-color:var(--primary);
+color:var(--white);
 
 padding:12px 22px;
 
 border:none;
 
-border-radius:8px;
+border-radius:var(--radius-md);
 
 font-weight:600;
 
@@ -50,13 +50,13 @@ cursor:pointer;
 
 .client-table-container{
 
-background:white;
+background:var(--surface);
 
 padding:25px;
 
-border-radius:15px;
+border-radius:var(--radius-lg);
 
-box-shadow:0 5px 20px rgba(0,0,0,.06);
+box-shadow:var(--shadow-sm);
 
 overflow-x:auto;
 
@@ -79,9 +79,9 @@ max-width:100%;
 
 padding:12px;
 
-border:1px solid #ddd;
+border:1px solid var(--border-strong);
 
-border-radius:8px;
+border-radius:var(--radius-md);
 
 outline:none;
 
@@ -97,13 +97,14 @@ border-collapse:collapse;
 
 .client-table th{
 
-background:var(--primary);
+background:var(--surface-alt);
 
-color:white;
+color:var(--text-light);
 
 padding:15px;
 
 text-align:left;
+  border-bottom:1px solid var(--border);
 
 }
 
@@ -111,13 +112,13 @@ text-align:left;
 
 padding:15px;
 
-border-bottom:1px solid #eee;
+border-bottom:1px solid var(--border);
 
 }
 
 .client-table tr:hover{
 
-background:#fafafa;
+background:var(--surface-alt);
 
 }
 
@@ -125,7 +126,7 @@ background:#fafafa;
 
 padding:6px 14px;
 
-border-radius:20px;
+border-radius:var(--radius-xl);
 
 font-size:13px;
 
@@ -135,17 +136,17 @@ font-weight:600;
 
 .status.active{
 
-background:#dcfce7;
+background:var(--success-soft);
 
-color:#16a34a;
+color:var(--success);
 
 }
 
 .status.disabled{
 
-background:#fee2e2;
+background:var(--danger-soft);
 
-color:#dc2626;
+color:var(--danger);
 
 }
 
@@ -153,7 +154,7 @@ color:#dc2626;
 
 text-align:center;
 
-color:#888;
+color:var(--text-muted);
 
 padding:30px 0;
 
@@ -161,15 +162,15 @@ padding:30px 0;
 
 .edit-btn{
 
-background:#0077CC;
+background:var(--accent);
 
-color:white;
+color:var(--white);
 
 border:none;
 
 padding:8px 14px;
 
-border-radius:6px;
+border-radius:var(--radius-sm);
 
 cursor:pointer;
 
@@ -179,15 +180,15 @@ margin-right:10px;
 
 .delete-btn{
 
-background:#ef4444;
+background:var(--danger);
 
-color:white;
+color:var(--white);
 
 border:none;
 
 padding:8px 14px;
 
-border-radius:6px;
+border-radius:var(--radius-sm);
 
 cursor:pointer;
 
@@ -197,13 +198,13 @@ cursor:pointer;
 
 background:var(--accent);
 
-color:var(--primary);
+color:var(--white);
 
 border:none;
 
 padding:8px 14px;
 
-border-radius:6px;
+border-radius:var(--radius-sm);
 
 cursor:pointer;
 
@@ -211,4 +212,190 @@ margin-right:10px;
 
 font-weight:600;
 
+}
+/* Permanent delete -- outlined so it reads differently from the solid red
+   Disable/Activate toggle that already uses .delete-btn. */
+.client-delete-btn{
+margin-left:10px;
+background:var(--surface);
+color:var(--danger);
+border:1px solid var(--danger-border);
+}
+
+.client-delete-btn:hover{
+background:var(--danger-soft);
+color:var(--danger-strong);
+}
+
+.client-delete-list{
+margin:8px 0 0;
+padding-left:20px;
+color:var(--text-body);
+font-size:14px;
+line-height:1.6;
+}
+
+/* ===========================
+   ACTION BUTTONS (Clients table only)
+   Scoped under .client-table .client-actions: .edit-btn/.delete-btn/
+   .services-btn above are global and used by other admin tables, so they
+   are left as they are and overridden here for this table only.
+=========================== */
+
+/* Slightly tighter side padding in this table so the one-row actions fit
+   at common laptop widths without a sideways scroll. */
+.client-table-container .client-table th,
+.client-table-container .client-table td{
+padding-left:10px;
+padding-right:10px;
+}
+
+.client-table .client-actions-cell{
+white-space:nowrap;
+}
+
+.client-table .client-actions{
+display:flex;
+align-items:center;
+gap:10px;
+flex-wrap:nowrap;
+}
+
+.client-table .client-actions .client-action{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:6px;
+height:36px;
+min-width:0;
+margin:0;
+padding:0 11px;
+border:1px solid transparent;
+border-radius:var(--radius-sm);
+font-family:inherit;
+font-size:13px;
+font-weight:600;
+line-height:1;
+white-space:nowrap;
+cursor:pointer;
+box-shadow:none;
+transition:background-color var(--transition),border-color var(--transition),color var(--transition),box-shadow var(--transition);
+}
+
+.client-table .client-actions .client-action:focus-visible{
+outline:none;
+box-shadow:var(--focus-ring);
+border-color:var(--accent);
+}
+
+/* Edit -- muted blue (tinted fill). */
+.client-table .client-actions .client-action--edit{
+background:var(--accent-soft);
+border-color:var(--accent-border);
+color:var(--accent-active);
+}
+
+.client-table .client-actions .client-action--edit:hover{
+background:var(--accent-soft-hover);
+border-color:var(--accent-border-strong);
+color:var(--accent-active);
+}
+
+/* Services -- same blue family, outlined. */
+.client-table .client-actions .client-action--services{
+background:var(--surface);
+border-color:var(--accent-border);
+color:var(--accent-hover);
+}
+
+.client-table .client-actions .client-action--services:hover{
+background:var(--accent-softer);
+border-color:var(--accent-border-strong);
+color:var(--accent-active);
+}
+
+/* Disable / Activate -- neutral slate with a small status-aware dot:
+   amber when the action will disable, green when it will re-activate. */
+.client-table .client-actions .client-action--status{
+background:var(--surface-alt);
+border-color:var(--border-strong);
+color:var(--text-body);
+}
+
+.client-table .client-actions .client-action--status::before{
+content:"";
+width:7px;
+height:7px;
+border-radius:50%;
+background:var(--warning);
+}
+
+.client-table .client-actions .client-action--status.is-disabled::before{
+background:var(--success);
+}
+
+.client-table .client-actions .client-action--status:hover{
+background:var(--surface-sunken);
+border-color:var(--text-muted);
+color:var(--text);
+}
+
+/* Delete -- muted red, outlined. */
+.client-table .client-actions .client-action--delete{
+background:var(--surface);
+border-color:var(--danger-border);
+color:var(--danger-strong);
+}
+
+.client-table .client-actions .client-action--delete:hover{
+background:var(--danger-soft);
+border-color:var(--danger-border-strong);
+color:var(--danger-strong);
+}
+
+.client-table .client-actions .client-action--delete:focus-visible{
+border-color:var(--danger);
+box-shadow:0 0 0 3px rgba(var(--danger-rgb),.18);
+}
+
+/* Resend set-password email -- compact icon button, neutral blue outline. */
+.client-table .client-actions .client-action--icon{
+width:36px;
+padding:0;
+background:var(--surface);
+border-color:var(--border-strong);
+color:var(--accent-hover);
+font-size:16px;
+}
+
+.client-table .client-actions .client-action--icon:hover{
+background:var(--accent-softer);
+border-color:var(--accent-border-strong);
+color:var(--accent-active);
+}
+
+.client-table .client-actions .client-action--icon:disabled{
+opacity:.45;
+cursor:not-allowed;
+background:var(--surface);
+border-color:var(--border);
+color:var(--text-muted);
+}
+
+/* Actions never shrink (the table scrolls inside its card on narrow
+   screens instead), and Disable/Activate share one width so the buttons
+   after it line up from row to row. */
+.client-table .client-actions .client-action{
+flex:0 0 auto;
+}
+
+.client-table .client-actions .client-action--status{
+min-width:92px;
+}
+
+/* Long email addresses wrap inside their cell rather than widening the
+   table (Email is the 3rd column). */
+.client-table td:nth-child(3){
+overflow-wrap:anywhere;
+min-width:120px;
 }

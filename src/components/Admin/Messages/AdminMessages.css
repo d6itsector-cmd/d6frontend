@@ -11,10 +11,10 @@
 /* LEFT -- client list */
 
 .admin-messages .chat-list{
-  background:#fff;
-  border-radius:20px;
+  background:var(--surface);
+  border-radius:var(--radius-xl);
   padding:16px;
-  box-shadow:0 12px 30px rgba(0,0,0,.06);
+  box-shadow:var(--shadow-md);
   max-height:75vh;
   overflow-y:auto;
 }
@@ -24,18 +24,18 @@
   align-items:center;
   gap:14px;
   padding:14px;
-  border-radius:14px;
+  border-radius:var(--radius-lg);
   cursor:pointer;
   transition:.2s;
   margin-bottom:8px;
 }
 
 .admin-messages .chat-user:hover{
-  background:#E8F3FC;
+  background:var(--accent-soft);
 }
 
 .admin-messages .chat-user.active{
-  background:#E8F3FC;
+  background:var(--accent-soft);
 }
 
 .admin-messages .avatar{
@@ -43,12 +43,12 @@
   height:46px;
   min-width:46px;
   border-radius:50%;
-  background:#0077CC;
+  background:var(--accent);
   display:flex;
   justify-content:center;
   align-items:center;
   font-weight:700;
-  color:#fff;
+  color:var(--white);
   font-size:15px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .admin-messages .chat-info h4{
-  color:#14213D;
+  color:var(--text-strong);
   margin-bottom:3px;
   font-size:14.5px;
   white-space:nowrap;
@@ -68,14 +68,14 @@
 
 .admin-messages .chat-info p{
   font-size:12px;
-  color:#777;
+  color:var(--text-light);
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
 .admin-messages .online{
-  color:#22C55E;
+  color:var(--success);
   font-size:9px;
   flex-shrink:0;
 }
@@ -83,9 +83,9 @@
 /* RIGHT -- thread */
 
 .admin-messages .chat-window{
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.06);
+  background:var(--surface);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-md);
   display:flex;
   flex-direction:column;
   min-height:75vh;
@@ -93,17 +93,17 @@
 
 .admin-messages .chat-header{
   padding:22px 25px;
-  border-bottom:1px solid #eee;
+  border-bottom:1px solid var(--border);
 }
 
 .admin-messages .chat-header h2{
-  color:#14213D;
+  color:var(--text-strong);
   font-size:19px;
   overflow-wrap:anywhere;
 }
 
 .admin-messages .chat-header span{
-  color:#888;
+  color:var(--text-muted);
   font-size:13px;
 }
 
@@ -118,27 +118,27 @@
 
 .admin-messages .chat-status{
   text-align:center;
-  color:#7B8498;
+  color:var(--text-light);
   margin:auto;
 }
 
 .admin-messages .message{
   padding:14px 18px;
-  border-radius:16px;
+  border-radius:var(--radius-lg);
   max-width:65%;
   line-height:1.6;
   font-size:14px;
 }
 
 .admin-messages .received{
-  background:#EEF2F7;
-  color:#14213D;
+  background:var(--surface-sunken);
+  color:var(--text-strong);
   align-self:flex-start;
 }
 
 .admin-messages .sent{
-  background:#14213D;
-  color:#fff;
+  background:var(--accent);
+  color:var(--white);
   align-self:flex-end;
 }
 
@@ -152,7 +152,7 @@
 .admin-messages .chat-input{
   display:flex;
   padding:18px;
-  border-top:1px solid #eee;
+  border-top:1px solid var(--border);
   gap:12px;
 }
 
@@ -160,22 +160,22 @@
   flex:1;
   min-width:0;
   padding:14px;
-  border:1px solid #ddd;
-  border-radius:12px;
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
   outline:none;
   font-family:inherit;
 }
 
 .admin-messages .chat-input input:focus{
-  border-color:#0077CC;
+  border-color:var(--accent);
 }
 
 .admin-messages .chat-input button{
   width:52px;
   border:none;
-  background:#0077CC;
-  color:#fff;
-  border-radius:12px;
+  background:var(--accent);
+  color:var(--white);
+  border-radius:var(--radius-lg);
   cursor:pointer;
   font-size:16px;
   transition:.2s;

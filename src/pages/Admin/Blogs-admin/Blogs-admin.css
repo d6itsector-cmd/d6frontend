@@ -1,7 +1,7 @@
 .blogs-page{
     padding:30px;
     min-height:100vh;
-    background:#F5F7FB;
+    background:var(--surface-alt);
 }
 
 .blogs-header{
@@ -12,21 +12,21 @@
 }
 
 .blogs-header h1{
-    color:var(--primary);
+    color:var(--text-strong);
     font-size:32px;
     margin-bottom:6px;
 }
 
 .blogs-header p{
-    color:#666;
+    color:var(--text-light);
 }
 
 .add-blog-btn{
     background:var(--accent);
-    color:var(--primary);
+    color:var(--white);
     padding:12px 24px;
     border:none;
-    border-radius:10px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-weight:600;
     transition:.3s;

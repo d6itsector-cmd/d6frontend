@@ -6,26 +6,26 @@
 }
 
 .kpi-box{
-    background:#fff;
+    background:var(--surface);
     padding:25px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-md);
     text-align:center;
     transition:.3s;
 }
 
 .kpi-box:hover{
-    transform:translateY(-5px);
+    transform:translateY(-2px);
 }
 
 .kpi-box h2{
-    color:#0077CC;
+    color:var(--accent);
     font-size:34px;
     margin-bottom:8px;
 }
 
 .kpi-box p{
-    color:#7B8498;
+    color:var(--text-light);
     font-size:15px;
 }
 

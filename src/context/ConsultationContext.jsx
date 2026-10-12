@@ -1,39 +1,10 @@
-import { createContext, useContext, useState } from "react";
-import ConsultationModal from "../components/Consultation/ConsultationModal";
+import { createContext, useContext } from "react";
+
+// The provider component lives in ConsultationProvider.jsx so this module only exports
+// non-components, which keeps React Fast Refresh working for both files.
 
 // Create Context
-const ConsultationContext = createContext();
-
-// Provider Component
-export const ConsultationProvider = ({ children }) => {
-  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
-
-  // Open Modal
-  const openConsultation = () => {
-    setIsConsultationOpen(true);
-  };
-
-  // Close Modal
-  const closeConsultation = () => {
-    setIsConsultationOpen(false);
-  };
-
-  return (
-    <ConsultationContext.Provider
-      value={{
-        openConsultation,
-        closeConsultation,
-      }}
-    >
-      {children}
-
-      <ConsultationModal
-        isOpen={isConsultationOpen}
-        onClose={closeConsultation}
-      />
-    </ConsultationContext.Provider>
-  );
-};
+export const ConsultationContext = createContext();
 
 // Custom Hook
 export const useConsultation = () => {

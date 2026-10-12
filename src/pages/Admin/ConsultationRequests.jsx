@@ -3,7 +3,8 @@ import ConsultationTable from "../../components/Admin/ConsultationRequests/Consu
 import ConsultationView from "../../components/Admin/ConsultationRequests/ConsultationView";
 import api from "../../services/api";
 
-const ConsultationRequests = () => {
+// `embedded`: rendered as a tab of /admin/leads, which supplies the header.
+const ConsultationRequests = ({ embedded = false }) => {
   const [consultations, setConsultations] = useState([]);
   const [status, setStatus] = useState("loading");
   const [search, setSearch] = useState("");
@@ -46,13 +47,15 @@ const ConsultationRequests = () => {
   };
 
   return (
-    <div className="clients-page">
-      <div className="page-header">
-        <div>
-          <h1>Consultation Requests</h1>
-          <p>Manage consultation bookings.</p>
+    <div className={embedded ? undefined : "clients-page"}>
+      {!embedded && (
+        <div className="page-header">
+          <div>
+            <h1>Consultation Requests</h1>
+            <p>Manage consultation bookings.</p>
+          </div>
         </div>
-      </div>
+      )}
 
       <ConsultationTable
         consultations={consultations}

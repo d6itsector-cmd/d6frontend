@@ -1,6 +1,8 @@
+import { LuKeyRound } from "react-icons/lu";
+
 import "./ClientTable.css";
 
-const ClientTable = ({ clients, status, search, onSearchChange, onEdit, onToggleStatus, onViewServices }) => {
+const ClientTable = ({ clients, status, search, onSearchChange, onEdit, onToggleStatus, onViewServices, onDelete, onResendSetPassword }) => {
   return (
     <div className="client-table-container">
 
@@ -62,28 +64,61 @@ const ClientTable = ({ clients, status, search, onSearchChange, onEdit, onToggle
 
                 </td>
 
-                <td>
+                <td className="client-actions-cell">
 
-                  <button
-                    className="edit-btn"
-                    onClick={() => onEdit(client)}
-                  >
-                    Edit
-                  </button>
+                  <div className="client-actions">
 
-                  <button
-                    className="services-btn"
-                    onClick={() => onViewServices(client)}
-                  >
-                    Services
-                  </button>
+                    <button
+                      type="button"
+                      className="edit-btn client-action client-action--edit"
+                      onClick={() => onEdit(client)}
+                    >
+                      Edit
+                    </button>
 
-                  <button
-                    className="delete-btn"
-                    onClick={() => onToggleStatus(client)}
-                  >
-                    {client.status === "active" ? "Disable" : "Activate"}
-                  </button>
+                    <button
+                      type="button"
+                      className="services-btn client-action client-action--services"
+                      onClick={() => onViewServices(client)}
+                    >
+                      Services
+                    </button>
+
+                    {/* Only active clients can be sent a set-password link; the
+                        button stays in place (disabled) so rows line up. */}
+                    <button
+                      type="button"
+                      className="client-action client-action--icon"
+                      onClick={() => onResendSetPassword(client)}
+                      disabled={client.status !== "active"}
+                      title={
+                        client.status === "active"
+                          ? "Resend set-password email"
+                          : "Re-activate the account to send a set-password email"
+                      }
+                      aria-label={`Resend set-password email to ${client.displayName || client.email}`}
+                    >
+                      <LuKeyRound aria-hidden="true" />
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`delete-btn client-action client-action--status is-${client.status}`}
+                      onClick={() => onToggleStatus(client)}
+                    >
+                      {client.status === "active" ? "Disable" : "Activate"}
+                    </button>
+
+                    <button
+                      type="button"
+                      className="delete-btn client-delete-btn client-action client-action--delete"
+                      onClick={() => onDelete(client)}
+                      aria-label={`Delete ${client.displayName || client.email}`}
+                    >
+                      Delete
+                    </button>
+
+                  </div>
 
                 </td>
 

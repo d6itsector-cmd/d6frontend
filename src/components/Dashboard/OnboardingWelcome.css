@@ -1,20 +1,20 @@
 .onboarding-welcome{
-    background:#fff;
-    border-radius:20px;
+    background:var(--surface);
+    border-radius:var(--radius-xl);
     padding:50px 40px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    box-shadow:var(--shadow-md);
     text-align:center;
     margin-bottom:30px;
 }
 
 .onboarding-welcome h2{
-    color:#14213D;
+    color:var(--text-strong);
     font-size:26px;
     margin-bottom:12px;
 }
 
 .onboarding-welcome > p{
-    color:#7B8498;
+    color:var(--text-light);
     font-size:15px;
     max-width:480px;
     margin:0 auto 30px;
@@ -32,8 +32,8 @@
 }
 
 .onboarding-steps li{
-    background:#E8F3FC;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
     font-size:13px;
     font-weight:600;
     padding:10px 16px;
@@ -41,7 +41,7 @@
 }
 
 .onboarding-help{
-    color:#14213D !important;
+    color:var(--text-strong) !important;
     font-weight:600;
     margin-bottom:16px !important;
 }
@@ -51,10 +51,10 @@
     align-items:center;
     gap:10px;
     border:none;
-    background:#0077CC;
-    color:#fff;
+    background:var(--accent);
+    color:var(--white);
     padding:14px 28px;
-    border-radius:12px;
+    border-radius:var(--radius-lg);
     font-weight:600;
     font-size:15px;
     cursor:pointer;
@@ -62,7 +62,7 @@
 }
 
 .onboarding-welcome button:hover{
-    background:#14213D;
+    background:var(--accent-hover);
 }
 
 @media(max-width:600px){

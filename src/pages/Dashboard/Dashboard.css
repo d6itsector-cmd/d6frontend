@@ -1,7 +1,7 @@
 .dashboard{
     display:flex;
     min-height:100vh;
-    background:#F5F7FB;
+    background:var(--surface-alt);
 }
 
 .dashboard-content{

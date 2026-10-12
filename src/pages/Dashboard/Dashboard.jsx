@@ -32,6 +32,9 @@ import BillingOverview from "../../components/Dashboard/Billing/BillingOverview"
 
 import api from "../../services/api";
 
+// Imported after the components so it layers over their stylesheets.
+import "../../styles/client-theme.css";
+
 // Each section lives at /dashboard/<id> so pages can be linked to directly
 // (Stripe redirects to /dashboard/billing/success|cancelled and the billing
 // portal returns to /dashboard/my-plan).

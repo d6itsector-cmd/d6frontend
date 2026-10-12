@@ -4,7 +4,9 @@ import EmailServices from "../../components/WebService/EmailMarketing/EmailServi
 import WhyEmailMarketing from "../../components/WebService/EmailMarketing/WhyEmailMarketing";
 import CTA from "../../components/Home/CTA/CTA";
 import Footer from "../../components/Home/Footer/Footer";
-import EmailFAQ from "../../components/WebService/EmailMarketing/EmailFAQ";
+// <EmailFAQ/> is disabled below; keep its stylesheet loaded since its global
+// .faq-* / .section-tag rules also apply to other components.
+import "../../components/WebService/EmailMarketing/EmailFAQ.css";
 
 const EmailMarketing = () => {
   return (

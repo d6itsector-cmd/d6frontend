@@ -4,7 +4,9 @@ import SEOProcess from "../../components/WebService/SEO/SEOProcess";
 import SEOServices from "../../components/WebService/SEO/SEOServices";
 import WhySEO from "../../components/WebService/SEO/WhySEO";
 import CTA from "../../components/Home/CTA/CTA";
-import SEOFAQ from "../../components/WebService/SEO/SEOFAQ";
+// <SEOFAQ/> is disabled below; keep its stylesheet loaded since its global
+// .faq-* / .section-tag rules also apply to other components.
+import "../../components/WebService/SEO/SEOFAQ.css";
 // import Footer from ""
 
 const SEO = () => {

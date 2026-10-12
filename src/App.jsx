@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import Navbar from "./components/Home/navbar/Navbar";
 import ScrollToTop from "./components/Scroll/ScrollToTop";
@@ -44,6 +44,7 @@ import Clients from "./pages/Admin/Clients";
 import Projects from "./pages/Admin/Projects";
 import Leads from "./pages/Admin/Leads";
 import ContactRequests from "./pages/Admin/ContactRequests";
+import LeadsContactAdmin from "./pages/Admin/LeadsContactAdmin";
 import ConsultationRequests from "./pages/Admin/ConsultationRequests";
 import DocumentsAdmin from "./pages/Admin/Documents-admin";
 import Services from "./pages/Admin/Service-ad/Services-admin";
@@ -207,25 +208,26 @@ function AppContent() {
             element={<Projects />}
           />
 
-          {/* Leads */}
+          {/* Leads & Contact Requests: one page, three tabs */}
 
-          <Route
-            path="leads"
-            element={<Leads />}
-          />
+          <Route path="leads" element={<LeadsContactAdmin />}>
+            <Route index element={<Leads embedded />} />
+            <Route path="contact-requests" element={<ContactRequests embedded />} />
+            <Route path="consultations" element={<ConsultationRequests embedded />} />
+          </Route>
 
-          {/* Contact Requests */}
+          {/* Old standalone URL -> the Contact Requests tab */}
 
           <Route
             path="contact-requests"
-            element={<ContactRequests />}
+            element={<Navigate to="/admin/leads/contact-requests" replace />}
           />
 
-          {/* Consultation Requests */}
+          {/* Old standalone URL -> the Consultations tab */}
 
           <Route
             path="consultations"
-            element={<ConsultationRequests />}
+            element={<Navigate to="/admin/leads/consultations" replace />}
           />
 
           {/* Services */}

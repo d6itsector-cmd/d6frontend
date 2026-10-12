@@ -1,6 +1,6 @@
 .googleads-faq{
     padding:100px 8%;
-    background:#F8FAFC;
+    background:var(--surface-alt);
 }
 
 .googleads-faq-container{
@@ -17,8 +17,8 @@
 .section-tag{
     display:inline-block;
     padding:8px 20px;
-    background:#E8F3FC;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
     border-radius:30px;
     font-size:14px;
     font-weight:600;
@@ -27,16 +27,16 @@
 
 .faq-left h2{
     font-size:46px;
-    color:#1E2A5E;
+    color:var(--text-strong);
     margin-bottom:20px;
 }
 
 .faq-left h2 span{
-    color:#0077CC;
+    color:var(--accent);
 }
 
 .faq-left p{
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
 }
 
@@ -49,15 +49,15 @@
 }
 
 .faq-item{
-    background:#fff;
-    border:1px solid #E5E7EB;
-    border-radius:18px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-xl);
     overflow:hidden;
     transition:.3s;
 }
 
 .faq-item.active{
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-md);
 }
 
 .faq-question{
@@ -71,14 +71,14 @@
 .faq-question h3{
     margin:0;
     font-size:20px;
-    color:#1E2A5E;
+    color:var(--text-strong);
     font-weight:600;
     flex:1;
 }
 
 .faq-icon{
     font-size:20px;
-    color:#1E2A5E;
+    color:var(--text-strong);
     margin-left:20px;
 }
 
@@ -88,7 +88,7 @@
 
 .faq-answer p{
     margin:0;
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
     font-size:16px;
 }

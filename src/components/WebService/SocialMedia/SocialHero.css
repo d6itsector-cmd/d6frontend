@@ -1,6 +1,6 @@
 .social-hero{
     padding:120px 8% 80px;
-    background:#F8FAFC;
+    background:var(--surface-alt);
 }
 
 .social-hero-container{
@@ -19,8 +19,8 @@
 .hero-badge{
     display:inline-block;
     padding:8px 20px;
-    background:#E8F3FC;
-    color:#0077CC;
+    background:var(--accent-soft);
+    color:var(--accent);
     border-radius:30px;
     font-size:14px;
     font-weight:600;
@@ -30,17 +30,17 @@
 .social-hero-content h1{
     font-size:58px;
     line-height:1.2;
-    color:#1E2A5E;
+    color:var(--text-strong);
     margin-bottom:25px;
 }
 
 .social-hero-content h1 span{
-    color:#0077CC;
+    color:var(--accent);
 }
 
 .social-hero-content p{
     font-size:18px;
-    color:#6B7280;
+    color:var(--text-light);
     line-height:1.8;
     margin-bottom:35px;
     max-width:550px;
@@ -53,10 +53,10 @@
 
 .btn-primary{
     padding:15px 32px;
-    background:#0077CC;
-    color:#fff;
+    background:var(--accent);
+    color:var(--white);
     border:none;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-size:16px;
     font-weight:600;
@@ -64,15 +64,15 @@
 }
 
 .btn-primary:hover{
-    background:#e39418;
+    background:var(--accent-hover);
 }
 
 .btn-secondary{
     padding:15px 32px;
-    background:#fff;
-    border:2px solid #1E2A5E;
-    color:#1E2A5E;
-    border-radius:8px;
+    background:var(--surface);
+    border:2px solid var(--text-strong);
+    color:var(--text-strong);
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-size:16px;
     font-weight:600;
@@ -80,8 +80,8 @@
 }
 
 .btn-secondary:hover{
-    background:#1E2A5E;
-    color:#fff;
+    background:var(--accent-hover);
+    color:var(--white);
 }
 
 .social-hero-image{
@@ -93,7 +93,7 @@
 .social-hero-image img{
     width:100%;
     max-width:520px;
-    border-radius:20px;
+    border-radius:var(--radius-xl);
 }
 
 @media(max-width:992px){

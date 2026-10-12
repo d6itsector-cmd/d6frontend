@@ -1,13 +1,13 @@
 .settings-card{
-    background:var(--white);
+    background:var(--surface);
     padding:25px;
-    border-radius:15px;
+    border-radius:var(--radius-lg);
     margin-bottom:30px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-sm);
 }
 
 .settings-card h2{
-    color:var(--primary);
+    color:var(--text-strong);
     margin-bottom:20px;
 }
 
@@ -25,13 +25,13 @@
 .form-group label{
     margin-bottom:8px;
     font-weight:600;
-    color:var(--primary);
+    color:var(--text-strong);
 }
 
 .form-group input{
     padding:12px;
-    border:1px solid #ddd;
-    border-radius:8px;
+    border:1px solid var(--border-strong);
+    border-radius:var(--radius-md);
     outline:none;
 }
 
@@ -43,9 +43,9 @@
     margin-top:25px;
     padding:12px 25px;
     background:var(--accent);
-    color:var(--primary);
+    color:var(--white);
     border:none;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     cursor:pointer;
     font-weight:600;
 }

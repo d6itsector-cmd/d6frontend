@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import {
     FaHome,
-    FaFolderOpen,
-    FaBriefcase,
     FaChartLine,
     FaFileAlt,
     FaComments,
@@ -47,15 +45,9 @@ const Sidebar = ({ activePage, setActivePage, isOpen, onClose }) => {
         },
 
         {
-            id: "projects",
-            title: "My Projects",
-            icon: <FaFolderOpen />,
-        },
-
-        {
-            id: "services",
-            title: "My Services",
-            icon: <FaBriefcase />,
+            id: "analytics",
+            title: "Analytics",
+            icon: <FaChartLine />,
         },
 
         {
@@ -68,12 +60,6 @@ const Sidebar = ({ activePage, setActivePage, isOpen, onClose }) => {
             id: "billing",
             title: "Billing",
             icon: <FaCreditCard />,
-        },
-
-        {
-            id: "analytics",
-            title: "Analytics",
-            icon: <FaChartLine />,
         },
 
         {
@@ -161,23 +147,6 @@ const Sidebar = ({ activePage, setActivePage, isOpen, onClose }) => {
                 ))}
 
             </nav>
-            <div className="sidebar-bottom">
-
-                <div className="sidebar-card">
-
-                    <h4>Need Help?</h4>
-
-                    <p>
-                        Contact your project manager anytime.
-                    </p>
-
-                    <button onClick={() => handleSelect("support")}>
-                        Contact Support
-                    </button>
-
-                </div>
-
-            </div>
 
             <Link to="/" className="view-website-link" onClick={onClose}>
                 <FaGlobe />

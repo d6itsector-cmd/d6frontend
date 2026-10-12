@@ -4,7 +4,9 @@ import SocialServices from "../../components/WebService/SocialMedia/SocialServic
 import WhySocialMedia from "../../components/WebService/SocialMedia/WhySocialMedia";
 import CTA from "../../components/Home/CTA/CTA";
 import Footer from "../../components/Home/Footer/Footer";
-import SocialFAQ from "../../components/WebService/SocialMedia/SocialFAQ";
+// <SocialFAQ/> is disabled below; keep its stylesheet loaded since its global
+// .faq-* / .section-tag rules also apply to other components.
+import "../../components/WebService/SocialMedia/SocialFAQ.css";
 
 const SocialMedia = () => {
     return (
