@@ -70,7 +70,8 @@
 }
 
 .featureCard:hover{
-    transform:translateX(10px);
+    transform:translateY(var(--hover-lift));
+    box-shadow:var(--shadow-md);
 }
 
 .featureCard svg{

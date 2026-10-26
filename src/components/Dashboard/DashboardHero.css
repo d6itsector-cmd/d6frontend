@@ -330,7 +330,7 @@
 
 .hero-info > div:hover{
 
-  transform:translateX(8px);
+  transform:translateX(var(--hover-nudge));
 
   background:rgba(255,255,255,.13);
 

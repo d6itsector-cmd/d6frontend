@@ -115,6 +115,7 @@
 .contact-form-box select:focus,
 .contact-form-box textarea:focus{
     border-color:var(--accent);
+    box-shadow:var(--focus-ring);
 }
 
 .contact-form-box textarea{

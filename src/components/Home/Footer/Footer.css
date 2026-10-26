@@ -138,7 +138,7 @@
 
 .footer-links a:hover {
   color: var(--accent);
-  transform: translateX(6px);
+  transform: translateX(var(--hover-nudge));
 }
 
 .footer-services a {
@@ -150,7 +150,7 @@
 
 .footer-services a:hover {
   color: var(--accent);
-  transform: translateX(6px);
+  transform: translateX(var(--hover-nudge));
 }
 
 /* ==========================
@@ -221,13 +221,12 @@
 .footer-social a:hover {
   background: var(--accent-hover);
   color: var(--white);
-  transform: translateY(-3px);
+  transform: translateY(var(--hover-lift));
   box-shadow: var(--shadow-md);
 }
 
 .footer-social a:hover svg {
   color: var(--white);
-  transform: scale(1.15);
 }
 
 /* ==========================

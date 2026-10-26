@@ -22,7 +22,7 @@ const Hero = () => {
         <div className="seo-left">
 
           <span className="seo-badge">
-            🚀 SEO Solutions for Growing Businesses
+            SEO Solutions for Growing Businesses
           </span>
 
           <h1>

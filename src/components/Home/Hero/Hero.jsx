@@ -23,7 +23,7 @@ const Hero = () => {
         <div className="hero-content">
 
           <span className="hero-badge">
-            🚀 Your Trusted Digital Growth Partner
+            Your Trusted Digital Growth Partner
           </span>
 
           <h1>
@@ -62,17 +62,14 @@ const Hero = () => {
           <div className="hero-features">
 
             <div className="feature">
-              <span>✔</span>
               <p>Customized Marketing Strategies</p>
             </div>
 
             <div className="feature">
-              <span>✔</span>
               <p>Transparent Communication</p>
             </div>
 
             <div className="feature">
-              <span>✔</span>
               <p>Affordable Business Solutions</p>
             </div>
 

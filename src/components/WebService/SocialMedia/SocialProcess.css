@@ -53,11 +53,11 @@
     padding:35px 25px;
     text-align:center;
     position:relative;
-    transition:.3s;
+    transition:var(--transition-slow);
 }
 
 .process-card:hover{
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
     box-shadow:var(--shadow-md);
 }
 

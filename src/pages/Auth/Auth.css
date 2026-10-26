@@ -90,6 +90,7 @@
 .auth-form input:focus{
 
     border-color:var(--accent);
+    box-shadow:var(--focus-ring);
 
 }
 

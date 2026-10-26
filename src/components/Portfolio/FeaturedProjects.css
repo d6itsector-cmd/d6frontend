@@ -62,9 +62,9 @@
 }
 
 .project-card:hover{
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
     border-color:var(--accent);
-    box-shadow:0 20px 45px rgba(var(--primary-rgb),.12);
+    box-shadow:var(--shadow-md);
 }
 
 /*==============================
@@ -93,11 +93,10 @@
 
 .project-card:hover .project-icon{
     background:var(--accent-hover);
-    transform:scale(1.08);
 }
 
 .project-card:hover .project-icon svg{
-    color:var(--text-strong);
+    color:var(--white);
 }
 
 /*==============================
@@ -199,7 +198,7 @@
 }
 
 .project-content button:hover svg{
-    transform:translateX(5px);
+    transform:translateX(var(--hover-nudge));
 }
 
 /*==============================

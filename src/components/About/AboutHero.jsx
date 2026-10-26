@@ -15,7 +15,7 @@ const AboutHero = () => {
         <div className="aboutHero__content">
 
           <span className="aboutHero__badge">
-            🚀 About Our Startup
+            About Our Startup
           </span>
 
           <h1>
@@ -76,14 +76,6 @@ const AboutHero = () => {
             alt="About Us"
             loading="lazy"
           />
-
-          <div className="floatingCard topCard">
-            🚀 Startup Focused
-          </div>
-
-          <div className="floatingCard bottomCard">
-            ⭐ Trusted Partner
-          </div>
 
         </div>
 

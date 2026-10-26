@@ -146,9 +146,9 @@
     0 8px 25px rgba(var(--primary-rgb),0.05);
 
   transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    border-color 0.35s ease;
+    transform var(--transition-slow),
+    box-shadow var(--transition-slow),
+    border-color var(--transition-slow);
 }
 
 
@@ -174,7 +174,7 @@
   transform-origin: center;
 
   transition:
-    transform 0.35s ease;
+    transform var(--transition-slow);
 }
 
 
@@ -183,7 +183,7 @@
 ========================================================= */
 
 .service-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
 
   border-color: var(--accent-border);
 
@@ -229,10 +229,10 @@
   font-size: 30px;
 
   transition:
-    background 0.35s ease,
-    color 0.35s ease,
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+    background var(--transition-slow),
+    color var(--transition-slow),
+    transform var(--transition-slow),
+    box-shadow var(--transition-slow);
 }
 
 
@@ -244,8 +244,8 @@
   color: inherit;
 
   transition:
-    transform 0.35s ease,
-    color 0.35s ease;
+    transform var(--transition-slow),
+    color var(--transition-slow);
 }
 
 
@@ -262,7 +262,7 @@
 
   color: var(--white);
 
-  transform: translateY(-3px);
+  transform: translateY(var(--hover-lift));
 
   box-shadow:
     var(--shadow-md);
@@ -272,7 +272,6 @@
 /* Slight icon animation */
 
 .service-card:hover .service-icon svg {
-  transform: scale(1.08);
 
   color: var(--white);
 }
@@ -295,7 +294,7 @@
   line-height: 1.3;
 
   transition:
-    color 0.3s ease;
+    color var(--transition-slow);
 }
 
 
@@ -330,6 +329,8 @@
 ========================================================= */
 
 .learn-more {
+  position: relative;
+
   display: inline-flex;
 
   align-items: center;
@@ -355,13 +356,18 @@
 
   cursor: pointer;
 
-  transition:
-    color 0.25s ease,
-    gap 0.25s ease;
+  transition: color var(--transition);
 }
 
 
 /* Learn More arrow */
+
+/* Larger touch target, same visual size. */
+.learn-more::after {
+  content: "";
+  position: absolute;
+  inset: -15px 0;
+}
 
 .learn-more svg {
   flex-shrink: 0;
@@ -369,7 +375,7 @@
   font-size: 13px;
 
   transition:
-    transform 0.25s ease;
+    transform var(--transition);
 }
 
 
@@ -377,15 +383,13 @@
 
 .learn-more:hover {
   color: var(--accent);
-
-  gap: 12px;
 }
 
 
 /* Arrow movement */
 
 .learn-more:hover svg {
-  transform: translateX(4px);
+  transform: translateX(var(--hover-nudge));
 }
 
 

@@ -181,8 +181,15 @@
     color var(--transition);
 }
 
-.navbar-link:hover {
+.navbar-link:hover,
+.navbar-link:focus-visible {
   color: var(--blue);
+}
+
+/* Focus is shown by the colour + underline; the global outline would box
+   the full nav-bar height. */
+.navbar-link:focus-visible {
+  outline: none;
 }
 
 .navbar-link.active {
@@ -214,6 +221,7 @@
 }
 
 .navbar-link:hover::after,
+.navbar-link:focus-visible::after,
 .navbar-link.active::after {
   width: 100%;
 }
@@ -276,8 +284,6 @@
 
 .navbar-phone:hover svg {
   color: var(--blue);
-
-  transform: scale(1.05);
 }
 
 
@@ -529,8 +535,6 @@
 
 .service-item:hover {
   background: var(--accent-softer);
-
-  transform: translateY(-2px);
 }
 
 
@@ -571,8 +575,12 @@
 .service-item:hover .service-icon {
   background:
     rgba(var(--accent-rgb),0.16);
+}
 
-  transform: scale(1.03);
+/* Services.css (home page) shares the .service-icon class name; keep its
+   card margin out of the dropdown. */
+.services-dropdown .service-icon {
+  margin: 0;
 }
 
 
@@ -730,7 +738,7 @@
 .desktop-consultation-btn:hover {
   background: var(--blue-hover);
 
-  transform: translateY(-1px);
+  transform: translateY(calc(var(--hover-lift) / 2));
 
   box-shadow:
     var(--shadow-md);
@@ -843,8 +851,6 @@
 
 .profile-button:hover svg {
   color: var(--blue);
-
-  transform: scale(1.04);
 }
 
 
@@ -1359,6 +1365,12 @@
 
   .navbar-menu.navbar-menu-open {
     left: 0;
+  }
+
+  /* Rows keep their height when the open Services panel overflows the
+     menu -- the menu scrolls instead of squashing the other links. */
+  .navbar-menu > * {
+    flex-shrink: 0;
   }
 
 

@@ -18,7 +18,7 @@ const StartupHero = () => {
 
         {/* Badge */}
         <div className="hero-badge">
-          🚀 INDUSTRIES
+          INDUSTRIES
         </div>
 
         {/* Heading */}
@@ -55,12 +55,10 @@ const StartupHero = () => {
         <div className="hero-image">
 
           <div className="floating-card idea">
-            💡
             <span>Creative Ideas</span>
           </div>
 
           <div className="floating-card growth">
-            📈
             <span>Business Growth</span>
           </div>
 
@@ -71,12 +69,10 @@ const StartupHero = () => {
           />
 
           <div className="floating-card leads">
-            🎯
             <span>Quality Leads</span>
           </div>
 
           <div className="floating-card branding">
-            ⭐
             <span>Brand Identity</span>
           </div>
 

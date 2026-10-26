@@ -111,7 +111,7 @@
 }
 
 .primary-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
   box-shadow: var(--shadow-md);
 }
 
@@ -120,7 +120,7 @@
 }
 
 .primary-btn:hover svg {
-  transform: translateX(6px);
+  transform: translateX(var(--hover-nudge));
 }
 
 .secondary-btn {
@@ -149,7 +149,7 @@
   background: var(--surface);
   color: var(--text-strong);
   border-color: var(--white);
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
   box-shadow: var(--shadow-md);
 }
 
@@ -161,7 +161,7 @@
 
 .cta .primary-btn:hover {
   background: var(--accent-softer);
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
   box-shadow: var(--shadow-md);
 }
 
@@ -175,7 +175,7 @@
   background: var(--surface);
   border-color: var(--white);
   color: var(--accent);
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
 }
 
 /* ===========================

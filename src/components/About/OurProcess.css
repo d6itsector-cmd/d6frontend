@@ -54,7 +54,7 @@
 }
 
 .process-card:hover{
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
 }
 
 .process-number{

@@ -49,7 +49,7 @@
     border:1px solid var(--border);
     border-radius:var(--radius-xl);
     overflow:hidden;
-    transition:.3s;
+    transition:var(--transition-slow);
 }
 
 .faq-item.active{
