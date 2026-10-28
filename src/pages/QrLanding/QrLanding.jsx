@@ -38,8 +38,8 @@ import "./QrLanding.css";
 // client-side flag) is trivially bypassed and can also reject real scans.
 // The page is kept out of search results instead (noindex below).
 
-const PHONE_DISPLAY = "+44 330 088 8586";
-const PHONE_HREF = "tel:+443300888586";
+const PHONE_DISPLAY = "+44 7776635958";
+const PHONE_HREF = "tel:+447776635958";
 const EMAIL = "d6globaluk@gmail.com";
 const AURAWORK_URL = "https://aurawork.d6globalmedia.com/";
 
