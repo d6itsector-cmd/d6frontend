@@ -25,6 +25,7 @@ import {
   FaFolderOpen,
   FaFingerprint,
   FaGlobe,
+  FaInstagram,
 } from "react-icons/fa";
 
 import { useConsultation } from "../../context/ConsultationContext";
@@ -32,14 +33,20 @@ import logo from "../../assets/d6.png";
 import "./QrLanding.css";
 
 // Public landing page for visitors arriving from the printed D6 Global
-// Limited QR code (/qr). Deliberately open to everyone: a static QR code
+// Services QR code (/qr). Deliberately open to everyone: a static QR code
 // only encodes a URL, so any "scan-only" check (Referer, user-agent, a
 // client-side flag) is trivially bypassed and can also reject real scans.
 // The page is kept out of search results instead (noindex below).
 
 const PHONE_DISPLAY = "+44 330 088 8586";
 const PHONE_HREF = "tel:+443300888586";
-const EMAIL = "notifications@d6globalmedia.com";
+const EMAIL = "d6globaluk@gmail.com";
+const AURAWORK_URL = "https://aurawork.d6globalmedia.com/";
+
+const INSTAGRAM_ACCOUNTS = [
+  { label: "D6 Global Media", href: "https://www.instagram.com/d6_global_media_/" },
+  { label: "D6 Global Services", href: "https://www.instagram.com/d6_global_services" },
+];
 
 const BRANCHES = [
   {
@@ -92,7 +99,7 @@ const AURAWORK_FEATURES = [
 const useNoIndex = () => {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "D6 Global Limited | Our Services";
+    document.title = "D6 Global Services | Our Services";
 
     const meta = document.createElement("meta");
     meta.name = "robots";
@@ -117,7 +124,7 @@ const QrLanding = () => {
         <div className="qr-shell qr-topbar-inner">
           <Link to="/" className="qr-brand" aria-label="D6 Global Services home">
             <img src={logo} alt="" width="40" height="40" />
-            <span>D6 Global Limited</span>
+            <span>D6 Global Services</span>
           </Link>
           <a href={PHONE_HREF} className="qr-topbar-call">
             <FaPhoneAlt aria-hidden="true" />
@@ -137,7 +144,7 @@ const QrLanding = () => {
               <span> and business technology.</span>
             </h1>
             <p>
-              D6 Global Limited brings together digital marketing, event management,
+              D6 Global Services brings together digital marketing, event management,
               business and technology solutions, and our own workforce platform,
               AuraWork, so your business can grow from one trusted team.
             </p>
@@ -159,14 +166,14 @@ const QrLanding = () => {
             <div className="qr-heading">
               <span className="qr-tag">What we do</span>
               <h2 id="qr-tree-title">Our service tree</h2>
-              <p>Three specialist divisions and one product, all under D6 Global Limited.</p>
+              <p>Three specialist divisions and one product, all under D6 Global Services.</p>
             </div>
 
             <div className="qr-tree">
               <div className="qr-root">
                 <img src={logo} alt="" width="44" height="44" />
                 <div>
-                  <strong>D6 Global Limited</strong>
+                  <strong>D6 Global Services</strong>
                   <span>Services &amp; products</span>
                 </div>
               </div>
@@ -231,10 +238,21 @@ const QrLanding = () => {
                 leave, employee records and documents together, so HR and managers
                 spend less time on admin and more time on their people.
               </p>
-              <button type="button" className="qr-btn qr-btn--light" onClick={openConsultation}>
-                Request a demo
-                <FaArrowRight aria-hidden="true" />
-              </button>
+              <div className="qr-product-actions">
+                <button type="button" className="qr-btn qr-btn--light" onClick={openConsultation}>
+                  Request a demo
+                  <FaArrowRight aria-hidden="true" />
+                </button>
+                <a
+                  href={AURAWORK_URL}
+                  className="qr-btn qr-btn--ghost"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit AuraWork
+                  <FaArrowRight aria-hidden="true" />
+                </a>
+              </div>
             </div>
 
             <ul className="qr-features">
@@ -279,6 +297,26 @@ const QrLanding = () => {
                 <strong>Visit D6 Global Services</strong>
               </Link>
             </div>
+
+            <div className="qr-social">
+              <span className="qr-social-title">Follow us on Instagram</span>
+              <ul className="qr-social-links">
+                {INSTAGRAM_ACCOUNTS.map(({ label, href }) => (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      className="qr-social-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${label} on Instagram (opens in a new tab)`}
+                    >
+                      <FaInstagram aria-hidden="true" />
+                      <span>{label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -286,7 +324,7 @@ const QrLanding = () => {
 
       <footer className="qr-footer">
         <div className="qr-shell">
-          <p>&copy; {new Date().getFullYear()} D6 Global Limited. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} D6 Global Services. All rights reserved.</p>
         </div>
       </footer>
 
