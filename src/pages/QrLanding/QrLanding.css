@@ -619,6 +619,17 @@
     line-height:1.75;
 }
 
+.qr-product-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:30px;
+}
+
+.qr-product-actions .qr-btn--light{
+    margin-top:0;
+}
+
 .qr-features{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -723,6 +734,64 @@
 /* long address: keep it on one line where it fits, break only at "@" */
 .qr-contact-email{
     font-size:16px;
+}
+
+.qr-social{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:14px 20px;
+    margin-top:36px;
+}
+
+.qr-social-title{
+    color:var(--text-light);
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+}
+
+.qr-social-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.qr-social-link{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    min-height:44px;
+    padding:0 18px;
+    color:var(--text-strong);
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+    background:var(--surface-alt);
+    border:1px solid var(--border);
+    border-radius:var(--radius-pill);
+    transition:
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.qr-social-link svg{
+    flex-shrink:0;
+    color:var(--accent);
+    font-size:18px;
+}
+
+.qr-social-link:hover{
+    color:var(--accent);
+    border-color:rgba(var(--accent-rgb),.40);
+    transform:translateY(-2px);
 }
 
 
@@ -969,6 +1038,25 @@
         width:100%;
     }
 
+    .qr-product-actions{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .qr-social,
+    .qr-social-links{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .qr-social-title{
+        text-align:center;
+    }
+
+    .qr-social-link{
+        justify-content:center;
+    }
+
 }
 
 
@@ -978,7 +1066,7 @@
 
 @media (hover:none){
 
-    .qr-page :is(.qr-btn, .qr-branch, .qr-contact-card):hover{
+    .qr-page :is(.qr-btn, .qr-branch, .qr-contact-card, .qr-social-link):hover{
         transform:none;
     }
 
@@ -995,7 +1083,7 @@
         transition:none !important;
     }
 
-    .qr-page :is(.qr-btn, .qr-branch, .qr-contact-card):hover{
+    .qr-page :is(.qr-btn, .qr-branch, .qr-contact-card, .qr-social-link):hover{
         transform:none;
     }
 
