@@ -13,6 +13,8 @@ import Portfolio from "./pages/Portfolio";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
+// QR-code landing page (D6 Global Limited); has its own header
+import QrLanding from "./pages/QrLanding/QrLanding";
 
 // ================= SERVICES =================
 import ServicesPage from "./pages/Services/ServicesPage";
@@ -71,7 +73,8 @@ function AppContent() {
   const hideNavbar =
     location.pathname.startsWith("/dashboard") ||
     location.pathname.startsWith("/admin") ||
-    authRoutes.includes(location.pathname);
+    authRoutes.includes(location.pathname) ||
+    location.pathname === "/qr";
 
   // Redirect-to-home-then-open-modal is the one predictable path every
   // "you need to log in" case funnels through (ProtectedRoute, AdminRoute,
@@ -99,6 +102,7 @@ function AppContent() {
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/qr" element={<QrLanding />} />
 
         {/* Website Services */}
 
