@@ -4,24 +4,28 @@ import PortfolioStats from "../components/Portfolio/PortfolioStats";
 import Testimonials from "../components/Portfolio/Testimonials";
 import CTA from "../components/Home/CTA/CTA";
 import Footer from "../components/Home/Footer/Footer";
+// Shared layout for the marketing pages, scoped under .site-page
+import "../styles/sitePages.css";
 
 const Portfolio = () => {
   return (
     <>
-      <PortfolioHero />
+      <div className="site-page site-page--portfolio">
+        <PortfolioHero />
 
-      <FeaturedProjects />
+        <FeaturedProjects />
 
-      <PortfolioStats />
+        <PortfolioStats />
 
-      <Testimonials />
+        <Testimonials />
+      </div>
 
       <CTA
         badge="OUR PORTFOLIO"
         title="Ready to Start Your Success Story?"
         description="Whether you're launching a new brand, redesigning your website, or scaling your digital marketing, D6 Global Services is here to help you achieve measurable business growth."
-        primaryButton="Get Free Consultation"
-        secondaryButton="Contact Us"
+        primaryBtn="Get Free Consultation"
+        secondaryBtn="Contact Us"
       />
       <Footer/>
     </>

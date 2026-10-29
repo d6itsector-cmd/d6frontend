@@ -72,7 +72,7 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition:var(--transition);
 }
 
 .primary-btn {
@@ -86,7 +86,7 @@
 
 .primary-btn:hover {
   background: var(--accent-hover);
-  transform: translateY(-3px);
+  transform: translateY(var(--hover-lift));
 }
 
 .secondary-btn {
@@ -192,11 +192,11 @@
   border-radius: var(--radius-xl);
   text-align: center;
   box-shadow: var(--shadow-md);
-  transition: 0.3s ease;
+  transition:var(--transition-slow);
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
 }
 
 .stat-card h2 {

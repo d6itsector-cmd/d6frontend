@@ -52,8 +52,8 @@
 
 .why-card:hover{
     background:var(--surface);
-    transform:translateY(-2px);
-    box-shadow:0 15px 35px rgba(var(--primary-rgb),.08);
+    transform:translateY(var(--hover-lift));
+    box-shadow:var(--shadow-md);
 }
 
 .why-icon{

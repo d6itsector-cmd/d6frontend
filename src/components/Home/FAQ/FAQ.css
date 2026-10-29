@@ -115,17 +115,20 @@
     border-radius:var(--radius-lg);
     overflow:hidden;
     box-shadow:0 8px 20px rgba(var(--primary-rgb),.06);
-    transition:.3s;
+    transition:var(--transition-slow);
 }
 
 .faq-card:hover{
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
     border-color:var(--accent);
 }
 
 .faq-card.active{
-    border:2px solid var(--accent);
-    box-shadow:var(--shadow-sm);
+
+    border-color:var(--accent);
+
+    box-shadow:0 0 0 1px var(--accent),var(--shadow-sm);
+
 }
 
 /* ==========================
@@ -139,6 +142,9 @@
     gap:25px;
     padding:28px 35px;
     cursor:pointer;
+
+    position:relative;
+
 }
 
 .faq-question h3{
@@ -149,7 +155,59 @@
     font-weight:600;
 }
 
-.icon{
+.faq-toggle{
+
+    width:100%;
+
+    padding:0;
+
+    border:none;
+
+    background:none;
+
+    color:inherit;
+
+    font:inherit;
+
+    text-align:left;
+
+    cursor:pointer;
+
+}
+
+.faq-toggle::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:var(--radius-lg);
+
+}
+
+.faq-toggle:focus-visible{
+
+    outline:none;
+
+}
+
+.faq-toggle:focus-visible::after{
+
+    outline:2px solid var(--accent);
+
+    outline-offset:-4px;
+
+}
+
+/* .faq-card prefix: other pages also style the generic .icon / .faq-answer
+   class names (WhySocialMedia.css, SEOFAQ.css) and loaded later, so they
+   overrode the sizes and padding here. */
+.faq-card .icon{
+
+    margin:0;
+
     width:20px;
     height:20px;
     /* min-width:40px; */
@@ -160,7 +218,12 @@
     color:var(--accent);
     border-radius:50%;
     font-size:15px;
-    transition:.3s;
+    transition:var(--transition-slow);
+}
+/* SEOFAQ.css colours every .faq-question svg navy. */
+.faq-card .icon svg{
+    color:inherit;
+    font-size:inherit;
 }
 .faq-card.active .icon{
     background:var(--accent);
@@ -175,16 +238,36 @@
    ANSWER
 ========================== */
 
-.faq-answer{
+.faq-card .faq-answer{
+
+    padding:0;
+
+    animation:none;
+
     max-height:0;
     overflow:hidden;
     opacity:0;
-    transition:all .4s ease;
+    transition:var(--transition-slow);
 }
 
-.faq-card:hover .faq-answer{
+.faq-card.active .faq-answer{
+
     max-height:300px;
+
     opacity:1;
+
+}
+
+@media (hover:hover){
+
+.faq-card:hover .faq-answer{
+
+    max-height:300px;
+
+    opacity:1;
+
+}
+
 }
 
 .faq-answer p{
@@ -193,10 +276,24 @@
     line-height:1.8;
     font-size:16px;
 }
-.faq-card:hover .icon{
-    background:var(--accent-hover);
-    color:var(--white);
+.faq-card.active .icon{
+
     transform:rotate(180deg);
+
+}
+
+@media (hover:hover){
+
+.faq-card:hover .icon{
+
+    background:var(--accent-hover);
+
+    color:var(--white);
+
+    transform:rotate(180deg);
+
+}
+
 }
 
 /* ==========================
@@ -264,7 +361,7 @@ padding:22px;
 font-size:18px;
 }
 
-.icon{
+.faq-card .icon{
 width:44px;
 height:44px;
 min-width:44px;

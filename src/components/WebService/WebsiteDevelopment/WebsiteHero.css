@@ -60,7 +60,7 @@
     cursor:pointer;
     font-size:16px;
     font-weight:600;
-    transition:.3s;
+    transition:var(--transition);
 }
 
 .primary-btn:hover{
@@ -76,7 +76,7 @@
     cursor:pointer;
     font-size:16px;
     font-weight:600;
-    transition:.3s;
+    transition:var(--transition);
 }
 
 .secondary-btn:hover{

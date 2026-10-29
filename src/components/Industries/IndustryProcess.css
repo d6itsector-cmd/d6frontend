@@ -47,7 +47,7 @@
    this was the only section-level component sitewide with zero hover
    states. */
 .process-step:hover{
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
 }
 
 .process-icon{
@@ -65,7 +65,7 @@
 
 .process-step:hover .process-icon{
     background:var(--accent-hover);
-    box-shadow:var(--shadow-lg);
+    box-shadow:var(--shadow-md);
 }
 
 .process-icon svg{

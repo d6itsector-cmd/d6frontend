@@ -15,31 +15,38 @@
 
     max-width:440px;
 
+    box-sizing:border-box;
+
     background:var(--surface);
 
-    border-radius:var(--radius-xl);
+    border:1px solid var(--border);
 
-    padding:40px;
+    border-radius:var(--radius-lg);
 
-    box-shadow:var(--shadow-lg);
+    padding:36px;
+
+    box-shadow:var(--shadow-md);
 
 }
 
+/* same pill badge as the Services / About pages */
 .auth-badge{
 
     display:inline-block;
 
-    background:rgba(var(--accent-rgb),.15);
+    background:rgba(var(--accent-rgb),.10);
 
     color:var(--accent);
 
-    padding:8px 18px;
+    padding:6px 14px;
 
-    border-radius:30px;
+    border-radius:var(--radius-pill);
 
     font-weight:600;
 
     font-size:13px;
+
+    letter-spacing:.3px;
 
 }
 
@@ -47,7 +54,11 @@
 
     color:var(--text-strong);
 
-    margin:20px 0 10px;
+    font-size:28px;
+
+    line-height:1.25;
+
+    margin:16px 0 8px;
 
 }
 
@@ -55,7 +66,11 @@
 
     color:var(--text-light);
 
-    margin-bottom:30px;
+    font-size:15px;
+
+    line-height:1.65;
+
+    margin:0 0 24px;
 
 }
 
@@ -71,9 +86,17 @@
 
 .auth-form input{
 
+    box-sizing:border-box;
+
     width:100%;
 
-    padding:15px;
+    height:48px;
+
+    padding:0 14px;
+
+    background:var(--surface);
+
+    color:var(--text-strong);
 
     border:1px solid var(--border-strong);
 
@@ -90,32 +113,55 @@
 .auth-form input:focus{
 
     border-color:var(--accent);
+    box-shadow:var(--focus-ring);
 
 }
 
 .auth-submit-btn{
 
-    padding:16px;
+    box-sizing:border-box;
+
+    height:48px;
+
+    padding:0 16px;
 
     background:var(--accent);
 
     color:var(--white);
 
-    border:none;
+    border:1px solid var(--accent);
 
     border-radius:var(--radius-md);
 
     cursor:pointer;
 
+    font-family:inherit;
+
+    font-size:15px;
+
     font-weight:600;
 
-    transition:var(--transition);
+    transition:background-color var(--transition), border-color var(--transition);
+
+}
+
+/* keyboard focus on every auth control (scoped to the card: .link-btn is
+   also used by the dashboard billing page) */
+.auth-card :is(.auth-submit-btn, .google-btn, .link-btn, .auth-footer a, .auth-forgot-link):focus-visible{
+
+    outline:none;
+
+    box-shadow:var(--focus-ring);
+
+    border-radius:var(--radius-md);
 
 }
 
 .auth-submit-btn:hover:not(:disabled){
 
     background:var(--accent-hover);
+
+    border-color:var(--accent-hover);
 
     color:var(--white);
 
@@ -168,9 +214,13 @@
 
     gap:10px;
 
+    box-sizing:border-box;
+
     width:100%;
 
-    padding:14px;
+    height:48px;
+
+    padding:0 14px;
 
     border:1px solid var(--border-strong);
 
@@ -178,18 +228,26 @@
 
     background:var(--surface);
 
-    color:var(--text);
+    color:var(--text-strong);
+
+    font-family:inherit;
+
+    font-size:15px;
 
     font-weight:600;
 
     cursor:pointer;
 
-    transition:var(--transition);
+    transition:background-color var(--transition), border-color var(--transition);
 }
 
 .google-btn:hover:not(:disabled){
 
     background:var(--secondary-bg);
+
+    border-color:var(--accent);
+
+    color:var(--text-strong);
 
 }
 
@@ -317,7 +375,25 @@
 
 .auth-card{
 
-    padding:28px;
+    padding:24px 20px;
+
+}
+
+.auth-card h2{
+
+    font-size:24px;
+
+}
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+.auth-submit-btn,
+.google-btn,
+.auth-form input{
+
+    transition:none;
 
 }
 

@@ -112,7 +112,17 @@
   --nav-height:98px;
   /* Duration + easing only, so both `transition:var(--transition)` and
      `transition:color var(--transition)` are valid. */
-  --transition:.2s ease;
+  /* --transition: controls (buttons, links, inputs).
+     --transition-slow: cards and images. */
+  --ease-standard:cubic-bezier(.2,0,0,1);
+  --transition:.2s var(--ease-standard);
+  --transition-slow:.28s var(--ease-standard);
+
+  /* Hover motion -- the only movement hover states should use. Zeroed on
+     touch screens (no sticky lift after a tap) and for reduced motion. */
+  --hover-lift:-2px;            /* cards, primary buttons */
+  --hover-nudge:3px;            /* directional arrows, footer links */
+  --hover-zoom:1.02;            /* images */
 
   /* ---------- Interactive tints (hover states) ---------- */
   --accent-soft-hover:#DCE9FA;
@@ -225,6 +235,12 @@ textarea{
   font-family:inherit;
 }
 
+/* Links styled as buttons (.primary-btn, .secondaryBtn, ...) never show the
+   default link underline. :where() keeps this overridable by components. */
+a:where([class*="btn"],[class*="Btn"]){
+  text-decoration:none;
+}
+
 input::placeholder,
 textarea::placeholder{
   color:var(--text-muted);
@@ -249,7 +265,21 @@ textarea::placeholder{
   padding:20px 0;
 }
 
+@media (hover: none){
+  :root{
+    --hover-lift:0px;
+    --hover-nudge:0px;
+    --hover-zoom:1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce){
+  :root{
+    --hover-lift:0px;
+    --hover-nudge:0px;
+    --hover-zoom:1;
+  }
+
   *,
   *::before,
   *::after{

@@ -29,7 +29,7 @@
 }
 
 .missionVision__image img:hover{
-    transform:scale(1.03);
+    transform:scale(var(--hover-zoom));
 }
 
 /* RIGHT */
@@ -80,7 +80,8 @@
 }
 
 .infoCard:hover{
-    transform:translateX(10px);
+    transform:translateY(var(--hover-lift));
+    box-shadow:var(--shadow-md);
 }
 
 .iconBox{

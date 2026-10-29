@@ -76,7 +76,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition:var(--transition-slow);
 }
 
 .faq-item:hover {

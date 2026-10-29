@@ -4,6 +4,8 @@ import SocialServices from "../../components/WebService/SocialMedia/SocialServic
 import WhySocialMedia from "../../components/WebService/SocialMedia/WhySocialMedia";
 import CTA from "../../components/Home/CTA/CTA";
 import Footer from "../../components/Home/Footer/Footer";
+// Shared, .svc-detail-scoped layout for the five service detail pages.
+import "../../components/WebService/ServiceDetailLayout.css";
 // <SocialFAQ/> is disabled below; keep its stylesheet loaded since its global
 // .faq-* / .section-tag rules also apply to other components.
 import "../../components/WebService/SocialMedia/SocialFAQ.css";
@@ -11,18 +13,20 @@ import "../../components/WebService/SocialMedia/SocialFAQ.css";
 const SocialMedia = () => {
     return (
         <>
-            <SocialHero />
-            <WhySocialMedia />
-            <SocialServices />
-            <SocialProcess />
+            <div className="svc-detail">
+                <SocialHero />
+                <WhySocialMedia />
+                <SocialServices />
+                <SocialProcess />
+            </div>
             {/* <SocialFAQ/> */}
             <CTA
                 tag="LET'S CONNECT"
                 title="Grow Your Brand"
                 highlight="On Social Media"
                 description="Build meaningful relationships with your audience and increase engagement through strategic social media marketing."
-                primaryButton="Start Your Campaign"
-                secondaryButton="Talk to an Expert"
+                primaryBtn="Start Your Campaign"
+                secondaryBtn="Talk to an Expert"
             />
             <Footer/>
         </>

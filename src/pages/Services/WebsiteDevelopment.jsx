@@ -7,22 +7,26 @@ import WebsiteServices from "../../components/WebService/WebsiteDevelopment/Webs
 import WhyWebsite from "../../components/WebService/WebsiteDevelopment/WhyWebsite";
 import CTA from "../../components/Home/CTA/CTA";
 import Footer from "../../components/Home/Footer/Footer";
+// Shared, .svc-detail-scoped layout for the five service detail pages.
+import "../../components/WebService/ServiceDetailLayout.css";
 
 const WebsiteDevelopment = () => {
   return (
     <>
-      <WebsiteHero />
-      <WhyWebsite/>
-      <WebsiteServices/>
-      <WebsiteProcess/>
+      <div className="svc-detail">
+        <WebsiteHero />
+        <WhyWebsite/>
+        <WebsiteServices/>
+        <WebsiteProcess/>
+      </div>
       {/* <WebsiteFAQ/> */}
       <CTA
         tag="WEBSITE DEVELOPMENT"
         title="Ready to Build Your"
         highlight="Business Website?"
         description="Transform your ideas into a modern, responsive, and high-performing website. Our expert developers create SEO-friendly, secure, and scalable websites that help your business grow online."
-        primaryButton="Get Free Consultation"
-        secondaryButton="View Our Portfolio"
+        primaryBtn="Get Free Consultation"
+        secondaryBtn="Contact Us"
       />
       <Footer/>
 

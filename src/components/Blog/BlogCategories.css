@@ -51,7 +51,7 @@
 
 .category-card:hover{
     background:var(--accent-hover);
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
 }
 
 .category-icon{
@@ -84,11 +84,11 @@
 }
 
 .category-card:hover .category-icon{
-    background:var(--accent-hover);
+    background:rgba(255,255,255,.16);
 }
 
 .category-card:hover .category-icon svg{
-    color:var(--text-strong);
+    color:var(--white);
 }
 
 @media(max-width:992px){

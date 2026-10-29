@@ -160,7 +160,7 @@ line-height:1.8;
 
 .newsletter-form button:hover:not(:disabled){
 
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
     background:var(--accent-hover);
 
 }

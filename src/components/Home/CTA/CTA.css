@@ -1,46 +1,61 @@
 /* ===========================
    CTA SECTION
+   Shared by Home, About-style pages, the /services page and the five
+   service detail pages.
+
+   .primary-btn / .secondary-btn are also defined -- unscoped, with their
+   own :hover colours -- by several other stylesheets in the single CSS
+   bundle (one turned the "Get Free Consultation" text white on a
+   near-white hover background). The button rules below use
+   section.cta .cta-buttons ... so they outrank all of those.
 =========================== */
 
 .cta {
-  padding: 100px 8%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-active));
+  padding: 72px 24px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-active) 100%);
 }
 
 .cta-container {
-  max-width: 1100px;
-  margin: auto;
+  box-sizing: border-box;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 40px;
   text-align: center;
-  padding: 70px 50px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-xl);
   position: relative;
   overflow: hidden;
 }
 
-/* Decorative Circles */
+/* Restrained decoration: two faint corner circles */
 
 .cta-container::before,
 .cta-container::after {
   content: "";
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .cta-container::before {
-  width: 220px;
-  height: 220px;
-  top: -90px;
-  left: -90px;
+  width: 180px;
+  height: 180px;
+  top: -80px;
+  left: -80px;
 }
 
 .cta-container::after {
-  width: 180px;
-  height: 180px;
-  bottom: -70px;
-  right: -70px;
+  width: 140px;
+  height: 140px;
+  bottom: -60px;
+  right: -60px;
+}
+
+/* content sits above the decoration */
+.cta-container > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ===========================
@@ -49,20 +64,21 @@
 
 .cta-tag {
   display: inline-block;
-  padding: 8px 18px;
+  margin-bottom: 18px;
+  padding: 6px 14px;
   background: rgba(255, 255, 255, 0.14);
   color: var(--white);
   border-radius: var(--radius-pill);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 22px;
+  letter-spacing: 0.4px;
 }
 
 .cta h2 {
+  margin: 0 0 16px;
   color: var(--white);
-  font-size: 46px;
-  line-height: 1.3;
-  margin-bottom: 20px;
+  font-size: 38px;
+  line-height: 1.25;
 }
 
 .cta h2 span {
@@ -70,26 +86,114 @@
 }
 
 .cta p {
-  max-width: 700px;
-  margin: auto;
-  color: rgba(255, 255, 255, 0.88);
+  max-width: 640px;
+  margin: 0 auto 32px;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 17px;
-  line-height: 1.8;
-  margin-bottom: 45px;
+  line-height: 1.7;
 }
 
 /* ===========================
    BUTTONS
 =========================== */
 
-.cta-buttons {
+.cta .cta-buttons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  margin-top: 35px;
+  gap: 14px;
+  margin: 0;
 }
+
+section.cta .cta-buttons :is(.primary-btn, .secondary-btn) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 220px;
+  width: auto;
+  height: 52px;
+  margin: 0;
+  padding: 0 28px;
+  border: 2px solid #FFFFFF;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: none;
+  transform: none;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+/* the arrow follows the button text colour */
+section.cta .cta-buttons :is(.primary-btn, .secondary-btn) svg {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: currentColor;
+  transform: none;
+  transition: none;
+}
+
+/* Primary (e.g. Get Free Consultation): white -> D6 blue */
+section.cta .cta-buttons .primary-btn {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: var(--accent);
+}
+
+section.cta .cta-buttons .primary-btn:hover {
+  background: var(--accent-hover);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  transform: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Secondary (e.g. Contact Us): white outline -> white fill */
+section.cta .cta-buttons .secondary-btn {
+  background: transparent;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+section.cta .cta-buttons .secondary-btn:hover {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: var(--accent);
+  transform: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* keyboard focus: a white ring that shows on the blue band */
+section.cta .cta-buttons :is(.primary-btn, .secondary-btn):focus-visible {
+  outline: 3px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  section.cta .cta-buttons :is(.primary-btn, .secondary-btn) {
+    transition: none;
+  }
+
+}
+
+/* ===========================
+   LEGACY GLOBAL BUTTON RULES
+   These unscoped .primary-btn / .secondary-btn rules have always lived
+   in this file, and hero buttons on other pages pick them up through the
+   shared bundle. Kept unchanged so those buttons don't shift; the
+   section.cta rules above outrank them inside the CTA.
+=========================== */
 
 .primary-btn,
 .secondary-btn {
@@ -111,7 +215,7 @@
 }
 
 .primary-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
   box-shadow: var(--shadow-md);
 }
 
@@ -120,7 +224,7 @@
 }
 
 .primary-btn:hover svg {
-  transform: translateX(6px);
+  transform: translateX(var(--hover-nudge));
 }
 
 .secondary-btn {
@@ -149,76 +253,11 @@
   background: var(--surface);
   color: var(--text-strong);
   border-color: var(--white);
-  transform: translateY(-2px);
+  transform: translateY(var(--hover-lift));
   box-shadow: var(--shadow-md);
-}
-
-/* On the blue band the global blue .primary-btn would disappear. */
-.cta .primary-btn {
-  background: var(--surface);
-  color: var(--accent);
-}
-
-.cta .primary-btn:hover {
-  background: var(--accent-softer);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.cta .secondary-btn {
-  background: transparent;
-  color: var(--white);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.cta .secondary-btn:hover {
-  background: var(--surface);
-  border-color: var(--white);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-
-@media (max-width: 992px) {
-
-  .cta {
-    padding: 80px 6%;
-  }
-
-  .cta-container {
-    padding: 60px 35px;
-  }
-
-  .cta h2 {
-    font-size: 38px;
-  }
 }
 
 @media (max-width: 768px) {
-
-  .cta {
-    padding: 70px 5%;
-  }
-
-  .cta-container {
-    padding: 50px 25px;
-  }
-
-  .cta h2 {
-    font-size: 32px;
-  }
-
-  .cta p {
-    font-size: 15px;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
 
   .primary-btn,
   .secondary-btn {
@@ -230,21 +269,75 @@
 
 @media (max-width: 480px) {
 
-  .cta h2 {
-    font-size: 28px;
-  }
-
-  .cta-tag {
-    font-size: 13px;
-  }
-
-  .cta p {
-    font-size: 14px;
-  }
-
   .primary-btn,
   .secondary-btn {
     padding: 14px 24px;
     font-size: 15px;
+  }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 992px) {
+
+  .cta {
+    padding: 60px 24px;
+  }
+
+  .cta-container {
+    padding: 48px 32px;
+  }
+
+  .cta h2 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .cta {
+    padding: 48px 20px;
+  }
+
+  .cta-container {
+    padding: 40px 20px;
+  }
+
+  .cta h2 {
+    font-size: 28px;
+  }
+
+  .cta p {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+}
+
+/* narrow screens: buttons stack, full width up to 320px */
+@media (max-width: 560px) {
+
+  .cta .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  section.cta .cta-buttons :is(.primary-btn, .secondary-btn) {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .cta h2 {
+    font-size: 24px;
+  }
+
+  .cta-tag {
+    font-size: 12px;
   }
 }

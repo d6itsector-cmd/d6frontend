@@ -7,22 +7,26 @@ import GoogleAdsServices from "../../components/WebService/Google_Ads/GoogleAdsS
 import WhyGoogleAds from "../../components/WebService/Google_Ads/WhyGoogleAds";
 import CTA from "../../components/Home/CTA/CTA";
 import Footer from "../../components/Home/Footer/Footer";
+// Shared, .svc-detail-scoped layout for the five service detail pages.
+import "../../components/WebService/ServiceDetailLayout.css";
 
 const GoogleAds = () => {
     return (
         <>
-            <GoogleAdsHero />
-            <WhyGoogleAds />
-            <GoogleAdsServices />
-            <GoogleAdsProcess />
+            <div className="svc-detail">
+                <GoogleAdsHero />
+                <WhyGoogleAds />
+                <GoogleAdsServices />
+                <GoogleAdsProcess />
+            </div>
             {/* <GoogleAdsFAQ/> */}
             <CTA
                 tag="BOOST YOUR BUSINESS"
                 title="Launch High-Performing"
                 highlight="Google Ads Campaigns"
                 description="Drive instant traffic, generate qualified leads, and scale your business with expertly managed Google Ads campaigns tailored to your goals."
-                primaryButton="Start Your Campaign"
-                secondaryButton="Book a Free Call"
+                primaryBtn="Start Your Campaign"
+                secondaryBtn="Book a Free Call"
             />
             <Footer/>
         </>

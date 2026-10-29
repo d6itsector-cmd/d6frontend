@@ -52,11 +52,11 @@
     padding:35px;
     border-radius:var(--radius-xl);
     border:1px solid var(--border);
-    transition:.3s;
+    transition:var(--transition-slow);
 }
 
 .service-card:hover{
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
     box-shadow:var(--shadow-md);
 }
 

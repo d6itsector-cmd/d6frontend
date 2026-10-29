@@ -4,6 +4,8 @@ import EmailServices from "../../components/WebService/EmailMarketing/EmailServi
 import WhyEmailMarketing from "../../components/WebService/EmailMarketing/WhyEmailMarketing";
 import CTA from "../../components/Home/CTA/CTA";
 import Footer from "../../components/Home/Footer/Footer";
+// Shared, .svc-detail-scoped layout for the five service detail pages.
+import "../../components/WebService/ServiceDetailLayout.css";
 // <EmailFAQ/> is disabled below; keep its stylesheet loaded since its global
 // .faq-* / .section-tag rules also apply to other components.
 import "../../components/WebService/EmailMarketing/EmailFAQ.css";
@@ -11,18 +13,20 @@ import "../../components/WebService/EmailMarketing/EmailFAQ.css";
 const EmailMarketing = () => {
   return (
     <>
-      <EmailHero />
-      <WhyEmailMarketing/>
-      <EmailServices/>
-      <EmailProcess/>
+      <div className="svc-detail">
+        <EmailHero />
+        <WhyEmailMarketing/>
+        <EmailServices/>
+        <EmailProcess/>
+      </div>
       {/* <EmailFAQ/> */}
       <CTA
         tag="LET'S GROW YOUR BUSINESS"
         title="Ready to Launch High-Converting"
         highlight="Email Campaigns?"
         description="Connect with your audience through personalized email marketing strategies that increase engagement, build customer loyalty, and drive measurable business growth."
-        primaryButton="Get Free Consultation"
-        secondaryButton="Contact Us"
+        primaryBtn="Get Free Consultation"
+        secondaryBtn="Contact Us"
       />
       <Footer/>
     </>

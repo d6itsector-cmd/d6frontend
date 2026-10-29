@@ -114,7 +114,7 @@ transition:.3s;
 
 .timeline-content:hover{
 
-transform:translateX(6px);
+transform:translateX(var(--hover-nudge));
 
 box-shadow:var(--shadow-md);
 

@@ -48,12 +48,12 @@
     background:var(--surface-alt);
     padding:40px 25px;
     border-radius:var(--radius-xl);
-    transition:.3s;
+    transition:var(--transition-slow);
     border:1px solid var(--border);
 }
 
 .process-card:hover{
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
     box-shadow:var(--shadow-md);
 }
 

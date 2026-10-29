@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useConsultation } from "../../../context/ConsultationContext";
 import { useLoginModal } from "../../../context/LoginModalContext";
 import { useAuth } from "../../../context/AuthContext";
@@ -9,12 +9,6 @@ import { navbarConfig } from "../../../config/navbarConfig";
 import {
   FaBars,
   FaTimes,
-  FaChevronDown,
-  FaSearch,
-  FaBullhorn,
-  FaLaptopCode,
-  FaShareAlt,
-  FaEnvelope,
   FaUserCircle,
   FaUser,
   FaSignOutAlt,
@@ -34,18 +28,13 @@ const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const { role } = useUserRole();
 
-  const location = useLocation();
   const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_NAV_MAX);
 
   const profileRef = useRef(null);
   const profileButtonRef = useRef(null);
-
-  const isServicesActive = location.pathname.startsWith("/services");
 
   /* =========================
      PROFILE MENU: CLOSE ON OUTSIDE CLICK / ESCAPE
@@ -97,13 +86,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= MOBILE_NAV_MAX;
-
-      setIsMobile(mobile);
-
-      if (!mobile) {
+      if (window.innerWidth > MOBILE_NAV_MAX) {
         setMenuOpen(false);
-        setDropdownOpen(false);
         setProfileOpen(false);
       }
     };
@@ -116,49 +100,11 @@ const Navbar = () => {
   }, []);
 
   /* =========================
-     SERVICES
-  ========================= */
-
-  const services = [
-    {
-      title: "SEO",
-      description: "Improve your Google Ranking",
-      icon: <FaSearch />,
-      path: "/services/seo",
-    },
-    {
-      title: "Google Ads",
-      description: "Generate High Quality Leads",
-      icon: <FaBullhorn />,
-      path: "/services/google-ads",
-    },
-    {
-      title: "Social Media",
-      description: "Grow Your Social Presence",
-      icon: <FaShareAlt />,
-      path: "/services/social-media",
-    },
-    {
-      title: "Website Development",
-      description: "Modern Business Websites",
-      icon: <FaLaptopCode />,
-      path: "/services/web-development",
-    },
-    {
-      title: "Email Marketing",
-      description: "Reach Your Customers",
-      icon: <FaEnvelope />,
-      path: "/services/email-marketing",
-    },
-  ];
-
-  /* =========================
      HELPERS
   ========================= */
 
   const closeAllMenus = () => {
     setMenuOpen(false);
-    setDropdownOpen(false);
     setProfileOpen(false);
   };
 
@@ -235,84 +181,17 @@ const Navbar = () => {
             Home
           </NavLink>
 
-          {/* SERVICES */}
+          {/* SERVICES -- not `end`, so it stays active on /services/<name> */}
 
-          <div
-            className={`navbar-nav-item ${
-              dropdownOpen ? "dropdown-open" : ""
-            } ${
-              isServicesActive ? "active" : ""
-            }`}
-            onMouseEnter={() => {
-              if (!isMobile) {
-                setDropdownOpen(true);
-              }
-            }}
-            onMouseLeave={() => {
-              if (!isMobile) {
-                setDropdownOpen(false);
-              }
-            }}
+          <NavLink
+            to="/services"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "active" : ""}`
+            }
+            onClick={closeAllMenus}
           >
-            <button
-              type="button"
-              className={`navbar-link services-toggle ${
-                isServicesActive ? "active" : ""
-              }`}
-              onClick={() => {
-                if (isMobile) {
-                  setDropdownOpen(!dropdownOpen);
-                }
-              }}
-            >
-              <span>Services</span>
-
-              <FaChevronDown
-                className={
-                  dropdownOpen
-                    ? "services-arrow rotate"
-                    : "services-arrow"
-                }
-              />
-            </button>
-
-            <div
-              className={`services-dropdown ${
-                dropdownOpen ? "show" : ""
-              }`}
-            >
-              <div className="services-dropdown-header">
-                <h4>Digital Marketing Services</h4>
-
-                <p>
-                  Everything you need to grow your business online.
-                </p>
-              </div>
-
-              <div className="services-grid">
-                {services.map((service) => (
-                  <NavLink
-                    key={service.title}
-                    to={service.path}
-                    className="service-item"
-                    onClick={closeAllMenus}
-                  >
-                    <div className="service-icon">
-                      {service.icon}
-                    </div>
-
-                    <div className="service-title">
-                      <h5>{service.title}</h5>
-                    </div>
-
-                    <div className="service-description">
-                      <p>{service.description}</p>
-                    </div>
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-          </div>
+            Services
+          </NavLink>
 
           {/* OTHER LINKS */}
 

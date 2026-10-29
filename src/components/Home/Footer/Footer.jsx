@@ -154,20 +154,6 @@ const Footer = () => {
 
             </div>
 
-            {/* Bottom CTA */}
-
-            <div className="footer-cta">
-
-                <h3>
-                    Ready to grow your business with D6 Global Services?
-                </h3>
-
-                <p>
-                    Let's build something amazing together.
-                </p>
-
-            </div>
-
             {/* Bottom */}
 
             <div className="footer-bottom">

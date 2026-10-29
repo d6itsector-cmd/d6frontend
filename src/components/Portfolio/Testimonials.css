@@ -49,8 +49,8 @@
 }
 
 .testimonial-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 20px 40px rgba(var(--primary-rgb),.1);
+    transform:translateY(var(--hover-lift));
+    box-shadow:var(--shadow-md);
 }
 
 .quote-icon{

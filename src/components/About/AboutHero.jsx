@@ -1,5 +1,6 @@
 import "./AboutHero.css";
 import aboutHero from "../../assets/about.jpg";
+import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { useContact } from "../../context/ContactContext";
 
@@ -15,7 +16,7 @@ const AboutHero = () => {
         <div className="aboutHero__content">
 
           <span className="aboutHero__badge">
-            🚀 About Our Startup
+            About Our Startup
           </span>
 
           <h1>
@@ -33,10 +34,10 @@ const AboutHero = () => {
 
           <div className="aboutHero__buttons">
 
-            <a href="/#services" className="primaryBtn">
+            <Link to="/services" className="primaryBtn">
               Explore Services
               <FaArrowRight />
-            </a>
+            </Link>
 
             <button
               className="secondaryBtn"
@@ -76,14 +77,6 @@ const AboutHero = () => {
             alt="About Us"
             loading="lazy"
           />
-
-          <div className="floatingCard topCard">
-            🚀 Startup Focused
-          </div>
-
-          <div className="floatingCard bottomCard">
-            ⭐ Trusted Partner
-          </div>
 
         </div>
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./FAQ.css";
 import {
   FaChevronDown,
@@ -33,6 +34,14 @@ const faqs = [
 ];
 
 const FAQ = () => {
+  // Hover still previews answers on mouse devices (FAQ.css); this state
+  // makes them reachable by tap and keyboard too.
+  const [active, setActive] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setActive(active === index ? null : index);
+  };
+
   return (
     <section className="faq">
 
@@ -90,15 +99,25 @@ const FAQ = () => {
           {faqs.map((item, index) => (
 
             <div
-              className="faq-card"
+              className={`faq-card ${active === index ? "active" : ""}`}
               key={index}
             >
 
               <div className="faq-question">
 
-                <h3>{item.question}</h3>
+                <h3>
+                  <button
+                    type="button"
+                    className="faq-toggle"
+                    aria-expanded={active === index}
+                    aria-controls={`faq-answer-${index}`}
+                    onClick={() => toggleFAQ(index)}
+                  >
+                    {item.question}
+                  </button>
+                </h3>
 
-                <div className="icon">
+                <div className="icon" aria-hidden="true">
 
                   <FaChevronDown />
 
@@ -106,7 +125,7 @@ const FAQ = () => {
 
               </div>
 
-              <div className="faq-answer">
+              <div className="faq-answer" id={`faq-answer-${index}`}>
 
                 <p>{item.answer}</p>
 

@@ -1,0 +1,749 @@
+/* ===========================================================
+   HOME PAGE SCALE-UP
+   Larger type, cards, icons and buttons; a bigger hero illustration
+   with the three service cards arranged around it.
+
+   Every rule is scoped under .site-page.site-page--home, so it outranks
+   the shared sitePages.css rules (.site-page ... / .site-page--home ...)
+   and never reaches Services, About, the dashboards or the admin portal
+   -- even for the shared WhyChoose component.
+=========================================================== */
+
+
+/* ===========================================================
+   SECTIONS + TYPE
+=========================================================== */
+
+.site-page.site-page--home > section{
+    padding:96px 32px;
+}
+
+.site-page.site-page--home > section:first-child{
+    padding-top:calc(var(--nav-height) + 64px);
+    padding-bottom:80px;
+}
+
+.site-page.site-page--home > section > *{
+    max-width:1200px;
+}
+
+.site-page.site-page--home :is(.hero-badge, .section-tag, .faq-tag){
+    margin-bottom:18px;
+    padding:8px 18px;
+    font-size:14px;
+}
+
+.site-page.site-page--home section h1{
+    font-size:50px;
+    line-height:1.16;
+    letter-spacing:-.015em;
+}
+
+.site-page.site-page--home section h2{
+    margin-bottom:18px;
+    font-size:40px;
+    line-height:1.2;
+    letter-spacing:-.01em;
+}
+
+.site-page.site-page--home :is(.services-heading, .section-header){
+    max-width:760px;
+    margin-bottom:52px;
+}
+
+.site-page.site-page--home :is(.services-heading, .section-header) > p,
+.site-page.site-page--home :is(.about-content, .why-left, .faq-left) > p{
+    max-width:680px;
+    font-size:18px;
+    line-height:1.75;
+}
+
+
+/* ===========================================================
+   BUTTONS (shared look for every Home CTA)
+=========================================================== */
+
+.site-page.site-page--home .hero .hero-buttons{
+    gap:16px;
+    margin-top:36px;
+}
+
+.site-page.site-page--home .hero .hero-buttons > :is(.primary-btn, .secondary-btn),
+.site-page.site-page--home :is(.about-btn, .choose-btn){
+    width:auto;
+    min-width:236px;
+    height:56px;
+    padding:0 30px;
+    justify-content:center;
+    gap:10px;
+    border-radius:var(--radius-md);
+    font-size:16.5px;
+    font-weight:600;
+    transition:
+        background-color 200ms ease,
+        border-color 200ms ease,
+        color 200ms ease,
+        box-shadow 200ms ease,
+        transform 200ms ease;
+}
+
+.site-page.site-page--home :is(.about-btn, .choose-btn){
+    min-width:0;
+}
+
+/* solid: white text on blue, a deeper blue + soft lift on hover */
+.site-page.site-page--home .hero .hero-buttons > .primary-btn,
+.site-page.site-page--home :is(.about-btn, .choose-btn){
+    background:var(--accent);
+    border:1px solid var(--accent);
+    color:var(--white);
+}
+
+.site-page.site-page--home .hero .hero-buttons > .primary-btn:hover,
+.site-page.site-page--home :is(.about-btn, .choose-btn):hover{
+    background:var(--accent-hover);
+    border-color:var(--accent-hover);
+    color:var(--white);
+    box-shadow:0 10px 22px rgba(var(--accent-rgb),.28);
+    transform:translateY(-2px);
+}
+
+/* outlined: blue text on white, light-blue fill on hover */
+.site-page.site-page--home .hero .hero-buttons > .secondary-btn{
+    background:var(--surface);
+    border:1.5px solid var(--accent);
+    color:var(--accent);
+}
+
+.site-page.site-page--home .hero .hero-buttons > .secondary-btn:hover{
+    background:var(--accent-softer);
+    border-color:var(--accent-hover);
+    color:var(--accent-hover);
+    box-shadow:0 8px 18px rgba(16,24,40,.08);
+    transform:translateY(-2px);
+}
+
+.site-page.site-page--home .hero .hero-buttons > * svg,
+.site-page.site-page--home :is(.about-btn, .choose-btn) svg{
+    font-size:14px;
+    transition:transform 200ms ease;
+}
+
+.site-page.site-page--home .hero .hero-buttons > *:hover svg,
+.site-page.site-page--home :is(.about-btn, .choose-btn):hover svg{
+    transform:translateX(3px);
+}
+
+.site-page.site-page--home .hero .hero-buttons > *:focus-visible,
+.site-page.site-page--home :is(.about-btn, .choose-btn):focus-visible{
+    outline:none;
+    box-shadow:var(--focus-ring);
+}
+
+
+/* ===========================================================
+   CARDS + ICON TILES
+=========================================================== */
+
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card){
+    padding:30px;
+    border-radius:16px;
+    transition:
+        transform 220ms ease,
+        box-shadow 220ms ease,
+        border-color 220ms ease;
+}
+
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card):is(:hover, :focus-within){
+    transform:translateY(-4px);
+    background:var(--surface);
+    border-color:rgba(var(--accent-rgb),.40);
+    box-shadow:0 14px 32px rgba(16,24,40,.09);
+}
+
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card) :is(h3, h4){
+    margin-bottom:8px;
+    font-size:20px;
+    line-height:1.35;
+    color:var(--text-strong);
+}
+
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card) p{
+    font-size:16px;
+    line-height:1.7;
+    color:var(--text-light);
+}
+
+.site-page.site-page--home :is(.service-icon, .process-icon, .industry-icon, .choose-icon){
+    width:56px;
+    height:56px;
+    min-width:56px;
+    margin-bottom:20px;
+    border-radius:14px;
+    font-size:22px;
+    transition:background-color 220ms ease;
+}
+
+.site-page.site-page--home :is(.service-icon, .process-icon, .industry-icon, .choose-icon) svg{
+    width:22px;
+    height:22px;
+    font-size:22px;
+    transition:transform 220ms ease;
+}
+
+.site-page.site-page--home :is(svg.feature-icon, svg.mv-icon){
+    width:56px;
+    height:56px;
+    min-width:56px;
+    padding:16px;
+    border-radius:14px;
+}
+
+/* icon tile deepens a touch on hover; text keeps its colours */
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .choose-card):is(:hover, :focus-within) :is(.service-icon, .process-icon, .industry-icon, .choose-icon){
+    background:rgba(var(--accent-rgb),.16);
+    color:var(--accent);
+}
+
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .choose-card):is(:hover, :focus-within) :is(.service-icon, .process-icon, .industry-icon, .choose-icon) svg{
+    color:var(--accent) !important;
+    transform:scale(1.06);
+}
+
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card):hover :is(h3, h4){
+    color:var(--text-strong);
+}
+
+.site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card):hover p{
+    color:var(--text-light);
+}
+
+/* grids: one 24px gutter everywhere */
+.site-page.site-page--home :is(.services-grid, .process-grid, .industries-grid),
+.site-page.site-page--home .services .services-grid,
+.site-page.site-page--home .process .process-grid{
+    max-width:1200px;
+    gap:24px;
+}
+
+
+/* ===========================================================
+   HERO
+=========================================================== */
+
+.site-page.site-page--home .hero .hero-container{
+    grid-template-columns:minmax(0,1fr) 540px;
+    column-gap:56px;
+    align-items:center;
+}
+
+.site-page.site-page--home .hero .hero-content h1{
+    margin-bottom:22px;
+}
+
+.site-page.site-page--home .hero .hero-content > p{
+    max-width:620px;
+    font-size:18px;
+    line-height:1.75;
+}
+
+.site-page.site-page--home .hero .hero-features{
+    gap:14px;
+    margin-top:32px;
+    padding-top:24px;
+}
+
+.site-page.site-page--home .hero .hero-features .feature{
+    gap:12px;
+}
+
+.site-page.site-page--home .hero .hero-features .feature span{
+    width:26px;
+    height:26px;
+}
+
+.site-page.site-page--home .hero .hero-features .feature span svg{
+    width:12px;
+    height:12px;
+}
+
+.site-page.site-page--home .hero .hero-features .feature p{
+    font-size:17px;
+}
+
+/* square stage: soft circle + dashed ring, illustration centred, the
+   three cards in a zig-zag -- SEO top-left, Google Ads right-centre,
+   Web Development bottom-left -- each only overlapping the image edge */
+.site-page.site-page--home .hero .hero-image{
+    position:relative;
+    display:block;
+    width:100%;
+    max-width:540px;
+    aspect-ratio:1 / 1;
+    margin:0;
+    justify-self:center;
+}
+
+.site-page.site-page--home .hero .hero-image::before{
+    inset:6%;
+}
+
+.site-page.site-page--home .hero .hero-image::after{
+    inset:0;
+}
+
+.site-page.site-page--home .hero .hero-image > img{
+    width:96%;
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:max-content;
+    min-width:0;
+    max-width:270px;
+    padding:14px 18px;
+    border-radius:14px;
+    box-shadow:0 12px 30px rgba(16,24,40,.12);
+    transition:
+        translate 220ms ease,
+        box-shadow 220ms ease,
+        border-color 220ms ease;
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card:hover{
+    translate:0 -4px;
+    border-color:rgba(var(--accent-rgb),.40);
+    box-shadow:0 16px 36px rgba(16,24,40,.16);
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card.card-one{
+    top:7%;
+    right:auto;
+    bottom:auto;
+    left:0;
+    transform:none;
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card.card-two{
+    top:50%;
+    right:0;
+    bottom:auto;
+    left:auto;
+    transform:translateY(-50%);
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card.card-three{
+    top:auto;
+    right:auto;
+    bottom:7%;
+    left:4%;
+    transform:none;
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card > svg{
+    width:46px;
+    height:46px;
+    min-width:46px;
+    padding:12px;
+    border-radius:12px;
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card h4{
+    margin:0 0 2px;
+    font-size:16.5px;
+    line-height:1.3;
+}
+
+.site-page.site-page--home .hero .hero-image .floating-card p{
+    margin:0;
+    font-size:14px;
+    line-height:1.4;
+}
+
+
+/* ===========================================================
+   ABOUT
+=========================================================== */
+
+.site-page.site-page--home .about-container{
+    gap:64px;
+}
+
+.site-page.site-page--home .about-content > p{
+    margin-bottom:28px;
+}
+
+.site-page.site-page--home .mission-vision{
+    gap:20px;
+    margin-bottom:32px;
+}
+
+.site-page.site-page--home .mv-card{
+    gap:16px;
+    padding:24px;
+}
+
+.site-page.site-page--home .about-right{
+    gap:20px;
+}
+
+.site-page.site-page--home .about-right .feature-card{
+    column-gap:18px;
+    padding:26px;
+}
+
+
+/* ===========================================================
+   SERVICES / PROCESS / INDUSTRIES
+=========================================================== */
+
+.site-page.site-page--home .services .learn-more{
+    padding-top:22px;
+    font-size:16px;
+}
+
+.site-page.site-page--home .services .learn-more svg{
+    transition:transform 200ms ease;
+}
+
+.site-page.site-page--home .services .learn-more:hover svg{
+    transform:translateX(3px);
+}
+
+.site-page.site-page--home .process .process-number{
+    font-size:16px;
+}
+
+.site-page.site-page--home .process .process-card h3{
+    margin-top:20px;
+}
+
+
+/* ===========================================================
+   WHY CHOOSE (Home instance only)
+=========================================================== */
+
+.site-page.site-page--home .whychoose .whychoose-container{
+    gap:64px;
+}
+
+.site-page.site-page--home .whychoose .why-left > p{
+    margin-bottom:32px;
+}
+
+.site-page.site-page--home .whychoose .why-right{
+    gap:20px;
+}
+
+.site-page.site-page--home .whychoose .choose-card{
+    gap:18px;
+    padding:26px;
+}
+
+.site-page.site-page--home .whychoose .choose-icon{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+}
+
+
+/* ===========================================================
+   FAQ
+=========================================================== */
+
+.site-page.site-page--home .faq-container{
+    gap:64px;
+}
+
+.site-page.site-page--home .faq-features{
+    gap:16px;
+}
+
+.site-page.site-page--home .faq-features span{
+    font-size:17px;
+}
+
+.site-page.site-page--home .faq-card{
+    margin-bottom:16px;
+    border-radius:14px;
+    transition:border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.site-page.site-page--home .faq-card:hover{
+    border-color:rgba(var(--accent-rgb),.35);
+    box-shadow:0 8px 22px rgba(16,24,40,.06);
+}
+
+.site-page.site-page--home .faq-question{
+    padding:24px 28px;
+}
+
+.site-page.site-page--home .faq-question h3{
+    font-size:20px;
+    line-height:1.45;
+}
+
+.site-page.site-page--home .faq-card .icon{
+    width:34px;
+    height:34px;
+    min-width:34px;
+    font-size:14px;
+}
+
+.site-page.site-page--home .faq-answer p{
+    padding:0 28px 26px;
+    font-size:16.5px;
+    line-height:1.75;
+}
+
+
+/* ===========================================================
+   SMALL LAPTOP
+=========================================================== */
+
+@media(max-width:1200px){
+
+    .site-page.site-page--home .hero .hero-container{
+        grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+        column-gap:44px;
+    }
+
+    .site-page.site-page--home section h1{
+        font-size:44px;
+    }
+
+    .site-page.site-page--home .hero .hero-image .floating-card{
+        max-width:240px;
+        padding:12px 14px;
+    }
+
+}
+
+
+/* ===========================================================
+   TABLET
+=========================================================== */
+
+@media(max-width:992px){
+
+    .site-page.site-page--home > section{
+        padding:76px 28px;
+    }
+
+    .site-page.site-page--home > section:first-child{
+        padding-top:calc(var(--nav-height) + 48px);
+        padding-bottom:64px;
+    }
+
+    .site-page.site-page--home section h1{
+        font-size:40px;
+    }
+
+    .site-page.site-page--home section h2{
+        font-size:34px;
+    }
+
+    .site-page.site-page--home .hero .hero-container,
+    .site-page.site-page--home :is(.about-container, .faq-container),
+    .site-page.site-page--home .whychoose .whychoose-container{
+        grid-template-columns:minmax(0,1fr);
+        row-gap:48px;
+    }
+
+    .site-page.site-page--home .hero .hero-image{
+        max-width:520px;
+        margin:0 auto;
+    }
+
+    .site-page.site-page--home .hero .hero-image .floating-card{
+        max-width:260px;
+    }
+
+    .site-page.site-page--home :is(.services-heading, .section-header){
+        margin-bottom:44px;
+    }
+
+}
+
+
+/* ===========================================================
+   MOBILE
+=========================================================== */
+
+@media(max-width:768px){
+
+    .site-page.site-page--home > section{
+        padding:60px 20px;
+    }
+
+    .site-page.site-page--home > section:first-child{
+        padding-top:calc(var(--nav-height) + 36px);
+        padding-bottom:52px;
+    }
+
+    .site-page.site-page--home section h1{
+        font-size:34px;
+    }
+
+    .site-page.site-page--home section h2{
+        font-size:29px;
+    }
+
+    .site-page.site-page--home :is(.services-heading, .section-header){
+        margin-bottom:34px;
+    }
+
+    .site-page.site-page--home :is(.services-heading, .section-header) > p,
+    .site-page.site-page--home :is(.about-content, .why-left, .faq-left) > p,
+    .site-page.site-page--home .hero .hero-content > p{
+        font-size:16.5px;
+    }
+
+    .site-page.site-page--home :is(.services-grid, .process-grid, .industries-grid),
+    .site-page.site-page--home .services .services-grid,
+    .site-page.site-page--home .process .process-grid,
+    .site-page.site-page--home .whychoose .why-right,
+    .site-page.site-page--home .mission-vision,
+    .site-page.site-page--home .about-right{
+        gap:16px;
+    }
+
+    .site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card),
+    .site-page.site-page--home .about-right .feature-card,
+    .site-page.site-page--home .whychoose .choose-card{
+        padding:22px;
+    }
+
+    .site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card) :is(h3, h4){
+        font-size:18.5px;
+    }
+
+    .site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card) p{
+        font-size:15.5px;
+    }
+
+    .site-page.site-page--home :is(.service-icon, .process-icon, .industry-icon, .choose-icon),
+    .site-page.site-page--home :is(svg.feature-icon, svg.mv-icon){
+        width:50px;
+        height:50px;
+        min-width:50px;
+    }
+
+    .site-page.site-page--home :is(svg.feature-icon, svg.mv-icon){
+        padding:14px;
+    }
+
+    .site-page.site-page--home .faq-question{
+        padding:20px 22px;
+    }
+
+    .site-page.site-page--home .faq-question h3{
+        font-size:18px;
+    }
+
+    .site-page.site-page--home .faq-answer p{
+        padding:0 22px 22px;
+        font-size:15.5px;
+    }
+
+    .site-page.site-page--home .hero .hero-buttons > :is(.primary-btn, .secondary-btn){
+        min-width:0;
+        height:54px;
+    }
+
+}
+
+/* narrow phones: the illustration gets its own frame and the three
+   cards stack below it at full width -- no overlap, no clipping */
+@media(max-width:560px){
+
+    .site-page.site-page--home .hero .hero-image{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+        max-width:100%;
+        aspect-ratio:auto;
+    }
+
+    .site-page.site-page--home .hero .hero-image > img{
+        position:static;
+        width:100%;
+        transform:none;
+    }
+
+    .site-page.site-page--home .hero .hero-image .floating-card,
+    .site-page.site-page--home .hero .hero-image .floating-card:is(.card-one, .card-two, .card-three){
+        position:static;
+        width:100%;
+        max-width:none;
+        padding:14px 16px;
+        transform:none;
+        box-shadow:var(--shadow-sm);
+    }
+
+    .site-page.site-page--home .hero .hero-image .floating-card:hover{
+        translate:none;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .site-page.site-page--home section h1{
+        font-size:30px;
+    }
+
+    .site-page.site-page--home section h2{
+        font-size:26px;
+    }
+
+    .site-page.site-page--home .hero .hero-buttons > :is(.primary-btn, .secondary-btn),
+    .site-page.site-page--home :is(.about-btn, .choose-btn){
+        width:100%;
+    }
+
+}
+
+
+/* ===========================================================
+   TOUCH + REDUCED MOTION
+=========================================================== */
+
+@media (hover: none){
+
+    .site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card):hover,
+    .site-page.site-page--home .hero .hero-buttons > *:hover,
+    .site-page.site-page--home :is(.about-btn, .choose-btn):hover{
+        transform:none;
+    }
+
+    .site-page.site-page--home .hero .hero-image .floating-card:hover{
+        translate:none;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    .site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card),
+    .site-page.site-page--home .hero .hero-image .floating-card,
+    .site-page.site-page--home .hero .hero-buttons > *,
+    .site-page.site-page--home :is(.about-btn, .choose-btn){
+        transition:none;
+    }
+
+    .site-page.site-page--home :is(.service-card, .process-card, .industry-card, .feature-card, .mv-card, .choose-card):hover,
+    .site-page.site-page--home .hero .hero-buttons > *:hover,
+    .site-page.site-page--home :is(.about-btn, .choose-btn):hover{
+        transform:none;
+    }
+
+    .site-page.site-page--home .hero .hero-image .floating-card:hover{
+        translate:none;
+    }
+
+}

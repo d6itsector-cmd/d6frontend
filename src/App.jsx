@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import QrLanding from "./pages/QrLanding/QrLanding";
 
 // ================= SERVICES =================
+import ServicesPage from "./pages/Services/ServicesPage";
 import SEO from "./pages/Services/SEO";
 import SocialMedia from "./pages/Services/SocialMedia";
 import EmailMarketing from "./pages/Services/EmailMarketing";
@@ -105,6 +106,7 @@ function AppContent() {
 
         {/* Website Services */}
 
+        <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/seo" element={<SEO />} />
         <Route
           path="/services/social-media"

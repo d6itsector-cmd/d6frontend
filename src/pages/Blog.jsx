@@ -6,26 +6,30 @@ import Newsletter from "../components/Blog/Newsletter";
 
 import CTA from "../components/Home/CTA/CTA";
 import Footer from "../components/Home/Footer/Footer";
+// Shared layout for the marketing pages, scoped under .site-page
+import "../styles/sitePages.css";
 
 const Blog = () => {
   return (
     <>
-      <BlogHero />
+      <div className="site-page site-page--blog">
+        <BlogHero />
 
-      <FeaturedArticle />
+        <FeaturedArticle />
 
-      <BlogCategories />
+        <BlogCategories />
 
-      <LatestBlogs />
+        <LatestBlogs />
 
-      <Newsletter />
+        <Newsletter />
+      </div>
 
       <CTA
         badge="DIGITAL MARKETING INSIGHTS"
         title="Ready to Grow Your Business?"
         description="Stay ahead with expert digital marketing strategies, actionable insights, and innovative solutions that help your business succeed online."
-        primaryButton="Get Free Consultation"
-        secondaryButton="Get In Touch"
+        primaryBtn="Get Free Consultation"
+        secondaryBtn="Get In Touch"
       />
 
       <Footer />

@@ -153,7 +153,7 @@
 
     font-weight:600;
 
-    transition:.35s;
+    transition:var(--transition);
 
     display:flex;
 
@@ -176,7 +176,7 @@
 
 .primary-btn:hover{
     background:var(--accent-hover);
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
 
     box-shadow:var(--shadow-md);
 
@@ -293,13 +293,13 @@
 
     filter:drop-shadow(0 30px 60px rgba(var(--primary-rgb),.15));
 
-    transition:.4s;
+    transition:var(--transition-slow);
 
 }
 
 .hero-image img:hover{
 
-    transform:scale(1.03);
+    transform:scale(var(--hover-zoom));
 
 }
 
@@ -373,7 +373,7 @@
 
     z-index:5;
 
-    transition:.35s;
+    transition:var(--transition-slow);
 
     animation:float 4s ease-in-out infinite;
 
@@ -381,9 +381,9 @@
 
 .floating-card:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
 
-    box-shadow:0 30px 70px rgba(var(--primary-rgb),.18);
+    box-shadow:var(--shadow-lg);
 
 }
 
@@ -485,13 +485,13 @@
 
     text-align:center;
 
-    transition:.35s;
+    transition:var(--transition-slow);
 
 }
 
 .stat-box:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(var(--hover-lift));
 
 }
 
