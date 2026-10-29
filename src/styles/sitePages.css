@@ -1,0 +1,1681 @@
+/* ===========================================================
+   SITE PAGES LAYOUT
+   Brings Home, Industries, Portfolio, Blog and Contact in line with the
+   redesigned Services / About pages: 1140px content width, 40px page
+   titles, 32px section titles, 72px section padding, small framed
+   images without animation, compact bordered cards with blue icon
+   tiles, alternating white / light-grey bands.
+
+   Each page wraps its sections (not the shared CTA / Footer) in
+   <div className="site-page site-page--<name>"> and every rule here is
+   scoped under .site-page, so Services, About, the dashboards and the
+   admin portal are untouched.
+
+   The section components keep their own stylesheets. Many of their
+   class names (.hero-buttons, .primary-btn, .process-card, .why-grid,
+   .services-grid, .stats-card, ...) are also defined -- unscoped -- by
+   other components and leak through the single CSS bundle; the
+   .site-page rules below outrank them and reset what they leak.
+=========================================================== */
+
+
+/* ===========================================================
+   SECTIONS
+=========================================================== */
+
+.site-page > section{
+    box-sizing:border-box;
+    position:relative;
+    min-height:0;
+    padding:72px 24px;
+    border-bottom:1px solid var(--border);
+    overflow:hidden;
+}
+
+/* every direct child of a section shares the 1140px content column */
+.site-page > section > *{
+    box-sizing:border-box;
+    max-width:1140px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* first section on each page clears the fixed navbar */
+.site-page > section:first-child{
+    padding-top:calc(var(--nav-height) + 56px);
+    padding-bottom:56px;
+}
+
+/* decorative blobs / shapes behind the heroes */
+.site-page :is(.shape, .portfolio-shape){
+    display:none;
+}
+
+.site-page :is(.hero-image, .portfolio-image, .blog-right)::before,
+.site-page :is(.hero-image, .portfolio-image, .blog-right)::after,
+.site-page > section:first-child::before,
+.site-page > section:first-child::after{
+    content:none;
+}
+
+
+/* ===========================================================
+   SHARED TYPE
+=========================================================== */
+
+.site-page :is(
+    .hero-badge, .portfolio-badge, .blog-badge,
+    .section-tag, .faq-tag
+){
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    width:auto;
+    margin:0 0 14px;
+    padding:6px 14px;
+    background:rgba(var(--accent-rgb),.10);
+    color:var(--accent);
+    border:0;
+    border-radius:var(--radius-pill);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.3px;
+    line-height:1.4;
+}
+
+.site-page section h1{
+    margin:0 0 16px;
+    font-size:40px;
+    font-weight:700;
+    line-height:1.2;
+    color:var(--text-strong);
+}
+
+.site-page section h2{
+    margin:0 0 14px;
+    font-size:32px;
+    font-weight:700;
+    line-height:1.25;
+    color:var(--text-strong);
+}
+
+.site-page section :is(h1, h2) span{
+    color:var(--accent);
+}
+
+/* centred section headers */
+.site-page :is(
+    .services-heading, .section-header,
+    .industry-heading, .why-header, .process-header, .stats-header,
+    .stats-heading, .testimonial-header,
+    .featured-header, .categories-header, .latest-header,
+    .map-header
+){
+    max-width:700px;
+    margin:0 auto 40px;
+    text-align:center;
+}
+
+.site-page :is(
+    .services-heading, .section-header,
+    .industry-heading, .why-header, .process-header, .stats-header,
+    .stats-heading, .testimonial-header,
+    .featured-header, .categories-header, .latest-header,
+    .map-header
+) > p{
+    max-width:640px;
+    margin:0 auto;
+    font-size:16px;
+    line-height:1.75;
+    color:var(--text-light);
+}
+
+/* card titles + body text */
+.site-page :is(
+    .service-card, .process-card, .industry-card, .why-card,
+    .industry-stats-card, .stats-card, .category-card,
+    .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card
+) :is(h3, h4){
+    margin:0 0 6px;
+    font-size:17px;
+    font-weight:600;
+    line-height:1.35;
+    color:var(--text-strong);
+}
+
+.site-page :is(
+    .service-card, .process-card, .industry-card, .why-card,
+    .industry-stats-card, .stats-card, .category-card,
+    .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card
+) p{
+    margin:0;
+    font-size:15px;
+    line-height:1.65;
+    color:var(--text-light);
+    opacity:1;
+}
+
+
+/* ===========================================================
+   CARDS + ICON TILES
+=========================================================== */
+
+.site-page :is(
+    .service-card, .process-card, .industry-card, .why-card,
+    .industry-stats-card, .stats-card, .category-card,
+    .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card
+){
+    box-sizing:border-box;
+    position:relative;
+    min-width:0;
+    height:100%;
+    margin:0;
+    padding:24px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:none;
+    transform:none;
+    transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.site-page :is(
+    .service-card, .process-card, .industry-card, .why-card,
+    .industry-stats-card, .stats-card, .category-card,
+    .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card
+):hover{
+    transform:translateY(-2px);
+    background:var(--surface);
+    border-color:var(--border);
+    box-shadow:var(--shadow-md);
+}
+
+/* some components turn card text white on hover (they used to fill the
+   card blue); the card stays white here, so keep the text dark */
+.site-page :is(
+    .service-card, .process-card, .industry-card, .why-card,
+    .industry-stats-card, .stats-card, .category-card,
+    .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card
+):hover :is(h3, h4){
+    color:var(--text-strong);
+}
+
+.site-page :is(
+    .service-card, .process-card, .industry-card, .why-card,
+    .category-card, .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card
+):hover p{
+    color:var(--text-light);
+}
+
+.site-page :is(.industry-stats-card, .stats-card):hover h3{
+    color:var(--accent);
+}
+
+/* accent bars some components draw on hover (Home Process.css) */
+.site-page .process-card::before,
+.site-page .process-card::after{
+    content:none;
+}
+
+/* feature cards: icon tile, then title, then text -- left aligned */
+.site-page :is(.service-card, .process-card, .industry-card, .why-card, .category-card, .feature-card){
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    text-align:left;
+}
+
+.site-page :is(
+    .service-icon, .process-icon, .industry-icon, .why-icon,
+    .industry-stats-icon, .stats-icon, .category-icon,
+    .project-icon
+){
+    box-sizing:border-box;
+    flex-shrink:0;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    margin:0 0 16px;
+    padding:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(var(--accent-rgb),.10);
+    color:var(--accent);
+    border-radius:var(--radius-md);
+    font-size:18px;
+    transform:none;
+    transition:none;
+}
+
+.site-page :is(
+    .service-icon, .process-icon, .industry-icon, .why-icon,
+    .industry-stats-icon, .stats-icon, .category-icon,
+    .project-icon
+) svg{
+    width:18px;
+    height:18px;
+    font-size:18px;
+    color:inherit !important;
+    transform:none;
+}
+
+/* hover states elsewhere fill these tiles blue / turn icons white */
+.site-page :is(.service-card, .process-card, .industry-card, .why-card, .category-card, .industry-stats-card, .stats-card, .project-card):hover :is(.service-icon, .process-icon, .industry-icon, .why-icon, .category-icon, .industry-stats-icon, .stats-icon, .project-icon){
+    background:rgba(var(--accent-rgb),.10);
+    color:var(--accent);
+}
+
+/* Home About's mission / feature cards use a bare <svg> icon */
+.site-page :is(svg.feature-icon, svg.mv-icon){
+    box-sizing:border-box;
+    flex-shrink:0;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    margin:0 0 16px;
+    padding:13px;
+    background:rgba(var(--accent-rgb),.10);
+    color:var(--accent);
+    border-radius:var(--radius-md);
+}
+
+/* stat cards: centred figure */
+.site-page :is(.industry-stats-card, .stats-card){
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+.site-page :is(.industry-stats-card, .stats-card) h3{
+    margin:0 0 4px;
+    font-size:30px;
+    font-weight:700;
+    line-height:1.15;
+    color:var(--accent);
+}
+
+.site-page :is(.industry-stats-card, .stats-card) h4{
+    margin:0 0 6px;
+}
+
+
+/* ===========================================================
+   GRIDS
+=========================================================== */
+
+.site-page :is(
+    .services-grid, .process-grid, .industries-grid, .industry-grid,
+    .why-grid, .industry-stats-grid, .stats-grid, .categories-grid,
+    .projects-grid, .testimonial-grid, .blogs-grid
+){
+    box-sizing:border-box;
+    max-width:1140px;
+    margin:0 auto;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-auto-rows:1fr;
+    gap:20px;
+    background:none;
+}
+
+/* four-item rows */
+.site-page :is(.industries-grid, .industry-grid, .industry-stats-grid, .stats-grid),
+.site-page .process .process-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+/* Home Services has five cards: 3 + 2 with the second row centred.
+   Six half-width tracks, each card spans two; the 4th card starts on
+   track 2 so the last pair sits in the middle. grid-auto-rows:1fr keeps
+   both rows (and so every card) the same height. */
+.site-page .services .services-grid{
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-auto-rows:1fr;
+    gap:20px;
+}
+
+.site-page .services .services-grid > .service-card{
+    grid-column:span 2;
+    width:auto;
+    height:100%;
+    /* Services.css sets min-height 280-320px per breakpoint, which left
+       empty space above "Learn More" */
+    min-height:0;
+}
+
+.site-page .services .services-grid > .service-card:nth-child(4){
+    grid-column:2 / span 2;
+}
+
+/* icon, title, text, then the link pinned to the bottom */
+.site-page .services .service-card h3{
+    margin:0 0 8px;
+}
+
+.site-page .services .learn-more{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:auto;
+    padding-top:18px;
+    color:var(--accent);
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.site-page .services .learn-more:hover{
+    color:var(--accent-hover);
+    text-decoration:underline;
+    text-underline-offset:4px;
+}
+
+.site-page .services .learn-more:focus-visible{
+    outline:none;
+    border-radius:var(--radius-sm);
+    box-shadow:var(--focus-ring);
+}
+
+/* Blog categories: seven cards, centred wrap */
+.site-page .categories-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.site-page .categories-grid > .category-card{
+    flex:0 1 calc((100% - 60px) / 4);
+    height:auto;
+}
+
+/* Home Process: number + icon on one row */
+.site-page .process .process-card{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-rows:auto auto 1fr;
+    align-content:start;
+    align-items:center;
+    column-gap:12px;
+}
+
+.site-page .process .process-number{
+    position:static;
+    grid-row:1;
+    grid-column:1;
+    margin:0;
+    font-size:15px;
+    font-weight:700;
+    line-height:1;
+    letter-spacing:.5px;
+    color:var(--accent);
+}
+
+.site-page .process .process-card .process-icon{
+    grid-row:1;
+    grid-column:2;
+    margin:0;
+}
+
+.site-page .process .process-card h3{
+    grid-row:2;
+    grid-column:1 / -1;
+    margin-top:16px;
+}
+
+.site-page .process .process-card p{
+    grid-row:3;
+    grid-column:1 / -1;
+    align-self:start;
+}
+
+/* Home process cards: hover / focus.
+   These outrank the shared .site-page card hover (2px lift) and Home's
+   Process.css, which fills the icon tile solid blue and forces the icon
+   white with !important on hover. Only transform, shadow, border and
+   background change, so nothing reflows. */
+.site-page--home .process .process-card{
+    transition:
+        background-color 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+}
+
+.site-page--home .process .process-card:is(:hover, :focus-visible){
+    transform:translateY(-4px);
+    background:var(--surface);
+    border-color:rgba(var(--accent-rgb),.45);
+    box-shadow:0 8px 22px rgba(16,24,40,.08);
+    outline:none;
+}
+
+/* title and text keep their normal colours */
+.site-page--home .process .process-card:is(:hover, :focus-visible) h3{
+    color:var(--text-strong);
+}
+
+.site-page--home .process .process-card:is(:hover, :focus-visible) p{
+    color:var(--text-light);
+}
+
+.site-page--home .process .process-card .process-icon{
+    transition:background-color 220ms ease;
+}
+
+.site-page--home .process .process-card .process-icon svg{
+    transition:transform 220ms ease;
+}
+
+/* icon tile turns a slightly deeper light blue; icon grows a touch */
+.site-page--home .process .process-card:is(:hover, :focus-visible) .process-icon{
+    background:rgba(var(--accent-rgb),.16);
+}
+
+.site-page--home .process .process-card:is(:hover, :focus-visible) .process-icon svg{
+    color:var(--accent) !important;
+    transform:scale(1.05);
+}
+
+/* touch screens: no sticky lift / scale after a tap */
+@media (hover: none){
+
+    .site-page--home .process .process-card:hover,
+    .site-page--home .process .process-card:hover .process-icon svg{
+        transform:none;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    .site-page--home .process .process-card,
+    .site-page--home .process .process-card .process-icon,
+    .site-page--home .process .process-card .process-icon svg{
+        transition:none;
+    }
+
+    .site-page--home .process .process-card:is(:hover, :focus-visible),
+    .site-page--home .process .process-card:is(:hover, :focus-visible) .process-icon svg{
+        transform:none;
+    }
+
+}
+
+
+/* ===========================================================
+   HEROES: text ~65% | small framed image ~32%
+=========================================================== */
+
+/* Home + Industries + Portfolio containers */
+.site-page :is(.hero-container, .startup-container, .portfolio-container){
+    display:grid;
+    grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);
+    align-items:center;
+    column-gap:56px;
+    width:100%;
+}
+
+/* Industries / Portfolio put badge, title, text and buttons straight
+   in the container: text in column 1 rows 2-5, image in column 2 across
+   all rows. The two 1fr spacer rows absorb the image's extra height, so
+   the text stays tight and vertically centred instead of spreading out. */
+.site-page :is(.startup-container, .portfolio-container){
+    grid-template-rows:1fr auto auto auto auto 1fr;
+    align-items:start;
+}
+
+.site-page :is(.startup-container, .portfolio-container) > *{
+    grid-column:1;
+    justify-self:start;
+    text-align:left;
+}
+
+.site-page :is(.startup-container, .portfolio-container) > :is(.hero-badge, .portfolio-badge){ grid-row:2; }
+.site-page :is(.startup-container, .portfolio-container) > :is(.hero-title, .portfolio-title){ grid-row:3; }
+.site-page :is(.startup-container, .portfolio-container) > :is(.hero-description, .portfolio-description){ grid-row:4; }
+.site-page :is(.startup-container, .portfolio-container) > :is(.hero-buttons, .portfolio-buttons){ grid-row:5; }
+
+.site-page :is(.startup-container, .portfolio-container) > :is(.hero-image, .portfolio-image){
+    grid-column:2;
+    grid-row:1 / -1;
+    align-self:center;
+    justify-self:center;
+}
+
+/* Blog: the section itself holds the two columns */
+.site-page > .blog-hero{
+    display:grid;
+    grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);
+    align-items:center;
+    column-gap:56px;
+    padding-left:max(24px, calc((100% - 1140px) / 2));
+    padding-right:max(24px, calc((100% - 1140px) / 2));
+}
+
+.site-page > .blog-hero > *{
+    max-width:none;
+    margin:0;
+}
+
+.site-page :is(.hero-content, .blog-left){
+    min-width:0;
+    max-width:none;
+    text-align:left;
+}
+
+.site-page :is(.hero-content, .blog-left) > p,
+.site-page :is(.hero-description, .portfolio-description){
+    max-width:640px;
+    margin:0;
+    font-size:16px;
+    line-height:1.75;
+    color:var(--text-light);
+}
+
+.site-page :is(.hero-image, .portfolio-image, .blog-right){
+    position:static;
+    min-width:0;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+}
+
+.site-page :is(.hero-image, .portfolio-image, .blog-right) > img{
+    display:block;
+    box-sizing:border-box;
+    width:100%;
+    max-width:380px;
+    height:auto;
+    aspect-ratio:4 / 3;
+    object-fit:cover;
+    margin:0;
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-xs);
+    animation:none;
+    transform:none;
+}
+
+/* floating cards / labels become static chips under the image */
+.site-page :is(.hero-image, .portfolio-image) .floating-card{
+    position:static;
+    inset:auto;
+    box-sizing:border-box;
+    width:100%;
+    /* a global .floating-card rule sets min-width:240px */
+    min-width:0;
+    max-width:380px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0;
+    padding:10px 14px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    box-shadow:none;
+    animation:none;
+    transform:none;
+    font-size:14px;
+    font-weight:600;
+    color:var(--text-strong);
+}
+
+.site-page .hero-image .floating-card :is(h4, p){
+    margin:0;
+    font-size:14px;
+    line-height:1.35;
+}
+
+.site-page .hero-image .floating-card p{
+    font-weight:400;
+    color:var(--text-light);
+}
+
+.site-page .hero-image .floating-card svg{
+    flex-shrink:0;
+    color:var(--accent);
+}
+
+/* Industries: four short labels -> a wrapped row of chips */
+.site-page .startup-container .hero-image{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.site-page .startup-container .hero-image > img{
+    order:-1;
+    flex-basis:100%;
+}
+
+.site-page .startup-container .hero-image .floating-card{
+    width:auto;
+    max-width:none;
+    padding:6px 12px;
+    border-radius:var(--radius-pill);
+}
+
+/* hero buttons: solid primary, outlined secondary */
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons){
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+    margin:28px 0 0;
+}
+
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > :is(.primary-btn, .secondary-btn){
+    box-sizing:border-box;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:auto;
+    min-width:0;
+    max-width:none;
+    height:46px;
+    margin:0;
+    padding:0 22px;
+    border:1px solid var(--accent);
+    border-radius:var(--radius-md);
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    line-height:1;
+    text-decoration:none;
+    white-space:nowrap;
+    cursor:pointer;
+    box-shadow:none;
+    transform:none;
+    transition:background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > .primary-btn{
+    background:var(--accent);
+    color:var(--white);
+}
+
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > .primary-btn:hover{
+    background:var(--accent-hover);
+    border-color:var(--accent-hover);
+    color:var(--white);
+    transform:none;
+    box-shadow:none;
+}
+
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > .secondary-btn{
+    background:transparent;
+    color:var(--accent);
+}
+
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > .secondary-btn:hover{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:var(--white);
+    transform:none;
+    box-shadow:none;
+}
+
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > * svg{
+    font-size:13px;
+    color:currentColor;
+    transform:none;
+}
+
+.site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > *:focus-visible{
+    outline:none;
+    box-shadow:var(--focus-ring);
+}
+
+/* Home hero checklist */
+.site-page .hero-features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 24px;
+    margin:24px 0 0;
+}
+
+.site-page .hero-features .feature{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:0;
+    padding:0;
+    background:none;
+    border:0;
+    box-shadow:none;
+}
+
+.site-page .hero-features .feature p{
+    margin:0;
+    font-size:15px;
+    font-weight:500;
+    color:var(--text-strong);
+}
+
+.site-page .hero-features svg{
+    color:var(--accent);
+}
+
+/* Blog hero stats: one bordered row */
+.site-page .blog-stats{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    max-width:480px;
+    margin:28px 0 0;
+    overflow:hidden;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+}
+
+.site-page .blog-stats > div{
+    padding:14px 10px;
+    text-align:center;
+}
+
+.site-page .blog-stats > div + div{
+    border-left:1px solid var(--border);
+}
+
+.site-page .blog-stats h3{
+    margin:0 0 2px;
+    font-size:24px;
+    line-height:1.15;
+    color:var(--accent);
+}
+
+.site-page .blog-stats span{
+    font-size:14px;
+    color:var(--text-light);
+}
+
+
+/* ===========================================================
+   HOME: Hero refinements (Home only -- the shared hero rules above
+   also serve Industries / Portfolio / Blog)
+=========================================================== */
+
+/* fixed right column sized for the illustration (~18% larger than the
+   old ratio-based column) */
+.site-page--home .hero .hero-container{
+    grid-template-columns:minmax(0,1fr) 446px;
+    column-gap:48px;
+}
+
+/* Hero.css pushes the image column down 80px, which threw the two
+   columns off-centre */
+.site-page--home .hero .hero-image{
+    margin:0;
+}
+
+/* heading on two lines at desktop width, comfortable intro measure */
+.site-page--home .hero .hero-content h1{
+    max-width:none;
+    margin-bottom:18px;
+    line-height:1.18;
+    letter-spacing:-.01em;
+}
+
+.site-page--home .hero .hero-content > p{
+    max-width:600px;
+    font-size:17px;
+    line-height:1.7;
+}
+
+/* both CTAs share one box */
+.site-page--home .hero .hero-buttons{
+    margin-top:28px;
+}
+
+.site-page--home .hero .hero-buttons > :is(.primary-btn, .secondary-btn){
+    width:226px;
+    height:48px;
+}
+
+.site-page--home .hero .hero-buttons > .secondary-btn:hover{
+    background:var(--accent-softer);
+    border-color:var(--accent);
+    color:var(--accent);
+}
+
+/* trust points: compact list with small blue check badges */
+.site-page--home .hero .hero-features{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin:24px 0 0;
+    padding:20px 0 0;
+    border-top:1px solid var(--border);
+}
+
+.site-page--home .hero .hero-features .feature{
+    gap:10px;
+}
+
+.site-page--home .hero .hero-features .feature span{
+    flex-shrink:0;
+    width:22px;
+    height:22px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+    padding:0;
+    background:rgba(var(--accent-rgb),.12);
+    color:var(--accent);
+    border-radius:50%;
+    font-size:10px;
+}
+
+.site-page--home .hero .hero-features .feature span svg{
+    width:10px;
+    height:10px;
+    color:var(--accent);
+}
+
+.site-page--home .hero .hero-features .feature p{
+    font-size:15px;
+    font-weight:500;
+    line-height:1.4;
+}
+
+/* Right side: one composition on a square stage --
+     ::before  soft-blue circle
+     ::after   subtle dashed ring
+     img       the 3:2 illustration, centred, shown whole
+     cards     SEO top-left, Google Ads bottom-left, Web Development
+               right-centre, overlapping only the illustration's edges */
+.site-page--home .hero .hero-image{
+    position:relative;
+    display:block;
+    width:100%;
+    max-width:470px;
+    aspect-ratio:1 / 1;
+    margin:0;
+    justify-self:center;
+}
+
+/* Hero.css gives these fixed pixel sizes per breakpoint (520/450/420/
+   330px...), hides them on small screens and spins the ring -- reset all
+   of that so inset alone sizes them to the stage */
+.site-page--home .hero .hero-image::before,
+.site-page--home .hero .hero-image::after{
+    content:"";
+    display:block;
+    position:absolute;
+    width:auto;
+    height:auto;
+    margin:0;
+    border-radius:50%;
+    pointer-events:none;
+    transform:none;
+    animation:none;
+}
+
+.site-page--home .hero .hero-image::before{
+    inset:7%;
+    z-index:0;
+    background:radial-gradient(circle at 50% 45%, rgba(var(--accent-rgb),.16) 0%, rgba(var(--accent-rgb),.07) 70%);
+    border:0;
+}
+
+.site-page--home .hero .hero-image::after{
+    inset:1%;
+    z-index:0;
+    background:none;
+    border:1.5px dashed rgba(var(--accent-rgb),.28);
+}
+
+.site-page--home .hero .hero-image > img{
+    position:absolute;
+    z-index:1;
+    top:50%;
+    left:50%;
+    width:92%;
+    max-width:none;
+    height:auto;
+    aspect-ratio:3 / 2;
+    object-fit:contain;
+    padding:0;
+    background:none;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    transform:translate(-50%, -50%);
+}
+
+/* service highlights: white floating info cards */
+.site-page--home .hero .hero-image .floating-card{
+    position:absolute;
+    z-index:2;
+    box-sizing:border-box;
+    width:max-content;
+    max-width:240px;
+    min-height:0;
+    gap:12px;
+    padding:10px 14px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:0 8px 22px rgba(16,24,40,.10);
+    /* Hero.css centres this text on small screens */
+    text-align:left;
+    animation:none;
+    transition:box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.site-page--home .hero .hero-image .floating-card:hover{
+    border-color:rgba(var(--accent-rgb),.35);
+    box-shadow:0 10px 26px rgba(16,24,40,.13);
+}
+
+.site-page--home .hero .hero-image .floating-card.card-one{
+    top:9%;
+    left:-7%;
+}
+
+.site-page--home .hero .hero-image .floating-card.card-two{
+    bottom:11%;
+    left:-4%;
+}
+
+/* a little below centre so it clears the illustration's gear icons */
+.site-page--home .hero .hero-image .floating-card.card-three{
+    top:58%;
+    right:-8%;
+    transform:translateY(-50%);
+}
+
+/* the section clips overflow and the side margin shrinks quickly below
+   ~1320px: keep all three cards inside the column there */
+@media(max-width:1320px){
+
+    .site-page--home .hero .hero-image .floating-card.card-one{ left:0; }
+    .site-page--home .hero .hero-image .floating-card.card-two{ left:0; }
+    .site-page--home .hero .hero-image .floating-card.card-three{ right:0; }
+
+}
+
+.site-page--home .hero .hero-image .floating-card > svg{
+    box-sizing:border-box;
+    flex-shrink:0;
+    width:38px;
+    height:38px;
+    min-width:38px;
+    padding:10px;
+    margin:0;
+    background:rgba(var(--accent-rgb),.10);
+    color:var(--accent);
+    border-radius:var(--radius-md);
+}
+
+.site-page--home .hero .hero-image .floating-card h4{
+    font-size:15px;
+    font-weight:600;
+    color:var(--text-strong);
+}
+
+.site-page--home .hero .hero-image .floating-card p{
+    font-size:13px;
+}
+
+/* the rules above outrank the shared breakpoints, so restate them */
+
+/* small laptops: a proportional right column leaves the heading room */
+@media(max-width:1200px){
+
+    .site-page--home .hero .hero-container{
+        grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);
+        column-gap:40px;
+    }
+
+}
+
+@media(max-width:992px){
+
+    .site-page--home .hero .hero-container{
+        grid-template-columns:minmax(0,1fr);
+        row-gap:36px;
+    }
+
+    .site-page--home .hero .hero-content h1{
+        font-size:34px;
+    }
+
+    /* stacked: the composition sits centred under the text */
+    .site-page--home .hero .hero-image{
+        max-width:440px;
+        margin:0 auto;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .site-page--home .hero .hero-content h1{
+        font-size:28px;
+    }
+
+    .site-page--home .hero .hero-content > p{
+        font-size:16px;
+    }
+
+    .site-page--home .hero .hero-image .floating-card{
+        max-width:236px;
+        padding:8px 12px;
+    }
+
+}
+
+/* narrow phones: drop the circle, frame the illustration and stack the
+   three cards neatly below it */
+@media(max-width:560px){
+
+    .site-page--home .hero .hero-image{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+        max-width:100%;
+        aspect-ratio:auto;
+    }
+
+    .site-page--home .hero .hero-image::before,
+    .site-page--home .hero .hero-image::after{
+        content:none;
+    }
+
+    .site-page--home .hero .hero-image > img{
+        position:static;
+        width:100%;
+        padding:8px;
+        background:var(--surface);
+        border:1px solid var(--border);
+        border-radius:var(--radius-lg);
+        box-shadow:var(--shadow-sm);
+        transform:none;
+    }
+
+    .site-page--home .hero .hero-image .floating-card,
+    .site-page--home .hero .hero-image .floating-card:is(.card-one, .card-two, .card-three){
+        position:static;
+        width:100%;
+        max-width:none;
+        padding:10px 14px;
+        transform:none;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .site-page--home .hero .hero-buttons > :is(.primary-btn, .secondary-btn){
+        width:100%;
+    }
+
+    .site-page--home .hero .hero-content h1{
+        font-size:26px;
+    }
+
+}
+
+
+/* ===========================================================
+   HOME: About (text left | three feature cards right)
+=========================================================== */
+
+.site-page .about-container{
+    display:grid;
+    /* wider left column so the two Vision / Mission cards aren't cramped */
+    grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    align-items:center;
+    gap:56px;
+    width:100%;
+}
+
+.site-page .about-content{
+    min-width:0;
+    text-align:left;
+}
+
+/* one 24px rhythm: description -> Vision/Mission -> Learn More */
+.site-page .about-content > p{
+    max-width:640px;
+    margin:0 0 24px;
+    font-size:16px;
+    line-height:1.75;
+    color:var(--text-light);
+}
+
+.site-page .mission-vision{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-auto-rows:1fr;
+    gap:16px;
+    margin:0 0 24px;
+}
+
+/* Vision / Mission: icon tile left, title + text beside it
+   (same pattern as the three cards on the right) */
+.site-page .mv-card{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:14px;
+    padding:20px;
+    text-align:left;
+}
+
+.site-page .mv-card > svg.mv-icon{
+    margin:0;
+}
+
+.site-page .mv-card > div{
+    min-width:0;
+}
+
+.site-page .mv-card h4{
+    margin:0 0 4px;
+}
+
+.site-page .about-btn{
+    box-sizing:border-box;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    /* AboutSection.css adds margin-top:35px (and centres it at <=992px) */
+    margin:0;
+    height:46px;
+    padding:0 22px;
+    background:var(--accent);
+    border:1px solid var(--accent);
+    border-radius:var(--radius-md);
+    color:var(--white);
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+    transform:none;
+    box-shadow:none;
+    transition:background-color var(--transition);
+}
+
+.site-page .about-btn:hover{
+    background:var(--accent-hover);
+    border-color:var(--accent-hover);
+    color:var(--white);
+    transform:none;
+    box-shadow:none;
+}
+
+.site-page .about-right{
+    min-width:0;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    /* the three cards share one height */
+    grid-auto-rows:1fr;
+    gap:16px;
+}
+
+.site-page .about-right .feature-card{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    grid-template-rows:auto 1fr;
+    column-gap:14px;
+    align-items:start;
+    align-content:start;
+    height:100%;
+    padding:20px;
+}
+
+.site-page .about-right .feature-card > h3{
+    margin:0 0 4px;
+}
+
+.site-page .about-right .feature-card > svg{
+    grid-row:1 / span 2;
+    margin:0;
+}
+
+.site-page .about-right .feature-card > :is(h3, p){
+    grid-column:2;
+}
+
+
+/* ===========================================================
+   HOME: Why Choose (shared with About -- styled here for Home only)
+=========================================================== */
+
+.site-page .whychoose .whychoose-container{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.9fr);
+    align-items:center;
+    gap:56px;
+    width:100%;
+    padding:0;
+}
+
+.site-page .whychoose .why-left{
+    display:block;
+    min-width:0;
+    text-align:left;
+}
+
+.site-page .whychoose .why-left > p{
+    max-width:640px;
+    margin:0 0 24px;
+    font-size:16px;
+    line-height:1.75;
+    color:var(--text-light);
+}
+
+.site-page .whychoose .choose-btn{
+    box-sizing:border-box;
+    display:inline-flex;
+    align-items:center;
+    height:46px;
+    margin:0;
+    padding:0 22px;
+    background:var(--accent);
+    border:1px solid var(--accent);
+    border-radius:var(--radius-md);
+    color:var(--white);
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:none;
+    transform:none;
+    transition:background-color var(--transition);
+}
+
+.site-page .whychoose .choose-btn:hover{
+    background:var(--accent-hover);
+    border-color:var(--accent-hover);
+    color:var(--white);
+    transform:none;
+    box-shadow:none;
+}
+
+.site-page .whychoose .why-right{
+    min-width:0;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-auto-rows:1fr;
+    gap:14px;
+}
+
+.site-page .whychoose .choose-card{
+    box-sizing:border-box;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:14px;
+    margin:0;
+    padding:20px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:none;
+    transform:none;
+    transition:transform var(--transition), box-shadow var(--transition);
+}
+
+.site-page .whychoose .choose-card:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
+}
+
+.site-page .whychoose .choose-icon{
+    flex-shrink:0;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    background:rgba(var(--accent-rgb),.10);
+    color:var(--accent);
+    border-radius:var(--radius-md);
+    font-size:18px;
+}
+
+.site-page .whychoose .choose-card h3{
+    margin:0 0 4px;
+    font-size:17px;
+}
+
+.site-page .whychoose .choose-card p{
+    margin:0;
+    font-size:15px;
+    line-height:1.65;
+    color:var(--text-light);
+}
+
+
+/* ===========================================================
+   HOME: FAQ (intro left | accordion right)
+=========================================================== */
+
+.site-page .faq-container{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);
+    align-items:start;
+    gap:56px;
+    width:100%;
+}
+
+.site-page .faq-left{
+    min-width:0;
+    text-align:left;
+}
+
+/* faq-left is a flex column: keep the tag pill to its own width */
+.site-page .faq-left > .faq-tag{
+    align-self:flex-start;
+}
+
+.site-page .faq-left > p{
+    font-size:16px;
+    line-height:1.75;
+    color:var(--text-light);
+}
+
+.site-page .faq-right{
+    min-width:0;
+}
+
+.site-page .faq-card{
+    margin:0 0 12px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:none;
+    transform:none;
+}
+
+.site-page .faq-card.active{
+    border-color:rgba(var(--accent-rgb),.35);
+}
+
+
+/* ===========================================================
+   INDUSTRIES: process timeline
+=========================================================== */
+
+.site-page .process-timeline{
+    max-width:1140px;
+    margin:0 auto;
+}
+
+.site-page .process-step .process-icon{
+    margin:0;
+}
+
+
+/* ===========================================================
+   CONTACT
+=========================================================== */
+
+.site-page > .contact-section{
+    padding-top:calc(var(--nav-height) + 56px);
+}
+
+.site-page .contact-container{
+    gap:48px;
+    width:100%;
+}
+
+.site-page .contact-form-box{
+    box-sizing:border-box;
+    padding:32px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+}
+
+.site-page .map-container{
+    width:100%;
+    overflow:hidden;
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+}
+
+
+/* ===========================================================
+   REDUCED MOTION
+=========================================================== */
+
+@media (prefers-reduced-motion: reduce){
+
+    .site-page *{
+        animation:none !important;
+    }
+
+    .site-page :is(
+        .service-card, .process-card, .industry-card, .why-card,
+        .industry-stats-card, .stats-card, .category-card,
+        .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card,
+        .choose-card
+    ),
+    .site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > *{
+        transition:none;
+    }
+
+    .site-page :is(
+        .service-card, .process-card, .industry-card, .why-card,
+        .industry-stats-card, .stats-card, .category-card,
+        .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card,
+        .choose-card
+    ):hover{
+        transform:none;
+    }
+
+}
+
+
+/* ===========================================================
+   TABLET
+=========================================================== */
+
+@media(max-width:992px){
+
+    .site-page > section{
+        padding:60px 24px;
+    }
+
+    .site-page > section:first-child{
+        padding-top:calc(var(--nav-height) + 44px);
+        padding-bottom:48px;
+    }
+
+    .site-page section h1{
+        font-size:34px;
+    }
+
+    .site-page section h2{
+        font-size:28px;
+    }
+
+    /* heroes + two-column sections stack: text first */
+    .site-page :is(.hero-container, .startup-container, .portfolio-container),
+    .site-page > .blog-hero,
+    .site-page :is(.about-container, .faq-container),
+    .site-page .whychoose .whychoose-container{
+        grid-template-columns:minmax(0,1fr);
+        row-gap:32px;
+    }
+
+    /* stacked: drop the explicit rows so items flow in source order */
+    .site-page :is(.startup-container, .portfolio-container){
+        grid-template-rows:none;
+    }
+
+    .site-page :is(.startup-container, .portfolio-container) > *{
+        grid-row:auto !important;
+    }
+
+    .site-page :is(.startup-container, .portfolio-container) > :is(.hero-image, .portfolio-image){
+        grid-column:1;
+        justify-self:start;
+    }
+
+    .site-page :is(.hero-image, .portfolio-image, .blog-right){
+        align-items:flex-start;
+        justify-content:flex-start;
+    }
+
+    .site-page :is(.hero-image, .portfolio-image, .blog-right) > img{
+        max-width:340px;
+    }
+
+    .site-page :is(.hero-image, .portfolio-image) .floating-card{
+        max-width:340px;
+    }
+
+    .site-page :is(
+        .services-grid, .process-grid, .industries-grid, .industry-grid,
+        .why-grid, .industry-stats-grid, .stats-grid,
+        .projects-grid, .testimonial-grid, .blogs-grid
+    ),
+    .site-page .process .process-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    /* tablet: 2 per row (four tracks), the 5th card centred */
+    .site-page .services .services-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .site-page .services .services-grid > .service-card:nth-child(4){
+        grid-column:span 2;
+    }
+
+    .site-page .services .services-grid > .service-card:nth-child(5){
+        grid-column:2 / span 2;
+    }
+
+    .site-page .categories-grid > .category-card{
+        flex-basis:calc((100% - 40px) / 3);
+    }
+
+}
+
+
+/* ===========================================================
+   MOBILE
+=========================================================== */
+
+@media(max-width:768px){
+
+    .site-page > section{
+        padding:48px 20px;
+    }
+
+    .site-page > section:first-child{
+        padding-top:calc(var(--nav-height) + 32px);
+        padding-bottom:40px;
+    }
+
+    .site-page section h1{
+        font-size:28px;
+    }
+
+    .site-page section h2{
+        font-size:24px;
+    }
+
+    .site-page :is(
+        .services-heading, .section-header,
+        .industry-heading, .why-header, .process-header, .stats-header,
+        .stats-heading, .testimonial-header,
+        .featured-header, .categories-header, .latest-header,
+        .map-header
+    ){
+        margin-bottom:28px;
+    }
+
+    .site-page :is(.hero-image, .portfolio-image, .blog-right) > img,
+    .site-page :is(.hero-image, .portfolio-image) .floating-card{
+        max-width:100%;
+    }
+
+    .site-page :is(
+        .services-grid, .process-grid, .industries-grid, .industry-grid,
+        .why-grid, .projects-grid, .testimonial-grid, .blogs-grid
+    ),
+    .site-page .process .process-grid,
+    .site-page .whychoose .why-right,
+    .site-page .mission-vision{
+        grid-template-columns:minmax(0,1fr);
+        grid-auto-rows:auto;
+        gap:14px;
+    }
+
+    /* stats stay two-up */
+    .site-page :is(.industry-stats-grid, .stats-grid){
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:14px;
+    }
+
+    .site-page .categories-grid > .category-card{
+        flex-basis:100%;
+    }
+
+    /* mobile: one full-width column, cards sized to their content */
+    .site-page .services .services-grid{
+        grid-template-columns:minmax(0,1fr);
+        grid-auto-rows:auto;
+    }
+
+    .site-page .services .services-grid > .service-card,
+    .site-page .services .services-grid > .service-card:is(:nth-child(4), :nth-child(5)){
+        grid-column:1;
+    }
+
+    .site-page :is(
+        .service-card, .process-card, .industry-card, .why-card,
+        .industry-stats-card, .stats-card, .category-card,
+        .mv-card, .feature-card, .project-card, .testimonial-card, .blog-card
+    ),
+    .site-page .whychoose .choose-card{
+        padding:18px;
+    }
+
+    .site-page :is(.industry-stats-card, .stats-card) h3{
+        font-size:24px;
+    }
+
+    .site-page .contact-form-box{
+        padding:22px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons){
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .site-page :is(.hero-buttons, .portfolio-buttons, .blog-buttons) > *{
+        width:100%;
+    }
+
+    .site-page .blog-stats > div{
+        padding:12px 6px;
+    }
+
+    .site-page .blog-stats h3{
+        font-size:20px;
+    }
+
+}

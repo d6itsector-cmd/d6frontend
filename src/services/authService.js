@@ -22,7 +22,12 @@ export const registerWithEmail = async (email, password, displayName) => {
     await user.getIdToken(true);
   }
 
-  await sendEmailVerification(user);
+  // The account already exists at this point, so a failed verification send
+  // (rate limit, network) must not surface as a failed sign-up -- the
+  // Verify Email page offers "Resend".
+  await sendEmailVerification(user).catch((err) => {
+    console.error("Verification email not sent:", err.code || err.message);
+  });
 
   // Create the account record now (and trigger the one-time account-created
   // email) instead of waiting for the next API call. Not fatal: the backend

@@ -288,194 +288,12 @@
 
 
 /* =========================================================
-   SERVICES NAV ITEM
-========================================================= */
-
-.navbar-nav-item {
-  position: relative;
-
-  height: var(--nav-height);
-
-  display: flex;
-
-  align-items: center;
-
-  flex-shrink: 0;
-}
-
-
-/* =========================================================
-   SERVICES TOGGLE
-========================================================= */
-
-.services-toggle {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 8px;
-}
-
-.services-arrow {
-  font-size: 11px;
-
-  transition:
-    transform var(--transition);
-}
-
-.services-arrow.rotate {
-  transform: rotate(180deg);
-}
-
-
-/* =========================================================
-   SERVICES MEGA DROPDOWN
-========================================================= */
-
-.services-dropdown {
-  position: absolute;
-
-  top: calc(100% + 3px);
-
-  left: 50%;
-
-  width: 575px;
-
-  background: var(--surface);
-
-  border-radius: var(--radius-xl);
-
-  overflow: hidden;
-
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.14),
-    0 8px 20px rgba(var(--primary-rgb),0.08);
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  pointer-events: none;
-
-  transform:
-    translateX(-50%)
-    translateY(15px);
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease,
-    visibility 0.25s ease;
-
-  z-index: 2000;
-}
-
-
-/* =========================================================
-   SHOW DROPDOWN
-========================================================= */
-
-.navbar-nav-item:hover .services-dropdown,
-.navbar-nav-item.dropdown-open .services-dropdown,
-.services-dropdown.show {
-  opacity: 1;
-
-  visibility: visible;
-
-  pointer-events: auto;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
-}
-
-
-/* =========================================================
-   DROPDOWN TOP ARROW
-========================================================= */
-
-.services-dropdown::before {
-  content: "";
-
-  position: absolute;
-
-  top: -8px;
-  left: 50%;
-
-  width: 16px;
-  height: 16px;
-
-  background: var(--accent-softer);
-
-  border-top: 1px solid var(--border);
-
-  border-left: 1px solid var(--border);
-
-  transform:
-    translateX(-50%)
-    rotate(45deg);
-
-  z-index: 0;
-}
-
-
-/* =========================================================
-   DROPDOWN HEADER
-========================================================= */
-
-.services-dropdown-header {
-  position: relative;
-
-  z-index: 1;
-
-  min-height: 105px;
-
-  padding: 20px 25px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  background: var(--accent-softer);
-
-  border-bottom: 1px solid var(--border);
-
-
-
-
-
-}
-
-.services-dropdown-header h4 {
-  margin: 0 0 6px;
-
-  color: var(--text-strong);
-
-  font-size: 20px;
-
-  font-weight: 700;
-
-  line-height: 1.25;
-}
-
-.services-dropdown-header p {
-  margin: 0;
-
-  color: var(--text-light);
-
-  font-size: 13px;
-
-  font-weight: 400;
-
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   SERVICES GRID
-
-   DESKTOP = 2 COLUMNS
+   SERVICES GRID / SERVICE ICON
+
+   Left over from the removed Services dropdown. Kept because Home
+   Services, the service-page *Services sections and Dashboard
+   MyServices share these class names and currently inherit these
+   rules from the single CSS bundle -- remove only after scoping those.
 ========================================================= */
 
 .services-grid {
@@ -493,54 +311,6 @@
   background: var(--surface);
 }
 
-
-/* =========================================================
-   SERVICE ITEM
-========================================================= */
-
-.service-item {
-  position: relative;
-
-  min-width: 0;
-
-  min-height: 105px;
-
-  padding: 8px;
-
-  display: grid;
-
-  grid-template-columns:
-    68px minmax(0, 1fr);
-
-  grid-template-rows:
-    auto auto;
-
-  column-gap: 14px;
-
-  align-items: center;
-
-  border-radius: var(--radius-lg);
-
-  text-decoration: none;
-
-  transition:
-    background var(--transition),
-    transform var(--transition);
-}
-
-
-/* =========================================================
-   SERVICE ITEM HOVER
-========================================================= */
-
-.service-item:hover {
-  background: var(--accent-softer);
-}
-
-
-/* =========================================================
-   SERVICE ICON
-========================================================= */
 
 .service-icon {
   grid-column: 1;
@@ -570,75 +340,6 @@
   transition:
     background var(--transition),
     transform var(--transition);
-}
-
-.service-item:hover .service-icon {
-  background:
-    rgba(var(--accent-rgb),0.16);
-}
-
-/* Services.css (home page) shares the .service-icon class name; keep its
-   card margin out of the dropdown. */
-.services-dropdown .service-icon {
-  margin: 0;
-}
-
-
-/* =========================================================
-   SERVICE TITLE
-========================================================= */
-
-.service-title {
-  grid-column: 2;
-
-  grid-row: 1;
-
-  min-width: 0;
-
-  align-self: end;
-}
-
-.service-title h5 {
-  width: 100%;
-
-  margin: 0 0 4px;
-
-  color: var(--text-strong);
-
-  font-size: 15px;
-
-  font-weight: 700;
-
-  line-height: 1.3;
-}
-
-
-/* =========================================================
-   SERVICE DESCRIPTION
-========================================================= */
-
-.service-description {
-  grid-column: 2;
-
-  grid-row: 2;
-
-  min-width: 0;
-
-  align-self: start;
-}
-
-.service-description p {
-  width: 100%;
-
-  margin: 0;
-
-  color: var(--muted);
-
-  font-size: 12px;
-
-  font-weight: 400;
-
-  line-height: 1.4;
 }
 
 
@@ -1170,21 +871,10 @@
     font-size: 14px;
   }
 
-  .services-dropdown {
-    width: 560px;
-  }
-
   .services-grid {
     column-gap: 15px;
 
     padding: 22px;
-  }
-
-  .service-item {
-    grid-template-columns:
-      62px minmax(0, 1fr);
-
-    column-gap: 12px;
   }
 
   .service-icon {
@@ -1397,98 +1087,6 @@
 
 
   /* -------------------------------------------------------
-     MOBILE SERVICES
-  ------------------------------------------------------- */
-
-  .navbar-nav-item {
-    width: 100%;
-
-    height: auto;
-
-    display: block;
-  }
-
-  .services-toggle {
-    width: 100%;
-
-    justify-content: space-between;
-  }
-
-
-  /* -------------------------------------------------------
-     MOBILE SERVICES DROPDOWN
-  ------------------------------------------------------- */
-
-  .services-dropdown {
-    position: static;
-
-    width: 100%;
-
-    max-height: 0;
-
-    margin-top: 4px;
-
-    border-radius: var(--radius-lg);
-
-    box-shadow: none;
-
-    border: 1px solid var(--border);
-
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-
-    transform: none;
-
-    overflow: hidden;
-
-    transition:
-      max-height 0.35s ease;
-  }
-
-  .navbar-nav-item.dropdown-open .services-dropdown,
-  .services-dropdown.show {
-    max-height: 900px;
-  }
-
-  /* The desktop open-state rules centre the panel with translateX(-50%)
-     and out-rank the plain .services-dropdown reset above. */
-  .navbar-nav-item:hover .services-dropdown,
-  .navbar-nav-item.dropdown-open .services-dropdown,
-  .services-dropdown.show {
-    transform: none;
-  }
-
-
-  /* Hide pointer on mobile */
-
-  .services-dropdown::before {
-    display: none;
-  }
-
-
-  /* -------------------------------------------------------
-     MOBILE DROPDOWN HEADER
-  ------------------------------------------------------- */
-
-  .services-dropdown-header {
-    min-height: 85px;
-
-    padding: 18px;
-  }
-
-  .services-dropdown-header h4 {
-    font-size: 17px;
-  }
-
-  .services-dropdown-header p {
-    font-size: 12px;
-  }
-
-
-  /* -------------------------------------------------------
      MOBILE SERVICES GRID
   ------------------------------------------------------- */
 
@@ -1498,23 +1096,6 @@
     gap: 6px;
 
     padding: 12px;
-  }
-
-
-  /* -------------------------------------------------------
-     MOBILE SERVICE ITEM
-  ------------------------------------------------------- */
-
-  .service-item {
-    min-height: 82px;
-
-    grid-template-columns:
-      60px minmax(0, 1fr);
-
-    grid-template-rows:
-      auto auto;
-
-    column-gap: 13px;
   }
 
 
@@ -1529,26 +1110,6 @@
     border-radius: var(--radius-lg);
 
     font-size: 23px;
-  }
-
-
-  /* -------------------------------------------------------
-     MOBILE TITLE
-  ------------------------------------------------------- */
-
-  .service-title h5 {
-    font-size: 14px;
-
-    margin-bottom: 4px;
-  }
-
-
-  /* -------------------------------------------------------
-     MOBILE DESCRIPTION
-  ------------------------------------------------------- */
-
-  .service-description p {
-    font-size: 12px;
   }
 
 

@@ -3,6 +3,7 @@ import {
   FaChartLine,
   FaBullhorn,
   FaLaptopCode,
+  FaCheck,
 } from "react-icons/fa";
 
 import { useConsultation } from "../../../context/ConsultationContext";
@@ -61,15 +62,19 @@ const Hero = () => {
 
           <div className="hero-features">
 
+            {/* Hero.css styles the check badge as `.feature span` */}
             <div className="feature">
+              <span aria-hidden="true"><FaCheck /></span>
               <p>Customized Marketing Strategies</p>
             </div>
 
             <div className="feature">
+              <span aria-hidden="true"><FaCheck /></span>
               <p>Transparent Communication</p>
             </div>
 
             <div className="feature">
+              <span aria-hidden="true"><FaCheck /></span>
               <p>Affordable Business Solutions</p>
             </div>
 

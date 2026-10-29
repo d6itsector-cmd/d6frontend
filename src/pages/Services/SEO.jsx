@@ -1,4 +1,6 @@
 import Footer from "../../components/Home/Footer/Footer";
+// Shared, .svc-detail-scoped layout for the five service detail pages.
+import "../../components/WebService/ServiceDetailLayout.css";
 import Hero from "../../components/WebService/SEO/SeoHero";
 import SEOProcess from "../../components/WebService/SEO/SEOProcess";
 import SEOServices from "../../components/WebService/SEO/SEOServices";
@@ -12,10 +14,12 @@ import "../../components/WebService/SEO/SEOFAQ.css";
 const SEO = () => {
     return (
         <>
-            <Hero />
-            <WhySEO />
-            <SEOServices />
-            <SEOProcess />
+            <div className="svc-detail">
+                <Hero />
+                <WhySEO />
+                <SEOServices />
+                <SEOProcess />
+            </div>
             {/* <SEOFAQ/> */}
             <CTA
                 tag="LET'S GROW TOGETHER"

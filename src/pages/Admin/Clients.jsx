@@ -24,11 +24,13 @@ const Clients = () => {
   // deleted (no projects/services/billing/financial history); the dialog
   // only explains that decision.
   const [deleting, setDeleting] = useState(null);
-  const [notice, setNotice] = useState("");
+  // tone "warning": the action succeeded but its email didn't go out as expected
+  const [notice, setNotice] = useState({ text: "", tone: "success" });
+  const showNotice = (text, tone = "success") => setNotice({ text, tone });
 
   useEffect(() => {
-    if (!notice) return undefined;
-    const t = setTimeout(() => setNotice(""), 6000);
+    if (!notice.text) return undefined;
+    const t = setTimeout(() => setNotice({ text: "", tone: "success" }), 6000);
     return () => clearTimeout(t);
   }, [notice]);
 
@@ -62,7 +64,7 @@ const Clients = () => {
   };
 
   const openDelete = async (client) => {
-    setNotice("");
+    showNotice("");
     setDeleting({ client, check: null, checking: true, busy: false, error: "" });
     try {
       const res = await api.get(`/admin/users/${client._id}/deletion-check`);
@@ -84,7 +86,7 @@ const Clients = () => {
     try {
       const res = await api.delete(`/admin/users/${client._id}/permanent`);
       setDeleting(null);
-      setNotice(res.data?.message || `${clientName(client)} was permanently deleted.`);
+      showNotice(res.data?.message || `${clientName(client)} was permanently deleted.`);
       loadClients();
     } catch (err) {
       const data = err.response?.data;
@@ -106,7 +108,7 @@ const Clients = () => {
       const res = await api.put(`/admin/users/${client._id}`, { status: "disabled" });
       setClients((prev) => prev.map((c) => (c._id === client._id ? res.data.data : c)));
       setDeleting(null);
-      setNotice(`${clientName(client)} was disabled. Their history is kept and they can no longer sign in.`);
+      showNotice(`${clientName(client)} was disabled. Their history is kept and they can no longer sign in.`);
     } catch (err) {
       setDeleting((prev) => ({
         ...prev,
@@ -125,7 +127,7 @@ const Clients = () => {
     try {
       const res = await api.post(`/admin/users/${client._id}/resend-set-password`);
       setResending(null);
-      setNotice(res.data?.message || `A new set-password email was sent to ${client.email}.`);
+      showNotice(res.data?.message || `A new set-password email was sent to ${client.email}.`);
     } catch (err) {
       setResending((prev) => ({
         ...prev,
@@ -213,9 +215,9 @@ const Clients = () => {
         </button>
       </div>
 
-      {notice && (
-        <p className="bl-alert bl-alert--success" role="status">
-          {notice}
+      {notice.text && (
+        <p className={`bl-alert bl-alert--${notice.tone}`} role="status">
+          {notice.text}
         </p>
       )}
 
@@ -229,7 +231,7 @@ const Clients = () => {
         onViewServices={setServicesClient}
         onDelete={openDelete}
         onResendSetPassword={(client) => {
-          setNotice("");
+          showNotice("");
           setResending({ client, busy: false, error: "" });
         }}
       />
@@ -254,7 +256,10 @@ const Clients = () => {
           onClose={() => setAdding(false)}
           onCreated={(result) => {
             setAdding(false);
-            setNotice(result?.message || "Client added.");
+            showNotice(
+              result?.message || "Client added.",
+              result?.emailSent === false || result?.warning ? "warning" : "success"
+            );
             loadClients();
           }}
         />

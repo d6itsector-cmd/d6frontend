@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ConsultationModal.css";
 import { FaTimes } from "react-icons/fa";
 
 import api from "../../services/api";
+import { MARKETING_SERVICES, DIVISIONS } from "./consultationServices";
+import { escapeToClose } from "./escapeToClose";
 
 const initialForm = {
   name: "",
@@ -18,6 +20,12 @@ const ConsultationModal = ({ isOpen, onClose }) => {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [feedback, setFeedback] = useState("");
+
+  // Escape closes the modal; the listener exists only while it is open.
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    return escapeToClose(document, onClose);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -49,8 +57,10 @@ const ConsultationModal = ({ isOpen, onClose }) => {
       <div className="consultation-modal">
 
         <button
+          type="button"
           className="close-btn"
           onClick={onClose}
+          aria-label="Close consultation form"
         >
           <FaTimes />
         </button>
@@ -118,19 +128,17 @@ const ConsultationModal = ({ isOpen, onClose }) => {
 
             <option value="">Select Service</option>
 
-            <option>SEO</option>
+            <optgroup label="Marketing services">
+              {MARKETING_SERVICES.map((service) => (
+                <option key={service} value={service}>{service}</option>
+              ))}
+            </optgroup>
 
-            <option>Google Ads</option>
-
-            <option>Social Media Marketing</option>
-
-            <option>Website Development</option>
-
-            <option>Email Marketing</option>
-
-            <option>Branding</option>
-
-            <option>Complete Digital Marketing</option>
+            <optgroup label="D6 Global divisions">
+              {DIVISIONS.map((service) => (
+                <option key={service} value={service}>{service}</option>
+              ))}
+            </optgroup>
 
           </select>
 

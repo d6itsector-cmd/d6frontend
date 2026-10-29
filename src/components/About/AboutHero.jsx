@@ -1,5 +1,6 @@
 import "./AboutHero.css";
 import aboutHero from "../../assets/about.jpg";
+import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { useContact } from "../../context/ContactContext";
 
@@ -33,10 +34,10 @@ const AboutHero = () => {
 
           <div className="aboutHero__buttons">
 
-            <a href="/#services" className="primaryBtn">
+            <Link to="/services" className="primaryBtn">
               Explore Services
               <FaArrowRight />
-            </a>
+            </Link>
 
             <button
               className="secondaryBtn"
