@@ -257,12 +257,12 @@ const Navbar = () => {
 
           {navbarConfig.showPhoneNumber && (
             <a
-              href="tel:+44 330 088 8586"
+              href="tel:+447776635958"
               className="navbar-phone"
               aria-label="Call D6 Global Services"
             >
               <FaPhoneAlt />
-              <span>+44 330 088 8586</span>
+              <span>+44 7776 635958</span>
             </a>
           )}
 

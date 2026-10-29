@@ -72,7 +72,7 @@ const ContactSection = () => {
             <div>
               <h4>Phone</h4>
               <p>
-                <a href="tel:+443300888586">+44 330 088 8586</a>
+                <a href="tel:+447776635958">+44 7776 635958</a>
               </p>
             </div>
           </div>
