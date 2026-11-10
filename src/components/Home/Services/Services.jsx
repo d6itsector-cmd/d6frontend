@@ -1,57 +1,10 @@
-import { Link } from "react-router-dom";
+import { FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
 
-import {
-  FaSearch,
-  FaBullhorn,
-  FaShareAlt,
-  FaLaptopCode,
-  FaEnvelope,
-  FaArrowRight,
-} from "react-icons/fa";
+import ExploreLink from "../../ServiceLanding/ExploreLink";
+// Same eight services, in the same order, as the /services page.
+import { services } from "../../../data/servicesCatalog";
 
 import "./Services.css";
-
-const services = [
-  {
-    title: "SEO",
-    description:
-      "Improve your website's visibility and attract organic traffic through effective Search Engine Optimization.",
-    icon: <FaSearch />,
-    path: "/services/seo",
-  },
-
-  {
-    title: "Google Ads",
-    description:
-      "Reach the right audience with targeted advertising campaigns that generate quality leads.",
-    icon: <FaBullhorn />,
-    path: "/services/google-ads",
-  },
-
-  {
-    title: "Social Media Marketing",
-    description:
-      "Build your brand presence and engage your audience across leading social platforms.",
-    icon: <FaShareAlt />,
-    path: "/services/social-media",
-  },
-
-  {
-    title: "Website Development",
-    description:
-      "Create fast, responsive, and modern websites that deliver an excellent user experience.",
-    icon: <FaLaptopCode />,
-    path: "/services/web-development",
-  },
-
-  {
-    title: "Email Marketing",
-    description:
-      "Reach your customers with targeted email campaigns that build relationships and drive conversions.",
-    icon: <FaEnvelope />,
-    path: "/services/email-marketing",
-  },
-];
 
 const Services = () => {
   return (
@@ -65,15 +18,15 @@ const Services = () => {
           <span>OUR SERVICES</span>
 
           <h2>
-            Digital Marketing
+            Business &amp; Digital
             <br />
             Solutions That Grow
           </h2>
 
           <p>
-            We provide result-driven digital marketing services
-            designed to increase your visibility, generate leads,
-            and grow your business.
+            From custom branded products and AI automation to websites
+            and digital marketing, we help UK businesses work smarter,
+            reach more customers and grow.
           </p>
         </div>
 
@@ -82,48 +35,51 @@ const Services = () => {
 
         <div className="services-grid">
 
-          {services.map((service) => (
+          {services.map((service) => {
+            const { Icon } = service;
 
-            <div
-              className="service-card"
-              key={service.title}
-            >
-
-              {/* Icon */}
-
-              <div className="service-icon">
-                {service.icon}
-              </div>
-
-
-              {/* Title */}
-
-              <h3>
-                {service.title}
-              </h3>
-
-
-              {/* Description */}
-
-              <p>
-                {service.description}
-              </p>
-
-
-              {/* Learn More */}
-
-              <Link
-                to={service.path}
-                className="learn-more"
+            return (
+              <div
+                className="service-card"
+                key={service.id}
               >
-                <span>Learn More</span>
 
-                <FaArrowRight />
-              </Link>
+                {/* Icon */}
 
-            </div>
+                <div className="service-icon" aria-hidden="true">
+                  <Icon />
+                </div>
 
-          ))}
+
+                {/* Title */}
+
+                <h3>
+                  {service.title}
+                </h3>
+
+
+                {/* Description */}
+
+                <p>
+                  {service.summary}
+                </p>
+
+
+                {/* Explore Service: internal page, or AuraWork in a new tab */}
+
+                <ExploreLink
+                  service={service}
+                  className="learn-more"
+                >
+                  <span>Explore Service</span>
+                  <span className="svl-visually-hidden">: {service.title}</span>
+
+                  {service.external ? <FaExternalLinkAlt aria-hidden="true" /> : <FaArrowRight aria-hidden="true" />}
+                </ExploreLink>
+
+              </div>
+            );
+          })}
 
         </div>
 

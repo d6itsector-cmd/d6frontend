@@ -1,6 +1,6 @@
 import "./GoogleAdsHero.css";
 import { Link } from "react-router-dom";
-import googleAdsImage from "../../../assets/googleads.jpeg";
+import googleAdsImage from "../../../assets/services/google-ads.webp";
 import { useConsultation } from "../../../context/ConsultationContext";
 
 const GoogleAdsHero = () => {
@@ -18,14 +18,14 @@ const GoogleAdsHero = () => {
           </span>
 
           <h1>
-            Maximize Your Growth with
+            Maximise Your Growth with
             <span> Google Ads</span>
           </h1>
 
           <p>
             Reach customers at the perfect moment with high-performing Google
             Ads campaigns. We create data-driven PPC strategies that increase
-            website traffic, generate quality leads, and maximize your return
+            website traffic, generate quality leads, and maximise your return
             on investment.
           </p>
 
@@ -50,7 +50,9 @@ const GoogleAdsHero = () => {
 
           <img
             src={googleAdsImage}
-            alt="Google Ads"
+            alt="Laptop showing pay-per-click advertising performance charts and conversion metrics"
+            width="1200"
+            height="900"
           />
 
         </div>

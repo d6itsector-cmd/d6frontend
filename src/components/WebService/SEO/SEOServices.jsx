@@ -19,7 +19,7 @@ const services = [
     icon: <FaFileAlt />,
     title: "On-Page SEO",
     description:
-      "Optimize titles, meta descriptions, headings, URLs, and content to improve search rankings.",
+      "Optimise titles, meta descriptions, headings, URLs, and content to improve search rankings.",
   },
   {
     icon: <FaCogs />,
@@ -35,9 +35,9 @@ const services = [
   },
   {
     icon: <FaPenNib />,
-    title: "Content Optimization",
+    title: "Content Optimisation",
     description:
-      "Create and optimize valuable content that engages users and performs well in search engines.",
+      "Create and optimise valuable content that engages users and performs well in search engines.",
   },
   {
     icon: <FaLink />,

@@ -6,6 +6,8 @@ import WebsiteProcess from "../../components/WebService/WebsiteDevelopment/Websi
 import WebsiteServices from "../../components/WebService/WebsiteDevelopment/WebsiteServices";
 import WhyWebsite from "../../components/WebService/WebsiteDevelopment/WhyWebsite";
 import CTA from "../../components/Home/CTA/CTA";
+// Meta tags, FAQs and related-service links
+import ServicePageExtras from "../../components/ServiceLanding/ServicePageExtras";
 import Footer from "../../components/Home/Footer/Footer";
 // Shared, .svc-detail-scoped layout for the five service detail pages.
 import "../../components/WebService/ServiceDetailLayout.css";
@@ -19,7 +21,7 @@ const WebsiteDevelopment = () => {
         <WebsiteServices/>
         <WebsiteProcess/>
       </div>
-      {/* <WebsiteFAQ/> */}
+      <ServicePageExtras id="website-development" />
       <CTA
         tag="WEBSITE DEVELOPMENT"
         title="Ready to Build Your"

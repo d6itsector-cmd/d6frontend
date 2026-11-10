@@ -1,5 +1,6 @@
 import "./IndustryHero.css";
-import startupImg from "../../assets/industry.jpg";
+// Photography: Unsplash (Unsplash Licence), see src/assets/photos/CREDITS.md
+import startupImg from "../../assets/photos/industries-hero.webp";
 import { useConsultation } from "../../context/ConsultationContext";
 
 const StartupHero = () => {
@@ -64,7 +65,9 @@ const StartupHero = () => {
 
           <img
             src={startupImg}
-            alt="Startup Marketing"
+            alt="Startup team working at desks in an open-plan brick-walled office"
+            width="1080"
+            height="810"
             loading="lazy"
           />
 

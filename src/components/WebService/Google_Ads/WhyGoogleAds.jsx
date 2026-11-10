@@ -84,10 +84,10 @@ const WhyGoogleAds = () => {
               <FaCoins />
             </div>
 
-            <h3>Maximize ROI</h3>
+            <h3>Maximise ROI</h3>
 
             <p>
-              Optimize campaigns with data-driven insights to improve
+              Optimise campaigns with data-driven insights to improve
               performance while reducing advertising costs.
             </p>
 

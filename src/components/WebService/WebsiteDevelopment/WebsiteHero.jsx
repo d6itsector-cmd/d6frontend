@@ -1,6 +1,6 @@
 import "./WebsiteHero.css";
 import { Link } from "react-router-dom";
-import websiteImage from "../../../assets/websitedev.png";
+import websiteImage from "../../../assets/services/website-development.webp";
 import { useConsultation } from "../../../context/ConsultationContext";
 
 const WebsiteHero = () => {
@@ -49,7 +49,9 @@ const WebsiteHero = () => {
 
           <img
             src={websiteImage}
-            alt="Website Development"
+            alt="Web developers writing code on large monitors in a bright office"
+            width="1200"
+            height="900"
           />
 
         </div>

@@ -1,79 +1,89 @@
+// Process.css is no longer used by this section, but it is kept loaded:
+// its unscoped .process-card / .process-icon / .section-header rules leak
+// into the About, Industries and service pages (which carry overrides for
+// them), so dropping it would change those sections.
 import "./Process.css";
-import {
-  FaComments,
-  FaClipboardList,
-  FaRocket,
-  FaChartLine,
-} from "react-icons/fa";
+import "./HowItWorks.css";
 
-const processData = [
+// Lucide icons, via react-icons (no extra dependency)
+import {
+  LuMessagesSquare,
+  LuClipboardList,
+  LuRocket,
+  LuTrendingUp,
+} from "react-icons/lu";
+
+const steps = [
   {
-    icon: <FaComments />,
-    number: "01",
+    Icon: LuMessagesSquare,
     title: "Consultation",
     description:
-      "We understand your business goals, target audience, and marketing requirements.",
+      "We take time to understand your business goals, target audience and marketing requirements.",
   },
   {
-    icon: <FaClipboardList />,
-    number: "02",
+    Icon: LuClipboardList,
     title: "Strategy Planning",
     description:
-      "Our experts create a customized digital marketing strategy for your business.",
+      "Our specialists create a customised digital marketing strategy built around your business.",
   },
   {
-    icon: <FaRocket />,
-    number: "03",
+    Icon: LuRocket,
     title: "Execution",
     description:
-      "We implement campaigns using the latest tools and proven marketing techniques.",
+      "We put your campaigns into action using the latest tools and proven marketing techniques.",
   },
   {
-    icon: <FaChartLine />,
-    number: "04",
-    title: "Growth & Optimization",
+    Icon: LuTrendingUp,
+    title: "Growth & Optimisation",
     description:
-      "We continuously analyze, optimize, and improve campaign performance for better results.",
+      "We continuously analyse, optimise and refine campaign performance to deliver better results.",
   },
 ];
 
 const Process = () => {
   return (
-    <section className="process">
-      <div className="process-container">
+    <section className="hiw" aria-labelledby="hiw-title">
+      <div className="hiw-container">
 
-        <div className="section-header">
-          <span className="section-tag">Our Process</span>
+        <header className="hiw-header">
+          <span className="hiw-eyebrow">Our Process</span>
 
-          <h2>
+          <h2 id="hiw-title" className="hiw-title">
             How <span>D6 Global Services</span> Works
           </h2>
 
-          <p>
-            We follow a simple and effective process to help businesses achieve
-            sustainable digital growth.
+          <p className="hiw-subtitle">
+            A clear, four-step approach that takes your business from the first
+            conversation to sustainable, measurable digital growth.
           </p>
-        </div>
+        </header>
 
-        <div className="process-grid">
-          {processData.map((item, index) => (
-            <div className="process-card" key={index}>
+        {/* Horizontal connected timeline on desktop, 2 x 2 on tablet,
+            vertical timeline on mobile */}
+        <ol className="hiw-steps">
+          {steps.map(({ Icon, title, description }, index) => (
+            <li className="hiw-step" key={title}>
 
-              <div className="process-number">
-                {item.number}
-              </div>
+              <span className="hiw-node" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
 
-              <div className="process-icon">
-                {item.icon}
-              </div>
+              <article className="hiw-card">
+                <span className="hiw-icon" aria-hidden="true">
+                  <Icon />
+                </span>
 
-              <h3>{item.title}</h3>
+                <h3>
+                  <span className="hiw-visually-hidden">Step {index + 1}: </span>
+                  {title}
+                </h3>
 
-              <p>{item.description}</p>
+                <p>{description}</p>
+              </article>
 
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
 
       </div>
     </section>

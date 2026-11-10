@@ -6,7 +6,7 @@ const faqData = [
   {
     question: "What is SEO?",
     answer:
-      "SEO (Search Engine Optimization) is the process of improving your website's visibility on search engines like Google to attract more organic traffic.",
+      "SEO (Search Engine Optimisation) is the process of improving your website's visibility on search engines like Google to attract more organic traffic.",
   },
   {
     question: "How long does SEO take to show results?",

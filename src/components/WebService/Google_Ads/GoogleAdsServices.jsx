@@ -42,9 +42,9 @@ const GoogleAdsServices = () => {
     },
     {
       icon: <FaChartLine />,
-      title: "Campaign Optimization",
+      title: "Campaign Optimisation",
       description:
-        "Continuously monitor and optimize campaigns to improve conversions while reducing advertising costs.",
+        "Continuously monitor and optimise campaigns to improve conversions while reducing advertising costs.",
     },
   ];
 
@@ -63,8 +63,8 @@ const GoogleAdsServices = () => {
           </h2>
 
           <p>
-            From campaign setup to ongoing optimization, we help businesses
-            generate qualified leads and maximize return on investment through
+            From campaign setup to ongoing optimisation, we help businesses
+            generate qualified leads and maximise return on investment through
             Google Ads.
           </p>
 

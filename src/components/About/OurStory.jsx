@@ -1,5 +1,6 @@
 import "./OurStory.css";
-import storyImg from "../../assets/Ourstory.png";
+// Photography: Unsplash (Unsplash Licence), see src/assets/photos/CREDITS.md
+import storyImg from "../../assets/photos/about-story.webp";
 import { FaBullseye, FaRocket, FaHandshake } from "react-icons/fa";
 
 const OurStory = () => {
@@ -9,7 +10,7 @@ const OurStory = () => {
       <div className="ourStory__container">
 
         <div className="ourStory__image">
-          <img src={storyImg} alt="Our Story" loading="lazy"/>
+          <img src={storyImg} alt="Colleagues taking notes during a planning discussion around a wooden table" width="1200" height="900" loading="lazy" />
         </div>
 
         <div className="ourStory__content">

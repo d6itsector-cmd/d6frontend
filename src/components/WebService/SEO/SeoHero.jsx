@@ -1,6 +1,6 @@
 import "./SeoHero.css";
 import { Link } from "react-router-dom";
-import heroImage from "../../../assets/hero-image.png";
+import heroImage from "../../../assets/services/seo-analytics.webp";
 
 import {
   FaArrowRight,
@@ -35,7 +35,7 @@ const Hero = () => {
             Improve your search rankings, attract high-quality traffic, and
             generate more qualified leads with our result-driven SEO services.
             We help startups and growing businesses build a strong online
-            presence through ethical, data-driven optimization strategies that
+            presence through ethical, data-driven optimisation strategies that
             deliver measurable results.
           </p>
 
@@ -59,12 +59,12 @@ const Hero = () => {
 
             <div>
               <FaCheckCircle />
-              Customized SEO Strategy
+              Customised SEO Strategy
             </div>
 
             <div>
               <FaCheckCircle />
-              Technical SEO Optimization
+              Technical SEO Optimisation
             </div>
 
             <div>
@@ -85,7 +85,7 @@ const Hero = () => {
 
         <div className="seo-right">
 
-          <img src={heroImage} alt="SEO Services" />
+          <img src={heroImage} alt="Website analytics dashboard showing organic visitor retention data" width="1200" height="900" />
 
           <div className="floating-card">
 

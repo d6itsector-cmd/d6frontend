@@ -6,6 +6,8 @@ import GoogleAdsProcess from "../../components/WebService/Google_Ads/GoogleAdsPr
 import GoogleAdsServices from "../../components/WebService/Google_Ads/GoogleAdsServices";
 import WhyGoogleAds from "../../components/WebService/Google_Ads/WhyGoogleAds";
 import CTA from "../../components/Home/CTA/CTA";
+// Meta tags, FAQs and related-service links
+import ServicePageExtras from "../../components/ServiceLanding/ServicePageExtras";
 import Footer from "../../components/Home/Footer/Footer";
 // Shared, .svc-detail-scoped layout for the five service detail pages.
 import "../../components/WebService/ServiceDetailLayout.css";
@@ -19,7 +21,7 @@ const GoogleAds = () => {
                 <GoogleAdsServices />
                 <GoogleAdsProcess />
             </div>
-            {/* <GoogleAdsFAQ/> */}
+            <ServicePageExtras id="google-ads" />
             <CTA
                 tag="BOOST YOUR BUSINESS"
                 title="Launch High-Performing"

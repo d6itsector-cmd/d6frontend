@@ -9,7 +9,7 @@ const EmailFAQ = () => {
     {
       question: "What is email marketing?",
       answer:
-        "Email marketing is a powerful digital marketing strategy that helps businesses communicate directly with customers through personalized email campaigns.",
+        "Email marketing is a powerful digital marketing strategy that helps businesses communicate directly with customers through personalised email campaigns.",
     },
     {
       question: "How can email marketing help my business?",
@@ -19,7 +19,7 @@ const EmailFAQ = () => {
     {
       question: "Can you create custom email campaigns?",
       answer:
-        "Yes. We design attractive, responsive, and personalized email campaigns tailored to your audience and business objectives.",
+        "Yes. We design attractive, responsive, and personalised email campaigns tailored to your audience and business objectives.",
     },
     {
       question: "Do you offer email automation?",

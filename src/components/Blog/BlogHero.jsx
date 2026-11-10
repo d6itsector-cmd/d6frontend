@@ -1,5 +1,6 @@
 import "./BlogHero.css";
-import blogImage from "../../assets/blog.jpg";
+// Photography: Unsplash (Unsplash Licence), see src/assets/photos/CREDITS.md
+import blogImage from "../../assets/photos/blog-hero.webp";
 import { FaArrowRight, FaBookOpen } from "react-icons/fa";
 import { useContact } from "../../context/ContactContext";
 
@@ -71,7 +72,9 @@ const BlogHero = () => {
 
         <img
           src={blogImage}
-          alt="Digital Marketing Blog"
+          alt="Laptop, notepad and coffee on a desk ready for writing"
+          width="1200"
+          height="900"
           loading="lazy"
         />
 

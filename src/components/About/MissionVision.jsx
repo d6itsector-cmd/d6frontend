@@ -1,5 +1,6 @@
 import "./MissionVision.css";
-import missionImg from "../../assets/mission-vision.jpg";
+// Photography: Unsplash (Unsplash Licence), see src/assets/photos/CREDITS.md
+import missionImg from "../../assets/photos/about-mission.webp";
 
 import { FaBullseye, FaEye, FaGem } from "react-icons/fa";
 
@@ -11,7 +12,7 @@ const MissionVision = () => {
 
         {/* Left Image */}
         <div className="missionVision__image">
-          <img src={missionImg} alt="Mission Vision" loading="lazy"/>
+          <img src={missionImg} alt="Team member mapping out strategy on sticky notes during a workshop" width="1200" height="900" loading="lazy" />
         </div>
 
         {/* Right Content */}

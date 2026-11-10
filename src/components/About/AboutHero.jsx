@@ -1,5 +1,6 @@
 import "./AboutHero.css";
-import aboutHero from "../../assets/about.jpg";
+// Photography: Unsplash (Unsplash Licence), see src/assets/photos/CREDITS.md
+import aboutHero from "../../assets/photos/about-hero.webp";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { useContact } from "../../context/ContactContext";
@@ -74,7 +75,9 @@ const AboutHero = () => {
 
           <img
             src={aboutHero}
-            alt="About Us"
+            alt="Team collaborating on laptops around a shared table in a relaxed workspace"
+            width="1200"
+            height="900"
             loading="lazy"
           />
 

@@ -13,7 +13,7 @@ const EmailProcess = () => {
       icon: <FaSearch />,
       title: "Audience Research",
       description:
-        "We analyze your audience, segment subscribers, and define campaign goals to maximize engagement.",
+        "We analyse your audience, segment subscribers, and define campaign goals to maximise engagement.",
     },
     {
       number: "02",
@@ -34,7 +34,7 @@ const EmailProcess = () => {
       icon: <FaChartLine />,
       title: "Performance Analysis",
       description:
-        "We monitor open rates, click-through rates, conversions, and optimize campaigns for better results.",
+        "We monitor open rates, click-through rates, conversions, and optimise campaigns for better results.",
     },
   ];
 

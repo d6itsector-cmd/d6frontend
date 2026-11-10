@@ -19,7 +19,7 @@ const WebsiteFAQ = () => {
     {
       question: "Will my website be mobile-friendly?",
       answer:
-        "Yes. Every website we develop is fully responsive and optimized for desktops, tablets, and smartphones.",
+        "Yes. Every website we develop is fully responsive and optimised for desktops, tablets, and smartphones.",
     },
     {
       question: "Can you redesign my existing website?",
@@ -29,7 +29,7 @@ const WebsiteFAQ = () => {
     {
       question: "Do you provide maintenance after launch?",
       answer:
-        "Yes. We offer ongoing maintenance, security updates, backups, performance optimization, and technical support after your website goes live.",
+        "Yes. We offer ongoing maintenance, security updates, backups, performance optimisation, and technical support after your website goes live.",
     },
   ];
 

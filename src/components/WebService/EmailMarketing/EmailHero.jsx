@@ -1,6 +1,6 @@
 import "./EmailHero.css";
 import { Link } from "react-router-dom";
-import emailImage from "../../../assets/emailmarketing.jpg";
+import emailImage from "../../../assets/services/email-marketing.webp";
 import { useConsultation } from "../../../context/ConsultationContext";
 
 const EmailHero = () => {
@@ -23,7 +23,7 @@ const EmailHero = () => {
           </h1>
 
           <p>
-            Build meaningful customer relationships with personalized email
+            Build meaningful customer relationships with personalised email
             campaigns. Increase engagement, generate quality leads, and drive
             more sales through data-driven email marketing strategies.
           </p>
@@ -49,7 +49,9 @@ const EmailHero = () => {
 
           <img
             src={emailImage}
-            alt="Email Marketing"
+            alt="Marketer planning an automated email campaign workflow on a whiteboard"
+            width="1200"
+            height="900"
           />
 
         </div>

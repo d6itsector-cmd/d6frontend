@@ -6,6 +6,8 @@ import SEOProcess from "../../components/WebService/SEO/SEOProcess";
 import SEOServices from "../../components/WebService/SEO/SEOServices";
 import WhySEO from "../../components/WebService/SEO/WhySEO";
 import CTA from "../../components/Home/CTA/CTA";
+// Meta tags, FAQs and related-service links
+import ServicePageExtras from "../../components/ServiceLanding/ServicePageExtras";
 // <SEOFAQ/> is disabled below; keep its stylesheet loaded since its global
 // .faq-* / .section-tag rules also apply to other components.
 import "../../components/WebService/SEO/SEOFAQ.css";
@@ -20,7 +22,7 @@ const SEO = () => {
                 <SEOServices />
                 <SEOProcess />
             </div>
-            {/* <SEOFAQ/> */}
+            <ServicePageExtras id="seo" />
             <CTA
                 tag="LET'S GROW TOGETHER"
                 title="Ready to Grow Your Business"

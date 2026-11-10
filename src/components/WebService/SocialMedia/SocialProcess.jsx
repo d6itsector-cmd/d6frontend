@@ -13,7 +13,7 @@ const SocialProcess = () => {
       number: "01",
       title: "Research & Strategy",
       description:
-        "We analyze your business, competitors, audience, and goals to create a customized social media strategy.",
+        "We analyse your business, competitors, audience, and goals to create a customised social media strategy.",
     },
     {
       icon: <FaPenNib />,
@@ -34,7 +34,7 @@ const SocialProcess = () => {
       number: "04",
       title: "Performance Analysis",
       description:
-        "Track campaign success through analytics, reports, and continuous optimization for better ROI.",
+        "Track campaign success through analytics, reports, and continuous optimisation for better ROI.",
     },
   ];
 
