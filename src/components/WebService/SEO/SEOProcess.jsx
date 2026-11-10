@@ -12,21 +12,21 @@ const process = [
     number: "01",
     title: "Website Audit",
     description:
-      "We analyze your website to identify SEO issues, opportunities, and areas for improvement.",
+      "We analyse your website to identify SEO issues, opportunities, and areas for improvement.",
   },
   {
     icon: <FaLightbulb />,
     number: "02",
     title: "SEO Strategy",
     description:
-      "We create a customized SEO plan based on your business goals, audience, and competitors.",
+      "We create a customised SEO plan based on your business goals, audience, and competitors.",
   },
   {
     icon: <FaTools />,
     number: "03",
-    title: "Optimization",
+    title: "Optimisation",
     description:
-      "Our team implements on-page, technical, and content optimizations to improve rankings.",
+      "Our team implements on-page, technical, and content optimisations to improve rankings.",
   },
   {
     icon: <FaChartLine />,

@@ -1,5 +1,6 @@
 import "./PortfolioHero.css";
-import portfolioImg from "../../assets/portfolio.jpg";
+// Photography: Unsplash (Unsplash Licence), see src/assets/photos/CREDITS.md
+import portfolioImg from "../../assets/photos/portfolio-hero.webp";
 import { useConsultation } from "../../context/ConsultationContext";
 
 const PortfolioHero = () => {
@@ -43,7 +44,7 @@ const PortfolioHero = () => {
         </div>
 
         <div className="portfolio-image">
-          <img src={portfolioImg} alt="Portfolio" loading="lazy" />
+          <img src={portfolioImg} alt="Overhead view of a team working on laptops and devices at a shared project table" width="1080" height="810" loading="lazy" />
         </div>
 
       </div>

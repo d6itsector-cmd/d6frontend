@@ -3,6 +3,8 @@ import EmailProcess from "../../components/WebService/EmailMarketing/EmailProces
 import EmailServices from "../../components/WebService/EmailMarketing/EmailServices";
 import WhyEmailMarketing from "../../components/WebService/EmailMarketing/WhyEmailMarketing";
 import CTA from "../../components/Home/CTA/CTA";
+// Meta tags, FAQs and related-service links
+import ServicePageExtras from "../../components/ServiceLanding/ServicePageExtras";
 import Footer from "../../components/Home/Footer/Footer";
 // Shared, .svc-detail-scoped layout for the five service detail pages.
 import "../../components/WebService/ServiceDetailLayout.css";
@@ -19,12 +21,12 @@ const EmailMarketing = () => {
         <EmailServices/>
         <EmailProcess/>
       </div>
-      {/* <EmailFAQ/> */}
+      <ServicePageExtras id="email-marketing" />
       <CTA
         tag="LET'S GROW YOUR BUSINESS"
         title="Ready to Launch High-Converting"
         highlight="Email Campaigns?"
-        description="Connect with your audience through personalized email marketing strategies that increase engagement, build customer loyalty, and drive measurable business growth."
+        description="Connect with your audience through personalised email marketing strategies that increase engagement, build customer loyalty, and drive measurable business growth."
         primaryBtn="Get Free Consultation"
         secondaryBtn="Contact Us"
       />

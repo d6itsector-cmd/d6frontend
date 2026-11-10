@@ -88,7 +88,7 @@ const Hero = () => {
 
           <img
             src={heroImage}
-            alt="Digital Marketing"
+            alt="Digital marketing illustration: a hand holding a megaphone out of a computer screen, surrounded by charts, gears and growth icons"
             fetchPriority="high"
           />
 

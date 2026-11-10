@@ -3,6 +3,8 @@ import SocialProcess from "../../components/WebService/SocialMedia/SocialProcess
 import SocialServices from "../../components/WebService/SocialMedia/SocialServices";
 import WhySocialMedia from "../../components/WebService/SocialMedia/WhySocialMedia";
 import CTA from "../../components/Home/CTA/CTA";
+// Meta tags, FAQs and related-service links
+import ServicePageExtras from "../../components/ServiceLanding/ServicePageExtras";
 import Footer from "../../components/Home/Footer/Footer";
 // Shared, .svc-detail-scoped layout for the five service detail pages.
 import "../../components/WebService/ServiceDetailLayout.css";
@@ -19,7 +21,7 @@ const SocialMedia = () => {
                 <SocialServices />
                 <SocialProcess />
             </div>
-            {/* <SocialFAQ/> */}
+            <ServicePageExtras id="social-media-marketing" />
             <CTA
                 tag="LET'S CONNECT"
                 title="Grow Your Brand"

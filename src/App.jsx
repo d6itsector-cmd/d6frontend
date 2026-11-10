@@ -23,6 +23,10 @@ import SocialMedia from "./pages/Services/SocialMedia";
 import EmailMarketing from "./pages/Services/EmailMarketing";
 import GoogleAds from "./pages/Services/GoogleAds";
 import WebsiteDevelopment from "./pages/Services/WebsiteDevelopment";
+import CustomProducts from "./pages/Services/CustomProducts";
+import CustomProductDetail from "./pages/Services/CustomProductDetail";
+import AIAutomation from "./pages/Services/AIAutomation";
+import EmployeeManagementRedirect from "./pages/Services/EmployeeManagementRedirect";
 
 // ================= AUTH =================
 import Register from "./pages/Auth/Register";
@@ -107,22 +111,44 @@ function AppContent() {
         {/* Website Services */}
 
         <Route path="/services" element={<ServicesPage />} />
-        <Route path="/services/seo" element={<SEO />} />
+        <Route path="/services/custom-products" element={<CustomProducts />} />
         <Route
-          path="/services/social-media"
-          element={<SocialMedia />}
+          path="/services/custom-products/:productSlug"
+          element={<CustomProductDetail />}
+        />
+        <Route path="/services/ai-automation" element={<AIAutomation />} />
+        {/* Employee Management is the live AuraWork product (external) */}
+        <Route
+          path="/services/employee-management"
+          element={<EmployeeManagementRedirect />}
         />
         <Route
-          path="/services/email-marketing"
-          element={<EmailMarketing />}
+          path="/services/website-development"
+          element={<WebsiteDevelopment />}
+        />
+        <Route
+          path="/services/social-media-marketing"
+          element={<SocialMedia />}
         />
         <Route
           path="/services/google-ads"
           element={<GoogleAds />}
         />
+        <Route path="/services/seo" element={<SEO />} />
+        <Route
+          path="/services/email-marketing"
+          element={<EmailMarketing />}
+        />
+
+        {/* Old service URLs -> current ones (keeps bookmarks and printed
+            QR / marketing links working) */}
         <Route
           path="/services/web-development"
-          element={<WebsiteDevelopment />}
+          element={<Navigate to="/services/website-development" replace />}
+        />
+        <Route
+          path="/services/social-media"
+          element={<Navigate to="/services/social-media-marketing" replace />}
         />
 
         <Route

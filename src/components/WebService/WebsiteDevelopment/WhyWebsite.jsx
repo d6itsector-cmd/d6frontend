@@ -20,7 +20,7 @@ const WhyWebsite = () => {
       icon: <FaBolt />,
       title: "Fast Loading Speed",
       description:
-        "Optimized performance for better user experience and improved conversions.",
+        "Optimised performance for better user experience and improved conversions.",
     },
     {
       icon: <FaSearch />,

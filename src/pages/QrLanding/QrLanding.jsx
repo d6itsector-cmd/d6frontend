@@ -56,10 +56,10 @@ const BRANCHES = [
     summary: "Grow visibility, traffic and qualified leads online.",
     items: [
       { icon: FaSearch, label: "Search Engine Optimisation", to: "/services/seo" },
-      { icon: FaShareAlt, label: "Social Media Marketing", to: "/services/social-media" },
+      { icon: FaShareAlt, label: "Social Media Marketing", to: "/services/social-media-marketing" },
       { icon: FaGoogle, label: "Google Ads", to: "/services/google-ads" },
       { icon: FaMailBulk, label: "Email Marketing", to: "/services/email-marketing" },
-      { icon: FaLaptopCode, label: "Website Development", to: "/services/web-development" },
+      { icon: FaLaptopCode, label: "Website Development", to: "/services/website-development" },
     ],
   },
   {

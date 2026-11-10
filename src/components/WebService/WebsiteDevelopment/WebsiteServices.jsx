@@ -36,7 +36,7 @@ const WebsiteServices = () => {
     },
     {
       icon: <FaRocket />,
-      title: "Performance Optimization",
+      title: "Performance Optimisation",
       description:
         "Improve website speed, Core Web Vitals, and overall performance for better user experience.",
     },

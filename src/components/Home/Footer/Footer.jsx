@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 
 import logo from "../../../assets/d6.png";
+import { services } from "../../../data/servicesCatalog";
 
 const Footer = () => {
     return (
@@ -93,15 +94,19 @@ const Footer = () => {
 
                     <ul>
 
-                        <li><a href="/services/seo">SEO Optimization</a></li>
-
-                        <li><a href="/services/google-ads">Google Ads</a></li>
-
-                        <li><a href="/services/social-media">Social Media Marketing</a></li>
-
-                        <li><a href="/services/web-development">Website Development</a></li>
-
-                        <li><a href="/services/email-marketing">Email Marketing</a></li>
+                        {/* Same order as the /services page; AuraWork
+                            (Employee Management) opens in a new tab */}
+                        {services.map((service) => (
+                            <li key={service.id}>
+                                {service.external ? (
+                                    <a href={service.path} target="_blank" rel="noopener noreferrer">
+                                        {service.title}
+                                    </a>
+                                ) : (
+                                    <a href={service.path}>{service.title}</a>
+                                )}
+                            </li>
+                        ))}
 
                     </ul>
 

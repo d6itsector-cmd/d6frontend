@@ -1,5 +1,5 @@
 import "./WhySEO.css";
-import seoImage from "../../../assets/whyseo.jpg";
+import seoImage from "../../../assets/services/seo-workspace.webp";
 
 import {
   FaSearch,
@@ -16,7 +16,7 @@ const WhySEO = () => {
         {/* LEFT */}
 
         <div className="why-left">
-          <img src={seoImage} alt="SEO Services" />
+          <img src={seoImage} alt="Analytics admin panel open in a browser during an SEO review" width="1200" height="900" loading="lazy" />
         </div>
 
         {/* RIGHT */}

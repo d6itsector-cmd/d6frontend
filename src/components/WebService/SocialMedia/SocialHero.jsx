@@ -1,6 +1,6 @@
 import "./SocialHero.css";
 import { Link } from "react-router-dom";
-import socialImage from "../../../assets/socialmedia.jpg";
+import socialImage from "../../../assets/services/social-media-marketing.webp";
 
 import { useConsultation } from "../../../context/ConsultationContext";
 
@@ -49,7 +49,9 @@ const SocialHero = () => {
         <div className="social-hero-image">
           <img
             src={socialImage}
-            alt="Social Media Marketing"
+            alt="Content creator recording a social media video on a smartphone mounted on a tripod"
+            width="1200"
+            height="900"
           />
         </div>
 

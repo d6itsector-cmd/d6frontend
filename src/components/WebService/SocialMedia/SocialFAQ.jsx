@@ -24,7 +24,7 @@ const SocialFAQ = () => {
     {
       question: "Do you manage paid social media campaigns?",
       answer:
-        "Yes. We create and optimize paid advertising campaigns on Facebook, Instagram, LinkedIn, and other social platforms to maximize ROI.",
+        "Yes. We create and optimise paid advertising campaigns on Facebook, Instagram, LinkedIn, and other social platforms to maximise ROI.",
     },
     {
       question: "How do you measure campaign success?",

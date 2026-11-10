@@ -14,7 +14,7 @@ const EmailServices = () => {
       icon: <FaEnvelopeOpenText />,
       title: "Email Campaign Strategy",
       description:
-        "Create personalized email strategies that align with your business goals and customer journey.",
+        "Create personalised email strategies that align with your business goals and customer journey.",
     },
     {
       icon: <FaPaintBrush />,

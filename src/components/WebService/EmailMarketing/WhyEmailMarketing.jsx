@@ -25,7 +25,7 @@ const WhyEmailMarketing = () => {
           <p>
             Email marketing is one of the most effective digital marketing
             channels for nurturing leads, increasing customer loyalty, and
-            driving sales. With personalized campaigns, you can reach the
+            driving sales. With personalised campaigns, you can reach the
             right audience at the right time.
           </p>
 
@@ -38,11 +38,11 @@ const WhyEmailMarketing = () => {
               <FaEnvelope />
             </div>
 
-            <h3>Personalized Communication</h3>
+            <h3>Personalised Communication</h3>
 
             <p>
               Deliver tailored emails that match your audience's interests
-              and buying behavior.
+              and buying behaviour.
             </p>
 
           </div>

@@ -14,15 +14,15 @@ const GoogleAdsFAQ = () => {
     {
       question: "How quickly can I see results from Google Ads?",
       answer:
-        "Google Ads can start generating traffic within hours after your campaign is approved. However, optimizing campaigns for the best results usually takes a few weeks.",
+        "Google Ads can start generating traffic within hours after your campaign is approved. However, optimising campaigns for the best results usually takes a few weeks.",
     },
     {
       question: "How much should I spend on Google Ads?",
       answer:
-        "Your budget depends on your business goals, industry, and competition. We create campaigns that maximize results within your preferred monthly budget.",
+        "Your budget depends on your business goals, industry, and competition. We create campaigns that maximise results within your preferred monthly budget.",
     },
     {
-      question: "Do you optimize campaigns regularly?",
+      question: "Do you optimise campaigns regularly?",
       answer:
         "Yes. We continuously monitor keywords, bidding strategies, ad performance, and audience targeting to improve conversions and reduce advertising costs.",
     },

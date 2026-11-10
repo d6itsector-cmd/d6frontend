@@ -1,92 +1,99 @@
+// Industries.css is no longer used by this section, but it is kept loaded:
+// its unscoped .industry-card / .industry-icon / .section-header rules
+// leak into the /industries page and other sections, so dropping it would
+// change them.
 import "./Industries.css";
+import "./IndustriesSection.css";
+
+// Lucide icons, via react-icons (no extra dependency)
 import {
-  FaLaptopCode,
-  FaHeartbeat,
-  FaShoppingCart,
-  FaHome,
-  FaGraduationCap,
-  FaUtensils,
-  FaBriefcase,
-  FaPlaneDeparture,
-} from "react-icons/fa";
+  LuLaptopMinimal,
+  LuHeartPulse,
+  LuShoppingCart,
+  LuHouse,
+  LuGraduationCap,
+  LuUtensils,
+  LuBriefcaseBusiness,
+  LuPlaneTakeoff,
+} from "react-icons/lu";
 
 const industries = [
   {
-    icon: <FaLaptopCode />,
+    Icon: LuLaptopMinimal,
     title: "IT & Software",
-    desc: "Helping tech companies build a strong digital presence.",
+    desc: "Helping technology companies build a strong, credible digital presence.",
   },
   {
-    icon: <FaHeartbeat />,
+    Icon: LuHeartPulse,
     title: "Healthcare",
-    desc: "Marketing solutions for clinics, hospitals, and healthcare providers.",
+    desc: "Marketing solutions for clinics, hospitals and healthcare providers.",
   },
   {
-    icon: <FaShoppingCart />,
+    Icon: LuShoppingCart,
     title: "E-Commerce",
     desc: "Drive more sales and improve your online store's visibility.",
   },
   {
-    icon: <FaHome />,
+    Icon: LuHouse,
     title: "Real Estate",
-    desc: "Generate quality leads for real estate businesses and agencies.",
+    desc: "Generate quality leads for estate agents and property businesses.",
   },
   {
-    icon: <FaGraduationCap />,
+    Icon: LuGraduationCap,
     title: "Education",
-    desc: "Promote educational institutions and online learning platforms.",
+    desc: "Promote schools, colleges and online learning platforms.",
   },
   {
-    icon: <FaUtensils />,
+    Icon: LuUtensils,
     title: "Restaurants",
-    desc: "Grow your restaurant brand with digital marketing strategies.",
+    desc: "Grow your restaurant brand and fill more tables with digital marketing.",
   },
   {
-    icon: <FaBriefcase />,
+    Icon: LuBriefcaseBusiness,
     title: "Corporate",
-    desc: "Professional marketing solutions for corporate businesses.",
+    desc: "Professional marketing solutions for established corporate businesses.",
   },
   {
-    icon: <FaPlaneDeparture />,
+    Icon: LuPlaneTakeoff,
     title: "Travel & Tourism",
-    desc: "Increase bookings and reach more travelers online.",
+    desc: "Increase bookings and reach more travellers online.",
   },
 ];
 
 const Industries = () => {
   return (
-    <section className="industries">
-      <div className="industries-container">
+    <section className="ind" aria-labelledby="ind-title">
+      <div className="ind-container">
 
-        <div className="section-header">
-          <span className="section-tag">Industries We Serve</span>
+        <header className="ind-header">
+          <span className="ind-eyebrow">Industries We Serve</span>
 
-          <h2>
+          <h2 id="ind-title" className="ind-title">
             Helping Businesses Across
             <span> Multiple Industries</span>
           </h2>
 
-          <p>
-            We deliver customized digital marketing solutions tailored to the
+          <p className="ind-subtitle">
+            We deliver customised digital marketing solutions tailored to the
             unique goals and challenges of every industry.
           </p>
-        </div>
+        </header>
 
-        <div className="industries-grid">
-          {industries.map((industry, index) => (
-            <div className="industry-card" key={index}>
+        <ul className="ind-grid">
+          {industries.map(({ Icon, title, desc }) => (
+            <li className="ind-card" key={title}>
 
-              <div className="industry-icon">
-                {industry.icon}
-              </div>
+              <span className="ind-icon" aria-hidden="true">
+                <Icon />
+              </span>
 
-              <h3>{industry.title}</h3>
+              <h3>{title}</h3>
 
-              <p>{industry.desc}</p>
+              <p>{desc}</p>
 
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
 
       </div>
     </section>

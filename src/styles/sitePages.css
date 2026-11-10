@@ -327,28 +327,31 @@
     grid-template-columns:repeat(4,minmax(0,1fr));
 }
 
-/* Home Services has five cards: 3 + 2 with the second row centred.
-   Six half-width tracks, each card spans two; the 4th card starts on
-   track 2 so the last pair sits in the middle. grid-auto-rows:1fr keeps
-   both rows (and so every card) the same height. */
+/* Home Services has eight cards: 4 x 2 on desktop, 2 per row on smaller
+   laptops and tablets, one column on mobile. grid-auto-rows:1fr keeps
+   every card the same height. */
 .site-page .services .services-grid{
     display:grid;
-    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr));
     grid-auto-rows:1fr;
     gap:20px;
 }
 
 .site-page .services .services-grid > .service-card{
-    grid-column:span 2;
+    grid-column:auto;
     width:auto;
     height:100%;
     /* Services.css sets min-height 280-320px per breakpoint, which left
-       empty space above "Learn More" */
+       empty space above the link */
     min-height:0;
 }
 
-.site-page .services .services-grid > .service-card:nth-child(4){
-    grid-column:2 / span 2;
+@media(max-width:1200px){
+
+    .site-page .services .services-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
 }
 
 /* icon, title, text, then the link pinned to the bottom */
@@ -432,78 +435,6 @@
     align-self:start;
 }
 
-/* Home process cards: hover / focus.
-   These outrank the shared .site-page card hover (2px lift) and Home's
-   Process.css, which fills the icon tile solid blue and forces the icon
-   white with !important on hover. Only transform, shadow, border and
-   background change, so nothing reflows. */
-.site-page--home .process .process-card{
-    transition:
-        background-color 220ms ease,
-        border-color 220ms ease,
-        box-shadow 220ms ease,
-        transform 220ms ease;
-}
-
-.site-page--home .process .process-card:is(:hover, :focus-visible){
-    transform:translateY(-4px);
-    background:var(--surface);
-    border-color:rgba(var(--accent-rgb),.45);
-    box-shadow:0 8px 22px rgba(16,24,40,.08);
-    outline:none;
-}
-
-/* title and text keep their normal colours */
-.site-page--home .process .process-card:is(:hover, :focus-visible) h3{
-    color:var(--text-strong);
-}
-
-.site-page--home .process .process-card:is(:hover, :focus-visible) p{
-    color:var(--text-light);
-}
-
-.site-page--home .process .process-card .process-icon{
-    transition:background-color 220ms ease;
-}
-
-.site-page--home .process .process-card .process-icon svg{
-    transition:transform 220ms ease;
-}
-
-/* icon tile turns a slightly deeper light blue; icon grows a touch */
-.site-page--home .process .process-card:is(:hover, :focus-visible) .process-icon{
-    background:rgba(var(--accent-rgb),.16);
-}
-
-.site-page--home .process .process-card:is(:hover, :focus-visible) .process-icon svg{
-    color:var(--accent) !important;
-    transform:scale(1.05);
-}
-
-/* touch screens: no sticky lift / scale after a tap */
-@media (hover: none){
-
-    .site-page--home .process .process-card:hover,
-    .site-page--home .process .process-card:hover .process-icon svg{
-        transform:none;
-    }
-
-}
-
-@media (prefers-reduced-motion: reduce){
-
-    .site-page--home .process .process-card,
-    .site-page--home .process .process-card .process-icon,
-    .site-page--home .process .process-card .process-icon svg{
-        transition:none;
-    }
-
-    .site-page--home .process .process-card:is(:hover, :focus-visible),
-    .site-page--home .process .process-card:is(:hover, :focus-visible) .process-icon svg{
-        transform:none;
-    }
-
-}
 
 
 /* ===========================================================
@@ -1549,17 +1480,9 @@
         grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
-    /* tablet: 2 per row (four tracks), the 5th card centred */
+    /* tablet: 2 per row */
     .site-page .services .services-grid{
-        grid-template-columns:repeat(4,minmax(0,1fr));
-    }
-
-    .site-page .services .services-grid > .service-card:nth-child(4){
-        grid-column:span 2;
-    }
-
-    .site-page .services .services-grid > .service-card:nth-child(5){
-        grid-column:2 / span 2;
+        grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
     .site-page .categories-grid > .category-card{
@@ -1635,8 +1558,7 @@
         grid-auto-rows:auto;
     }
 
-    .site-page .services .services-grid > .service-card,
-    .site-page .services .services-grid > .service-card:is(:nth-child(4), :nth-child(5)){
+    .site-page .services .services-grid > .service-card{
         grid-column:1;
     }
 
@@ -1679,3 +1601,24 @@
     }
 
 }
+
+
+/* ===========================================================
+   INDUSTRY CARD PHOTOS (Home "Industries We Serve" and /industries)
+   A 16:10 photograph at the top of each card, above the icon tile.
+   Every card in a grid uses the same ratio so rows stay aligned.
+=========================================================== */
+
+.site-page .industry-card .industry-photo{
+    display:block;
+    box-sizing:border-box;
+    width:100%;
+    max-width:none;
+    height:auto;
+    aspect-ratio:16 / 10;
+    object-fit:cover;
+    margin:0 0 18px;
+    background:var(--surface-sunken);
+    border-radius:var(--radius-md);
+}
+

@@ -13,14 +13,14 @@ const GoogleAdsProcess = () => {
       icon: <FaCrosshairs />,
       title: "Keyword Research",
       description:
-        "We identify high-performing keywords and analyze competitors to target the right audience.",
+        "We identify high-performing keywords and analyse competitors to target the right audience.",
     },
     {
       number: "02",
       icon: <FaCogs />,
       title: "Campaign Setup",
       description:
-        "Our team creates well-structured campaigns with optimized ad groups, bidding strategies, and compelling ad copy.",
+        "Our team creates well-structured campaigns with optimised ad groups, bidding strategies, and compelling ad copy.",
     },
     {
       number: "03",
@@ -32,9 +32,9 @@ const GoogleAdsProcess = () => {
     {
       number: "04",
       icon: <FaChartPie />,
-      title: "Optimization & Reporting",
+      title: "Optimisation & Reporting",
       description:
-        "Detailed reports and continuous optimization help maximize conversions while reducing advertising costs.",
+        "Detailed reports and continuous optimisation help maximise conversions while reducing advertising costs.",
     },
   ];
 
@@ -53,8 +53,8 @@ const GoogleAdsProcess = () => {
           </h2>
 
           <p>
-            We follow a proven PPC strategy to create, manage, and optimize
-            campaigns that deliver measurable business growth and maximize
+            We follow a proven PPC strategy to create, manage, and optimise
+            campaigns that deliver measurable business growth and maximise
             your return on investment.
           </p>
 

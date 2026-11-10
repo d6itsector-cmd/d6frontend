@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import "./ContactSection.css";
 import {
   FaEnvelope,
@@ -8,6 +9,7 @@ import {
 } from "react-icons/fa";
 
 import api from "../../services/api";
+import { services } from "../../data/servicesCatalog";
 
 const initialForm = {
   name: "",
@@ -17,8 +19,25 @@ const initialForm = {
   message: "",
 };
 
+// Service options, in the site-wide order.
+const SERVICE_OPTIONS = services.map((service) => service.title);
+
+// "Request a Quote" links arrive as /contact?service=<title>&item=<product>:
+// preselect the service and start the message with the product.
+const formFromParams = (params) => {
+  const service = params.get("service");
+  const item = params.get("item");
+
+  return {
+    ...initialForm,
+    subject: SERVICE_OPTIONS.includes(service) ? service : "",
+    message: item ? `I would like a quote for ${item}. ` : "",
+  };
+};
+
 const ContactSection = () => {
-  const [form, setForm] = useState(initialForm);
+  const [searchParams] = useSearchParams();
+  const [form, setForm] = useState(() => formFromParams(searchParams));
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [feedback, setFeedback] = useState("");
 
@@ -155,21 +174,16 @@ const ContactSection = () => {
 
               <select
                 name="subject"
+                aria-label="Service"
                 value={form.subject}
                 onChange={handleChange}
               >
 
                 <option value="">Select Service</option>
 
-                <option>SEO</option>
-
-                <option>Google Ads</option>
-
-                <option>Social Media Marketing</option>
-
-                <option>Website Development</option>
-
-                <option>Email Marketing</option>
+                {SERVICE_OPTIONS.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
 
               </select>
 
